@@ -1,0 +1,45 @@
+/*------------------------------------*\
+    TABLE
+\*------------------------------------*/
+
+.table{
+	width: 100%;
+	border-collapse: collapse;
+
+
+	td, th{
+		padding: 0.7em 1em;
+		text-align: left;
+		vertical-align: top;
+	}
+}
+
+
+/**
+ * Bordered table
+ */
+
+.table--bordered{
+
+	th{
+		background: $color-table;
+		border: 1px $color-table-border solid;
+	}
+
+	td{
+		border: 1px $color-table solid;
+	}
+}
+
+
+/**
+ * Zebra
+ */
+
+.table--zebra{
+
+	tbody > tr:nth-child(even) > td{
+		background: $color-grey;
+	}
+}
+

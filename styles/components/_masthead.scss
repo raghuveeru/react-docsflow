@@ -1,0 +1,89 @@
+/*------------------------------------*\
+    MASTHEAD.CSS
+\*------------------------------------*/
+
+/**
+ * Common masthead
+ */
+
+.sp-masthead{
+    background: #a5dcfb;
+    background-size: auto 100%;
+    padding: 0 0 0 0;   
+    min-height: 84px;
+    
+    //position: relative;
+    //z-index: 1;    
+    color: #fff;
+    @include clearfix;
+
+    @include media(tablet){        
+        margin-top: -30px; 
+        padding-bottom: 1em;
+    }
+    
+    @include media(desktop){
+        background: #a5dcfb url(../images/masthead-bg.png) bottom no-repeat;
+        background-size: auto;
+        //min-height: 95px;
+    }
+
+    /* Container */
+
+    .container{
+        position: relative;
+    }
+
+    /* Images */
+
+    img{
+        vertical-align: top;
+    }
+
+}
+
+    /**
+     * Logo
+     */
+    
+    .logo-main{
+        display: inline-block;
+        vertical-align: top;
+        margin: 5px 0;        
+        text-align: center;
+        display: block;
+
+        img{
+            max-width: 100%;
+        }
+        
+        @include media(tablet){
+            text-align: left;
+            margin-bottom: 10px;
+            float: left;
+            position: relative;
+            top: 10px;
+        }
+        @include media(desktop){
+            
+            
+        }
+    }
+
+
+/**
+ * Masthead wrap
+ */
+
+.sp-masthead-wrap{
+    //background: #fff;
+    border-radius: $base-radius $base-radius 0 0;
+    @include clearfix;
+    padding: 0 15px;
+    margin-top: 30px;
+    transition: padding 0.2s ease-in;
+
+    @include media(medium){
+        padding: 0 20px;
+    }
+}

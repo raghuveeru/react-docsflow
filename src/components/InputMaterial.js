@@ -15,8 +15,7 @@ var InputMaterial = React.createClass({
 		})
 	},
 	handleOnBlur: function(event){
-
-
+		
 		this.setState({
 			isFocused: false,
 			hasValue: event.target.value == ''? false: true,

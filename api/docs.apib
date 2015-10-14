@@ -1,0 +1,240 @@
+FORMAT: 1A
+HOST: http://localhost:3000/api/
+
+# COS API Documentation
+This is the API blueprint for Momster COS application
+
+# Group Budget cuts
+This section groups App.net post resources.
+
+## Budget Cut Collection [/api/v1/budget_cuts{?topic,status,year,userId}]
+
++ Parameters
+    + topic: `2` (string)
+    + status: `on_sourcing` (string)
+    + year: `2015` (string) 
+    + userId: `10` (string)
+
+### Get all Budget cuts [GET]
+
++ Response 200
+	
+	```
+	{
+		"data": [
+			{
+				"id": 1,
+				"type": "budget_cuts",
+				"title": "Manpower challenges",
+				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+				"status": "finalDraft",
+				"memberOfParliament": "Alex Yam",
+				"hodSourcing": "DOSHI- Chan Yew Kwong",
+				"hodDrafting": "Richard Wong",
+				"year": "2015",
+				"relationships": {
+					"category": "Workplace Safety & Health"
+				}
+			},
+			{
+				"id": 2,
+				"type": "budget_cuts",			
+				"title": "Workplace injuries",
+				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+				"status": "workingDraft",
+				"memberOfParliament": "Alex Yam",
+				"hodSourcing": "DOSHI- Chan Yew Kwong",
+				"hodDrafting": "Richard Wong",
+				"year": "2015",
+				"relationships": {
+					"category": "Central Provident Fund"
+				}
+			},
+			{
+				"id": 3,
+				"type": "budget_cuts",			
+				"title": "Workplace injuries 2",
+				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+				"status": "workingDraft",
+				"memberOfParliament": "Alex Yam",
+				"hodSourcing": "DOSHI- Chan Yew Kwong",
+				"hodDrafting": "Richard Wong",
+				"year": "2015",
+				"relationships": {
+					"category": "Central Provident Fund"
+				}
+			}
+		],
+		"facets": {
+			"topics": [
+				{
+					"name": "Workplace Safety & Health",
+					"count": "80"
+				},
+				{
+					"name": "Central Provident Fund",
+					"count": "15"
+				}
+			],
+			"status": [
+				{
+					"name": "On Sourcing",
+					"count": "10"
+				},
+				{
+					"name": "Final draft",
+					"count": "12"
+				}
+			],
+			"year": [
+				{
+					"name": "2015",
+					"count": "10"
+				}
+			]
+		}
+	}
+	```
+
+
+## Create new budget cut [/api/v1/budget_cuts{?topic,budget_cut_topic,member_of_parliament,sourcing_hod,file_ref,gist_cuts,time}]
+
++ Parameters
+	+ topic: `1` (string)
+	+ budget_cut_topic: `1` (string)
+
+### New budget cut [POST]
+
++ Response 200
+
+	```
+	{
+		"data": {
+			"id": 1,
+			"type": "budget_cuts",
+			"title": "Manpower challenges",
+			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+			"status": "finalDraft",
+			"memberOfParliament": "Alex Yam",
+			"hodSourcing": "DOSHI- Chan Yew Kwong",
+			"hodDrafting": "Richard Wong",
+			"year": "2015",
+			"relationships": {
+				"category": "Workplace Safety & Health"
+			}
+	}
+	```
+
+# Group Users
+
+## Users [/api/v1/users]
+
++ Model (application/json)
+
+    ```js
+    {
+    	data: {
+			"name": "Lisa Lawrence",
+			"designation": "HOD",
+			"permissions": "HOD sourcing"
+		}
+	},
+    ```
+
+### Get all users [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			},
+			{
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"permissions": "Liason officer"
+			}
+		]
+	}
+	```
+
+### Create a user [POST]
+
++ Request
+
+    [Users][]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			}
+		]
+	}
+	```
+
+# Group Groups
+
+## Groups [/api/v1/groups]
+
++ Model (application/json)
+
+    ```js
+    {
+    	data: {
+			"name": "Lisa Lawrence",
+			"designation": "HOD",
+			"permissions": "HOD sourcing"
+		}
+	},
+    ```
+
+### Get all groups [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			},
+			{
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"permissions": "Liason officer"
+			}
+		]
+	}
+	```
+
+### Create a group [POST]
+
++ Request
+
+    [Groups][]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			}
+		]
+	}
+	```

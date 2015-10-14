@@ -1,0 +1,74 @@
+{
+	"data": [
+		{
+			"id": 1,
+			"type": "budget_cuts",
+			"title": "Manpower challenges",
+			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+			"status": "finalDraft",
+			"memberOfParliament": "Alex Yam",
+			"hodSourcing": "DOSHI- Chan Yew Kwong",
+			"hodDrafting": "Richard Wong",
+			"year": "2015",
+			"relationships": {
+				"category": "Workplace Safety & Health"
+			}
+		},
+		{
+			"id": 2,
+			"type": "budget_cuts",			
+			"title": "Workplace injuries",
+			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+			"status": "workingDraft",
+			"memberOfParliament": "Alex Yam",
+			"hodSourcing": "DOSHI- Chan Yew Kwong",
+			"hodDrafting": "Richard Wong",
+			"year": "2015",
+			"relationships": {
+				"category": "Central Provident Fund"
+			}
+		},
+		{
+			"id": 3,
+			"type": "budget_cuts",			
+			"title": "Workplace injuries 2",
+			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+			"status": "workingDraft",
+			"memberOfParliament": "Alex Yam",
+			"hodSourcing": "DOSHI- Chan Yew Kwong",
+			"hodDrafting": "Richard Wong",
+			"year": "2015",
+			"relationships": {
+				"category": "Central Provident Fund"
+			}
+		}
+	],
+	"facets": {
+		"topics": [
+			{
+				"name": "Workplace Safety & Health",
+				"count": "80"
+			},
+			{
+				"name": "Central Provident Fund",
+				"count": "15"
+			}
+		],
+		"status": [
+			{
+				"name": "On Sourcing",
+				"count": "10"
+			},
+			{
+				"name": "Final draft",
+				"count": "12"
+			}
+		],
+		"year": [
+			{
+				"name": "2015",
+				"count": "10"
+			}
+		]
+	}
+}

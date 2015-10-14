@@ -52,10 +52,10 @@ var Users = React.createClass({
 						</tr>
 					</thead>
 					<tbody>
-						{this.state.UserStore.users.map((user) => {
+						{this.state.UserStore.users.map((user, idx) => {
 
 							return (
-								<tr>
+								<tr key = {idx}>
 									<td>{user.name}</td>
 									<td>{user.designation}</td>
 									<td>

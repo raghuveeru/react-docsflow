@@ -12,13 +12,15 @@ module.exports = (
 		<DefaultRoute handler={BudgetLayout} />
 		
 		<Route handler={NewBudget} path = "budgets/new" />
-		<Route handler={BudgetLayout} path = "budgets/:type" />
+		<Route handler={BudgetLayout} path = "budgets/:type" name="budget" />
 		
 
 		<Route handler = {AdminLayout} name='admin'>			
-			<Route handler = {Users} path = 'users' />
-			<Route handler = {Groups} path = 'groups' />
-			<Route handler = {Users} path = 'topics' />			
+			<Route handler = {Users} name="users" />
+			<Route handler = {Groups} name="groups" />
+			<Route handler = {Users} name="topics" />						
 		</Route>
+		
+		
 	</Route>
 )

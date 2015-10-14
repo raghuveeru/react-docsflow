@@ -16,7 +16,7 @@ var GroupStore = Fluxxor.createStore({
 	},
 	updateGroups: function(groups){
 
-		this.groups = groups
+		this.groups = groups.data
 
 		this.emit('change')
 	}

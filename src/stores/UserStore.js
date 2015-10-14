@@ -16,7 +16,7 @@ var UserStore = Fluxxor.createStore({
 	},
 	updateUsers: function(users){
 
-		this.users = users
+		this.users = users.data
 
 		this.emit('change')
 	}

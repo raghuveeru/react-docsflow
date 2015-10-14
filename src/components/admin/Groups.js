@@ -52,10 +52,10 @@ var Groups = React.createClass({
 						</tr>
 					</thead>
 					<tbody>
-						{this.state.GroupStore.groups.map((user) => {
+						{this.state.GroupStore.groups.map((user, idx) => {
 
 							return (
-								<tr>
+								<tr key = {idx}>
 									<td>{user.name}</td>
 									<td>{user.designation}</td>
 									<td>

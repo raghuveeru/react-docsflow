@@ -6,7 +6,7 @@ module.exports = {
 	getUsers: function(){
 
 		request
-			.get(config.ADMIN.USERS)
+			.get(config.BASE_URL + config.ADMIN.USERS)
 			.end((err, res) => {
 				
 				this.dispatch(actions.UPDATE_USERS, JSON.parse(res.text));
@@ -15,7 +15,7 @@ module.exports = {
 	getGroups: function(){
 
 		request
-			.get(config.ADMIN.GROUPS)
+			.get(config.BASE_URL + config.ADMIN.GROUPS)
 			.end((err, res) => {
 				
 				this.dispatch(actions.UPDATE_GROUPS, JSON.parse(res.text));

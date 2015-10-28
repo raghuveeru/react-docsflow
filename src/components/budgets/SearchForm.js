@@ -6,7 +6,7 @@ var SearchForm = React.createClass({
 		return (
 			<div className="sp-card-search sp-search-top">
 				<div className="text-wrap">
-					<input className="text-input" type="text" placeholder={this.props.placeholder} />
+					<input className="text-input" type="text" placeholder={this.props.placeholder} onChange = {this.props.onChange} />
 					<button className="btn btn--unstyled">
 						<em className="fa fa-search" />
 					</button>

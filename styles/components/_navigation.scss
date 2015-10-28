@@ -24,6 +24,7 @@
 
     a{
         @include link-colors($base-color, $base-color, $base-color);
+        cursor: pointer;
     }
 
     > a{
@@ -185,7 +186,7 @@
         }
 
         &:last-child:after{
-            content: "";
+            // content: "";
         }
     }
 }

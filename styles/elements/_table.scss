@@ -43,3 +43,33 @@
 	}
 }
 
+
+
+
+/**
+ * Budget table
+ */
+
+.table-budget-item{
+	font-size: 14px;
+	td, th{
+		padding: 3px;
+		vertical-align: top;
+	}
+
+	th{
+		color: #666;
+		font-weight: normal;
+		width: 160px;
+		padding-left: 0;
+	}
+}
+
+	.table-budget-single{
+		@include font-size($base-font-size, false);
+
+		th{
+			white-space: nowrap;
+			padding-right: 1em;
+		}
+	}

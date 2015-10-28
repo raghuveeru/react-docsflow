@@ -1,0 +1,56 @@
+{
+	"data": [
+		{
+			"id": 1,
+			"type": "budget_cuts",
+			"title": "Manpower challenges",
+			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+			"status": "finalDraft",
+			"memberOfParliament": "Alex Yam",
+			"hodSourcing": "DOSHI- Chan Yew Kwong",
+			"hodDrafting": "Richard Wong",
+			"year": "2015",
+			"relationships": {
+				"category": "Workplace Safety & Health"
+			},
+			"liasonOfficer": "Richard Khong",
+			"userId": "blahblahblah",
+			"fileReferenceNo": "-",
+			"time": "50",
+			"activity": [
+				{
+					"action": "allocated question",
+					"from": {
+						"name": "Jane Goh",
+						"url": "http://profile_url",
+						"image": "images/profile-img.png",
+						"role": "Sourcing HOD"
+					},
+					"to": {
+						"name": "Samuel Seah",
+						"url": "http://profile_url",
+						"image": "images/profile-img.png",
+						"role": "Sourcing HOD"
+					},
+					"date": "August 28, 2015"
+				},
+				{
+					"action": "created and assigned the budget cut",
+					"from": {
+						"name": "Jane Goh",
+						"url": "http://profile_url",
+						"image": "images/profile-img.png",
+						"role": "Sourcing HOD"
+					},
+					"to": {
+						"name": "Samuel Seah",
+						"url": "http://profile_url",
+						"image": "images/profile-img.png",
+						"role": "Sourcing HOD"
+					},
+					"date": "August 28, 2015"
+				}
+			]
+		}
+	]	
+}

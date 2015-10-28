@@ -1,6 +1,12 @@
 import React from 'react';
+import Fluxxor from 'fluxxor';
+import _ from 'lodash';
+import {Link} from 'react-router';
+import {mapObject} from './../../utilities';
+var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetGroup = React.createClass({
+	mixins: [FluxMixin],
 	getInitialState: function(){
 
 		return {
@@ -13,6 +19,14 @@ var BudgetGroup = React.createClass({
 			isOpen: !this.state.isOpen
 		})
 	},
+	getStatusName: function(status){
+
+		if(status in AppConfig.STATUS_MAPPING){
+			 return AppConfig.STATUS_MAPPING[status]
+		}
+
+		return 'Please provide status mapping in config file for ' + status;
+	},
 	render: function(){
 
 		var {group} = this.props;
@@ -20,18 +34,31 @@ var BudgetGroup = React.createClass({
 
 		return (
 			<div className={klassName}>
-				<a onClick = {this.toggleGroup}>Toggle Group</a>
-				<h3>{group.name}</h3>
+				
+				<h3 className="budget-group-title" onClick = {this.toggleGroup}>{group.name} ({group.items.length})</h3>
 											
 				{group.items.map((item, index) => {
+
+					var statusIdx = 5;
 					
 					return (
-						<div key = {index}>
-							<input type="checkbox" />
-							<h4>{item.title}</h4>
-							<p>{item.summary}</p>
+						<div key = {index} className="budget-list-item">
+							<span className="budget-item-status">{this.getStatusName(item.status)}</span>
+							<input 
+								type="checkbox" 
+								className="budget-item-checkbox"  
+								onClick = {(event) =>{
+									
+									this.getFlux().actions.BudgetActions.selectBudget(item.id, event.target.checked)
+								}}
+								checked = {item.checked}
+							/>
+							<h4 className="budget-item-title">
+								<Link to = 'budgetsView' params={{id: item.id}}>{item.title}</Link>
+							</h4>
+							<p  className="budget-item-summary">{item.summary}</p>
 
-							<table>
+							<table className="table table-budget-item">
 								<tbody>
 									<tr>
 										<th>Member of Parliament</th>
@@ -45,8 +72,25 @@ var BudgetGroup = React.createClass({
 										<th>HOD Drafting</th>
 										<td>{item.hodDrafting}</td>
 									</tr>
+									<tr>
+										<th>Liason officer</th>
+										<td>{item.liasonOfficer}</td>
+									</tr>
 								</tbody>
 							</table>
+							<div className="status-trail">
+								{mapObject(AppConfig.STATUS_MAPPING, function(key, value, idx){		
+
+									if(key == item.status){
+										statusIdx = idx;
+									}
+									
+									var statusClassName = 'status-trail-item' + (key == item.status? ' active' : '') + (idx > statusIdx? ' inactive': '');
+									return (
+										<span className={statusClassName}>{key}</span>
+									)
+								})}
+							</div>
 					</div>)
 				})}
 			</div>

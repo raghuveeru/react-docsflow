@@ -1,7 +1,7 @@
 import React from 'react';
 import BudgetGroup from './BudgetGroup';
 
-var BudgetList = React.createClass({	
+var BudgetList = React.createClass({		
 	render: function(){
 
 		var {budgets} = this.props;
@@ -31,11 +31,11 @@ var BudgetList = React.createClass({
 
 
 		return (
-			<div>
+			<div className="budget-list">
 				{budgetGroups.map((group, idx) => {
 
 					return (
-						<BudgetGroup group = {group} />
+						<BudgetGroup group = {group} key = {idx} />
 					)
 				})}
 			</div>

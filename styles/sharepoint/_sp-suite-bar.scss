@@ -11,6 +11,7 @@
     text-align: right;
     @include clearfix;    
     font-size: 14px;
+    z-index: 4;
 
     @include media(tablet){
         background-color: transparent;

@@ -5,6 +5,7 @@
 a{
 	@include link-colors($link-color, $link-hover-color, $link-active-color);
 	text-decoration: none;	
+    cursor: pointer;
 
 	&:hover{
 		text-decoration: underline;		

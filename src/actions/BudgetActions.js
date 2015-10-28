@@ -1,15 +1,59 @@
 import {actions} from '../constants';
-import config from '../config';
 import request from 'superagent';
 
 module.exports = {
-	getBudgets: function(){
-
+	getBudgets: function(params){		
+		
 		request
-			.get(config.BASE_URL + config.BUDGET.ALL)
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ALL)			
+			.query(params)
 			.end((err, res) => {
 				
 				this.dispatch(actions.UPDATE_BUDGETS, JSON.parse(res.text));
 			});
+	},
+	getBudgetById: function(payload){
+		
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.SINGLE)			
+			.query(payload)
+			.end((err, res) => {
+				
+				this.dispatch(actions.GET_BUDGET_BY_ID, JSON.parse(res.text));
+			});
+	},
+	selectBudget: function(id, type){
+		
+		this.dispatch(actions.SELECT_BUDGET, {
+			id: id,
+			type: type
+		})
+	},
+	selectAllBudgets: function(type){
+
+		this.dispatch(actions.SELECT_ALL_BUDGETS, type)
+	},
+	exportToExcel: function(payload){
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
+			.query({
+				id: payload
+			})
+			.end((err, res) => {
+				console.log(err, res)
+			})
+	},
+	addToSpeech: function(payload){
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ADD_TO_SPEECH)
+			.query({
+				id: payload
+			})
+			.end((err, res) => {
+				
+				this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
+			})
 	}
 }

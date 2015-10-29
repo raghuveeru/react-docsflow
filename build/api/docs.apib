@@ -127,43 +127,7 @@ This is the API blueprint for Momster COS application
 				"liasonOfficer": "Richard Khong",
 				"userId": "blahblahblah",
 				"fileReferenceNo": "-",
-				"time": "50",
-				"activity": [
-					{
-						"action": "allocated question",
-						"from": {
-							"name": "Jane Goh",
-							"url": "http://profile_url",
-							"image": "images/profile-img.png",
-							"role": "Sourcing HOD"
-						},
-						"message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-						"to": {
-							"name": "Samuel Seah",
-							"url": "http://profile_url",
-							"image": "images/profile-img.png",
-							"role": "Sourcing HOD"
-						},
-						"date": "August 28, 2015"
-					},
-					{
-						"action": "created and assigned the budget cut",
-						"from": {
-							"name": "Jane Goh",
-							"url": "http://profile_url",
-							"image": "images/profile-img.png",
-							"role": "Sourcing HOD"
-						},
-						"message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-						"to": {
-							"name": "Samuel Seah",
-							"url": "http://profile_url",
-							"image": "images/profile-img.png",
-							"role": "Sourcing HOD"
-						},
-						"date": "August 28, 2015"
-					}
-				]
+				"time": "50"
 			}
 		]	
 	}
@@ -375,6 +339,57 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
+
+## Get budget cut activity [/api/v1/budget-cut-activity{?budgetCutId}]
+
++ Parameters
+	+ budgetCutId: `12` (string)
+
+### Get budget cut activity [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"action": "allocated question",
+				"from": {
+					"name": "Jane Goh",
+					"url": "http://profile_url",
+					"image": "images/profile-img.png",
+					"role": "Sourcing HOD"
+				},
+				"message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+				"to": {
+					"name": "Samuel Seah",
+					"url": "http://profile_url",
+					"image": "images/profile-img.png",
+					"role": "Sourcing HOD"
+				},
+				"date": "August 28, 2015"
+			},
+			{
+				"action": "created and assigned the budget cut",
+				"from": {
+					"name": "Jane Goh",
+					"url": "http://profile_url",
+					"image": "images/profile-img.png",
+					"role": "Sourcing HOD"
+				},
+				"message": "Message 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+				"to": {
+					"name": "Samuel Seah",
+					"url": "http://profile_url",
+					"image": "images/profile-img.png",
+					"role": "Sourcing HOD"
+				},
+				"date": "August 28, 2015"
+			}
+		]
+	}
+	```
+
 ## Create new budget cut [/api/v1/budget_cuts{?topic,budget_cut_topic,member_of_parliament,sourcing_hod,file_ref,gist_cuts,time}]
 
 + Parameters
@@ -415,7 +430,7 @@ This is the API blueprint for Momster COS application
     	data: [{
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
-			"permissions": "HOD sourcing"
+			"role": ["HOD Officers"]
 		}]
 	},
     ```
@@ -430,12 +445,12 @@ This is the API blueprint for Momster COS application
 			{
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			},
 			{
 				"name": "Christopher Brown",
 				"designation": "Executive",
-				"permissions": "Liason officer"
+				"role": ["Liason Officers"]
 			}
 		]
 	}
@@ -455,7 +470,7 @@ This is the API blueprint for Momster COS application
 			{
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			}
 		
 	}
@@ -474,13 +489,13 @@ This is the API blueprint for Momster COS application
 				"id": "1212",
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			},
 			{
 				"id": "1213",
 				"name": "Christopher Brown",
 				"designation": "Executive",
-				"permissions": "Liason officer"
+				"role": ["HOD Officers"]
 			}
 		]
 	}
@@ -499,14 +514,14 @@ This is the API blueprint for Momster COS application
 				"id": "1212",
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing",
+				"role": ["HOD Officers"]
 				"liasonOfficer": "Steve Kong"
 			},
 			{
 				"id": "1213",
 				"name": "Christopher Brown",
 				"designation": "Executive",
-				"permissions": "Liason officer",
+				"role": ["HOD Officers"]
 				"liasonOfficer": "Steve Kong"
 			}
 		]
@@ -526,13 +541,13 @@ This is the API blueprint for Momster COS application
 				"id": "1212",
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			},
 			{
 				"id": "1213",
 				"name": "Christopher Brown",
 				"designation": "Executive",
-				"permissions": "Liason officer"
+				"role": ["HOD Officers"]
 			}
 		]
 	}
@@ -551,13 +566,13 @@ This is the API blueprint for Momster COS application
 				"id": "1212",
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			},
 			{
 				"id": "1213",
 				"name": "Christopher Brown",
 				"designation": "Executive",
-				"permissions": "Liason officer"
+				"role": ["HOD Officers"]
 			}
 		]
 	}
@@ -574,7 +589,7 @@ This is the API blueprint for Momster COS application
     	data: {
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
-			"permissions": "HOD sourcing"
+			"role": ["HOD Officers"]
 		}
 	},
     ```
@@ -589,12 +604,12 @@ This is the API blueprint for Momster COS application
 			{
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			},
 			{
 				"name": "Christopher Brown",
 				"designation": "Executive",
-				"permissions": "Liason officer"
+				"role": ["HOD Officers"]
 			}
 		]
 	}
@@ -614,7 +629,7 @@ This is the API blueprint for Momster COS application
 			{
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
-				"permissions": "HOD sourcing"
+				"role": ["HOD Officers"]
 			}
 		]
 	}

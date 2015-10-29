@@ -4268,6 +4268,22 @@ li {
     white-space: nowrap;
     padding-right: 1em; }
 
+/**
+ * Admin table
+ */
+.table-admin thead th {
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px #e5e5e5 solid;
+  padding-left: 0; }
+
+.table-admin tbody td {
+  padding-left: 0;
+  border-bottom: 1px #e5e5e5 solid; }
+
+.table-admin .cell-image {
+  width: 40px; }
+
 /* Components */
 /*------------------------------------*    COMPONENTS.CSS
 \*------------------------------------*/
@@ -6142,13 +6158,19 @@ li {
  * Dialog
  */
 .modal-dialog {
-  max-width: 300px; }
+  max-width: 300px;
+  min-width: 300px; }
   @media only screen and (min-width: 600px) {
     .modal-dialog {
-      max-width: 580px; } }
+      max-width: 580px;
+      min-width: 580px; } }
   @media only screen and (min-width: 768px) {
     .modal-dialog {
-      max-width: 850px; } }
+      max-width: 850px;
+      min-width: 700px; } }
+  @media only screen and (min-width: 960px) {
+    .modal-dialog {
+      min-width: 850px; } }
   .modal-dialog .modal-dialog-title {
     font-weight: 100;
     font-size: 32px;
@@ -6156,7 +6178,10 @@ li {
     padding: 15px 30px;
     margin-bottom: 0; }
   .modal-dialog .modal-dialog-body {
-    padding: 15px 30px; }
+    padding: 1em; }
+    @media only screen and (min-width: 768px) {
+      .modal-dialog .modal-dialog-body {
+        padding: 15px 30px; } }
 
 .ReactModal__Overlay {
   -webkit-perspective: 600;
@@ -7049,6 +7074,12 @@ li {
   .sub-section-active .pane-subsection {
     display: block; } }
 
+/**
+ * App root
+ */
+#root {
+  min-height: 400px; }
+
 .budget-status {
   display: table;
   table-layout: fixed;
@@ -7700,7 +7731,10 @@ Version: 3.5.4 Timestamp: Sun Aug 30 13:30:32 EDT 2015
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  min-width: 270px; }
+  width: 100%; }
+  @media only screen and (min-width: 768px) {
+    .select2-container {
+      max-width: 270px; } }
 
 .select2-container,
 .select2-drop,
@@ -7832,10 +7866,10 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
   box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15); }
 
 .select2-drop-active {
-  border: 1px solid #5897fb; }
+  border: 1px solid #B25A00; }
 
 .select2-drop.select2-drop-above.select2-drop-active {
-  border-top: 1px solid #5897fb; }
+  border-top: 1px solid #B25A00; }
 
 .select2-drop-auto-width {
   border-top: 1px solid #aaa;
@@ -7920,7 +7954,7 @@ html[dir="rtl"] .select2-search input {
 
 .select2-container-active .select2-choice,
 .select2-container-active .select2-choices {
-  border: 1px solid #5897fb;
+  border: 1px solid #B25A00;
   outline: none;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
@@ -7940,7 +7974,7 @@ html[dir="rtl"] .select2-search input {
 
 .select2-dropdown-open.select2-drop-above .select2-choice,
 .select2-dropdown-open.select2-drop-above .select2-choices {
-  border: 1px solid #5897fb;
+  border: 1px solid #B25A00;
   border-top-color: transparent;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.5, #eee));
   background-image: -webkit-linear-gradient(center top, #fff 0%, #eee 50%);
@@ -8121,7 +8155,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices {
   min-height: 26px; }
 
 .select2-container-multi.select2-container-active .select2-choices {
-  border: 1px solid #5897fb;
+  border: 1px solid #B25A00;
   outline: none;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
@@ -8293,6 +8327,36 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
     top: 8px; }
   .select2-element .select2-container-multi .select2-search-choice-close {
     left: 4px; }
+  .select2-element .select2-container .select2-choice {
+    border-radius: 0;
+    border-width: 0 0 1px 0;
+    height: 36px;
+    line-height: 36px;
+    background: transparent;
+    padding-left: 0;
+    box-shadow: none !important; }
+  .select2-element .select2-container .select2-choice .select2-arrow {
+    background: transparent;
+    border-left: none; }
+    .select2-element .select2-container .select2-choice .select2-arrow:before {
+      line-height: 40px;
+      content: " ";
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #666;
+      display: block;
+      width: 0;
+      height: 0;
+      top: 0;
+      right: 5px;
+      bottom: 0;
+      position: absolute;
+      margin: auto 0; }
+  .select2-element .select2-container .select2-choice .select2-arrow b {
+    background: none; }
+
+.select2-drop-active {
+  border-color: #ccc; }
 
 /* Typography */
 /*------------------------------------*    TYPOGRAPHY.CSS

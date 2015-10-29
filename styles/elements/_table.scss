@@ -73,3 +73,32 @@
 			padding-right: 1em;
 		}
 	}
+
+
+/**
+ * Admin table
+ */
+
+.table-admin{
+
+
+	thead{
+		th{
+			font-size: 18px;
+			font-weight: 600;
+			border-bottom: 1px $base-ui-color solid;
+			padding-left: 0;
+		}
+	}
+
+	tbody{
+		td{
+			padding-left: 0;
+			border-bottom: 1px $base-ui-color solid;
+		}
+	}
+
+	.cell-image{
+		width: 40px;
+	}
+}

@@ -1,3 +1,10 @@
+/**
+ * App root
+ */
+#root{
+    min-height: 400px;
+}
+
 .budget-status{
     display: table;
     table-layout: fixed;
@@ -234,3 +241,20 @@
     text-align: center;
     padding: 2em 0;
 }
+
+
+
+// html,
+// body { height: 100%; }
+
+// body {
+//   display: table;
+//   width: 100%;
+// }
+
+// .page-row {
+//   display: table-row;
+//   height: 1px;
+// }
+
+// .page-row-expanded { height: 100%; }

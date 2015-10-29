@@ -5,14 +5,16 @@
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
 			"role": ["HOD sourcing"],
-			"image": "images/profile-img.png"
+			"image": "images/profile-img.png",
+			"online": true
 		},
 		{
 			"id": "1213",
 			"name": "Christopher Brown",
 			"designation": "Executive",
-			"role": ["Liaison Officers"],
-			"image": "images/profile-img.png"
+			"role": ["Head of Department", "Speech Writer"],
+			"image": "images/profile-img.png",
+			"online": false
 		}
 	]
 }

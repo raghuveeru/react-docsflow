@@ -1,6 +1,13 @@
 import React from 'react';
 
 var Select2 = React.createClass({
+	getDefaultProps: function(){
+
+		return {
+			multiple: false,
+			allowClear: false
+		}
+	},
 	componentDidMount: function(){
 
 		var select = this.refs.select.getDOMNode();
@@ -9,6 +16,7 @@ var Select2 = React.createClass({
 			data:{ text: "name" },
 			placeholder: this.props.placeholder,
 			multiple: this.props.multiple || false,
+			allowClear: this.props.allowClear,
 			ajax: {
 				url: this.props.url,
 				dataType: 'json',
@@ -30,7 +38,7 @@ var Select2 = React.createClass({
 		})
 	},
 	render: function(){
-
+		
 		return (
 			<div className="select2-element">
 				<input type="text" ref="select" />

@@ -11,6 +11,8 @@ var BudgetStore = Fluxxor.createStore({
 		this.totalSpeechCount = 0;
 		this.totalUserCount = 0;
 		this.currentBudget = {};
+		this.activity = [];
+		this.isFetchingBudgetActivity = false
 
 		this.bindActions(
 			actions.UPDATE_BUDGETS, this.updateBudgets,
@@ -18,7 +20,9 @@ var BudgetStore = Fluxxor.createStore({
 			actions.SELECT_ALL_BUDGETS, this.selectAllBudgets,
 			actions.GET_BUDGET_BY_ID, this.getBudgetById,
 			actions.ADD_TO_SPEECH, this.addToSpeech,
-			actions.ASSIGN_TO_OFFICER, this.assignToOfficer
+			actions.ASSIGN_TO_OFFICER, this.assignToOfficer,
+			actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity,
+			actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity
 		)
 	},
 	updateBudgets: function(budgets){
@@ -43,7 +47,9 @@ var BudgetStore = Fluxxor.createStore({
 			totalCount: this.totalCount,
 			totalUserCount: this.totalUserCount,
 			totalSpeechCount: this.totalSpeechCount,
-			currentBudget: this.currentBudget
+			currentBudget: this.currentBudget,
+			activity: this.activity,
+			isFetchingBudgetActivity: this.isFetchingBudgetActivity
 		}
 	},
 	selectBudget: function(payload){		
@@ -113,6 +119,20 @@ var BudgetStore = Fluxxor.createStore({
 		this.currentBudget = budget.data[0]
 
 		this.emit('change');
+	},
+	fetchingBudgetActivity: function(){		
+
+		this.isFetchingBudgetActivity = true;
+
+		this.emit('change')
+	},
+	getBudgetActivity: function(activity){
+		
+		this.activity = activity.data
+
+		this.isFetchingBudgetActivity = false;
+		
+		this.emit('change')
 	}
 });
 

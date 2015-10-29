@@ -21,15 +21,6 @@ var BudgetAssignToOfficer = React.createClass({
 			showMessage: false
 		}
 	},
-	getReponsibleOfficers: function(){
-		
-		return {
-			options: [
-                { value: 'one', label: 'One' },
-                { value: 'two', label: 'Two' }
-            ]
-		}
-	},
 	onSave: function(){
 
 		this.getFlux().actions.BudgetActions.assignToOfficer(this.state);

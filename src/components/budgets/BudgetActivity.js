@@ -1,11 +1,27 @@
 import React from 'react';
 import Modal from 'react-modal';
 import {customStyles} from '../../constants';
+import Loader from './../Loader';
+import Fluxxor, {StoreWatchMixin} from 'fluxxor';
+var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetActivity = React.createClass({
+	mixins: [FluxMixin, StoreWatchMixin('BudgetStore')],
+	getStateFromFlux: function(){
+
+		return {
+			BudgetStore: this.getFlux().store('BudgetStore').getState()
+		}
+	},
+	componentDidMount: function(){
+		
+		this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)		
+	},
 	render: function(){
 
-		var {activity} = this.props;
+		var {activity, isFetchingBudgetActivity} = this.state.BudgetStore;
+		
+		if(isFetchingBudgetActivity) return <Loader />;
 
 		return (
 			<div className="sp-module">

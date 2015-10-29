@@ -65,5 +65,19 @@ module.exports = {
 				
 				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));
 			})
+	},
+	getBudgetActivity: function(payload){
+
+		this.dispatch(actions.FETCHING_BUDGET_ACTIVITY, true);
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_BUDGET_ACTIVITY)
+			.query({
+				budgetId: payload
+			})
+			.end((err, res) => {
+				
+				this.dispatch(actions.GET_BUDGET_ACTIVITY, JSON.parse(res.text));
+			})
 	}
 }

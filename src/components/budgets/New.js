@@ -3,6 +3,12 @@ import InputMaterial from '../InputMaterial';
 import SelectMaterial from '../SelectMaterial';
 
 var BudgetNew = React.createClass({
+	contextTypes: {
+		router: React.PropTypes.func
+	},
+	goBack: function(){
+		this.context.router.transitionTo('budgetsInbox', {type: 'inbox'})	
+	},
 	render: function(){
 
 		return (
@@ -36,8 +42,8 @@ var BudgetNew = React.createClass({
 							<InputMaterial label = "Message" />
 
 							<div className="form-control">
-								<button className="btn btn-primary">Create</button>
-								<a className="btn btn--unstyled">Cancel</a>
+								<button className="btn btn-primary">Create and assign</button>
+								<a className="btn btn--unstyled" onClick = {this.goBack}>Cancel</a>
 							</div>
 						</div>
 

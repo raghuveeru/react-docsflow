@@ -47,10 +47,10 @@ var Users = React.createClass({
 					>
 					<NewUser closeModal = {this.closeModal} />
 				</Modal>
-				<table className="table">
+				<table className="table table-admin">
 					<thead>
 						<tr>
-							<th>User details</th>
+							<th colSpan="2">User details</th>
 							<th>Account permissions </th>
 							<th className="cell-actions"></th>
 						</tr>
@@ -60,6 +60,9 @@ var Users = React.createClass({
 
 							return (
 								<tr key = {idx}>
+									<td className="cell-image">
+										<img src={user.image} />
+									</td>
 									<td>{user.name}</td>
 									<td>{user.designation}</td>
 									<td>

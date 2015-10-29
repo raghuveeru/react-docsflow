@@ -74,14 +74,21 @@
 .modal-dialog{
 	// width: 870px;
 	max-width: 300px;
+	min-width: 300px;
 	
 	@include media(medium){
 		max-width: 580px;
+		min-width: 580px;
 	}
 
 
 	@include media(tablet){
 		max-width: 850px;
+		min-width: 700px;
+	}
+
+	@include media(desktop){
+		min-width: 850px;
 	}
 
 	.modal-dialog-title{
@@ -93,7 +100,10 @@
 	}
 
 	.modal-dialog-body{
-		padding: 15px 30px;
+		padding: 1em;
+		@include media(tablet){
+			padding: 15px 30px;
+		}
 	}
 }
 

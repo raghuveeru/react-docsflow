@@ -2,7 +2,7 @@ import React from 'react';
 import Fluxxor from 'fluxxor';
 import _ from 'lodash';
 import {Link} from 'react-router';
-import {mapObject} from './../../utilities';
+import {mapObject, getStatusName} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetGroup = React.createClass({
@@ -18,14 +18,6 @@ var BudgetGroup = React.createClass({
 		this.setState({
 			isOpen: !this.state.isOpen
 		})
-	},
-	getStatusName: function(status){
-
-		if(status in AppConfig.STATUS_MAPPING){
-			 return AppConfig.STATUS_MAPPING[status]
-		}
-
-		return 'Please provide status mapping in config file for ' + status;
 	},
 	render: function(){
 
@@ -43,7 +35,7 @@ var BudgetGroup = React.createClass({
 					
 					return (
 						<div key = {index} className="budget-list-item">
-							<span className="budget-item-status">{this.getStatusName(item.status)}</span>
+							<span className="budget-item-status">{getStatusName(item.status)}</span>
 							<input 
 								type="checkbox" 
 								className="budget-item-checkbox"  
@@ -87,7 +79,7 @@ var BudgetGroup = React.createClass({
 									
 									var statusClassName = 'status-trail-item' + (key == item.status? ' active' : '') + (idx > statusIdx? ' inactive': '');
 									return (
-										<span className={statusClassName}>{key}</span>
+										<span className={statusClassName} key = {idx}>{key}</span>
 									)
 								})}
 							</div>

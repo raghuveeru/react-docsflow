@@ -1,5 +1,12 @@
 import React from 'react';
 import {StoreWatchMixin} from 'fluxxor';
+import BudgetActivity from './BudgetActivity';
+import BudgetQuestions from './BudgetQuestions';
+import BudgetWorkingDraft from './BudgetWorkingDraft';
+import BudgetFinalApprovedReply from './BudgetFinalApprovedReply';
+import Loader from './../Loader';
+import BudgetAssignToOfficer from './BudgetAssignToOfficer';
+import {getStatusName} from './../../utilities';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
@@ -29,7 +36,7 @@ var BudgetView = React.createClass({
 		
 		var {currentBudget} = this.state.BudgetStore;
 
-		if(!Object.keys(currentBudget).length) return null;
+		if(!Object.keys(currentBudget).length) return <Loader />;
 
 		return (
 			<div>
@@ -41,8 +48,9 @@ var BudgetView = React.createClass({
 				<h1>Budget cut details</h1>
 				<div className="row">
 					<div className="sp-content">
-						<div className="sp-card">
+						<div className="sp-card sp-budget-card">
 							<div className="card-body">
+								<span className="budget-item-status budget-item-status-view">{getStatusName(currentBudget.status)}</span>
 								<table className="table table-budget-item table-budget-single">
 										<tbody>
 											<tr>
@@ -78,38 +86,19 @@ var BudgetView = React.createClass({
 
 								<div className="rule" />
 
-								<p>lorem	</p>
+								<BudgetQuestions id = {this.props.params.id} />
+								
+								<BudgetWorkingDraft id = {this.props.params.id} />
+
+								<BudgetFinalApprovedReply id = {this.props.params.id} />
+								
+								<BudgetAssignToOfficer id = {this.props.params.id} />	
 							</div>
 							
 						</div>
 					</div>
 					<div className="sp-sidebar">
-						<div className="sp-module">
-							<h2 className="sp-module-title">Activity</h2>
-							<div className="sp-module-content">
-								<ul className="list-items list-user">
-									{currentBudget.activity.map(function(activity){
-
-										var fromUser = activity.from;
-										var toUser = activity.to;
-
-										return (
-											<li>
-												<div className="media-item">
-													<img src = {fromUser.image} />
-												</div>
-												<div className="media-content">
-													<strong>{fromUser.name}</strong> {activity.action} to {toUser.role} <strong>{toUser.name}</strong>
-
-													<div className="activity-meta">{activity.date}</div>
-												</div>
-											</li>
-										)
-									})}
-									
-								</ul>
-							</div>
-						</div>
+						<BudgetActivity activity = {currentBudget.activity} />
 					</div>
 				</div>
 			</div>

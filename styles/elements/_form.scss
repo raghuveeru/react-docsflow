@@ -187,3 +187,41 @@ label{
 /**
  * Error label
  */
+
+
+
+/**
+ * Section form
+ */
+
+.section-form{
+    padding: 1em;
+    border: 1px #DFDFDF solid;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 0 #C2C2C2;
+    margin-bottom: 1em;
+}
+
+
+/**
+ * Assign form
+ */
+
+.assign-form{
+    padding-bottom: 2em;
+    padding-top: 2em;
+}
+
+
+/**
+ * Label block
+ */
+
+.label-block{
+    display: block;
+    margin-bottom: 8px;
+    
+    & + .label-block{
+        margin-left: 0;
+    }
+}

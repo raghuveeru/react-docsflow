@@ -18,17 +18,16 @@ var BudgetContainer = React.createClass({
 			BudgetStore: this.props.flux.stores.BudgetStore.getState(),
 		}
 	},
-	getInitialState: function(){
+	componentWillMount: function(){
 
-		return {
-			query: this.props.query.query,
-			filters: {
-				'topics': this.props.query.topics || '',
-				'status': this.props.query.status || '',
-				'year': this.props.query.year || new Date().getFullYear()
-			}
+		this._filters = {
+			'topics': this.props.query.topics || '',
+			'status': this.props.query.status || '',
+			'year': this.props.query.year || new Date().getFullYear()
 		}
-	},
+
+		this._query = this.props.query.query;
+	},	
 	contextTypes: {
 		router: React.PropTypes.func
 	},
@@ -39,9 +38,9 @@ var BudgetContainer = React.createClass({
 
 		return Object.assign(
 		{
-			'query': this.state.query,
+			'query': this._query,
 		}, 
-		this.state.filters,
+		this._filters,
 		(!activeRouteName || activeRouteName == 'budgetsInbox'? {'userId': CURRENT_USER.id} : {})
 		)
 
@@ -56,6 +55,21 @@ var BudgetContainer = React.createClass({
 		
 	},
 	componentDidUpdate: function(nextProps, nextState){
+
+		if(nextProps.params.type != this.props.params.type){
+			/**
+			 * Clear all filter states
+			 */
+			
+			for(var filter in this._filters){
+				
+				this._filters[filter] = ''
+
+				this._query = '';
+
+				if(filter == 'year') this._filters[filter] = new Date().getFullYear();
+			}
+		}
 		
 		if(nextProps.query != this.props.query) this.getBudgets();
 	},
@@ -65,23 +79,21 @@ var BudgetContainer = React.createClass({
 	},
 	updateQuery: function(event){
 
-		this.setState({
-			
-			query: event.target.value
+		this._query =  event.target.value
 
-		}, this.route)
+		this.route();
 	},	
 	handleFacetChange: function(facet, value){
 
-		var newFilters = _.clone(this.state.filters);
+		var newFilters = _.clone(this._filters);
 
 		if(facet in newFilters){
 			
 			newFilters[facet] = value.name		
-		
-			this.setState({
-				filters: newFilters
-			}, this.route)
+			
+			this._filters = newFilters;
+
+			this.route()
 		}
 	
 	},
@@ -99,7 +111,11 @@ var BudgetContainer = React.createClass({
 
 		var ids = this.state.BudgetStore.budgets
 			.filter((budget) => budget.checked)
-			.map((budget) => budget.id)
+			.map((budget) => budget.id);
+
+		if(!ids.length){
+			return alert('Please select atleast one budget cut to add to speech');
+		}
 		
 		this.getFlux().actions.BudgetActions.addToSpeech(ids);
 	},
@@ -125,21 +141,26 @@ var BudgetContainer = React.createClass({
 		
 		return (
 			<div>
-				<SearchForm placeholder="Search budget cuts" onChange = {this.updateQuery} />
+				<SearchForm 
+					defaultValue = {this._query} 
+					placeholder="Search budget cuts" 
+					onChange = {this.updateQuery} 
+					onSubmit = {this.route}
+				/>
 				<section className="row">
 					<aside className="sp-sidebar">
 						<Filters 
 							facets = {facets} 
 							onChange = {this.handleFacetChange}
 							onClearFacet = {this.onClearFacet}
-							selected = {this.state.filters}
+							selected = {this._filters}
 						/>
 					</aside>
 					<section className="sp-content">
 						<div className="sp-card">
-							<nav className="nav-tabs">
-								<a href="#/budgetsInbox" className={!activeRouteName || activeRouteName == 'budgetsInbox'? 'active': ''}>My Inbox ({this.state.BudgetStore.totalUserCount})</a>
-								<a href="#/budgets" className={activeRouteName && activeRouteName != 'budgetsInbox'? 'active': ''}>All budget cuts ({this.state.BudgetStore.totalCount})</a>
+							<nav className="nav-tabs">								
+								<Link to = 'budgetsInbox' params = {{type: 'inbox'}}>My Inbox ({this.state.BudgetStore.totalUserCount})</Link>
+								<Link to = 'budgets'>All budget cuts ({this.state.BudgetStore.totalCount})</Link>
 							</nav>
 							{budgetStatus}
 							

@@ -10,7 +10,6 @@ var Layout = React.createClass({
 				<div className="sp-card">
 					<nav className="nav-tabs">
 						<Link className="tab__handle" to = {'/admin/users'}>Users</Link>
-						<Link to = {'/admin/groups'}>Groups</Link>
 						<Link to = {'/admin/topics'}>Topics</Link>
 					</nav>
 

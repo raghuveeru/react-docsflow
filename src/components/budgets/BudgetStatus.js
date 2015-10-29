@@ -18,7 +18,7 @@ var BudgetStatus = React.createClass({
 			<div className="budget-status">
 				<div className="budget-status-total">
 					<Progress 
-						percentage = {60} 
+						percentage = {totalPercent} 
 						strokeWidth="6"
                     	r="50" />
 				</div>

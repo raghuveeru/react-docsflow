@@ -55,5 +55,15 @@ module.exports = {
 				
 				this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
 			})
+	},
+	assignToOfficer: function(payload){
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
+			.query(payload)
+			.end((err, res) => {
+				
+				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));
+			})
 	}
 }

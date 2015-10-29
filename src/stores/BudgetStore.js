@@ -18,6 +18,7 @@ var BudgetStore = Fluxxor.createStore({
 			actions.SELECT_ALL_BUDGETS, this.selectAllBudgets,
 			actions.GET_BUDGET_BY_ID, this.getBudgetById,
 			actions.ADD_TO_SPEECH, this.addToSpeech,
+			actions.ASSIGN_TO_OFFICER, this.assignToOfficer
 		)
 	},
 	updateBudgets: function(budgets){
@@ -106,6 +107,12 @@ var BudgetStore = Fluxxor.createStore({
 
 		this.emit('change')
 
+	},
+	assignToOfficer: function(budget){
+		
+		this.currentBudget = budget.data[0]
+
+		this.emit('change');
 	}
 });
 

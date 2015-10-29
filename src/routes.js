@@ -14,15 +14,16 @@ module.exports = (
 				
 		<Route handler={NewBudget} path = "budgets/new" name="budgetsNew" />
 		<Route handler={BudgetLayout} path = "budgets" name="budgets" />		
-		<Route handler={BudgetLayout} path = "budgetsInbox" name="budgetsInbox" />		
+		<Route handler={BudgetLayout} path = "budgets/:type" name="budgetsInbox" />		
 		<Route handler={BudgetView} path = "budgets/view/:id" name="budgetsView" />		
 
+		<Redirect from='/admin' to='users' />
 		<Route handler = {AdminLayout} name='admin'>			
-			<Route handler = {Users} name="users" />
-			<Route handler = {Groups} name="groups" />
+			<Route handler = {Users} name="users" />			
 			<Route handler = {Users} name="topics" />						
 		</Route>
 		
 		
+		<Redirect from='/' to='budgetsInbox' params = {{type: 'inbox'}} />		 
 	</Route>
 )

@@ -185,3 +185,24 @@ Link more
         // color: #888;
     }
 }
+
+
+/**
+ * Link add
+ */
+
+.link-add{
+    &:before{
+        @extend %icon;
+        content: "\f067";
+    }
+}
+
+
+/**
+ * Edit question
+ */
+
+.link-edit-question{
+    margin-left: 1em;
+}

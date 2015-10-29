@@ -24,6 +24,9 @@ gulp.task('build', function(){
 	gulp.src('./api/*')
 		.pipe(gulp.dest('./build/api'))
 
+	gulp.src('./fonts/**')
+		.pipe(gulp.dest('./build/fonts'))
+
 	gulp.src('./config.js')
 		.pipe(gulp.dest('./build/'))
 
@@ -32,4 +35,7 @@ gulp.task('build', function(){
 
 	gulp.src('./images/**')
 		.pipe(gulp.dest('./build/images'))
+
+	gulp.src('./vendor/**')
+		.pipe(gulp.dest('./build/vendor'))
 })

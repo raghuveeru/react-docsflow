@@ -116,8 +116,21 @@
         padding: 2px 5px;
         font-size: 12px;
         text-transform: uppercase;
+        border-bottom-left-radius: 5px;
     }
 
+    .budget-item-status-view{
+        left: 0;
+        right: auto;
+        border-radius: 0;
+        border-bottom-right-radius: 5px;
+    }
+
+    .sp-budget-card{
+        .card-body{
+            padding-top: 3em;
+        }
+    }
 
     /**
      * Item title
@@ -201,4 +214,23 @@
             color: red;
         }
     }
+}
+
+
+/**
+ * View message link
+ */
+
+.link-view-message{
+    float: right;
+}
+
+
+/**
+ * Loader
+ */
+
+.momster-loader{
+    text-align: center;
+    padding: 2em 0;
 }

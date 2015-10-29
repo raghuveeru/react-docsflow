@@ -35,7 +35,11 @@ var Users = React.createClass({
 		
 		return (
 			<div>
-				<a onClick = {this.openModal}>Add new user</a>
+				<a onClick = {this.openModal}>Add new user</a><br />
+				<a onClick = {this.openModal}>Add new MP</a><br />
+				<a onClick = {this.openModal}>Add new HOD</a><br />
+				<a onClick = {this.openModal}>Add new MP and HOD Linkage</a><br />
+				<a onClick = {this.openModal}>Add new HOD and Liason Officer Linkage</a><br />
 				<Modal 
 					isOpen = {this.state.isModalOpen}
 					style={customStyles}

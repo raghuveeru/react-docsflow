@@ -72,8 +72,17 @@
  */
 
 .modal-dialog{
-	width: 870px;
-	// max-width: 99%;
+	// width: 870px;
+	max-width: 300px;
+	
+	@include media(medium){
+		max-width: 580px;
+	}
+
+
+	@include media(tablet){
+		max-width: 850px;
+	}
 
 	.modal-dialog-title{
 		font-weight: 100;

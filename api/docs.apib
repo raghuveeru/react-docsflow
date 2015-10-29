@@ -99,7 +99,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get a Single Budget cut [/api/v1/budget_cuts{?id}]
+## Get a Single Budget cut [/api/v1/budget_cuts/?id]
 
 + Parameters
 	+ id: `121` (string)
@@ -137,6 +137,7 @@ This is the API blueprint for Momster COS application
 							"image": "images/profile-img.png",
 							"role": "Sourcing HOD"
 						},
+						"message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 						"to": {
 							"name": "Samuel Seah",
 							"url": "http://profile_url",
@@ -153,6 +154,7 @@ This is the API blueprint for Momster COS application
 							"image": "images/profile-img.png",
 							"role": "Sourcing HOD"
 						},
+						"message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 						"to": {
 							"name": "Samuel Seah",
 							"url": "http://profile_url",
@@ -167,7 +169,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Add to speech [/api/v1/add_to_speech{?id}]
+## Add to speech [/api/v1/add_to_speech/?id]
 
 + Parameters
 	+ id: `1,2,3,4` (comma separated)
@@ -202,17 +204,175 @@ This is the API blueprint for Momster COS application
 	```
 
 
-## Export to excel [/api/v1/export_to_excel{?id}]
+## Export to excel [/api/v1/export_to_excel/?id]
 
 + Parameters
 	+ id: `1,2,3,4` (comma separated)
 
-## Export to excel [GET]
+### Export to excel [GET]
 
 + Response 200
 	
 	```
 	true
+	```
+
+## Get Question details [/api/v1/get_question_details{?budgetCutId}]
+
++ Parameters
+	+ budgetCutId: `1` (string)
+
+### Get Question details [GET]
+
++ Response 200
+
+	```
+	{
+	    "data": [
+	        {
+	            "details": "test...",
+	            "attachments": [
+	                {
+	                    "fileName": "question-details.pdf",
+	                    "fileSize": "200kb",
+	                    "downloadUrl": "http://google.com"
+	                }
+	            ],
+	            "hodDrafting": "Kai Goh",
+	            "liasonOfficer": "Samuel Seh",
+	            "date": "August 31, 2015"
+	        }
+	    ]
+	}
+	```
+
+## Get Working draft details [/api/v1/get_working_draft_details{?budgetCutId}]
+
++ Parameters
+	+ budgetCutId: `1` (string)
+
+### Get Working draft details [GET]
+
++ Response 200
+
+	```
+	{
+	    "data": [
+	        {
+	            "available": true,
+	            "attachments": [
+	                {
+	                    "fileName": "question-details.pdf",
+	                    "fileSize": "200kb",
+	                    "downloadUrl": "http://google.com"
+	                }
+	            ],
+	            "date": "August 31, 2015"
+	        }
+	    ]
+	}
+	```
+
+## Get final approved reply [/api/v1/get_final_approved_reply{?budgetCutId}]
+
++ Parameters
+	+ budgetCutId: `1` (string)
+
+### Get final approved reply [GET]
+
++ Response 200
+
+	```
+	{
+	    "data": [
+	        {
+	            "available": true,
+	            "attachments": [
+	                {
+	                    "fileName": "question-details.pdf",
+	                    "fileSize": "200kb",
+	                    "downloadUrl": "http://google.com"
+	                }
+	            ],
+	            "types": ["Approved draft", "Anticipated Q&A", "Supplementary Info (upto confidential only)"],
+	            "date": "August 31, 2015"
+	        }
+	    ]
+	}
+	```
+
+## Assign to Officer [/api/v1/assign_to_officer{?budgetCutId,status,responsibleOfficer,officersToNotify,message}]
+
++ Parameters
+	+ budgetCutId: `12` (string)
+	+ status: `Final draft` (string)
+	+ responsibleOfficer: `1,2,3,4` (comma separated)
+	+ officersToNotify: `1,2,3,4` (comma separated)
+	+ message: `email message` (string)
+
+### Assign to Officer [GET]
+
++ Response 200
+	
+	```
+	{
+		"data": [
+			{
+				"id": 1,
+				"type": "budget_cuts",
+				"title": "Manpower challenges",
+				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+				"status": "Working draft",
+				"memberOfParliament": "Alex Yam",
+				"hodSourcing": "Newly assigned DOSHI- Chan Yew Kwong",
+				"hodDrafting": "Richard Wong",
+				"year": "2015",
+				"relationships": {
+					"category": "Workplace Safety & Health"
+				},
+				"liasonOfficer": "Richard Khong",
+				"userId": "blahblahblah",
+				"fileReferenceNo": "-",
+				"time": "50",
+				"activity": [
+					{
+						"action": "allocated question",
+						"from": {
+							"name": "Jane Goh",
+							"url": "http://profile_url",
+							"image": "images/profile-img.png",
+							"role": "Sourcing HOD"
+						},
+						"message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+						"to": {
+							"name": "Samuel Seah",
+							"url": "http://profile_url",
+							"image": "images/profile-img.png",
+							"role": "Sourcing HOD"
+						},
+						"date": "August 28, 2015"
+					},
+					{
+						"action": "created and assigned the budget cut",
+						"from": {
+							"name": "Jane Goh",
+							"url": "http://profile_url",
+							"image": "images/profile-img.png",
+							"role": "Sourcing HOD"
+						},
+						"message": "Message 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+						"to": {
+							"name": "Samuel Seah",
+							"url": "http://profile_url",
+							"image": "images/profile-img.png",
+							"role": "Sourcing HOD"
+						},
+						"date": "August 28, 2015"
+					}
+				]
+			}
+		]	
+	}
 	```
 
 ## Create new budget cut [/api/v1/budget_cuts{?topic,budget_cut_topic,member_of_parliament,sourcing_hod,file_ref,gist_cuts,time}]
@@ -252,11 +412,11 @@ This is the API blueprint for Momster COS application
 
     ```js
     {
-    	data: {
+    	data: [{
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
 			"permissions": "HOD sourcing"
-		}
+		}]
 	},
     ```
 
@@ -298,6 +458,108 @@ This is the API blueprint for Momster COS application
 				"permissions": "HOD sourcing"
 			}
 		
+	}
+	```
+
+## Get all Liason Officers [/api/v1/get-all-liason-officers]
+
+### Get all Liason Officers[GET]
+
++ Response 200
+	
+	```
+		{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			},
+			{
+				"id": "1213",
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"permissions": "Liason officer"
+			}
+		]
+	}
+	```
+
+## Get HOD Drafting Users [/api/v1/get-hod-drafting-user]
+
+### Get HOD Drafting Users[GET]
+
++ Response 200
+	
+	```
+	{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing",
+				"liasonOfficer": "Steve Kong"
+			},
+			{
+				"id": "1213",
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"permissions": "Liason officer",
+				"liasonOfficer": "Steve Kong"
+			}
+		]
+	}
+	```
+
+## Get officers to notify [/api/v1/get-officers-to-notify]
+
+### Get officers to notify [GET]
+
++ Response 200
+	
+	```
+	{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			},
+			{
+				"id": "1213",
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"permissions": "Liason officer"
+			}
+		]
+	}
+	```
+
+## Get responsible officers [/api/v1/get-responsible-officers]
+
+### Get responsible officers [GET]
+
++ Response 200
+	
+	```
+	{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"permissions": "HOD sourcing"
+			},
+			{
+				"id": "1213",
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"permissions": "Liason officer"
+			}
+		]
 	}
 	```
 

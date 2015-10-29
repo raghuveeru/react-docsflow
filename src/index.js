@@ -19,9 +19,12 @@ flux.on("dispatch", function(type, payload) {
 	}
 });
 
-Router.run(routes, function(Handler) {
-  React.render(
-    <Handler flux = {flux} />,
-    document.getElementById("root")
-  );
-});
+$(function(){
+
+	Router.run(routes, function(Handler) {
+	  React.render(
+	    <Handler flux = {flux} />,
+	    document.getElementById("root")
+	  );
+	});
+})

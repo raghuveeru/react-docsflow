@@ -5,7 +5,10 @@
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
 			"role": ["HOD sourcing"],
-			"liasonOfficer": "Steve Kong",
+			"liasonOfficer": {
+				"name": "Steve Kong",
+				"id": "12"
+			},
 			"image": "images/profile-img.png"
 		},
 		{
@@ -13,7 +16,10 @@
 			"name": "Christopher Brown",
 			"designation": "Executive",
 			"role": ["HOD sourcing"],
-			"liasonOfficer": "Steve Kong",
+			"liasonOfficer": {
+				"name": "Steve Kong",
+				"id": "12"
+			},
 			"image": "images/profile-img.png"
 		}
 	]

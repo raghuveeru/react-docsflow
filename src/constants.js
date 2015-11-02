@@ -34,6 +34,8 @@ module.exports = {
 			transform             : 'translate(-50%, -50%)',
 			padding: 0,
 			zIndex: 11,
+			maxHeight: '100%',
+			overflow: 'auto'
 		}
 	}
 }

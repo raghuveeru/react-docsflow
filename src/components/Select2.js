@@ -12,32 +12,51 @@ var Select2 = React.createClass({
 
 		var select = this.refs.select.getDOMNode();
 
-		$(select).select2({
-			data:{ text: "name" },
+		var options = {			
 			placeholder: this.props.placeholder,
-			multiple: this.props.multiple || false,
 			allowClear: this.props.allowClear,
-			ajax: {
-				url: this.props.url,
-				dataType: 'json',
-				data: function (term, page) {
-		            return {
-		                q: term, // search term
-		            };
-		        },
-		        results: function (data, page) { 
-		        	
-            		return { results: data.data };
-        		},        		
-        		cache: true
-			}			
-		})
-		.on('change', (event) => {
+		};
 
-			this.props.onChange && this.props.onChange.call(this, event.val)
-		})
+		if(this.props.url){
+			
+			options = Object.assign({}, options, {
+				data:{ text: "name" },
+				multiple: this.props.multiple || false,
+				ajax: {
+					url: this.props.url,
+					dataType: 'json',
+					data: function (term, page) {
+			            return {
+			                q: term, // search term
+			            };
+			        },
+			        results: function (data, page) { 
+			        	
+	            		return { results: data.data };
+	        		},        		
+	        		cache: true
+				}
+			});
+		}
+
+		var $select = $(select).select2(options)
+			.on('change', (event) => {
+
+				this.props.onChange && this.props.onChange.call(this, event.val, $select.select2('data'))
+			})
 	},
 	render: function(){
+
+		if(!this.props.url){
+
+			return (
+				<div className="select2-element">
+					<select ref= "select">
+						{this.props.children}
+					</select>
+				</div>
+			)
+		}
 		
 		return (
 			<div className="select2-element">

@@ -133,6 +133,10 @@ var BudgetStore = Fluxxor.createStore({
 		this.isFetchingBudgetActivity = false;
 		
 		this.emit('change')
+	},
+	createNewBudgetCut: function(activity){
+
+		console.log('c')
 	}
 });
 

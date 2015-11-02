@@ -6,7 +6,7 @@ import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var Main = React.createClass({
-	mixins: [FluxMixin],	
+	mixins: [FluxMixin],
 	render: function(){
 		
 		return (

@@ -29,6 +29,14 @@ var InputMaterial = React.createClass({
 			})
 		}
 	},
+	componentDidUpdate: function(nextProps){
+		
+		if(nextProps.defaultValue != this.props.defaultValue){			
+			this.setState({
+				hasValue: true
+			})
+		}
+	},
 	render: function(){
 
 		var {isFocused, hasValue} = this.state;
@@ -41,11 +49,14 @@ var InputMaterial = React.createClass({
 					className='label-control'					
 					>{this.props.label}</label>
 				<input 
-					className="input-control" 
-					type="text" 					
+					className= { "input-control " + this.props.className}
+					ref = 'input'
+					type="text" 
+					disabled = {this.props.disabled}					
 					onFocus = {this.handleOnFocus}
 					onBlur = {this.handleOnBlur}
-					defaultValue = {this.props.defaultValue}
+					value = {this.props.defaultValue}
+					onInput = {this.props.onChange}
 				/>
 			</div>
 		)

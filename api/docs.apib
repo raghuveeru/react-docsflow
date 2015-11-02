@@ -390,11 +390,20 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Create new budget cut [/api/v1/budget_cuts{?topic,budget_cut_topic,member_of_parliament,sourcing_hod,file_ref,gist_cuts,time}]
+## Create new budget cut [/api/v1/budget_cuts{?topicId,budgetCutId,memberOfParliament,hodSourcing,fileReferenceNo,summary,time,status,responsibleOfficer,officersToNotify,message,userId}]
 
 + Parameters
-	+ topic: `1` (string)
-	+ budget_cut_topic: `1` (string)
+	+ topicId: `1` (string)
+	+ budgetCutId: `1` (string)
+	+ memberOfParliament: `2` ID of member of parliament (string)
+	+ hodSourcing: `23` User ID of HOD Sourcing (string)
+	+ fileReferenceNo: `blah` (string)
+	+ summary: `blah` (string)
+	+ time: `blah` (string)
+	+ status: `Working draft` (string)	
+	+ responsibleOfficer: `[1,2]` (Array)
+	+ officersToNotify: `[1,2]` (Array)
+	+ userId: `5678` User ID of the Logged in User (string) 
 
 ## New budget cut [POST]
 
@@ -515,14 +524,53 @@ This is the API blueprint for Momster COS application
 				"name": "Lisa Lawrence",
 				"designation": "HOD",
 				"role": ["HOD Officers"]
-				"liasonOfficer": "Steve Kong"
+				"liasonOfficer": {
+					"name": "Steve Kong",
+					"id": "12"
+				}
 			},
 			{
 				"id": "1213",
 				"name": "Christopher Brown",
 				"designation": "Executive",
 				"role": ["HOD Officers"]
-				"liasonOfficer": "Steve Kong"
+				"liasonOfficer": {
+					"name": "Steve Kong",
+					"id": "12"
+				}
+			}
+		]
+	}
+	```
+
+## Get HOD Sourcing Users [/api/v1/get-hod-sourcing-user]
+
+### Get HOD Sourcing Users[GET]
+
++ Response 200
+	
+	```
+	{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"role": ["HOD Officers"]
+				"liasonOfficer": {
+					"name": "Steve Kong",
+					"id": "12"
+				}
+			},
+			{
+				"id": "1213",
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"role": ["HOD Officers"]
+				"liasonOfficer": {
+					"name": "Steve Kong",
+					"id": "12"
+				}
 			}
 		]
 	}
@@ -573,6 +621,41 @@ This is the API blueprint for Momster COS application
 				"name": "Christopher Brown",
 				"designation": "Executive",
 				"role": ["HOD Officers"]
+			}
+		]
+	}
+	```
+
+## Get MPs [/api/v1/get-mps]
+
+### Get MPs [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Lisa Lawrence",
+				"designation": "HOD",
+				"role": ["HOD sourcing"],
+				"hodOfficer": {
+					"name": "Steve Kong",
+					"id": "12"
+				},
+				"image": "images/profile-img.png"
+			},
+			{
+				"id": "1213",
+				"name": "Christopher Brown",
+				"designation": "Executive",
+				"role": ["Liaison Officers"],
+				"hodOfficer": {
+					"name": "Steve Kong",
+					"id": "12"
+				},
+				"image": "images/profile-img.png"
 			}
 		]
 	}

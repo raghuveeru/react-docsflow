@@ -11,13 +11,20 @@ var API = {
 		GET_WORKING_DRAFT: 'api/budget-cuts-working-draft.json',
 		GET_FINAL_APPROVED_REPLY: 'api/budget-cuts-final-approved-reply.json',
 		ASSIGN_TO_OFFICER: 'api/budget-cuts-assign-to-officer.json',
-		GET_BUDGET_ACTIVITY: 'api/budget-cuts-activity.json'
+		GET_BUDGET_ACTIVITY: 'api/budget-cuts-activity.json',
+		CREATE_NEW_BUDGET_CUT: 'api/new-budget-cut-response.json'
+	},
+	TOPICS: {
+		GET_MAIN_TOPICS: 'api/get-main-topics.json',
+		GET_BUDGET_CUT_TOPICS: 'api/get-budget-cut-topics.json'
 	},
 	USERS: {
 		GET_ALL_USERS: 'api/get-all-users.json',
 		GET_RESPONSIBLE_OFFICERS: 'api/get-responsible-officers.json',
 		GET_OFFICERS_TO_NOTIFY: 'api/get-officers-to-notify.json',
 		GET_HOD_DRAFTING_USER: 'api/get-hod-drafting-user.json',
+		GET_HOD_SOURCING_USER: 'api/get-hod-sourcing-user.json',
+		GET_MPS: 'api/get-mps.json',
 		GET_ALL_LIASON_OFFICERS: 'api/get-all-liason-officers.json',
 		GET_USER_BY_ID: 'api/get-user-by-id.json',
 	}

@@ -31,7 +31,7 @@ var InputMaterial = React.createClass({
 	},
 	componentDidUpdate: function(nextProps){
 		
-		if(nextProps.defaultValue != this.props.defaultValue){			
+		if(nextProps.defaultValue != this.props.defaultValue || nextProps.value != this.props.value){			
 			this.setState({
 				hasValue: true
 			})

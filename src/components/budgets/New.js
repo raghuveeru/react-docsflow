@@ -3,7 +3,7 @@ import InputMaterial from '../InputMaterial';
 import SelectMaterial from '../SelectMaterial';
 import Select2 from '../Select2';
 import TextareaMaterial from '../TextareaMaterial';
-import {mapObject} from './../../utilities';
+import {mapObject, t} from './../../utilities';
 
 var BudgetNew = React.createClass({	
 	contextTypes: {
@@ -19,6 +19,7 @@ var BudgetNew = React.createClass({
 			budgetCutId: '',
 			budgetCutTopicName: '',
 			memberOfParliament:'',
+			memberOfParliamentName: '',
 			hodSourcing: '',
 			fileReferenceNo: '',
 			summary: '',
@@ -27,7 +28,8 @@ var BudgetNew = React.createClass({
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',
-			userId: CURRENT_USER.id
+			userId: CURRENT_USER.id,
+			subject: ''
 		}
 	},
 	create: function(){
@@ -40,6 +42,18 @@ var BudgetNew = React.createClass({
 				throw new Error('Please check the response of this API Call - new-budget-cut-response.json');
 			}
 			this.context.router.transitionTo('budgetsView', {'id': res.id})
+		})
+	},
+	updateSubject: function(){		
+
+		var sub = t(AppConfig.SUBJECT_TEMPLATE, {
+			status: this.state.status,
+			topic: this.state.budgetCutTopicName,
+			mp: this.state.memberOfParliamentName
+		});
+
+		this.setState({
+			subject: sub
 		})
 	},
 	render: function(){
@@ -78,10 +92,11 @@ var BudgetNew = React.createClass({
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
 							placeholder= 'Member of Parliament'
 							multiple = {false}
-							onChange = { (val) => {
+							onChange = { (val, data) => {
 								
 								this.setState({
-									memberOfParliament: val
+									memberOfParliament: val,
+									memberOfParliamentName: data.name
 								})
 							}}
 						/>
@@ -152,7 +167,7 @@ var BudgetNew = React.createClass({
 
 								this.setState({
 									status: event.target.value
-								})
+								}, this.updateSubject)
 							}} >
 								{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
 									return <option key = {idx}>{status}</option>
@@ -182,6 +197,17 @@ var BudgetNew = React.createClass({
 									})
 								}}
 							/>
+
+							<div className="row">
+								<div className="columns six">
+
+									<InputMaterial
+										label="Subject"
+										value = {this.state.subject}
+										readOnly = {true}
+										/>
+								</div>
+							</div>
 
 							<div className="row">
 								<div className="columns six">

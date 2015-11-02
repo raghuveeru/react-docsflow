@@ -28,7 +28,7 @@ var API = {
 		GET_ALL_LIASON_OFFICERS: 'api/get-all-liason-officers.json',
 		GET_USER_BY_ID: 'api/get-user-by-id.json',
 	}
-}
+};
 
 /**
  * Status Name Mapping
@@ -57,6 +57,7 @@ window.AppConfig = {
 	API                    : API,
 	STATUS_MAPPING         : STATUS_MAPPING,
 	ROLE_PERMISSION_MAPPING: ROLE_PERMISSION_MAPPING,
-	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES
+	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
+	SUBJECT_TEMPLATE: '[MOM COS - {status}] - {topic} - {mp}'
 }
 

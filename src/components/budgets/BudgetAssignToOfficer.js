@@ -8,8 +8,6 @@ import Select2 from '../Select2';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React);
 
-var subjectTemplate = '[MOM COS - {status}] - {topic} - {mp}';
-
 var BudgetAssignToOfficer = React.createClass({
 	mixins: [FluxMixin],
 	getInitialState: function(){
@@ -38,7 +36,7 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	updateSubject: function(){		
 
-		var sub = t(subjectTemplate, {
+		var sub = t(AppConfig.SUBJECT_TEMPLATE, {
 			status: this.state.status,
 			topic: this.props.budget.title,
 			mp: this.props.budget.memberOfParliament
@@ -100,7 +98,7 @@ var BudgetAssignToOfficer = React.createClass({
 				<InputMaterial
 					label="Subject"
 					defaultValue = {this.state.subject}
-					disabled = {true}
+					readOnly = {true}
 					/>
 				
 				<TextareaMaterial label="Message" rows = {1} onChange = { (event) => {

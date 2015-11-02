@@ -11,5 +11,11 @@ module.exports = {
 		}
 
 		return 'Please provide status mapping in config file for ' + status;
+	},
+	t: function(s,d){
+		for(var p in d)
+		s=s.replace(new RegExp('{'+p+'}','g'), d[p]);
+		return s;
 	}
+
 }

@@ -70,8 +70,8 @@ var BudgetNew = React.createClass({
 							label = 'Budget cut topic' 
 							className="select2-wide" 
 							ref = "budgetCutTopic"
-							defaultValue = {this.state.budgetCutTopicName}
-							disabled = {true}
+							value = {this.state.budgetCutTopicName}
+							readOnly = {true}
 						/>
 
 						<Select2  

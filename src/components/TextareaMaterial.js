@@ -12,7 +12,9 @@ var TextareaMaterial = React.createClass({
 
 		this.setState({
 			isFocused: true,			
-		})
+		});
+
+		this.expandTextarea();
 	},
 	handleOnBlur: function(event){
 		
@@ -28,6 +30,19 @@ var TextareaMaterial = React.createClass({
 				hasValue: true
 			})
 		}
+
+		this.expandTextarea();
+	},
+	expandTextarea: function(){
+
+		var el = this.refs.textarea.getDOMNode();
+
+		var offset= !window.opera ? (el.offsetHeight - el.clientHeight) : (el.offsetHeight + parseInt(window.getComputedStyle(el, null).getPropertyValue('border-top-width'))) ;
+
+		// $(el).addClass('textarea-autogrow')
+
+		el.style.height = 'auto';
+		el.style.height = (el.scrollHeight  + offset ) + 'px';    
 	},
 	render: function(){
 
@@ -44,9 +59,11 @@ var TextareaMaterial = React.createClass({
 					className="input-control" 					
 					onFocus = {this.handleOnFocus}
 					onBlur = {this.handleOnBlur}
+					onInput = {this.expandTextarea}
 					defaultValue = {this.props.defaultValue}
 					rows={this.props.rows}
 					onChange = {this.props.onChange}
+					ref = 'textarea'
 				>
 				</textarea>
 			</div>

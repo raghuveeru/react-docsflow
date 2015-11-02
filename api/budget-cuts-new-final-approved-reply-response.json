@@ -1,7 +1,7 @@
 {
     "data": [
         {
-            "details": "test...",
+            "available": true,
             "attachments": [
                 {
                     "fileName": "question-details.pdf",
@@ -9,14 +9,7 @@
                     "downloadUrl": "http://google.com"
                 }
             ],
-            "hodDrafting": {
-                "id": 12,
-                "name": "Kai Goh"
-            },
-            "liasonOfficer": {
-                "id": 123,
-                "name": "Samuel Goh"
-            },
+            "types": ["Approved draft", "Anticipated Q&A", "Supplementary Info (upto confidential only)"],
             "date": "August 31, 2015"
         }
     ]

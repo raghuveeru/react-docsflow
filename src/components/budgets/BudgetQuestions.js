@@ -12,14 +12,54 @@ var BudgetQuestions = React.createClass({
 			BudgetDetailStore: this.getFlux().store('BudgetDetailStore').getState()
 		}
 	},
+	getInitialState: function(){
+
+		return {
+			editMode: false
+		}
+	},
 	componentDidMount: function(){
 
 		this.getFlux().actions.BudgetDetailActions.getQuestion(this.props.id)
 		
 	},
+	onEdit: function(){
+
+		this.getFlux().actions.BudgetDetailActions.getQuestion(this.props.id, () => {
+
+			this.setState({
+				editMode: true
+			})
+		});
+
+	},
 	render: function(){
 
 		var {question} = this.state.BudgetDetailStore;
+
+		if(this.state.editMode){
+
+			return (
+				<div>
+					<BudgetNewQuestion 
+						question = {question} 
+						editMode = {this.state.editMode}
+						budgetCutId = {this.props.id}
+						onCancelForm = {()=> {
+							this.setState({
+								editMode: false
+							})
+						}}
+						onFinishEdit = {()=> {
+							this.setState({
+								editMode: false
+							})
+						}}
+					/>
+					<hr className="rule" />
+				</div>
+			)
+		}
 
 		if(question.length){
 
@@ -50,17 +90,17 @@ var BudgetQuestions = React.createClass({
 								</tr>
 								<tr>
 									<th>HOD drafting reply</th>
-									<td>{q.hodDrafting}</td>
+									<td>{q.hodDrafting.name}</td>
 								</tr>
 								<tr>
 									<th>Liason officer</th>
-									<td>{q.liasonOfficer}</td>
+									<td>{q.liasonOfficer.name}</td>
 								</tr>
 								<tr>
 									<td colSpan="2">
 										<div className="activity-meta">
 											{q.date}
-											<a className="link-edit-question">Edit</a>
+											<a className="link-edit-question" onClick = {this.onEdit}>Edit</a>
 										</div>
 									</td>
 								</tr>
@@ -68,15 +108,16 @@ var BudgetQuestions = React.createClass({
 							)
 						})}
 						
-					</table>
+					</table>					
 					<hr className="rule" />
 				</div>
 			)
 		}
 		
 		return (
-			<div>				
-				<BudgetNewQuestion />
+			<div>
+				<BudgetNewQuestion budgetCutId = {this.props.id} />
+				<hr className="rule" />
 			</div>
 		)
 	}

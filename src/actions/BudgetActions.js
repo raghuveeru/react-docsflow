@@ -12,9 +12,9 @@ module.exports = {
 			.query(params)
 			.end((err, res) => {
 				
-				this.dispatch(actions.UPDATE_BUDGETS, JSON.parse(res.text));
-
 				NProgress.done()
+
+				this.dispatch(actions.UPDATE_BUDGETS, JSON.parse(res.text));				
 			});
 	},
 	getBudgetById: function(payload){
@@ -26,9 +26,9 @@ module.exports = {
 			.query(payload)
 			.end((err, res) => {
 				
-				this.dispatch(actions.GET_BUDGET_BY_ID, JSON.parse(res.text));
-
 				NProgress.done()
+
+				this.dispatch(actions.GET_BUDGET_BY_ID, JSON.parse(res.text));				
 			});
 	},
 	selectBudget: function(id, type){
@@ -47,14 +47,14 @@ module.exports = {
 		NProgress.start()
 
 		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
-			.query({
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
+			.send({
 				id: payload
 			})
 			.end((err, res) => {
-				console.log(err, res)
-
+				
 				NProgress.done()
+				
 			})
 	},
 	addToSpeech: function(payload){
@@ -62,15 +62,16 @@ module.exports = {
 		NProgress.start()
 
 		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ADD_TO_SPEECH)
-			.query({
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ADD_TO_SPEECH)
+			.send({
 				id: payload
 			})
 			.end((err, res) => {
 				
-				this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
-
 				NProgress.done()
+
+				this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
+				
 			})
 	},
 	assignToOfficer: function(payload){
@@ -78,13 +79,13 @@ module.exports = {
 		NProgress.start()
 
 		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
-			.query(payload)
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
+			.send(payload)			
 			.end((err, res) => {
-				
-				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));
 
 				NProgress.done()
+				
+				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));				
 			})
 	},
 	getBudgetActivity: function(payload){
@@ -100,9 +101,9 @@ module.exports = {
 			})
 			.end((err, res) => {
 				
-				this.dispatch(actions.GET_BUDGET_ACTIVITY, JSON.parse(res.text));
-
 				NProgress.done()
+				
+				this.dispatch(actions.GET_BUDGET_ACTIVITY, JSON.parse(res.text));				
 			})
 	},
 	createNew: function(payload, callback){

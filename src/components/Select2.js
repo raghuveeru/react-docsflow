@@ -22,6 +22,10 @@ var Select2 = React.createClass({
 			options = Object.assign({}, options, {
 				data:{ text: "name" },
 				multiple: this.props.multiple || false,
+				initSelection: (element, callback) => {
+									
+					callback(this.props.defaultValue)
+				},
 				ajax: {
 					url: this.props.url,
 					dataType: 'json',
@@ -43,15 +47,30 @@ var Select2 = React.createClass({
 			.on('change', (event) => {
 
 				this.props.onChange && this.props.onChange.call(this, event.val, $select.select2('data'))
-			})
+			});
+		
 	},
 	render: function(){
+
+		var {defaultValue} = this.props,
+			selected = '';
+
+		if(defaultValue){
+
+			if(defaultValue instanceof Array){
+				for(var i = 0; i < defaultValue.length; i++){
+					selected.push(defaultValue[i].id)
+				}
+			}else{
+				selected = defaultValue.id
+			}
+		}
 
 		if(!this.props.url){
 
 			return (
 				<div className="select2-element">
-					<select ref= "select">
+					<select ref= "select" name = {this.props.name}>
 						{this.props.children}
 					</select>
 				</div>
@@ -60,7 +79,7 @@ var Select2 = React.createClass({
 		
 		return (
 			<div className="select2-element">
-				<input type="text" ref="select" />
+				<input type="text" ref="select"  name = {this.props.name} value = {selected} />
 			</div>
 		)
 	}

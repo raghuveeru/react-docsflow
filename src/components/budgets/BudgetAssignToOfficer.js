@@ -3,10 +3,12 @@ import InputMaterial from '../InputMaterial';
 import SelectMaterial from '../SelectMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
-import {mapObject} from './../../utilities';
+import {mapObject, t} from './../../utilities';
 import Select2 from '../Select2';
 import Fluxxor from 'fluxxor';
-var FluxMixin = Fluxxor.FluxMixin(React)
+var FluxMixin = Fluxxor.FluxMixin(React);
+
+var subjectTemplate = '[MOM COS - {status}] - {topic} - {mp}';
 
 var BudgetAssignToOfficer = React.createClass({
 	mixins: [FluxMixin],
@@ -30,7 +32,20 @@ var BudgetAssignToOfficer = React.createClass({
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',
-			showMessage: true
+			showMessage: true,
+			subject: ''
+		})
+	},
+	updateSubject: function(){		
+
+		var sub = t(subjectTemplate, {
+			status: this.state.status,
+			topic: this.props.budget.title,
+			mp: this.props.budget.memberOfParliament
+		});
+
+		this.setState({
+			subject: sub
 		})
 	},
 	render: function(){
@@ -50,7 +65,8 @@ var BudgetAssignToOfficer = React.createClass({
 
 					this.setState({
 						status: event.target.value
-					})
+					}, this.updateSubject);
+
 				}} >
 					{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
 						return <option key = {idx}>{status}</option>
@@ -80,6 +96,12 @@ var BudgetAssignToOfficer = React.createClass({
 						})
 					}}
 				/>
+
+				<InputMaterial
+					label="Subject"
+					defaultValue = {this.state.subject}
+					disabled = {true}
+					/>
 				
 				<TextareaMaterial label="Message" rows = {1} onChange = { (event) => {
 					this.setState({

@@ -12,14 +12,54 @@ var BudgetFinalApprovedReply = React.createClass({
 			BudgetDetailStore: this.getFlux().store('BudgetDetailStore').getState()
 		}
 	},
+	getInitialState: function(){
+
+		return {
+			editMode: false
+		}
+	},
 	componentDidMount: function(){
 
 		this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply(this.props.id)
 		
 	},
+	onEdit: function(){
+
+		this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply(this.props.id, () => {
+
+			this.setState({
+				editMode: true
+			})
+		});
+
+	},
 	render: function(){
 
 		var {finalApprovedReply} = this.state.BudgetDetailStore;
+
+		if(this.state.editMode){
+
+			return (
+				<div>
+					<BudgetNewFinalApprovedReply 
+						budgetCutId = {this.props.id}
+						finalApprovedReply = {finalApprovedReply} 
+						editMode = {this.state.editMode} 
+						onFinishEdit = {()=> {
+							this.setState({
+								editMode: false
+							})
+						}}
+						onCancelForm = {()=> {
+							this.setState({
+								editMode: false
+							})
+						}}
+					/>
+					<hr className="rule" />
+				</div>
+			)
+		}
 
 		if(finalApprovedReply.length){
 
@@ -56,7 +96,7 @@ var BudgetFinalApprovedReply = React.createClass({
 									<td colSpan="2">
 										<div className="activity-meta">
 											{q.date}
-											<a className="link-edit-question">Edit</a>
+											<a className="link-edit-question" onClick = {this.onEdit}>Edit</a>
 										</div>
 									</td>
 								</tr>
@@ -72,7 +112,8 @@ var BudgetFinalApprovedReply = React.createClass({
 		
 		return (
 			<div>				
-				<BudgetNewFinalApprovedReply />
+				<BudgetNewFinalApprovedReply budgetCutId = {this.props.id} />
+				<hr className="rule" />	
 			</div>
 		)
 	}

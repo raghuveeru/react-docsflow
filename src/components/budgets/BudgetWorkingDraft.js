@@ -12,14 +12,54 @@ var BudgetWorkingDraft = React.createClass({
 			BudgetDetailStore: this.getFlux().store('BudgetDetailStore').getState()
 		}
 	},
+	getInitialState: function(){
+
+		return {
+			editMode: false
+		}
+	},
 	componentDidMount: function(){
 
 		this.getFlux().actions.BudgetDetailActions.getWorkingDraft(this.props.id)
 		
 	},
+	onEdit: function(){
+
+		this.getFlux().actions.BudgetDetailActions.getWorkingDraft(this.props.id, () => {
+
+			this.setState({
+				editMode: true
+			})
+		});
+
+	},
 	render: function(){
 
-		var {workingDraft} = this.state.BudgetDetailStore;
+		var {workingDraft} = this.state.BudgetDetailStore;		
+
+		if(this.state.editMode){
+
+			return (
+				<div>
+					<BudgetNewWorkingDraft 
+						workingDraft = {workingDraft}
+						budgetCutId = {this.props.id} 
+						editMode = {this.state.editMode} 
+						onFinishEdit = {()=> {
+							this.setState({
+								editMode: false
+							})
+						}}
+						onCancelForm = {()=> {
+							this.setState({
+								editMode: false
+							})
+						}}
+					/>
+					<hr className="rule" />
+				</div>
+			)
+		}
 
 		if(workingDraft.length){
 
@@ -52,7 +92,7 @@ var BudgetWorkingDraft = React.createClass({
 									<td colSpan="2">
 										<div className="activity-meta">
 											{q.date}
-											<a className="link-edit-question">Edit</a>
+											<a className="link-edit-question" onClick = {this.onEdit}>Edit</a>
 										</div>
 									</td>
 								</tr>
@@ -68,7 +108,8 @@ var BudgetWorkingDraft = React.createClass({
 		
 		return (
 			<div>				
-				<BudgetNewWorkingDraft />
+				<BudgetNewWorkingDraft budgetCutId = {this.props.id} />
+				<hr className="rule" />	
 			</div>
 		)
 	}

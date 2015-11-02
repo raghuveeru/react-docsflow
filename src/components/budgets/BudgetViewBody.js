@@ -75,7 +75,10 @@ var BudgetViewBody = React.createClass({
 
 					<BudgetFinalApprovedReply id = {this.props.id} />
 					
-					<BudgetAssignToOfficer id = {this.props.id} />	
+					<BudgetAssignToOfficer 
+						id = {this.props.id} 
+						budget = {currentBudget}
+					/>	
 				</div>
 				
 			</div>

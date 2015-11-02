@@ -133,12 +133,13 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Add to speech [/api/v1/add_to_speech/?id]
+## Add to speech [/api/v1/add_to_speech/{?id,userId}]
 
 + Parameters
 	+ id: `1,2,3,4` (comma separated)
+	+ userId: `12` (string)
 
-### Add to Speech [GET]
+### Add to Speech [POST]
 
 + Response 200
 
@@ -168,12 +169,13 @@ This is the API blueprint for Momster COS application
 	```
 
 
-## Export to excel [/api/v1/export_to_excel/?id]
+## Export to excel [/api/v1/export_to_excel/{?id,userId}]
 
 + Parameters
 	+ id: `1,2,3,4` (comma separated)
+	+ userId: `12` (string)
 
-### Export to excel [GET]
+### Export to excel [POST]
 
 + Response 200
 	
@@ -181,7 +183,7 @@ This is the API blueprint for Momster COS application
 	true
 	```
 
-## Get Question details [/api/v1/get_question_details{?budgetCutId}]
+## Budget Questions [/api/v1/get_question_details{?budgetCutId,userId,details,attachments,hodDrafting,liasonOfficer}]
 
 + Parameters
 	+ budgetCutId: `1` (string)
@@ -202,15 +204,59 @@ This is the API blueprint for Momster COS application
 	                    "downloadUrl": "http://google.com"
 	                }
 	            ],
-	            "hodDrafting": "Kai Goh",
-	            "liasonOfficer": "Samuel Seh",
+	            "hodDrafting": {
+	                "id": 12,
+	                "name": "Kai Goh"
+	            },
+	            "liasonOfficer": {
+	                "id": 123,
+	                "name": "Samuel Goh"
+	            },
 	            "date": "August 31, 2015"
 	        }
 	    ]
 	}
 	```
 
-## Get Working draft details [/api/v1/get_working_draft_details{?budgetCutId}]
+### Add/Update a new question [POST]
+
++ Parameters
+	+ budgetCutId: `1` (string)
+	+ userId: `12` (string)
+	+ details: `details of the question` (string)
+	+ attachments: `file` (attachment)
+	+ hodDrafting: `12` User ID of the HOD (string)
+	+ liasonOfficer: `12` User ID of the Liason officer (string)
+
++ Response 200
+	
+	```
+	{
+	    "data": [
+	        {
+	            "details": "test...",
+	            "attachments": [
+	                {
+	                    "fileName": "question-details.pdf",
+	                    "fileSize": "200kb",
+	                    "downloadUrl": "http://google.com"
+	                }
+	            ],
+	            "hodDrafting": {
+	                "id": 12,
+	                "name": "Kai Goh"
+	            },
+	            "liasonOfficer": {
+	                "id": 123,
+	                "name": "Samuel Goh"
+	            },
+	            "date": "August 31, 2015"
+	        }
+	    ]
+	}
+	```
+
+## Working draft details [/api/v1/get_working_draft_details{?budgetCutId,attachments,userId}]
 
 + Parameters
 	+ budgetCutId: `1` (string)
@@ -237,12 +283,66 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get final approved reply [/api/v1/get_final_approved_reply{?budgetCutId}]
+## Add/Update new working draft [POST]
+
++ Parameters
+	+ attachments: (attachments)
+	+ userId: `12` User ID of the logged in user (string)
+
++ Response 200
+
+	```
+	{
+	    "data": [
+	        {
+	            "available": true,
+	            "attachments": [
+	                {
+	                    "fileName": "question-details.pdf",
+	                    "fileSize": "200kb",
+	                    "downloadUrl": "http://google.com"
+	                }
+	            ],
+	            "date": "August 31, 2015"
+	        }
+	    ]
+	}
+	```
+
+## Final approved reply [/api/v1/get_final_approved_reply{?budgetCutId,attachments,types}]
 
 + Parameters
 	+ budgetCutId: `1` (string)
 
 ### Get final approved reply [GET]
+
++ Response 200
+
+	```
+	{
+	    "data": [
+	        {
+	            "available": true,
+	            "attachments": [
+	                {
+	                    "fileName": "question-details.pdf",
+	                    "fileSize": "200kb",
+	                    "downloadUrl": "http://google.com"
+	                }
+	            ],
+	            "types": ["Approved draft", "Anticipated Q&A", "Supplementary Info (upto confidential only)"],
+	            "date": "August 31, 2015"
+	        }
+	    ]
+	}
+	```
+
+### Add/Update new Final approved reply [POST]
+
++ Parameters
+	+ budgetCutId: `1` (string)
+	+ attachments: (attachments)
+	+ types: `['Approved draft']` (array)
 
 + Response 200
 
@@ -274,7 +374,7 @@ This is the API blueprint for Momster COS application
 	+ officersToNotify: `1,2,3,4` (comma separated)
 	+ message: `email message` (string)
 
-### Assign to Officer [GET]
+### Assign to Officer [POST]
 
 + Response 200
 	

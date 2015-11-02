@@ -365,7 +365,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Assign to Officer [/api/v1/assign_to_officer{?budgetCutId,status,responsibleOfficer,officersToNotify,message}]
+## Assign to Officer [/api/v1/assign_to_officer{?budgetCutId,status,responsibleOfficer,officersToNotify,message,subject,userId}]
 
 + Parameters
 	+ budgetCutId: `12` (string)
@@ -374,6 +374,7 @@ This is the API blueprint for Momster COS application
 	+ officersToNotify: `1,2,3,4` (comma separated)
 	+ message: `email message` (string)	
 	+ subject: `Subject of the email` (string)
+	+ userId: `5678` User ID of the Logged in User (string)
 
 ### Assign to Officer [POST]
 
@@ -491,7 +492,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Create new budget cut [/api/v1/budget_cuts{?topicId,budgetCutId,memberOfParliament,hodSourcing,fileReferenceNo,summary,time,status,responsibleOfficer,officersToNotify,message,userId}]
+## Create new budget cut [/api/v1/budget_cuts{?topicId,budgetCutId,memberOfParliament,hodSourcing,fileReferenceNo,summary,time,status,responsibleOfficer,officersToNotify,message,userId,subject}]
 
 + Parameters
 	+ topicId: `1` (string)

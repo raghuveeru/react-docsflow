@@ -17,8 +17,10 @@ var BudgetAssignToOfficer = React.createClass({
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',
+			subject: '',
 			budgetCutId: this.props.id,
-			showMessage: false
+			showMessage: false,
+			userId: CURRENT_USER.id
 		}
 	},
 	onSave: function(){

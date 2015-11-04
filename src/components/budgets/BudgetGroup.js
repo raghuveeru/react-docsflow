@@ -73,7 +73,7 @@ var BudgetGroup = React.createClass({
 							<div className="status-trail">
 								{mapObject(AppConfig.STATUS_MAPPING, function(key, value, idx){		
 
-									if(key == item.status){
+									if(key.toLowerCase() == item.status.toLowerCase()){
 										statusIdx = idx;
 									}
 									

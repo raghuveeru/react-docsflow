@@ -67,7 +67,8 @@ var BudgetNew = React.createClass({
 
 						<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_MAIN_TOPICS} 
-							placeholder= 'Select topics'							
+							placeholder= 'Select topics'
+							name="selectTopic"
 							multiple = {false}
 							onChange = { (val, data) => {
 
@@ -91,6 +92,7 @@ var BudgetNew = React.createClass({
 							placeholder = 'Budget cut topic' 							
 							ref = "budgetCutTopicSelect"							
 							readOnly = {true}
+							name="budgetCutTopicSelect"
 							onChange = { (val, data) => {
 								
 								this.setState({
@@ -108,6 +110,7 @@ var BudgetNew = React.createClass({
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
 							placeholder= 'Member of Parliament'
 							multiple = {false}
+							name="memberOfParliament"
 							onChange = { (val, data) => {
 								
 								this.setState({
@@ -121,6 +124,7 @@ var BudgetNew = React.createClass({
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_SOURCING_USER} 
 							placeholder= 'HOD Sourcing'
 							multiple = {false}
+							name="hodSourcing"
 							onChange = { (val) => {
 								
 								this.setState({
@@ -194,6 +198,7 @@ var BudgetNew = React.createClass({
 								url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
 								placeholder= 'Responsible officers'
 								multiple = {true}
+								name="responsibleOfficer"
 								onChange = { (val) => {
 									
 									this.setState({
@@ -206,6 +211,7 @@ var BudgetNew = React.createClass({
 								url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY} 
 								placeholder= 'Officers to notify'
 								multiple = {true}
+								name="officersToNotify"
 								onChange = { (val) => {
 									
 									this.setState({

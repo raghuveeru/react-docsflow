@@ -22,11 +22,7 @@ var Select2 = React.createClass({
 			
 			options = jQuery.extend({}, options, {
 				data:{ text: "name" },
-				multiple: this.props.multiple || false,
-				initSelection: (element, callback) => {
-									
-					callback(this.props.defaultValue)
-				},
+				multiple: this.props.multiple || false,				
 				ajax: {
 					url: this.props.url,
 					dataType: 'json',
@@ -45,11 +41,15 @@ var Select2 = React.createClass({
 		}
 
 		var $select = $(select).select2(options)
-			.on('change', (event) => {
-
-				this.props.onChange && this.props.onChange.call(this, event.val, $select.select2('data'))
+		$select.on('change', (event) => {
+				
+				this.props.onChange && this.props.onChange.call(this, event.val, event.added || event.removed)
 			});
 		
+	},
+	shouldComponentUpdate: function(nextProps){
+		
+		return nextProps.children != this.props.children
 	},
 	render: function(){
 

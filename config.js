@@ -1,5 +1,5 @@
 var API = {
-	BASE_URL: 'http://192.168.1.9:3000/',
+	BASE_URL: 'http://localhost:3000/',
 	BUDGET: {
 		ALL: 'api/budget-cuts.json',
 		SINGLE: 'api/budget-cuts-single.json',

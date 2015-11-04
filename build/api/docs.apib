@@ -27,7 +27,7 @@ This is the API blueprint for Momster COS application
 				"type": "budget_cuts",
 				"title": "Manpower challenges",
 				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "finalDraft",
+				"status": "Final draft",
 				"memberOfParliament": "Alex Yam",
 				"hodSourcing": "DOSHI- Chan Yew Kwong",
 				"hodDrafting": "Richard Wong",
@@ -35,14 +35,15 @@ This is the API blueprint for Momster COS application
 				"relationships": {
 					"category": "Workplace Safety & Health"
 				},
-				"userId": "123"
+				"liasonOfficer": "Richard Khong",
+				"userId": "blahblahblah"
 			},
 			{
 				"id": 2,
 				"type": "budget_cuts",			
 				"title": "Workplace injuries",
 				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "workingDraft",
+				"status": "On sourcing",
 				"memberOfParliament": "Alex Yam",
 				"hodSourcing": "DOSHI- Chan Yew Kwong",
 				"hodDrafting": "Richard Wong",
@@ -50,14 +51,15 @@ This is the API blueprint for Momster COS application
 				"relationships": {
 					"category": "Central Provident Fund"
 				},
-				"userId": "123"
+				"liasonOfficer": "Richard Khong",
+				"userId": "blahblahblah"
 			},
 			{
 				"id": 3,
 				"type": "budget_cuts",			
 				"title": "Workplace injuries 2",
 				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "workingDraft",
+				"status": "Speech",
 				"memberOfParliament": "Alex Yam",
 				"hodSourcing": "DOSHI- Chan Yew Kwong",
 				"hodDrafting": "Richard Wong",
@@ -65,9 +67,13 @@ This is the API blueprint for Momster COS application
 				"relationships": {
 					"category": "Central Provident Fund"
 				},
-				"userId": "123"
+				"liasonOfficer": "Richard Khong",
+				"userId": "blahblahblah"
 			}
 		],
+		"totalCount": 200,
+		"totalSpeechCount": 10,
+		"totalUserCount": 10,
 		"facets": {
 			"topics": [
 				{
@@ -85,14 +91,26 @@ This is the API blueprint for Momster COS application
 					"count": "10"
 				},
 				{
+					"name": "Working draft",
+					"count": "100"
+				},
+				{
 					"name": "Final draft",
 					"count": "12"
+				},
+				{
+					"name": "Speech",
+					"count": "10"
 				}
 			],
 			"year": [
 				{
 					"name": "2015",
 					"count": "10"
+				},
+				{
+					"name": "2014",
+					"count": "5"
 				}
 			]
 		}
@@ -365,7 +383,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Assign to Officer [/api/v1/assign_to_officer{?budgetCutId,status,responsibleOfficer,officersToNotify,message}]
+## Assign to Officer [/api/v1/assign_to_officer{?budgetCutId,status,responsibleOfficer,officersToNotify,message,subject,userId}]
 
 + Parameters
 	+ budgetCutId: `12` (string)
@@ -374,6 +392,7 @@ This is the API blueprint for Momster COS application
 	+ officersToNotify: `1,2,3,4` (comma separated)
 	+ message: `email message` (string)	
 	+ subject: `Subject of the email` (string)
+	+ userId: `5678` User ID of the Logged in User (string)
 
 ### Assign to Officer [POST]
 
@@ -491,7 +510,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Create new budget cut [/api/v1/budget_cuts{?topicId,budgetCutId,memberOfParliament,hodSourcing,fileReferenceNo,summary,time,status,responsibleOfficer,officersToNotify,message,userId}]
+## Create new budget cut [/api/v1/budget_cuts{?topicId,budgetCutId,memberOfParliament,hodSourcing,fileReferenceNo,summary,time,status,responsibleOfficer,officersToNotify,message,userId,subject}]
 
 + Parameters
 	+ topicId: `1` (string)
@@ -528,6 +547,44 @@ This is the API blueprint for Momster COS application
 				"category": "Workplace Safety & Health"
 			}
 		}
+	}
+	```
+
+
+## Get Main Topics [/api/v2/get-topics]
+
+### Get main topics [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1",
+				"name": "Workplace Safety & Health",
+				"budgetCutTopic": [
+					{
+						"id": "1231312",
+						"name": "Manpower challenges"
+					},
+					{
+						"id": "123",
+						"name": "Manpower challenges 2"
+					}
+				]
+			},
+			{
+				"id": "2",
+				"name": "Central Providence Fund",
+				"budgetCutTopic": [
+					{
+						"id": "1231312",
+						"name": "Manpower challenges for CPF"
+					}
+				]
+			}
+		]
 	}
 	```
 

@@ -550,6 +550,44 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
+
+## Get Main Topics [/api/v2/get-topics]
+
+### Get main topics [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1",
+				"name": "Workplace Safety & Health",
+				"budgetCutTopic": [
+					{
+						"id": "1231312",
+						"name": "Manpower challenges"
+					},
+					{
+						"id": "123",
+						"name": "Manpower challenges 2"
+					}
+				]
+			},
+			{
+				"id": "2",
+				"name": "Central Providence Fund",
+				"budgetCutTopic": [
+					{
+						"id": "1231312",
+						"name": "Manpower challenges for CPF"
+					}
+				]
+			}
+		]
+	}
+	```
+
 # Group Users
 
 ## Users [/api/v1/users]

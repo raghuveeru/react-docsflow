@@ -17,6 +17,7 @@ var BudgetNew = React.createClass({
 		return {			
 			topicId: '',
 			budgetCutId: '',
+			budgetCutTopic: [],
 			budgetCutTopicName: '',
 			memberOfParliament:'',
 			memberOfParliamentName: '',
@@ -71,22 +72,35 @@ var BudgetNew = React.createClass({
 							onChange = { (val, data) => {
 
 								var bcTopic = data.budgetCutTopic;
+
+								var select = this.refs.budgetCutTopicSelect.refs.select.getDOMNode();
+								
+								setTimeout(() => {
+									$(select).select2('val', bcTopic[0].id, true)
+								}, 100)
 								
 								this.setState({
 									topicId: val,
-									budgetCutTopic: bcTopic.id,
-									budgetCutTopicName: bcTopic.name
+									budgetCutTopic: bcTopic
 								})
 							}}
 						/>
 						
-						<InputMaterial 
-							label = 'Budget cut topic' 
-							className="select2-wide" 
-							ref = "budgetCutTopic"
-							value = {this.state.budgetCutTopicName}
+						<Select2 
+							placeholder = 'Budget cut topic' 							
+							ref = "budgetCutTopicSelect"							
 							readOnly = {true}
-						/>
+							onChange = { (val, data) => {
+								
+								this.setState({
+									budgetCutId: val
+								})
+							}}
+						>
+							{this.state.budgetCutTopic.map((topic) => {
+								return <option value= {topic.id}>{topic.name}</option>
+							})}
+						</Select2>
 
 						<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 

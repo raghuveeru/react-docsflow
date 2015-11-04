@@ -3,18 +3,26 @@
 		{
 			"id": "1",
 			"name": "Workplace Safety & Health",
-			"budgetCutTopic": {
-				"id": "1231312",
-				"name": "Manpower challenges"
-			}
+			"budgetCutTopic": [
+				{
+					"id": "1231312",
+					"name": "Manpower challenges"
+				},
+				{
+					"id": "123",
+					"name": "Manpower challenges 2"
+				}
+			]
 		},
 		{
 			"id": "2",
 			"name": "Central Providence Fund",
-			"budgetCutTopic": {
-				"id": "1231312",
-				"name": "Manpower challenges for CPF"
-			}
+			"budgetCutTopic": [
+				{
+					"id": "1231312",
+					"name": "Manpower challenges for CPF"
+				}
+			]
 		}
 	]
 }

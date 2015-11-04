@@ -64,8 +64,8 @@ var TextareaMaterial = React.createClass({
 					rows={this.props.rows}
 					onChange = {this.props.onChange}
 					ref = 'textarea'
-				>
-				</textarea>
+					name = {this.props.name}
+				/>
 			</div>
 		)
 	}

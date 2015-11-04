@@ -2,6 +2,7 @@ import React from 'react';
 import InputMaterial from '../InputMaterial';
 import SelectMaterial from '../SelectMaterial';
 import InputFileMaterial from '../InputFileMaterial';
+import TextareaMaterial from '../TextareaMaterial';
 import Select2 from '../Select2';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
@@ -65,7 +66,8 @@ var BudgetNewQuestion = React.createClass({
 
 				<div className={sectionClass}>
 					<h4>{heading}</h4>
-					<InputMaterial 
+					<TextareaMaterial
+						rows = {1} 
 						label = "Details of question sourced" 
 						name="details"
 						defaultValue = {currentQuestion.details}

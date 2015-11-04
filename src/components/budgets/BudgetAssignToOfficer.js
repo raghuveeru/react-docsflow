@@ -99,7 +99,7 @@ var BudgetAssignToOfficer = React.createClass({
 
 				<InputMaterial
 					label="Subject"
-					defaultValue = {this.state.subject}
+					value = {this.state.subject}
 					readOnly = {true}
 					/>
 				

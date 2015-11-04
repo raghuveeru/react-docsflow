@@ -7805,7 +7805,9 @@ Version: 3.5.4 Timestamp: Sun Aug 30 13:30:32 EDT 2015
   width: 100%; }
   @media only screen and (min-width: 768px) {
     .select2-container {
-      max-width: 270px; } }
+      min-width: 270px;
+      width: auto;
+      max-width: 500px; } }
 
 .select2-container,
 .select2-drop,
@@ -8426,6 +8428,8 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
       margin: auto 0; }
   .select2-element .select2-container .select2-choice .select2-arrow b {
     background: none; }
+  .select2-element .select2-container-multi .select2-choices .select2-search-choice {
+    margin-bottom: 5px; }
 
 .select2-drop-active {
   border-color: #ccc; }

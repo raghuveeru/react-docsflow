@@ -46,11 +46,13 @@ module.exports = {
 
 		NProgress.start()
 
+		var data = {
+			"id": payload
+		};
+
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
-			.send({
-				id: payload
-			})
+			.send(JSON.stringify(data))
 			.end((err, res) => {
 				
 				NProgress.done()
@@ -61,11 +63,13 @@ module.exports = {
 
 		NProgress.start()
 
+		var data = {
+			"id": payload
+		};
+
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ADD_TO_SPEECH)
-			.send({
-				id: payload
-			})
+			.send(JSON.stringify(data))
 			.end((err, res) => {
 				
 				NProgress.done()
@@ -80,7 +84,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
-			.send(payload)			
+			.send(JSON.stringify(payload))
 			.end((err, res) => {
 
 				NProgress.done()
@@ -112,7 +116,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_BUDGET_CUT)
-			.send(payload)
+			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
 				// this.dispatch(actions.CREATE_NEW_BUDGET_CUT, JSON.parse(res.text));

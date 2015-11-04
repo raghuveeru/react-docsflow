@@ -81,7 +81,8 @@ var BudgetNew = React.createClass({
 								
 								this.setState({
 									topicId: val,
-									budgetCutTopic: bcTopic
+									budgetCutTopic: bcTopic,
+									budgetCutTopicName: bcTopic[0].name
 								})
 							}}
 						/>
@@ -112,7 +113,7 @@ var BudgetNew = React.createClass({
 								this.setState({
 									memberOfParliament: val,
 									memberOfParliamentName: data.name
-								})
+								}, this.updateSubject)
 							}}
 						/>
 

@@ -97,6 +97,7 @@ var BudgetNew = React.createClass({
 								})
 							}}
 						>
+							<option></option>
 							{this.state.budgetCutTopic.map((topic) => {
 								return <option value= {topic.id}>{topic.name}</option>
 							})}

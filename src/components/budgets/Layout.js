@@ -123,11 +123,10 @@ var BudgetContainer = React.createClass({
 		var currentRoutes = this.context.router.getCurrentRoutes();
 		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;
 
-		var {facets, totalCount, totalSpeechCount, budgets} = this.state.BudgetStore;
+		var {facets, totalCount, totalStatusCount, budgets} = this.state.BudgetStore;
 		var budgetStatus = (activeRouteName && activeRouteName != 'budgetsInbox'? <BudgetStatus 
-								facets = {facets} 
 								totalCount = {totalCount}
-								totalSpeechCount = {totalSpeechCount}
+								totalStatusCount = {totalStatusCount}
 							/> : null);
 		
 		/**

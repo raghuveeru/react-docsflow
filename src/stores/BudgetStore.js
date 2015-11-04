@@ -10,6 +10,7 @@ var BudgetStore = Fluxxor.createStore({
 		this.totalCount = 0;
 		this.totalSpeechCount = 0;
 		this.totalUserCount = 0;
+		this.totalStatusCount = 0;
 		this.currentBudget = {};
 		this.activity = [];
 		this.isFetchingBudgetActivity = false
@@ -36,6 +37,8 @@ var BudgetStore = Fluxxor.createStore({
 		this.totalSpeechCount = budgets.totalSpeechCount
 
 		this.totalUserCount = budgets.totalUserCount
+		
+		this.totalStatusCount = budgets.totalStatusCount
 
 		this.emit('change')
 	},
@@ -46,6 +49,7 @@ var BudgetStore = Fluxxor.createStore({
 			facets: this.facets,
 			totalCount: this.totalCount,
 			totalUserCount: this.totalUserCount,
+			totalStatusCount: this.totalStatusCount,
 			totalSpeechCount: this.totalSpeechCount,
 			currentBudget: this.currentBudget,
 			activity: this.activity,

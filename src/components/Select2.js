@@ -17,7 +17,7 @@ var Select2 = React.createClass({
 			placeholder: this.props.placeholder,
 			allowClear: this.props.allowClear,
 		};
-
+		
 		if(this.props.url){
 			
 			options = jQuery.extend({}, options, {

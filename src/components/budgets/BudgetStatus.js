@@ -4,15 +4,13 @@ import Progress from './Progress';
 var BudgetStatus = React.createClass({
 	render: function(){
 
-		var {facets, totalCount, totalSpeechCount} = this.props;
+		var {totalStatusCount, totalCount} = this.props;
 
-		if(!facets) return null;
+		if(!totalStatusCount) return null;
 
-		var {status} = facets;
-
-		if(!status) return null;
-
-		var totalPercent = totalSpeechCount / totalCount * 100;
+		var speechStatus = totalStatusCount.filter((status) => status.name.toLowerCase() == 'speech')
+		
+		var totalPercent = speechStatus[0].count / totalCount * 100;
 
 		return (
 			<div className="budget-status">
@@ -22,7 +20,7 @@ var BudgetStatus = React.createClass({
 						strokeWidth="6"
                     	r="50" />
 				</div>
-				{status.map(function(st, idx){
+				{totalStatusCount.map(function(st, idx){
 					return (
 						<div key = {idx}>
 							<div className="budget-status-count">{st.count}</div>

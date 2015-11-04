@@ -8427,7 +8427,7 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
       position: absolute;
       margin: auto 0; }
   .select2-element .select2-container .select2-choice .select2-arrow b {
-    background: none; }
+    background: none !important; }
   .select2-element .select2-container-multi .select2-choices .select2-search-choice {
     margin-bottom: 5px; }
 

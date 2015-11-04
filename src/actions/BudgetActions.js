@@ -1,14 +1,16 @@
 import {actions} from '../constants';
 import request from 'superagent';
 import NProgress from 'react-nprogress';
+import {headers} from './../constants';
 
 module.exports = {
 	getBudgets: function(params){		
 		
 		NProgress.start()
 
-		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ALL)			
+		request		
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ALL)
+			.set(headers)
 			.query(params)
 			.end((err, res) => {
 				
@@ -22,7 +24,8 @@ module.exports = {
 		NProgress.start()
 		
 		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.SINGLE)			
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.SINGLE)
+			.set(headers)
 			.query(payload)
 			.end((err, res) => {
 				
@@ -52,6 +55,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
+			.set(headers)
 			.send(JSON.stringify(data))
 			.end((err, res) => {
 				
@@ -69,6 +73,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ADD_TO_SPEECH)
+			.set(headers)
 			.send(JSON.stringify(data))
 			.end((err, res) => {
 				
@@ -84,6 +89,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
+			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 
@@ -100,6 +106,7 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_BUDGET_ACTIVITY)
+			.set(headers)
 			.query({
 				budgetId: payload
 			})
@@ -116,6 +123,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_BUDGET_CUT)
+			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				

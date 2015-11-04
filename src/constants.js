@@ -40,5 +40,9 @@ module.exports = {
 			maxHeight: '100%',
 			overflow: 'auto'
 		}
+	},
+	headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json'
 	}
 }

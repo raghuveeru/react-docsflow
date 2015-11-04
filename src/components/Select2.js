@@ -1,4 +1,5 @@
 import React from 'react';
+import utils from './../utilities';
 
 var Select2 = React.createClass({
 	getDefaultProps: function(){
@@ -19,7 +20,7 @@ var Select2 = React.createClass({
 
 		if(this.props.url){
 			
-			options = Object.assign({}, options, {
+			options = jQuery.extend({}, options, {
 				data:{ text: "name" },
 				multiple: this.props.multiple || false,
 				initSelection: (element, callback) => {

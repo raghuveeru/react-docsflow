@@ -36,7 +36,7 @@ var BudgetContainer = React.createClass({
 		var currentRoutes = this.context.router.getCurrentRoutes();
 		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;		
 
-		return Object.assign(
+		return jQuery.extend(
 		{
 			'query': this._query,
 		}, 

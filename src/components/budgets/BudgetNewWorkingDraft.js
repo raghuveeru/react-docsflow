@@ -55,7 +55,7 @@ var BudgetNewWorkingDraft = React.createClass({
 		if(editMode) currentDraft = workingDraft[0];		
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = 'api/budget-cuts-new-working-draft-response.json'>
+			<form ref="ajaxForm" method = 'post' action = {AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_WORKING_DRAFT}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

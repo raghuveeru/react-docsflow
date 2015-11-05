@@ -49,7 +49,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 		if(editMode) currentReply = finalApprovedReply[0];		
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = 'api/budget-cuts-new-final-approved-reply-response.json'>
+			<form ref="ajaxForm" method = 'post' action = {AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_QUESTION}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

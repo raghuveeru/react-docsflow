@@ -58,7 +58,7 @@ var BudgetNewQuestion = React.createClass({
 		if(editMode) currentQuestion = question[0];		
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = 'api/budget-cuts-new-question-response.json'>
+			<form ref="ajaxForm" method = 'post' action = {AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_QUESTION}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

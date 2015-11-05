@@ -65,7 +65,7 @@ var Users = React.createClass({
 									</td>
 									<td>{user.name}</td>
 									<td>{user.designation}</td>
-									<td>
+									<td className="cell-actions">
 										<a href="#">Edit</a>
 										<a href="#">Delete</a>
 									</td>

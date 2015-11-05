@@ -89,7 +89,7 @@ var BudgetContainer = React.createClass({
 
 		if(facet in newFilters){
 			
-			newFilters[facet] = value.name		
+			newFilters[facet] = value.id || value.name		
 			
 			this._filters = newFilters;
 

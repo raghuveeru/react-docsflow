@@ -4284,6 +4284,11 @@ li {
 .table-admin .cell-image {
   width: 40px; }
 
+.table-admin .cell-actions {
+  text-align: right; }
+  .table-admin .cell-actions > a {
+    margin: 0 0.5em; }
+
 /* Components */
 /*------------------------------------*    COMPONENTS.CSS
 \*------------------------------------*/

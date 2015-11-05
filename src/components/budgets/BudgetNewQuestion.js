@@ -55,10 +55,16 @@ var BudgetNewQuestion = React.createClass({
 		var link = !isOpen? <a className="link-add" onClick = {this.toggle}>Add question details </a>: null;
 
 		var heading = editMode? 'Edit question details': 'Add question details';
-		if(editMode) currentQuestion = question[0];		
+
+		var url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_QUESTION;
+
+		if(editMode) {
+			currentQuestion = question[0];		
+			url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EDIT_QUESTION;
+		}
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = {AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_QUESTION}>
+			<form ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

@@ -52,10 +52,15 @@ var BudgetNewWorkingDraft = React.createClass({
 			attachments: []
 		};
 		var heading = editMode? 'Edit working draft details': 'Add working draft details';
-		if(editMode) currentDraft = workingDraft[0];		
+		
+		var url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_WORKING_DRAFT;
+		if(editMode) {
+			currentDraft = workingDraft[0];		
+			url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EDIT_WORKING_DRAFT;
+		}
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = {AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_WORKING_DRAFT}>
+			<form ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

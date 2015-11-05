@@ -46,10 +46,17 @@ var BudgetNewFinalApprovedReply = React.createClass({
 			types: []
 		};
 		var heading = editMode? 'Edit working draft details': 'Add working draft details';
-		if(editMode) currentReply = finalApprovedReply[0];		
+		
+		var url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_FINAL_APPROVED_REPLY;
+
+		if(editMode) {
+			currentReply = finalApprovedReply[0];	
+
+			url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EDIT_FINAL_APPROVED_REPLY	
+		}
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = {AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_QUESTION}>
+			<form ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

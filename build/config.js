@@ -5,11 +5,18 @@ var API = {
 		SINGLE: 'api/budget-cuts-single.json',
 		EXPORT_TO_EXCEL: 'api/export',
 		ADD_TO_SPEECH: 'api/budget-add-to-speech.json',
-		GET_QUESTION: 'api/budget-cuts-question-detail.json',		
-		SAVE_EDIT_QUESTION: 'api/budget-cuts-question-detail.json',
-		CREATE_NEW_QUESTION: 'api/budget-cuts-question-detail.json',
+		GET_QUESTION: 'api/budget-cuts-question-detail.json',				
+		EDIT_QUESTION: 'api/budget-cuts-question-detail.json',
+		CREATE_NEW_QUESTION: 'api/budget-cuts-new-question-response.json',
+		
 		GET_WORKING_DRAFT: 'api/budget-cuts-working-draft.json',
+		EDIT_WORKING_DRAFT: 'api/budget-cuts-working-draft.json',
+		CREATE_NEW_WORKING_DRAFT: 'api/budget-cuts-new-working-draft-response.json',
+		
 		GET_FINAL_APPROVED_REPLY: 'api/budget-cuts-final-approved-reply.json',
+		EDIT_FINAL_APPROVED_REPLY: 'api/budget-cuts-final-approved-reply.json',
+		CREATE_NEW_FINAL_APPROVED_REPLY: 'api/budget-cuts-new-final-approved-reply-response.json',
+		
 		ASSIGN_TO_OFFICER: 'api/budget-cuts-assign-to-officer.json',
 		GET_BUDGET_ACTIVITY: 'api/budget-cuts-activity.json',
 		CREATE_NEW_BUDGET_CUT: 'api/new-budget-cut-response.json'

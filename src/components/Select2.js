@@ -23,6 +23,9 @@ var Select2 = React.createClass({
 			options = jQuery.extend({}, options, {
 				data:{ text: "name" },
 				multiple: this.props.multiple || false,				
+				initSelection: (element, callback) => {					
+					callback(this.props.defaultValue)
+				},
 				ajax: {
 					url: this.props.url,
 					dataType: 'json',

@@ -16,7 +16,13 @@ var API = {
 	},
 	TOPICS: {
 		GET_MAIN_TOPICS: 'api/get-main-topics.json',
-		GET_BUDGET_CUT_TOPICS: 'api/get-budget-cut-topics.json'
+		GET_BUDGET_CUT_TOPICS: 'api/get-budget-cut-topics.json',
+		CREATE_MAIN_TOPIC: 'api/new-topic-response.json',
+		EDIT_MAIN_TOPIC: 'api/edit-topic-response.json',
+		DELETE_MAIN_TOPIC: 'api/delete-topic-response.json',
+		CREATE_BUDGET_CUT_TOPIC: 'api/new-budget-cut-topic-response.json',
+		EDIT_BUDGET_CUT_TOPIC: 'api/edit-budget-cut-topic-response.json',
+		DELETE_BUDGET_CUT_TOPIC: 'api/delete-budget-cut-topic-response.json',
 	},
 	USERS: {
 		GET_ALL_USERS: 'api/get-all-users.json',

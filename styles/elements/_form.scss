@@ -165,12 +165,13 @@ label{
  * Error label
  */
 
-.label-error{
+label.label-error{
     color: $color-error;
     text-transform: none;
     @include font-size(14px, false);
-    margin-top: -15px;
+    margin-top: 0.5em;
     letter-spacing: 0;
+    display: block;
 }
 
     /**

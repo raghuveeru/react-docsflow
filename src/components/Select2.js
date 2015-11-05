@@ -41,10 +41,11 @@ var Select2 = React.createClass({
 		}
 
 		var $select = $(select).select2(options)
+		
 		$select.on('change', (event) => {
 				
-				this.props.onChange && this.props.onChange.call(this, event.val, event.added || event.removed)
-			});
+			this.props.onChange && this.props.onChange.call(this, event.val, event.added || event.removed, event)
+		});
 		
 	},
 	shouldComponentUpdate: function(nextProps){
@@ -71,7 +72,10 @@ var Select2 = React.createClass({
 
 			return (
 				<div className="select2-element">
-					<select ref= "select" name = {this.props.name}>
+					<select 
+						required ={this.props.required}
+						ref= "select" 
+						name = {this.props.name}>
 						{this.props.children}
 					</select>
 				</div>
@@ -80,7 +84,12 @@ var Select2 = React.createClass({
 		
 		return (
 			<div className="select2-element">
-				<input type="text" ref="select"  name = {this.props.name} value = {selected} />
+				<input 
+					required ={this.props.required}
+					type="text" 
+					ref="select" 
+					name = {this.props.name} 
+					value = {selected} />
 			</div>
 		)
 	}

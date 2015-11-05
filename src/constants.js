@@ -17,6 +17,13 @@ module.exports = {
 		ADD_QUESTION: 'ADD_QUESTION',
 		ADD_WORKING_DRAFT: 'ADD_WORKING_DRAFT',
 		ADD_FINAL_APPROVED_REPLY: 'ADD_FINAL_APPROVED_REPLY',
+		GET_MAIN_TOPICS: 'GET_MAIN_TOPICS',
+		CREATE_MAIN_TOPIC: 'CREATE_MAIN_TOPIC',
+		EDIT_MAIN_TOPIC: 'EDIT_MAIN_TOPIC',
+		DELETE_MAIN_TOPIC: 'DELETE_MAIN_TOPIC',
+		CREATE_BUDGET_CUT_TOPIC: 'CREATE_BUDGET_CUT_TOPIC',
+		EDIT_BUDGET_CUT_TOPIC: 'EDIT_BUDGET_CUT_TOPIC',
+		DELETE_BUDGET_CUT_TOPIC: 'DELETE_BUDGET_CUT_TOPIC'
 	},
 	customStyles: {
 		overlay : {
@@ -44,5 +51,28 @@ module.exports = {
 	headers: {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json'
+	},
+	validationOptions: {
+		errorClass: 'label-error',
+		ignore: null,
+		highlight: function (element, errorClass, validClass) {
+			
+            var elem = $(element);
+            if (elem.hasClass("select2-offscreen")) {
+                $("#s2id_" + elem.attr("id") + " ul").addClass(errorClass);
+            } else {
+                elem.addClass(errorClass);
+            }
+        },
+
+        //When removing make the same adjustments as when adding
+        unhighlight: function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-offscreen")) {
+                $("#s2id_" + elem.attr("id") + " ul").removeClass(errorClass);
+            } else {
+                elem.removeClass(errorClass);
+            }
+        }
 	}
 }

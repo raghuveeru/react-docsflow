@@ -4,6 +4,7 @@ import Filters from './Filters';
 import SearchForm from './SearchForm';
 import BudgetList from './BudgetList';
 import BudgetStatus from './BudgetStatus';
+import {debounce} from './../../utilities';
 import {StoreWatchMixin} from 'fluxxor';
 import Fluxxor from 'fluxxor';
 import _ from 'lodash';
@@ -52,6 +53,8 @@ var BudgetContainer = React.createClass({
 	componentDidMount: function(){
 
 		this.getBudgets();
+
+		this._debounceRoute = debounce(this.route, 300)
 		
 	},
 	componentDidUpdate: function(nextProps, nextState){
@@ -81,7 +84,7 @@ var BudgetContainer = React.createClass({
 
 		this._query =  event.target.value
 
-		this.route();
+		this._debounceRoute();
 	},	
 	handleFacetChange: function(facet, value){
 

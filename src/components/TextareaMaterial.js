@@ -56,6 +56,7 @@ var TextareaMaterial = React.createClass({
 					className='label-control'					
 					>{this.props.label}</label>
 				<textarea 
+					required = {this.props.required}
 					className="input-control" 					
 					onFocus = {this.handleOnFocus}
 					onBlur = {this.handleOnBlur}

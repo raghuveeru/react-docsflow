@@ -23,6 +23,8 @@ var BudgetActivity = React.createClass({
 		
 		if(isFetchingBudgetActivity) return <Loader />;
 
+		if(!activity.length) return null;
+
 		return (
 			<div className="sp-module">
 				<h2 className="sp-module-title">Activity</h2>

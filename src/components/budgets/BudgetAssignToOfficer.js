@@ -4,6 +4,7 @@ import SelectMaterial from '../SelectMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
 import {mapObject, t} from './../../utilities';
+import {validationOptions} from './../../constants';
 import Select2 from '../Select2';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React);
@@ -23,18 +24,23 @@ var BudgetAssignToOfficer = React.createClass({
 			userId: CURRENT_USER.id
 		}
 	},
-	onSave: function(){
+	onSave: function(event){
 
-		this.getFlux().actions.BudgetActions.assignToOfficer(this.state);
+		if(this.$form.valid()){
 
-		this.setState({
-			status: '',
-			responsibleOfficer: [],
-			officersToNotify: [],
-			message: '',
-			showMessage: true,
-			subject: ''
-		})
+			event && event.preventDefault();
+
+			this.getFlux().actions.BudgetActions.assignToOfficer(this.state);
+
+			this.setState({
+				status: '',
+				responsibleOfficer: [],
+				officersToNotify: [],
+				message: '',
+				showMessage: true,
+				subject: ''
+			})
+		}
 	},
 	updateSubject: function(){		
 
@@ -48,11 +54,29 @@ var BudgetAssignToOfficer = React.createClass({
 			subject: sub
 		})
 	},
+	componentDidMount: function(){
+
+		this.$form = $(this.refs.form.getDOMNode());
+
+		this.$form.validate(validationOptions);
+
+	},
+	checkSelect2Valid: function(e){
+		
+		if(!e) return;
+
+		if(this.$form.data('validator') == null) return;
+
+		var $ele = $(e.target);		
+		
+		return $ele.valid();
+		
+	},
 	render: function(){
 
 
 		return (
-			<div className="assign-form">
+			<form ref="form" className="assign-form">
 				<h4>Assign to officer</h4>
 
 				{this.state.showMessage? 
@@ -61,23 +85,33 @@ var BudgetAssignToOfficer = React.createClass({
 				</div>
 				: null}
 				
-				<SelectMaterial label = 'Select action' onChange = { (event) => {
+				<Select2
+					placeholder = 'Select action' 
+					required = {true}
+					onChange = { (val, data, event) => {
+
+						this.checkSelect2Valid(event)
 
 					this.setState({
-						status: event.target.value
+						status: val
 					}, this.updateSubject);
 
 				}} >
+					<option></option>
 					{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
 						return <option key = {idx}>{status}</option>
 					})}
-				</SelectMaterial>
+				</Select2>
 
 				<Select2  
-					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
+					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS}
+					required = {true}
 					placeholder= 'Responsible officers'
 					multiple = {true}
-					onChange = { (val) => {
+					name="responsibleOfficer"
+					onChange = { (val, data, event) => {
+
+						this.checkSelect2Valid(event)
 						
 						this.setState({
 							responsibleOfficer: val
@@ -89,8 +123,12 @@ var BudgetAssignToOfficer = React.createClass({
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY} 
 					placeholder= 'Officers to notify'
 					multiple = {true}
-					onChange = { (val) => {
+					required = {true}
+					name="officersToNotify"
+					onChange = { (val, data, event) => {
 						
+						this.checkSelect2Valid(event)
+
 						this.setState({
 							officersToNotify: val
 						})
@@ -98,12 +136,18 @@ var BudgetAssignToOfficer = React.createClass({
 				/>
 
 				<InputMaterial
+					required = {true}
 					label="Subject"
+					name="subject"
 					value = {this.state.subject}
 					readOnly = {true}
 					/>
 				
-				<TextareaMaterial label="Message" rows = {1} onChange = { (event) => {
+				<TextareaMaterial 
+					label="Message" 
+					required = {true}
+					name="message"
+					rows = {1} onChange = { (event) => {
 					this.setState({
 						message: event.target.value
 					})
@@ -113,7 +157,7 @@ var BudgetAssignToOfficer = React.createClass({
 					<button className="btn btn-primary" onClick = {this.onSave}>Save</button>
 					<a className="btn btn--unstyled">Cancel</a>
 				</div>
-			</div>
+			</form>
 		)
 	}
 });

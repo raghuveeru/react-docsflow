@@ -293,6 +293,8 @@
 
     .container{
         position: relative;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -306,22 +308,17 @@
     @include font-size(15px, false);
 
 
-    @include media(tablet){
-
-    }
-
-    display:none;
-
     .menu-open &{
         display: block;
     }
 
-    @include media(desktop){
+    // @include media(desktop){
         padding: 0;
-        width: $site-width;
+        white-space: nowrap;
+        // width: $site-width;
         margin: 0 auto;
         display: block;
-    }
+    // }
 
     a{
         @include link-colors(#fff, #fff, #fff);
@@ -337,11 +334,11 @@
 
         margin: 0;
 
-        @include media(desktop){
+        // @include media(desktop){
             display: inline-block;
             vertical-align: top;
             position: relative;
-        }
+        // }
     }
 
     ul{
@@ -385,15 +382,15 @@
         text-decoration: none;
         font-weight: 600;
 
-        @include media(tablet){
+        // @include media(tablet){
             padding: 8px 8px;
-        }
+        // }
 
-        @include media(desktop){
+        // @include media(desktop){
             padding: 9px 15px;
             display: inline-block;
             vertical-align: top;
-        }
+        // }
     }
 
     a:hover, .dropdown-active > a, a:active, a:focus , > li:hover > a, li.active > a, a.active{

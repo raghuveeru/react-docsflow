@@ -1,11 +1,11 @@
 import BudgetStore from './BudgetStore';
 import UserStore from './UserStore';
-import GroupStore from './GroupStore';
+import AdminStore from './AdminStore';
 import BudgetDetailStore from './BudgetDetailStore';
 
 module.exports = {
 	BudgetStore: new BudgetStore(),
 	UserStore: new UserStore(),
-	GroupStore: new GroupStore(),
+	AdminStore: new AdminStore(),
 	BudgetDetailStore: new BudgetDetailStore(),
 }

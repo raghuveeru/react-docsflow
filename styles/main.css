@@ -3450,13 +3450,14 @@ label {
 /**
  * Error label
  */
-.label-error {
+label.label-error {
   color: #C1272D;
   text-transform: none;
   font-size: 14px;
   font-size: 0.875rem;
-  margin-top: -15px;
-  letter-spacing: 0; }
+  margin-top: 0.5em;
+  letter-spacing: 0;
+  display: block; }
 
 /**
      * Input error
@@ -4624,7 +4625,9 @@ li {
       padding-left: 0;
       padding-right: 0; } }
   .nav-wrapper .container {
-    position: relative; }
+    position: relative;
+    padding-left: 0;
+    padding-right: 0; }
 
 .nav-list {
   list-style: none;
@@ -4634,15 +4637,12 @@ li {
   padding-top: 40px;
   font-size: 15px;
   font-size: 0.9375rem;
-  display: none; }
+  padding: 0;
+  white-space: nowrap;
+  margin: 0 auto;
+  display: block; }
   .menu-open .nav-list {
     display: block; }
-  @media only screen and (min-width: 960px) {
-    .nav-list {
-      padding: 0;
-      width: 960px;
-      margin: 0 auto;
-      display: block; } }
   .nav-list a {
     color: #fff; }
     .nav-list a:hover {
@@ -4652,12 +4652,10 @@ li {
   .nav-list ul a {
     color: #fff; }
   .nav-list > li {
-    margin: 0; }
-    @media only screen and (min-width: 960px) {
-      .nav-list > li {
-        display: inline-block;
-        vertical-align: top;
-        position: relative; } }
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+    position: relative; }
   .nav-list ul {
     margin: 0;
     padding: 0;
@@ -4687,15 +4685,11 @@ li {
     padding: 8px 15px;
     display: block;
     text-decoration: none;
-    font-weight: 600; }
-    @media only screen and (min-width: 768px) {
-      .nav-list a {
-        padding: 8px 8px; } }
-    @media only screen and (min-width: 960px) {
-      .nav-list a {
-        padding: 9px 15px;
-        display: inline-block;
-        vertical-align: top; } }
+    font-weight: 600;
+    padding: 8px 8px;
+    padding: 9px 15px;
+    display: inline-block;
+    vertical-align: top; }
   .nav-list a:hover, .nav-list .dropdown-active > a, .nav-list a:active, .nav-list a:focus, .nav-list > li:hover > a, .nav-list li.active > a, .nav-list a.active {
     background-color: #e3571a;
     color: #fff; }
@@ -7159,6 +7153,9 @@ li {
     top: 20px;
     left: 8px; }
 
+.budget-list-subitem {
+  padding: 0.5em 0; }
+
 /**
      * Status
      */
@@ -7250,6 +7247,53 @@ li {
 .momster-loader {
   text-align: center;
   padding: 2em 0; }
+
+/**
+ * Card link
+ */
+.card-link {
+  position: absolute;
+  right: 1em;
+  top: 0.8em; }
+
+/**
+ * Topic cell actions
+ */
+.topic-cell-actions {
+  display: inline-block;
+  margin-left: 1em;
+  font-size: 12px;
+  display: none; }
+  .budget-list-subitem:hover .topic-cell-actions, .budget-group-title:hover .topic-cell-actions {
+    display: inline-block; }
+  .topic-cell-actions a {
+    margin: 0 0.5em;
+    color: #888; }
+
+/* Sub item */
+.budget-list-subitem a {
+  color: #333; }
+
+/**
+ * Budget topic add form
+ */
+.budget-topic-add-form {
+  padding: 1em;
+  background: #eee;
+  border-radius: 5px; }
+
+/**
+ * Admin topics
+ */
+.group-admin-topic .budget-group-title {
+  padding-left: 24px; }
+  .group-admin-topic .budget-group-title:before {
+    left: 0; }
+
+.group-admin-topic .budget-list-item {
+  padding-left: 24px;
+  margin-left: 0;
+  border-bottom: none; }
 
 .CircularProgress-Bg,
 .CircularProgress-Fg {

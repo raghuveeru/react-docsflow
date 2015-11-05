@@ -109,6 +109,10 @@
         }
     }
 
+    .budget-list-subitem{
+        padding: 0.5em 0;
+    }
+
 
     /**
      * Status
@@ -258,3 +262,74 @@
 // }
 
 // .page-row-expanded { height: 100%; }
+
+/**
+ * Card link
+ */
+
+.card-link{
+    position: absolute;
+    right: 1em;
+    top: 0.8em;
+}
+
+
+/**
+ * Topic cell actions
+ */
+
+.topic-cell-actions{
+    display: inline-block;
+    margin-left: 1em;
+    font-size: 12px;
+    display: none;
+
+    .budget-list-subitem:hover &, .budget-group-title:hover &{
+        display: inline-block;
+    }
+
+    a{
+        margin: 0 0.5em;
+        color: #888;
+    }
+}
+
+    /* Sub item */
+
+    .budget-list-subitem{
+        a{
+            color: $base-color;
+        }
+    }
+
+/**
+ * Budget topic add form
+ */
+
+.budget-topic-add-form{
+    padding: 1em;
+    background: #eee;
+    border-radius: 5px;
+}
+
+
+/**
+ * Admin topics
+ */
+
+.group-admin-topic{
+
+    .budget-group-title{
+        padding-left: 24px;
+
+        &:before{
+            left: 0;
+        }
+    }
+
+    .budget-list-item{
+        padding-left: 24px;
+        margin-left: 0;
+        border-bottom: none;
+    }
+}

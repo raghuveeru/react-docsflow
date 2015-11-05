@@ -838,23 +838,11 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-# Group Groups
+# Group Topics
 
-## Groups [/api/v1/groups]
+## Main Topics [/api/get-main-topics{?topicId,topicName}]
 
-+ Model (application/json)
-
-    ```js
-    {
-    	data: {
-			"name": "Lisa Lawrence",
-			"designation": "HOD",
-			"role": ["HOD Officers"]
-		}
-	},
-    ```
-
-### Get all groups [GET]
+### Get all main topics [GET]
 
 + Response 200
 
@@ -862,24 +850,38 @@ This is the API blueprint for Momster COS application
 	{
 		"data": [
 			{
-				"name": "Lisa Lawrence",
-				"designation": "HOD",
-				"role": ["HOD Officers"]
+				"id": "1",
+				"name": "Workplace Safety & Health",
+				"budgetCutTopic": [
+					{
+						"id": "1231312",
+						"name": "Manpower challenges"
+					},
+					{
+						"id": "123",
+						"name": "Manpower challenges 2"
+					}
+				]
 			},
 			{
-				"name": "Christopher Brown",
-				"designation": "Executive",
-				"role": ["HOD Officers"]
+				"id": "2",
+				"name": "Central Providence Fund",
+				"budgetCutTopic": [
+					{
+						"id": "1231312",
+						"name": "Manpower challenges for CPF"
+					}
+				]
 			}
 		]
 	}
 	```
 
-### Create a group [POST]
 
-+ Request
+### Create Main Topic [POST]
 
-    [Groups][]
++ Parameters
+	+ topicName: `Name of the topic` (string)
 
 + Response 200
 
@@ -887,10 +889,116 @@ This is the API blueprint for Momster COS application
 	{
 		"data": [
 			{
-				"name": "Lisa Lawrence",
-				"designation": "HOD",
-				"role": ["HOD Officers"]
+				"id": "12233",
+				"name": "A new main topic",
+				"budgetCutTopic": []
 			}
 		]
+	}
+	```
+
+
+### Edit Main Topic [POST]
+
++ Parameters
+	+ topicId: `12` (string)
+	+ topicName: `name of the topic` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1",
+				"name": "A new main topic (Edited)",
+				"budgetCutTopic": []
+			}
+		]
+	}
+
+### Delete Main Topic [POST]
+
++ Parameters
+	+ topicId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"success": true
+	}
+	```
+
+## Budget Cut Topic [/api/budget-cut-topics/{?budgetCutTopicId,topicId,topicName,budgetCutTopicName}]
+
+### Get all Budget Cut Topics [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1212",
+				"name": "Manpower challenges",
+				"mainTopic": "Workplace Safety & Health"
+			}
+		]
+	}
+	```
+
+### Create Budget Cut Topic [POST]
+
++ Parameters
+	+ budgetCutTopicName: `Name of the new budget cut topic` (string)
+	+ topicId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "12233",
+				"topicId": "1",
+				"name": "A new main budget cut topic"
+			}
+		]
+	}
+	```
+
+### Edit Budget Cut Topic [POST]
+
++ Parameters
+
+	+ topicId: `12` (string)
+	+ budgetCutTopicId: `12` (string)
+	+ budgetCutTopicName: `name of the budget cut topic` (string)	
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1231312",
+				"topicId": "1",
+				"name": "A new main budget cut topic"
+			}
+		]
+	}
+
+### Delete Budget Cut Topic [POST]
+
++ Parameters
+	+ budgetCutTopicId:  `11` (string)
+	+ topicId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"success": true
 	}
 	```

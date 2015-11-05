@@ -49,7 +49,8 @@ var InputMaterial = React.createClass({
 				<label 
 					className='label-control'					
 					>{this.props.label}</label>
-				<input 
+				<input
+					required = {this.props.required} 					
 					className= {inputKlass}
 					ref = 'input'
 					type="text"

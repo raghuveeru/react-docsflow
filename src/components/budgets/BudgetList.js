@@ -28,7 +28,7 @@ var BudgetList = React.createClass({
   		{
   			budgetGroups.push(temp[group])
   		})
-
+		
 
 		return (
 			<div className="budget-list">

@@ -4,6 +4,7 @@ import SelectMaterial from '../SelectMaterial';
 import Select2 from '../Select2';
 import TextareaMaterial from '../TextareaMaterial';
 import {mapObject, t} from './../../utilities';
+import {validationOptions} from './../../constants';
 
 var BudgetNew = React.createClass({	
 	contextTypes: {
@@ -33,17 +34,22 @@ var BudgetNew = React.createClass({
 			subject: ''
 		}
 	},
-	create: function(){
+	create: function(event){
 
-		this.props.flux.actions.BudgetActions.createNew(this.state, (response) => {
-			
-			var res = response.data[0];
+		if(this.$form.valid()){			
 
-			if(!res || !res.id){
-				throw new Error('Please check the response of this API Call - new-budget-cut-response.json');
-			}
-			this.context.router.transitionTo('budgetsView', {'id': res.id})
-		})
+			event && event.preventDefault();
+
+			this.props.flux.actions.BudgetActions.createNew(this.state, (response) => {
+				
+				var res = response.data[0];
+
+				if(!res || !res.id){
+					throw new Error('Please check the response of this API Call - new-budget-cut-response.json');
+				}
+				this.context.router.transitionTo('budgetsView', {'id': res.id})
+			})
+		}
 	},
 	updateSubject: function(){		
 
@@ -57,20 +63,34 @@ var BudgetNew = React.createClass({
 			subject: sub
 		})
 	},
+	componentDidMount: function(){
+
+		this.$form = $(this.refs.form.getDOMNode());
+
+		this.$form.validate(validationOptions);
+
+	},
+	checkSelect2Valid: function(e){
+		if(!e) return;
+		var $ele = $(e.target);
+		
+		return $ele.valid();
+	},
 	render: function(){
 
 		return (
-			<div>
+			<form ref="form">
 				<h1>Create new budget cut</h1>
 				<div className="sp-card">
 					<div className="card-body">
 
 						<Select2  
-							url = {AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_MAIN_TOPICS} 
+							url = {AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_MAIN_TOPICS}
+							required = {true}
 							placeholder= 'Select topics'
 							name="selectTopic"
 							multiple = {false}
-							onChange = { (val, data) => {
+							onChange = { (val, data, event) => {
 
 								var bcTopic = data.budgetCutTopic;
 
@@ -79,6 +99,8 @@ var BudgetNew = React.createClass({
 								setTimeout(() => {
 									$(select).select2('val', bcTopic[0].id, true)
 								}, 100)
+
+								this.checkSelect2Valid(event);
 								
 								this.setState({
 									topicId: val,
@@ -92,8 +114,11 @@ var BudgetNew = React.createClass({
 							placeholder = 'Budget cut topic' 							
 							ref = "budgetCutTopicSelect"							
 							readOnly = {true}
+							required = {true}
 							name="budgetCutTopicSelect"
-							onChange = { (val, data) => {
+							onChange = { (val, data, event) => {
+
+								this.checkSelect2Valid(event);
 								
 								this.setState({
 									budgetCutId: val
@@ -101,8 +126,8 @@ var BudgetNew = React.createClass({
 							}}
 						>
 							<option></option>
-							{this.state.budgetCutTopic.map((topic) => {
-								return <option value= {topic.id}>{topic.name}</option>
+							{this.state.budgetCutTopic.map((topic, idx) => {
+								return <option value= {topic.id} key = {idx}>{topic.name}</option>
 							})}
 						</Select2>
 
@@ -110,8 +135,11 @@ var BudgetNew = React.createClass({
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
 							placeholder= 'Member of Parliament'
 							multiple = {false}
+							required = {true}
 							name="memberOfParliament"
-							onChange = { (val, data) => {
+							onChange = { (val, data, event) => {
+
+								this.checkSelect2Valid(event);
 								
 								this.setState({
 									memberOfParliament: val,
@@ -125,7 +153,10 @@ var BudgetNew = React.createClass({
 							placeholder= 'HOD Sourcing'
 							multiple = {false}
 							name="hodSourcing"
-							onChange = { (val) => {
+							required = {true}
+							onChange = { (val, data, event) => {
+
+								this.checkSelect2Valid(event);
 								
 								this.setState({
 									hodSourcing: val
@@ -136,13 +167,17 @@ var BudgetNew = React.createClass({
 						
 						<div className="row">
 							<div className="columns six">
-								<InputMaterial label = "File reference no. (optional)" onChange = {
-									(event) => {
-										
-										this.setState({
-											fileReferenceNo: event.target.value
-										})
-									}
+								<InputMaterial 
+									label = "File reference no. (optional)" 
+									name = "fileReferenceNo"
+									required = {true}
+									onChange = {
+										(event) => {
+											
+											this.setState({
+												fileReferenceNo: event.target.value
+											})
+										}
 								} />
 							</div>
 						</div>
@@ -150,6 +185,8 @@ var BudgetNew = React.createClass({
 						<div className="row">
 							<div className="columns six">
 								<InputMaterial 
+									required = {true}
+									name="summary"
 									label = "Gist of cuts" 
 									onChange = {
 										(event) => {
@@ -165,7 +202,9 @@ var BudgetNew = React.createClass({
 
 						<div className="row">
 							<div className="columns six">
-								<InputMaterial 
+								<InputMaterial
+									name="time" 
+									required = {true}
 									label = "Time for MP to speak (min)" 
 									onChange = {
 										(event) => {
@@ -183,19 +222,21 @@ var BudgetNew = React.createClass({
 						<div className="form-control">
 							<h4>Assign to officer</h4>
 
-							<SelectMaterial label = 'Select action' onChange = { (event) => {
-
+							<Select2 
+								label = 'Select action' onChange = { (val) => {
+								
 								this.setState({
-									status: event.target.value
+									status: val
 								}, this.updateSubject)
 							}} >
 								{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
 									return <option key = {idx}>{status}</option>
 								})}
-							</SelectMaterial>
+							</Select2>
 
 							<Select2  
 								url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
+								required = {true}
 								placeholder= 'Responsible officers'
 								multiple = {true}
 								name="responsibleOfficer"
@@ -234,10 +275,15 @@ var BudgetNew = React.createClass({
 							<div className="row">
 								<div className="columns six">
 									
-									<TextareaMaterial label="Message" rows = {1} onChange = { (event) => {
-										this.setState({
-											message: event.target.value
-										})
+									<TextareaMaterial 
+										name="message"
+										required = {true}
+										label="Message" 
+										rows = {1} 
+										onChange = { (event) => {
+											this.setState({
+												message: event.target.value
+											})
 									}} />
 								</div>
 							</div>
@@ -254,7 +300,7 @@ var BudgetNew = React.createClass({
 
 					</div>
 				</div>
-			</div>
+			</form>
 		)
 	}
 })

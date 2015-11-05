@@ -5,7 +5,7 @@ import BudgetLayout from './components/budgets/Layout';
 import BudgetView from './components/budgets/BudgetView';
 import NewBudget from './components/budgets/New';
 import Users from './components/admin/Users';
-import Groups from './components/admin/Groups';
+import Topics from './components/admin/Topics';
 import AdminLayout from './components/admin/Layout';
 
 module.exports = (
@@ -20,7 +20,7 @@ module.exports = (
 		<Redirect from='/admin' to='users' />
 		<Route handler = {AdminLayout} name='admin'>			
 			<Route handler = {Users} name="users" />			
-			<Route handler = {Users} name="topics" />						
+			<Route handler = {Topics} name="topics" />						
 		</Route>
 		
 		

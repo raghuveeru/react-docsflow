@@ -31,11 +31,14 @@ var Users = React.createClass({
 			isModalOpen: true
 		})
 	},
-	render: function(){
+	render: function(){		
 		
 		return (
 			<div>
-				<a onClick = {this.openModal}>Add new user</a><br />
+				<a className="card-link" onClick = {this.openModal}>
+					<em className="fa fa-plus" />
+					Add user
+				</a><br />
 				<a onClick = {this.openModal}>Add new MP</a><br />
 				<a onClick = {this.openModal}>Add new HOD</a><br />
 				<a onClick = {this.openModal}>Add new MP and HOD Linkage</a><br />

@@ -16,6 +16,7 @@ var Select2 = React.createClass({
 		var options = {			
 			placeholder: this.props.placeholder,
 			allowClear: this.props.allowClear,
+			formatResult: this.props.formatResult
 		};
 		
 		if(this.props.url){

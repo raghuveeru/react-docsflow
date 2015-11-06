@@ -1,6 +1,5 @@
 import React from 'react';
 import InputMaterial from '../InputMaterial';
-import SelectMaterial from '../SelectMaterial';
 import Select2 from '../Select2';
 import TextareaMaterial from '../TextareaMaterial';
 import {mapObject, t} from './../../utilities';

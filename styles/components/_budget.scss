@@ -270,7 +270,7 @@
 .card-link{
     position: absolute;
     right: 1em;
-    top: 0.8em;
+    top: 1em;
 }
 
 
@@ -332,4 +332,75 @@
         margin-left: 0;
         border-bottom: none;
     }
+}
+
+
+/**
+ * Admin pane;
+ */
+
+.user-add-dropdown{
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+
+/**
+ * Filter
+ */
+
+.sp-card-search{
+    position: relative;
+    padding-right: 40px;
+
+    .link-toggle-filter{
+        position: absolute;
+        right: 0;
+        top: 4px;
+        width: 40px;
+        text-align: center;
+
+        @include media(medium){
+            display: none;
+        }
+    }
+}
+
+  .sp-sidebar{
+        .sp-module{
+            display: none;
+            @include media(medium){
+                display: block;
+            }
+        }
+    }
+
+    .filter-open {
+        .sp-module{
+            display: block;
+        }
+    }
+
+
+/**
+ * User role item
+ */
+
+.user-role-item{
+    &:after{
+        content: ", "
+    }
+
+    &:last-child{
+        &:after{
+            content: "";
+        }
+    }
+}
+
+
+.user-role-designation{
+    display: block;
+    font-weight: 600;
 }

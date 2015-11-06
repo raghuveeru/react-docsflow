@@ -14,6 +14,13 @@ var MOMINTRANET = (function(app, $, window, undefined){
         initialize: function(){
 
             this.dropdown();
+
+            app.$body.on('click.filters', '.link-toggle-filter', function(e){
+
+                app.$body.toggleClass('filter-open')                
+
+                e.preventDefault();
+            })
         },
         dropdown: function(){
 

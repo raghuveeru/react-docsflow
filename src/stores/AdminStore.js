@@ -3,7 +3,9 @@ import {actions} from '../constants';
 
 var AdminStore = Fluxxor.createStore({
 	initialize: function(){
-		this.topics = []
+		this.topics = [];
+
+		this.users = []
 
 		this.bindActions(
 			actions.GET_MAIN_TOPICS, this.getMainTopics,
@@ -13,11 +15,15 @@ var AdminStore = Fluxxor.createStore({
 			actions.CREATE_BUDGET_CUT_TOPIC, this.createBudgetCutTopic,
 			actions.EDIT_BUDGET_CUT_TOPIC, this.editBudgetCutTopic,
 			actions.DELETE_BUDGET_CUT_TOPIC, this.deleteBudgetCutTopic,
+			actions.GET_ALL_USERS, this.getAllUsers,
+			actions.CREATE_NEW_USER, this.addUser,
+			actions.DELETE_USER, this.deleteUser,
 		)
 	},
 	getState: function(){
 		return {
-			topics: this.topics
+			topics: this.topics,
+			users: this.users
 		}
 	},
 	getMainTopics: function(topics){
@@ -121,6 +127,35 @@ var AdminStore = Fluxxor.createStore({
 							budgetCutTopics.splice(j, 1)
 						}
 					}
+				}
+			}
+
+			this.emit('change')
+		}
+	},
+	getAllUsers: function(users){
+
+		this.users = users.data
+
+		this.emit('change')
+	},
+	addUser: function(payload){
+
+		var user = payload.data[0]
+
+		this.users.unshift(user)
+
+		this.emit('change')
+	},
+	deleteUser: function(payload){
+
+		var data = payload.data.success,
+			userId = payload.userId;
+
+		if(data){
+			for(var i = this.users.length - 1; i >= 0; i --){
+				if(this.users[i].id == userId){
+					this.users.splice(i, 1)
 				}
 			}
 

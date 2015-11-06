@@ -5,21 +5,29 @@
 .nav-tabs{
     //border: 1px $base-ui-color solid;
     border-bottom: 1px $base-ui-color solid;
-    padding: 1em 0 0 20px;    
+    padding: 1em 0 0 0;    
     clear: both;
     background: #fff;
     font-weight: 600;
+
+    @include media(tablet){
+        padding-left: 20px;
+    }
 
     a{
         @include link-colors($base-color, $base-color, $base-color);
     }
 
     a{
-        margin-right: 1em;
+        
         display: inline-block;
         vertical-align: bottom;
         padding: 0 5px 5px 5px;
         border-bottom: 5px transparent solid;
+
+        @include media(tablet){
+            margin-right: 1em;
+        }
 
         &:hover{
             border-bottom: 5px $color-brand solid;

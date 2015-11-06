@@ -1,8 +1,6 @@
 module.exports = {
 	actions: {
-		UPDATE_BUDGETS: 'UPDATE_BUDGETS',
-		UPDATE_USERS: 'UPDATE_USERS',
-		UPDATE_GROUPS: 'UPDATE_GROUPS',
+		UPDATE_BUDGETS: 'UPDATE_BUDGETS',		
 		SELECT_ALL_BUDGETS: 'SELECT_ALL_BUDGETS',
 		SELECT_BUDGET: 'SELECT_BUDGET',
 		GET_BUDGET_BY_ID: 'GET_BUDGET_BY_ID',
@@ -23,7 +21,11 @@ module.exports = {
 		DELETE_MAIN_TOPIC: 'DELETE_MAIN_TOPIC',
 		CREATE_BUDGET_CUT_TOPIC: 'CREATE_BUDGET_CUT_TOPIC',
 		EDIT_BUDGET_CUT_TOPIC: 'EDIT_BUDGET_CUT_TOPIC',
-		DELETE_BUDGET_CUT_TOPIC: 'DELETE_BUDGET_CUT_TOPIC'
+		DELETE_BUDGET_CUT_TOPIC: 'DELETE_BUDGET_CUT_TOPIC',
+
+		GET_ALL_USERS: 'GET_ALL_USERS',
+		CREATE_NEW_USER: 'CREATE_NEW_USER',
+		DELETE_USER: 'DELETE_USER',
 	},
 	customStyles: {
 		overlay : {
@@ -55,24 +57,42 @@ module.exports = {
 	validationOptions: {
 		errorClass: 'label-error',
 		ignore: null,
+		errorPlacement: function(error, element){
+
+			var $ele = $(element);
+
+			if(!$ele.attr('type')) return error.insertAfter(element);
+
+			switch($ele.attr('type')){
+
+				case 'checkbox':
+					error.insertAfter($ele.closest('.form-control'))
+					break;
+
+				default:
+					error.insertAfter(element)
+					break;
+			}
+
+		},
 		highlight: function (element, errorClass, validClass) {
 			
-            var elem = $(element);
-            if (elem.hasClass("select2-offscreen")) {
-                $("#s2id_" + elem.attr("id") + " ul").addClass(errorClass);
-            } else {
-                elem.addClass(errorClass);
-            }
-        },
+			var elem = $(element);
+			if (elem.hasClass("select2-offscreen")) {
+				$("#s2id_" + elem.attr("id") + " ul").addClass(errorClass);
+			} else {
+				elem.addClass(errorClass);
+			}
+		},
 
-        //When removing make the same adjustments as when adding
-        unhighlight: function (element, errorClass, validClass) {
-            var elem = $(element);
-            if (elem.hasClass("select2-offscreen")) {
-                $("#s2id_" + elem.attr("id") + " ul").removeClass(errorClass);
-            } else {
-                elem.removeClass(errorClass);
-            }
-        }
+		//When removing make the same adjustments as when adding
+		unhighlight: function (element, errorClass, validClass) {
+			var elem = $(element);
+			if (elem.hasClass("select2-offscreen")) {
+				$("#s2id_" + elem.attr("id") + " ul").removeClass(errorClass);
+			} else {
+				elem.removeClass(errorClass);
+			}
+		}
 	}
 }

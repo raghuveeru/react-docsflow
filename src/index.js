@@ -1,7 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
 import routes from './routes';
-
 import Fluxxor from 'fluxxor';
 import stores from './stores';
 import actions from './actions';

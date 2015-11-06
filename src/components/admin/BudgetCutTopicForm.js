@@ -13,7 +13,8 @@ var BudgetCutTopicForm = React.createClass({
 	getDefaultProps: function(){
 
 		return {
-			budgetCutTopic: null
+			budgetCutTopic: null,
+			buttonTitle: 'Add budget cut topic'
 		}
 	},
 	onSave: function(event){
@@ -65,8 +66,8 @@ var BudgetCutTopicForm = React.createClass({
 					}}
 				/>
 
-				<div className="form-control">
-					<button className="btn btn-primary" onClick = {this.onSave}>Add budget cut topic</button>
+				<div className="form-control submit-control">
+					<button className="btn btn-primary" onClick = {this.onSave}>{this.props.buttonTitle}</button>
 					<a className="btn btn--unstyled" onClick = {this.props.toggleAdd}>Cancel</a>
 				</div>
 			</form>

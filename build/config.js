@@ -40,6 +40,14 @@ var API = {
 		GET_MPS: 'api/get-mps.json',
 		GET_ALL_LIASON_OFFICERS: 'api/get-all-liason-officers.json',
 		GET_USER_BY_ID: 'api/get-user-by-id.json',
+
+
+		CREATE_NEW_USER: 'api/create-new-user.json',
+		CREATE_NEW_MP: 'api/create-new-mp.json',
+		CREATE_NEW_HOD: 'api/create-new-hod.json',
+		CREATE_NEW_LIASON_OFFICER: 'api/create-new-liason-officer.json',
+
+		DELETE_USER: 'api/delete-user.json',
 	}
 };
 
@@ -57,9 +65,9 @@ var STATUS_MAPPING = {
 var ROLE_PERMISSION_MAPPING = {
 	'System Administrator': ['Admin'],
 	'COS Administrator': [],
-	'Liaison Officers': [],
+	// 'Liaison Officers': [],
 	'Registry Officers': [],
-	'Head of Department': [],
+	// 'Head of Department': [],
 	'Desk Officer': [],
 	'Speech Writer': []
 }

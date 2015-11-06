@@ -1,6 +1,5 @@
 import React from 'react';
 import InputMaterial from '../InputMaterial';
-import SelectMaterial from '../SelectMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)

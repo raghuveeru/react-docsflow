@@ -2,8 +2,9 @@ import {actions} from '../constants';
 import request from 'superagent';
 import {headers} from './../constants';
 import NProgress from 'react-nprogress';
+import {getUserUrl} from './../utilities';
 
-module.exports = {
+var AdminActions = {
 	getUsers: function(){
 
 		NProgress.start()
@@ -13,7 +14,7 @@ module.exports = {
 			.set(headers)
 			.end((err, res) => {
 				
-				this.dispatch(actions.UPDATE_USERS, JSON.parse(res.text));
+				this.dispatch(actions.GET_ALL_USERS, JSON.parse(res.text));
 
 				NProgress.done()
 			})		
@@ -134,5 +135,44 @@ module.exports = {
 
 				NProgress.done()
 			})
+	},
+	
+	addUser: function(payload, callback){
+
+		NProgress.start();
+		
+		request
+			.get(getUserUrl('new', payload.type))
+			.set(headers)
+			.query(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				this.dispatch(actions.CREATE_NEW_USER, JSON.parse(res.text));
+
+				callback && callback()
+
+				NProgress.done()
+			})
+	},
+	deleteUser: function(payload){
+
+		NProgress.start();
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.USERS.DELETE_USER)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				this.dispatch(actions.DELETE_USER, {
+					data: JSON.parse(res.text),
+					userId: payload.userId
+				});
+
+				NProgress.done()
+			})
+		
 	}
-}
+};
+
+module.exports = AdminActions

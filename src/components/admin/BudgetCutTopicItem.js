@@ -34,12 +34,13 @@ var BudgetCutTopicItem = React.createClass({
 		
 		return (
 			<div className="budget-list-subitem">
-				<a>{budgetCutTopic.name}</a>
+				<span>{budgetCutTopic.name}</span>
 				{this.state.isEditing? <BudgetCutTopicForm
 					{...this.props}
 					topic = {topic}
 					toggleAdd = {this.toggleEdit}
 					budgetCutTopic = {budgetCutTopic}
+					buttonTitle = 'Save'
 				/> : null}
 				<div className="topic-cell-actions">
 					<a onClick = {this.toggleEdit}>Edit</a>

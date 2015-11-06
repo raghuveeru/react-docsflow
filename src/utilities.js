@@ -90,6 +90,29 @@ module.exports = {
 
 			return result;
 		};
-	}
+	},
+	getUserUrl: function(method, userType){
+
+		var url = '';
+
+		if(method == 'new'){
+			switch(userType){
+				case 'user':
+					url = AppConfig.API.USERS.CREATE_NEW_USER;
+					break;
+				case 'mp':
+					url = AppConfig.API.USERS.CREATE_NEW_MP;
+					break;
+				case 'hod':
+					url = AppConfig.API.USERS.CREATE_NEW_HOD;
+					break;
+				default:
+					url = AppConfig.API.USERS.CREATE_NEW_LIASON_OFFICER;
+					break;
+			}
+		};
+
+		return AppConfig.API.BASE_URL + url;
+	},
 
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import InputMaterial from '../InputMaterial';
-import SelectMaterial from '../SelectMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
 import Select2 from '../Select2';

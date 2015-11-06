@@ -5,12 +5,12 @@ import NewUser from './NewUser';
 import {customStyles} from '../../constants';
 
 var Users = React.createClass({
-	mixins: [StoreWatchMixin('UserStore')],
+	mixins: [StoreWatchMixin('AdminStore')],
 	getStateFromFlux: function(){
 
 		return {
-			UserStore: this.props.flux.stores.UserStore.getState(),
-			isModalOpen: false,
+			AdminStore: this.props.flux.stores.AdminStore.getState(),
+			isUserModalOpen: false,
 		}
 	},
 	contextTypes: {
@@ -22,33 +22,43 @@ var Users = React.createClass({
 	closeModal: function(){
 		
 		this.setState({
-			isModalOpen: false
+			isUserModalOpen: false
 		})
 	},
-	openModal: function(){
+	openUserModal: function(event){		
+
+		event && event.stopPropagation();
 		
 		this.setState({
-			isModalOpen: true
+			isUserModalOpen: true
 		})
 	},
+	deleteUser: function(userId, event){
+
+		event && event.preventDefault();
+
+		if(confirm('Are you sure you want to delete?')){
+
+			this.props.flux.actions.AdminActions.deleteUser({
+				userId: userId
+			})
+		}
+
+	},
 	render: function(){		
+
+		var {isUserModalOpen} = this.state;
+		var {users} = this.state.AdminStore;
 		
 		return (
-			<div>
-				<a className="card-link" onClick = {this.openModal}>
-					<em className="fa fa-plus" />
-					Add user
-				</a><br />
-				<a onClick = {this.openModal}>Add new MP</a><br />
-				<a onClick = {this.openModal}>Add new HOD</a><br />
-				<a onClick = {this.openModal}>Add new MP and HOD Linkage</a><br />
-				<a onClick = {this.openModal}>Add new HOD and Liason Officer Linkage</a><br />
+			<div>	
+				<a className="card-link" onClick = {this.openUserModal}><em className='fa fa-plus' />Add user</a>				
 				<Modal 
-					isOpen = {this.state.isModalOpen}
+					isOpen = {isUserModalOpen}
 					style={customStyles}
 					onRequestClose={this.closeModal}
 					>
-					<NewUser closeModal = {this.closeModal} />
+					<NewUser {...this.props} closeModal = {this.closeModal} />
 				</Modal>
 				<table className="table table-admin">
 					<thead>
@@ -59,18 +69,25 @@ var Users = React.createClass({
 						</tr>
 					</thead>
 					<tbody>
-						{this.state.UserStore.users.map((user, idx) => {
+						{users.map((user, idx) => {
+
+							var deleteFn = this.deleteUser.bind(this, user.id);
 
 							return (
 								<tr key = {idx}>
 									<td className="cell-image">
-										<img src={user.image} />
+										<img src={user.image} />										
 									</td>
-									<td>{user.name}</td>
-									<td>{user.designation}</td>
+									<td>
+										{user.name}
+										<span className="user-role-designation">{user.designation}</span>
+									</td>
+									<td>																				
+										{user.role.map((role, index) => <span key = {index} className="user-role-item">{role}</span>)}
+									</td>
 									<td className="cell-actions">
-										<a href="#">Edit</a>
-										<a href="#">Delete</a>
+										
+										<a href="#" onClick = {deleteFn}>Delete</a>
 									</td>
 								</tr>
 							)

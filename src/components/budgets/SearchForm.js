@@ -11,6 +11,7 @@ var SearchForm = React.createClass({
 						<em className="fa fa-search" />
 					</button>
 				</div>
+				<a className="link-toggle-filter"><i className="fa fa-filter"></i></a>
 			</div>
 		)
 	}

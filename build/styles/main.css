@@ -3778,6 +3778,14 @@ Link more
 .link-edit-question {
   margin-left: 1em; }
 
+/**
+ * link-toggle-filter
+ */
+.link-toggle-filter {
+  font-size: 30px; }
+  .link-toggle-filter .fa {
+    margin: 0; }
+
 /*------------------------------------*    LIST
 \*------------------------------------*/
 /**
@@ -5885,7 +5893,7 @@ li {
 \*------------------------------------*/
 .nav-tabs {
   border-bottom: 1px #e5e5e5 solid;
-  padding: 1em 0 0 20px;
+  padding: 1em 0 0 0;
   clear: both;
   background: #fff;
   font-weight: 600;
@@ -5893,6 +5901,9 @@ li {
   /**
      * Inside card
      */ }
+  @media only screen and (min-width: 768px) {
+    .nav-tabs {
+      padding-left: 20px; } }
   .nav-tabs a {
     color: #333; }
     .nav-tabs a:hover {
@@ -5900,11 +5911,13 @@ li {
     .nav-tabs a:active {
       color: #333; }
   .nav-tabs a {
-    margin-right: 1em;
     display: inline-block;
     vertical-align: bottom;
     padding: 0 5px 5px 5px;
     border-bottom: 5px transparent solid; }
+    @media only screen and (min-width: 768px) {
+      .nav-tabs a {
+        margin-right: 1em; } }
     .nav-tabs a:hover {
       border-bottom: 5px #e3571a solid;
       text-decoration: none; }
@@ -7254,7 +7267,7 @@ li {
 .card-link {
   position: absolute;
   right: 1em;
-  top: 0.8em; }
+  top: 1em; }
 
 /**
  * Topic cell actions
@@ -7294,6 +7307,52 @@ li {
   padding-left: 24px;
   margin-left: 0;
   border-bottom: none; }
+
+/**
+ * Admin pane;
+ */
+.user-add-dropdown {
+  position: absolute;
+  right: 1em;
+  top: 1em; }
+
+/**
+ * Filter
+ */
+.sp-card-search {
+  position: relative;
+  padding-right: 40px; }
+  .sp-card-search .link-toggle-filter {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    width: 40px;
+    text-align: center; }
+    @media only screen and (min-width: 600px) {
+      .sp-card-search .link-toggle-filter {
+        display: none; } }
+
+.sp-sidebar .sp-module {
+  display: none; }
+  @media only screen and (min-width: 600px) {
+    .sp-sidebar .sp-module {
+      display: block; } }
+
+.filter-open .sp-module {
+  display: block; }
+
+/**
+ * User role item
+ */
+.user-role-item:after {
+  content: ", "; }
+
+.user-role-item:last-child:after {
+  content: ""; }
+
+.user-role-designation {
+  display: block;
+  font-weight: 600; }
 
 .CircularProgress-Bg,
 .CircularProgress-Fg {

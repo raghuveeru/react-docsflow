@@ -38,7 +38,7 @@ var Filters = React.createClass({
 								{allHTML}					
 								{values.map((value, idx) => {
 
-									var bounds = this.onChange.bind(this, key, value)
+									var bounds = value.count > 0? this.onChange.bind(this, key, value) : null
 									var itemActiveClass = (active == value.name || active == value.id? 'active': '')
 
 									return <a 

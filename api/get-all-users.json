@@ -1,18 +1,46 @@
 {
 	"data": [
 		{
-			"id": "1212",
+			"id": "1",
 			"name": "Lisa Lawrence",
+			"email": "lisa@lisa.com",
 			"designation": "HOD",
-			"role": ["HOD sourcing"],
+			"role": ["Speech Writer"],
 			"image": "images/profile-img.png",
 			"online": true
 		},
 		{
-			"id": "1213",
+			"id": "2",
+			"name": "Lisa Lawrence",
+			"email": "lisa@lisa.com",
+			"designation": "MP",
+			"role": ["Member of Parliament"],			
+			"online": true
+		},
+		{
+			"id": "3",
 			"name": "Christopher Brown",
+			"email": "christoper@chris.com",
 			"designation": "Executive",
-			"role": ["Head of Department", "Speech Writer"],
+			"role": ["Head of Department"],
+			"image": "images/profile-img.png",
+			"online": false
+		},
+		{
+			"id": "4",
+			"name": "Christopher Brown",
+			"email": "christoper@chris.com",
+			"designation": "Executive",
+			"role": ["System Administrator", "Speech Writer"],
+			"image": "images/profile-img.png",
+			"online": false
+		},
+		{
+			"id": "5",
+			"name": "Christopher Brown",
+			"email": "christoper@chris.com",
+			"designation": "Executive",
+			"role": ["Liaison Officers"],
 			"image": "images/profile-img.png",
 			"online": false
 		}

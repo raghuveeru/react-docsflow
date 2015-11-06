@@ -95,11 +95,13 @@ This is the API blueprint for Momster COS application
 			"topics": [
 				{
 					"name": "Workplace Safety & Health",
-					"count": "80"
+					"count": "80",
+					"id": "12"
 				},
 				{
 					"name": "Central Provident Fund",
-					"count": "15"
+					"count": "15",
+					"id": "12"
 				}
 			],
 			"status": [
@@ -607,7 +609,7 @@ This is the API blueprint for Momster COS application
 
 # Group Users
 
-## Users [/api/v1/users]
+## Users [/api/v1/users{?userId,roles,memberOfParliament,email,name,hodSourcing}]
 
 + Model (application/json)
 
@@ -644,21 +646,116 @@ This is the API blueprint for Momster COS application
 
 ### Create a user [POST]
 
-+ Request
++ Parameters
 
-    [Users][]
+    + userId: `12` (string)
+    + roles: ['Speech Writer', 'System Administrator'] (array)
 
 + Response 200
 
 	```
 	{
-		"data": 
+		"data": [
 			{
+				"id": "1",
 				"name": "Lisa Lawrence",
+				"email": "lisa@lisa.com",
 				"designation": "HOD",
-				"role": ["HOD Officers"]
+				"role": ["Speech Writer"],
+				"image": "images/profile-img.png",
+				"online": true
 			}
-		
+		]
+	}
+	```
+
+### Create a MP [POST]
+
++ Parameters
+
+	+ name: `Name of mp` (string)
+	+ email: `Email of mp` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "2",
+				"name": "Lisa Lawrence",
+				"email": "lisa@lisa.com",
+				"designation": "MP",
+				"role": ["Member of Parliament"],			
+				"online": true
+			}
+		]
+	}
+	```
+
+### Create a HOD [POST]
+
++ Parameters
+
+	+ userId: `12` (string)
+    + roles: ['Head of Department'] (array)
+	+ memberOfParliament: `1212` (string)
+
++ Response 200
+
+	```
+		{
+		"data": [
+			{
+				"id": "3",
+				"name": "Christopher Brown",
+				"email": "christoper@chris.com",
+				"designation": "Executive",
+				"role": ["Head of Department"],
+				"image": "images/profile-img.png",
+				"online": false
+			}
+		]
+	}
+	```
+
+### Create a Liason officer [POST]
+
++ Parameters
+
+	+ userId: `12` (string)
+    + roles: ['Head of Department'] (array)
+	+ hodSourcing: `1212` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "5",
+				"name": "Christopher Brown",
+				"email": "christoper@chris.com",
+				"designation": "Executive",
+				"role": ["Liaison Officers"],
+				"image": "images/profile-img.png",
+				"online": false
+			}
+		]
+	}
+	```
+
+### Delete a user [DELETE]
+
++ Parameters
+	
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"success": true
 	}
 	```
 
@@ -837,6 +934,8 @@ This is the API blueprint for Momster COS application
 		]
 	}
 	```
+
+
 
 # Group Topics
 

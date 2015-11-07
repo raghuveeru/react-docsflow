@@ -7368,6 +7368,12 @@ li {
   .budget-cut-actions a {
     margin-left: 1em; }
 
+/**
+ * File attachments
+ */
+.file-attachment {
+  display: block; }
+
 .CircularProgress-Bg,
 .CircularProgress-Fg {
   fill: none; }

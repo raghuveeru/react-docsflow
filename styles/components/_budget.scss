@@ -404,3 +404,16 @@
     display: block;
     font-weight: 600;
 }
+
+
+/** Actions */
+
+.budget-cut-actions{
+    position: absolute;
+    top: 1em;
+    right: 1em;
+
+    a{
+        margin-left: 1em;
+    }
+}

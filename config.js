@@ -19,7 +19,10 @@ var API = {
 		
 		ASSIGN_TO_OFFICER: 'api/budget-cuts-assign-to-officer.json',
 		GET_BUDGET_ACTIVITY: 'api/budget-cuts-activity.json',
-		CREATE_NEW_BUDGET_CUT: 'api/new-budget-cut-response.json'
+		CREATE_NEW_BUDGET_CUT: 'api/new-budget-cut-response.json',
+
+		DELETE_BUDGET_CUT: 'api/delete-budget-cut-response.json',
+		UPDATE_BUDGET_CUT: 'api/budget-cuts-single.json',
 	},
 	TOPICS: {
 		GET_MAIN_TOPICS: 'api/get-main-topics.json',
@@ -64,7 +67,7 @@ var STATUS_MAPPING = {
 
 var ROLE_PERMISSION_MAPPING = {
 	'System Administrator': ['Admin'],
-	'COS Administrator': [],
+	'COS Administrator': ['canViewSpeech'],
 	// 'Liaison Officers': [],
 	'Registry Officers': [],
 	// 'Head of Department': [],

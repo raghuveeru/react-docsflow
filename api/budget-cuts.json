@@ -1,114 +1,150 @@
 {
-	"data": [
-		{
-			"id": 1,
-			"type": "budget_cuts",
-			"title": "Manpower challenges",
-			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-			"status": "Final draft",
-			"memberOfParliament": "Alex Yam",
-			"hodSourcing": "DOSHI- Chan Yew Kwong",
-			"hodDrafting": "Richard Wong",
-			"year": "2015",
-			"relationships": {
-				"category": "Workplace Safety & Health"
+    "data": [
+        {
+            "id": 1,
+            "type": "budget_cuts",
+            "title": "Manpower challenges",
+            "summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+            "status": "Final draft",
+            "memberOfParliament": {
+				"id": "2",
+				"name": "Alex Yam"
 			},
-			"liasonOfficer": "Richard Khong",
-			"userId": "blahblahblah"
-		},
-		{
-			"id": 2,
-			"type": "budget_cuts",			
-			"title": "Workplace injuries",
-			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-			"status": "On sourcing",
-			"memberOfParliament": "Alex Yam",
-			"hodSourcing": "DOSHI- Chan Yew Kwong",
-			"hodDrafting": "Richard Wong",
-			"year": "2015",
-			"relationships": {
-				"category": "Central Provident Fund"
+            "hodSourcing": {
+				"id": 2,
+				"name": "DOSHI- Chan Yew Kwong"
 			},
-			"liasonOfficer": "Richard Khong",
-			"userId": "blahblahblah"
-		},
-		{
-			"id": 3,
-			"type": "budget_cuts",			
-			"title": "Workplace injuries 2",
-			"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-			"status": "Speech",
-			"memberOfParliament": "Alex Yam",
-			"hodSourcing": "DOSHI- Chan Yew Kwong",
-			"hodDrafting": "Richard Wong",
-			"year": "2015",
-			"relationships": {
-				"category": "Central Provident Fund"
+			"hodDrafting": {
+				"id": 2,
+				"name": "Richard Wong"
+			},            
+            "year": "2015",
+            "relationships": {
+                "category": "Workplace Safety & Health"
+            },
+            "liasonOfficer": {
+				"id": 121,
+				"name": "liasonOfficer"
 			},
-			"liasonOfficer": "Richard Khong",
-			"userId": "blahblahblah"
-		}
-	],
-	"totalCount": 200,
-	"totalUserCount": 10,
-	"totalStatusCount": [
-		{
-			"name": "On Sourcing",
-			"count": "10"
-		},
-		{
-			"name": "Working draft",
-			"count": "100"
-		},
-		{
-			"name": "Final draft",
-			"count": "12"
-		},
-		{
-			"name": "Speech",
-			"count": "100"
-		}
-	],	
-	"facets": {
-		"topics": [
-			{
-				"name": "Workplace Safety & Health",
-				"count": "80",
-				"id": 12
+            "userId": "blahblahblah"
+        },
+        {
+            "id": 2,
+            "type": "budget_cuts",
+            "title": "Workplace injuries",
+            "summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+            "status": "On sourcing",
+            "memberOfParliament": {
+				"id": "2",
+				"name": "Alex Yam"
 			},
-			{
-				"name": "Central Provident Fund",
-				"count": "15",
-				"id": 21
-			}
-		],
-		"status": [
-			{
-				"name": "On Sourcing",
-				"count": "10"
+            "hodSourcing": {
+				"id": 2,
+				"name": "DOSHI- Chan Yew Kwong"
 			},
-			{
-				"name": "Working draft",
-				"count": "100"
+			"hodDrafting": {
+				"id": 2,
+				"name": "Richard Wong"
+			},            
+            "year": "2015",
+            "relationships": {
+                "category": "Workplace Safety & Health"
+            },
+            "liasonOfficer": {
+				"id": 121,
+				"name": "liasonOfficer"
 			},
-			{
-				"name": "Final draft",
-				"count": "12"
+            "userId": "blahblahblah"
+        },
+        {
+            "id": 3,
+            "type": "budget_cuts",
+            "title": "Workplace injuries 2",
+            "summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+            "status": "Speech",
+            "memberOfParliament": {
+				"id": "2",
+				"name": "Alex Yam"
 			},
-			{
-				"name": "Speech",
-				"count": "10"
-			}
-		],
-		"year": [
-			{
-				"name": "2015",
-				"count": "10"
+            "hodSourcing": {
+				"id": 2,
+				"name": "DOSHI- Chan Yew Kwong"
 			},
-			{
-				"name": "2014",
-				"count": "5"
-			}
-		]
-	}
+			"hodDrafting": {
+				"id": 2,
+				"name": "Richard Wong"
+			},            
+            "year": "2015",
+            "relationships": {
+                "category": "Workplace Safety & Health"
+            },
+            "liasonOfficer": {
+				"id": 121,
+				"name": "liasonOfficer"
+			},
+            "userId": "blahblahblah"
+        }
+    ],
+    "totalCount": 200,
+    "totalUserCount": 10,
+    "totalStatusCount": [
+        {
+            "name": "On Sourcing",
+            "count": "10"
+        },
+        {
+            "name": "Working draft",
+            "count": "100"
+        },
+        {
+            "name": "Final draft",
+            "count": "12"
+        },
+        {
+            "name": "Speech",
+            "count": "100"
+        }
+    ],
+    "facets": {
+        "topics": [
+            {
+                "name": "Workplace Safety & Health",
+                "count": "80",
+                "id": "12"
+            },
+            {
+                "name": "Central Provident Fund",
+                "count": "15",
+                "id": "12"
+            }
+        ],
+        "status": [
+            {
+                "name": "On Sourcing",
+                "count": "10"
+            },
+            {
+                "name": "Working draft",
+                "count": "100"
+            },
+            {
+                "name": "Final draft",
+                "count": "12"
+            },
+            {
+                "name": "Speech",
+                "count": "10"
+            }
+        ],
+        "year": [
+            {
+                "name": "2015",
+                "count": "10"
+            },
+            {
+                "name": "2014",
+                "count": "5"
+            }
+        ]
+    }
 }

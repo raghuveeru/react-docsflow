@@ -5,10 +5,10 @@
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
 			"role": ["Member of Parliament"],
-			"hodOfficer": {
+			"hodOfficer": [{
 				"name": "Steve Kong",
-				"id": "12"
-			},
+				"id": "11"
+			}],
 			"image": "images/profile-img.png"
 		},
 		{
@@ -16,10 +16,16 @@
 			"name": "Christopher Brown",
 			"designation": "Executive",
 			"role": ["Member of Parliament"],
-			"hodOfficer": {
-				"name": "Steve Kong",
-				"id": "12"
-			},
+			"hodOfficer": [
+				{
+					"name": "Steve Kong",
+					"id": "1"
+				},
+				{
+					"name": "Nair Kong",
+					"id": "2"
+				}
+			],
 			"image": "images/profile-img.png"
 		}
 	]

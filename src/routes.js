@@ -16,6 +16,7 @@ module.exports = (
 		<Route handler={BudgetLayout} path = "budgets" name="budgets" />		
 		<Route handler={BudgetLayout} path = "budgets/:type" name="budgetsInbox" />		
 		<Route handler={BudgetView} path = "budgets/view/:id" name="budgetsView" />		
+		<Route handler={NewBudget} path = "budgets/edit/:id" name="budgetsEdit" />		
 
 		<Redirect from='/admin' to='users' />
 		<Route handler = {AdminLayout} name='admin'>			

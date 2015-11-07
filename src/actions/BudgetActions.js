@@ -134,5 +134,38 @@ module.exports = {
 				callback && callback(JSON.parse(res.text))
 			})
 
+	},
+	updateBudgetCut: function(payload, callback){
+		
+		NProgress.start()
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.UPDATE_BUDGET_CUT)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				// this.dispatch(actions.UPDATE_BUDGET_CUT, JSON.parse(res.text));
+
+				NProgress.done()
+
+				callback && callback(JSON.parse(res.text))
+			})
+
+	},
+	deleteBudgetCut: function(payload, callback){
+
+		NProgress.start()
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.DELETE_BUDGET_CUT)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+								
+				NProgress.done()
+
+				callback && callback(JSON.parse(res.text))
+			})
 	}
 }

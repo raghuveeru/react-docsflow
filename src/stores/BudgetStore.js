@@ -23,7 +23,8 @@ var BudgetStore = Fluxxor.createStore({
 			actions.ADD_TO_SPEECH, this.addToSpeech,
 			actions.ASSIGN_TO_OFFICER, this.assignToOfficer,
 			actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity,
-			actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity
+			actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity,			
+			actions.DELETE_BUDGET_CUT, this.deleteBudgetCut,
 		)
 	},
 	updateBudgets: function(budgets){
@@ -138,9 +139,8 @@ var BudgetStore = Fluxxor.createStore({
 		
 		this.emit('change')
 	},
-	createNewBudgetCut: function(activity){
-
-		console.log('c')
+	deleteBudgetCut: function(){
+		
 	}
 });
 

@@ -198,6 +198,20 @@ Link more
     }
 }
 
+.link-edit{
+    &:before{
+        @extend %icon;
+        content: "\f044";
+    }
+}
+
+.link-delete{
+    &:before{
+        @extend %icon;
+        content: "\f1f8";
+    }
+}
+
 
 /**
  * Edit question
@@ -220,3 +234,5 @@ Link more
         margin: 0;
     }
 }
+
+

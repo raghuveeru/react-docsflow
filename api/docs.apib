@@ -21,118 +21,154 @@ This is the API blueprint for Momster COS application
 	
 	```
 	{
-		"data": [
-			{
-				"id": 1,
-				"type": "budget_cuts",
-				"title": "Manpower challenges",
-				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "Final draft",
-				"memberOfParliament": "Alex Yam",
-				"hodSourcing": "DOSHI- Chan Yew Kwong",
-				"hodDrafting": "Richard Wong",
-				"year": "2015",
-				"relationships": {
-					"category": "Workplace Safety & Health"
+	    "data": [
+	        {
+	            "id": 1,
+	            "type": "budget_cuts",
+	            "title": "Manpower challenges",
+	            "summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+	            "status": "Final draft",
+	            "memberOfParliament": {
+					"id": "2",
+					"name": "Alex Yam"
 				},
-				"liasonOfficer": "Richard Khong",
-				"userId": "blahblahblah"
-			},
-			{
-				"id": 2,
-				"type": "budget_cuts",			
-				"title": "Workplace injuries",
-				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "On sourcing",
-				"memberOfParliament": "Alex Yam",
-				"hodSourcing": "DOSHI- Chan Yew Kwong",
-				"hodDrafting": "Richard Wong",
-				"year": "2015",
-				"relationships": {
-					"category": "Central Provident Fund"
+	            "hodSourcing": {
+					"id": 2,
+					"name": "DOSHI- Chan Yew Kwong"
 				},
-				"liasonOfficer": "Richard Khong",
-				"userId": "blahblahblah"
-			},
-			{
-				"id": 3,
-				"type": "budget_cuts",			
-				"title": "Workplace injuries 2",
-				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "Speech",
-				"memberOfParliament": "Alex Yam",
-				"hodSourcing": "DOSHI- Chan Yew Kwong",
-				"hodDrafting": "Richard Wong",
-				"year": "2015",
-				"relationships": {
-					"category": "Central Provident Fund"
+				"hodDrafting": {
+					"id": 2,
+					"name": "Richard Wong"
+				},            
+	            "year": "2015",
+	            "relationships": {
+	                "category": "Workplace Safety & Health"
+	            },
+	            "liasonOfficer": {
+					"id": 121,
+					"name": "liasonOfficer"
 				},
-				"liasonOfficer": "Richard Khong",
-				"userId": "blahblahblah"
-			}
-		],
-		"totalCount": 200,
-		"totalUserCount": 10,
-		"totalStatusCount": [
-			{
-				"name": "On Sourcing",
-				"count": "10"
-			},
-			{
-				"name": "Working draft",
-				"count": "100"
-			},
-			{
-				"name": "Final draft",
-				"count": "12"
-			},
-			{
-				"name": "Speech",
-				"count": "100"
-			}
-		],	
-		"facets": {
-			"topics": [
-				{
-					"name": "Workplace Safety & Health",
-					"count": "80",
-					"id": "12"
+	            "userId": "blahblahblah"
+	        },
+	        {
+	            "id": 2,
+	            "type": "budget_cuts",
+	            "title": "Workplace injuries",
+	            "summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+	            "status": "On sourcing",
+	            "memberOfParliament": {
+					"id": "2",
+					"name": "Alex Yam"
 				},
-				{
-					"name": "Central Provident Fund",
-					"count": "15",
-					"id": "12"
-				}
-			],
-			"status": [
-				{
-					"name": "On Sourcing",
-					"count": "10"
+	            "hodSourcing": {
+					"id": 2,
+					"name": "DOSHI- Chan Yew Kwong"
 				},
-				{
-					"name": "Working draft",
-					"count": "100"
+				"hodDrafting": {
+					"id": 2,
+					"name": "Richard Wong"
+				},            
+	            "year": "2015",
+	            "relationships": {
+	                "category": "Workplace Safety & Health"
+	            },
+	            "liasonOfficer": {
+					"id": 121,
+					"name": "liasonOfficer"
 				},
-				{
-					"name": "Final draft",
-					"count": "12"
+	            "userId": "blahblahblah"
+	        },
+	        {
+	            "id": 3,
+	            "type": "budget_cuts",
+	            "title": "Workplace injuries 2",
+	            "summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+	            "status": "Speech",
+	            "memberOfParliament": {
+					"id": "2",
+					"name": "Alex Yam"
 				},
-				{
-					"name": "Speech",
-					"count": "10"
-				}
-			],
-			"year": [
-				{
-					"name": "2015",
-					"count": "10"
+	            "hodSourcing": {
+					"id": 2,
+					"name": "DOSHI- Chan Yew Kwong"
 				},
-				{
-					"name": "2014",
-					"count": "5"
-				}
-			]
-		}
+				"hodDrafting": {
+					"id": 2,
+					"name": "Richard Wong"
+				},            
+	            "year": "2015",
+	            "relationships": {
+	                "category": "Workplace Safety & Health"
+	            },
+	            "liasonOfficer": {
+					"id": 121,
+					"name": "liasonOfficer"
+				},
+	            "userId": "blahblahblah"
+	        }
+	    ],
+	    "totalCount": 200,
+	    "totalUserCount": 10,
+	    "totalStatusCount": [
+	        {
+	            "name": "On Sourcing",
+	            "count": "10"
+	        },
+	        {
+	            "name": "Working draft",
+	            "count": "100"
+	        },
+	        {
+	            "name": "Final draft",
+	            "count": "12"
+	        },
+	        {
+	            "name": "Speech",
+	            "count": "100"
+	        }
+	    ],
+	    "facets": {
+	        "topics": [
+	            {
+	                "name": "Workplace Safety & Health",
+	                "count": "80",
+	                "id": "12"
+	            },
+	            {
+	                "name": "Central Provident Fund",
+	                "count": "15",
+	                "id": "12"
+	            }
+	        ],
+	        "status": [
+	            {
+	                "name": "On Sourcing",
+	                "count": "10"
+	            },
+	            {
+	                "name": "Working draft",
+	                "count": "100"
+	            },
+	            {
+	                "name": "Final draft",
+	                "count": "12"
+	            },
+	            {
+	                "name": "Speech",
+	                "count": "10"
+	            }
+	        ],
+	        "year": [
+	            {
+	                "name": "2015",
+	                "count": "10"
+	            },
+	            {
+	                "name": "2014",
+	                "count": "5"
+	            }
+	        ]
+	    }
 	}
 	```
 
@@ -153,18 +189,35 @@ This is the API blueprint for Momster COS application
 				"type": "budget_cuts",
 				"title": "Manpower challenges",
 				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
-				"status": "finalDraft",
-				"memberOfParliament": "Alex Yam",
-				"hodSourcing": "DOSHI- Chan Yew Kwong",
+				"status": "Final draft",
+				"topic": {
+					"id": "1",
+					"name": "Workplace Safety & Health"
+				},
+				"budgetCutTopic": {
+					"id": "1231312",
+					"name": "Manpower challenges"
+				},
+				"memberOfParliament": {
+					"id": "2",
+					"name": "Alex Yam"
+				},
+				"hodSourcing": {
+					"id": 2,
+					"name": "DOSHI- Chan Yew Kwong"
+				},
 				"hodDrafting": "Richard Wong",
 				"year": "2015",
 				"relationships": {
 					"category": "Workplace Safety & Health"
 				},
-				"liasonOfficer": "Richard Khong",
+				"liasonOfficer": {
+					"id": 121,
+					"name": "liasonOfficer"
+				},
 				"userId": "blahblahblah",
 				"fileReferenceNo": "-",
-				"time": "50"
+				"time": "50"			
 			}
 		]	
 	}
@@ -607,6 +660,77 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
+## Update Budget cut [/api/v1/update-budget-cut{?id,topicId,budgetCutId,memberOfParliament,hodSourcing,fileReferenceNo,summary,time}]
+
+### Update Budget Cut [POST]
+
++ Parameters
+	+ id: `12` (string)
+	+ topicId: `12` (string)
+	+ budgetCutId: `1212` (string)
+	+ memberOfParliament: `1212` (string)
+	+ hodSourcing: `121` (string)
+	+ fileReferenceNo: `reference` (string)
+	+ summary: `text` (string)
+	+ time: `time taken` (string)
+
+## Delete budget cut [/api/v1/delete-budget-cut{?id}]
+
+### Delete budget cut [POST]
+
++ Parameters
+	+ id: `12` (string)
+
++ Response 200
+	
+	```
+	{
+		"success": true
+	}
+	```
+
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 1,
+				"type": "budget_cuts",
+				"title": "Manpower challenges",
+				"summary": "This approach has a number of advantages and implications. It provides a constitutional foundation for the harmless error doctrine, explains why the same exclusionary principles apply to different constitutional rights.",
+				"status": "Final draft",
+				"topic": {
+					"id": "1",
+					"name": "Workplace Safety & Health"
+				},
+				"budgetCutTopic": {
+					"id": "1231312",
+					"name": "Manpower challenges"
+				},
+				"memberOfParliament": {
+					"id": "2",
+					"name": "Alex Yam"
+				},
+				"hodSourcing": {
+					"id": 2,
+					"name": "DOSHI- Chan Yew Kwong"
+				},
+				"hodDrafting": "Richard Wong",
+				"year": "2015",
+				"relationships": {
+					"category": "Workplace Safety & Health"
+				},
+				"liasonOfficer": "Richard Khong",
+				"userId": "blahblahblah",
+				"fileReferenceNo": "-",
+				"time": "50"			
+			}
+		]	
+	}
+	```
+
 # Group Users
 
 ## Users [/api/v1/users{?userId,roles,memberOfParliament,email,name,hodSourcing}]
@@ -817,9 +941,13 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get HOD Sourcing Users [/api/v1/get-hod-sourcing-user]
+## Get HOD Sourcing Users [/api/v1/get-hod-sourcing-user{?memberOfParliament,q}]
 
 ### Get HOD Sourcing Users[GET]
+
++ Parameters
+	+ memberOfParliament: `1212` (string)
+	+ q: `query text` (string)
 
 + Response 200
 	
@@ -1029,9 +1157,14 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Budget Cut Topic [/api/budget-cut-topics/{?budgetCutTopicId,topicId,topicName,budgetCutTopicName}]
+## Budget Cut Topic [/api/budget-cut-topics/{?budgetCutTopicId,topicId,topicName,budgetCutTopicName,q}]
 
 ### Get all Budget Cut Topics [GET]
+
++ Parameters
+	+ topicId: `12` (string)
+	+ q: `query text` (string)
+
 
 + Response 200
 

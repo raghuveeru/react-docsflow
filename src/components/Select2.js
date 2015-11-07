@@ -9,31 +9,45 @@ var Select2 = React.createClass({
 			allowClear: false
 		}
 	},
+	componentDidUpdate: function(nextProps){
+
+		if(nextProps.defaultValue != this.props.defaultValue){
+	
+			$(this.refs.select.getDOMNode()).select2('val', nextProps.defaultValue)
+		}
+	},
 	componentDidMount: function(){
 
 		var select = this.refs.select.getDOMNode();
+		var self = this;
 
 		var options = {			
 			placeholder: this.props.placeholder,
 			allowClear: this.props.allowClear,
 			formatResult: this.props.formatResult
 		};
+
+		var {query} = this.props;
 		
 		if(this.props.url){
 			
 			options = jQuery.extend({}, options, {
 				data:{ text: "name" },
 				multiple: this.props.multiple || false,				
-				initSelection: (element, callback) => {					
+				initSelection: (element, callback) => {
+
 					callback(this.props.defaultValue)
 				},
 				ajax: {
 					url: this.props.url,
 					dataType: 'json',
 					data: function (term, page) {
-			            return {
+
+						var term = {
 			                q: term, // search term
 			            };
+
+			        	return jQuery.extend({}, self.getQuery(), term)
 			        },
 			        results: function (data, page) { 
 			        	
@@ -52,9 +66,15 @@ var Select2 = React.createClass({
 		});
 		
 	},
-	shouldComponentUpdate: function(nextProps){
+	getQuery: function(){
+
+		var {query} = this.props;
 		
-		return nextProps.children != this.props.children
+		return query || {}
+	},
+	shouldComponentUpdate: function(nextProps){
+	
+		return nextProps.children != this.props.children || nextProps.defaultValue != this.props.defaultValue
 	},
 	render: function(){
 

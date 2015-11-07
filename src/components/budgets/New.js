@@ -5,7 +5,18 @@ import TextareaMaterial from '../TextareaMaterial';
 import {mapObject, t} from './../../utilities';
 import {validationOptions} from './../../constants';
 
+import Fluxxor from 'fluxxor';
+import {StoreWatchMixin} from 'fluxxor';
+var FluxMixin = Fluxxor.FluxMixin(React)
+
 var BudgetNew = React.createClass({	
+	mixins: [FluxMixin, StoreWatchMixin('BudgetStore')],
+	getStateFromFlux: function(){
+
+		return {
+			BudgetStore: this.getFlux().store('BudgetStore').getState()
+		}
+	},
 	contextTypes: {
 		router: React.PropTypes.func
 	},
@@ -22,6 +33,7 @@ var BudgetNew = React.createClass({
 			memberOfParliament:'',
 			memberOfParliamentName: '',
 			hodSourcing: '',
+			hodOfficers: [],
 			fileReferenceNo: '',
 			summary: '',
 			time: '',
@@ -35,11 +47,15 @@ var BudgetNew = React.createClass({
 	},
 	create: function(event){
 
+		if(this.props.params.id) return this.update(event)
+
 		if(this.$form.valid()){			
 
 			event && event.preventDefault();
 
-			this.props.flux.actions.BudgetActions.createNew(this.state, (response) => {
+			var data = this.getData();
+
+			this.props.flux.actions.BudgetActions.createNew(data, (response) => {
 				
 				var res = response.data[0];
 
@@ -48,6 +64,57 @@ var BudgetNew = React.createClass({
 				}
 				this.context.router.transitionTo('budgetsView', {'id': res.id})
 			})
+		}
+	},
+	getData: function(){
+
+		return {			
+			topicId: this.state.topicId,
+			budgetCutId: this.state.budgetCutId,
+			memberOfParliament: this.state.memberOfParliament,
+			hodSourcing: this.state.hodSourcing,
+			fileReferenceNo: this.state.fileReferenceNo,
+			summary: this.state.summary,
+			time: this.state.time,
+			responsibleOfficer: this.state.responsibleOfficer,
+			officersToNotify: this.state.officersToNotify,
+			message: this.state.message,
+			userId: CURRENT_USER.id,
+			subject: this.state.subject			
+		}
+	},
+	update: function(event){
+
+		event && event.preventDefault();
+
+		if(this.$form.valid()){
+			
+			var {currentBudget} = this.state.BudgetStore;
+
+			var data = {
+				id: currentBudget.id,
+				topicId: this.state.topicId || currentBudget.topic.id,
+				budgetCutId: this.state.budgetCutId || currentBudget.budgetCutTopic.id,
+				memberOfParliament: this.state.memberOfParliament || currentBudget.memberOfParliament,
+				hodSourcing: this.state.hodSourcing || currentBudget.hodSourcing,
+				fileReferenceNo: this.state.fileReferenceNo || currentBudget.fileReferenceNo,
+				summary: this.state.summary || currentBudget.summary,
+				time: this.state.time || currentBudget.time
+			}
+
+			
+			this.props.flux.actions.BudgetActions.updateBudgetCut(data, (response) => {
+				
+				var res = response.data[0];
+
+				if(!res || !res.id){
+					throw new Error('Please check the response of this API Call - new-budget-cut-response.json');
+				}
+				this.context.router.transitionTo('budgetsView', {'id': res.id})
+			})
+
+			
+
 		}
 	},
 	updateSubject: function(){		
@@ -62,20 +129,62 @@ var BudgetNew = React.createClass({
 			subject: sub
 		})
 	},
+	componentDidUpdate: function(nextProps, nextState){
+
+		var {currentBudget} = this.state.BudgetStore;
+		
+		if(this.props.params.id && currentBudget.id){
+			this.$form = $(this.refs.form.getDOMNode());
+
+			this.$form.validate(validationOptions);
+		}
+	},
 	componentDidMount: function(){
 
-		this.$form = $(this.refs.form.getDOMNode());
+		
+		if(!this.props.params.id){
 
-		this.$form.validate(validationOptions);
+			this.$form = $(this.refs.form.getDOMNode());
+
+			this.$form.validate(validationOptions);
+		}
+
+		/**
+		 * Check if its in editMode
+		 */
+		
+		if(this.props.params.id){
+
+			/**
+			 * Get Budget cut
+			 */
+			
+			this.getFlux().actions.BudgetActions.getBudgetById({
+				id: this.props.params.id
+			})
+		}
 
 	},
 	checkSelect2Valid: function(e){
+		
 		if(!e) return;
+		
 		var $ele = $(e.target);
 		
 		return $ele.valid();
 	},
 	render: function(){
+		var {currentBudget} = this.state.BudgetStore;
+		var isEditMode = !!this.props.params.id;		
+
+		if(!isEditMode) currentBudget = {};
+
+		var AssignTo = !isEditMode? this.renderAssignToOfficer() : null;
+		var buttonTitle = !isEditMode? 'Create and assign': 'Save';		
+
+		if(isEditMode && !currentBudget.id) return null;
+
+		// console.log(currentBudget)
 
 		return (
 			<form ref="form">
@@ -89,6 +198,7 @@ var BudgetNew = React.createClass({
 							placeholder= 'Select topics'
 							name="selectTopic"
 							multiple = {false}
+							defaultValue = {currentBudget.topic}
 							onChange = { (val, data, event) => {
 
 								var bcTopic = data.budgetCutTopic;
@@ -96,7 +206,7 @@ var BudgetNew = React.createClass({
 								var select = this.refs.budgetCutTopicSelect.refs.select.getDOMNode();
 								
 								setTimeout(() => {
-									$(select).select2('val', bcTopic[0].id, true)
+									bcTopic.length > 0 && $(select).select2('data', bcTopic[0], true)
 								}, 100)
 
 								this.checkSelect2Valid(event);
@@ -105,30 +215,30 @@ var BudgetNew = React.createClass({
 									topicId: val,
 									budgetCutTopic: bcTopic,
 									budgetCutTopicName: bcTopic[0].name
-								})
+								}, this.updateSubject)
 							}}
 						/>
 						
-						<Select2 
+						<Select2
+							url = {AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_BUDGET_CUT_TOPICS}
 							placeholder = 'Budget cut topic' 							
 							ref = "budgetCutTopicSelect"							
 							readOnly = {true}
 							required = {true}
 							name="budgetCutTopicSelect"
+							query = {{ topicId: this.state.topicId}}
+							defaultValue = {currentBudget.budgetCutTopic}
 							onChange = { (val, data, event) => {
-
+								
 								this.checkSelect2Valid(event);
 								
 								this.setState({
-									budgetCutId: val
-								})
+									budgetCutId: val,
+									budgetCutTopicName: data.name
+								}, this.updateSubject)
 							}}
-						>
-							<option></option>
-							{this.state.budgetCutTopic.map((topic, idx) => {
-								return <option value= {topic.id} key = {idx}>{topic.name}</option>
-							})}
-						</Select2>
+						 />
+						
 
 						<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
@@ -136,13 +246,15 @@ var BudgetNew = React.createClass({
 							multiple = {false}
 							required = {true}
 							name="memberOfParliament"
+							defaultValue = {currentBudget.memberOfParliament}
 							onChange = { (val, data, event) => {
 
 								this.checkSelect2Valid(event);
 								
 								this.setState({
 									memberOfParliament: val,
-									memberOfParliamentName: data.name
+									memberOfParliamentName: data.name,
+									hodOfficers: data.hodOfficer
 								}, this.updateSubject)
 							}}
 						/>
@@ -153,6 +265,8 @@ var BudgetNew = React.createClass({
 							multiple = {false}
 							name="hodSourcing"
 							required = {true}
+							defaultValue = {currentBudget.hodSourcing}
+							query = {{ memberOfParliament: this.state.memberOfParliament}}
 							onChange = { (val, data, event) => {
 
 								this.checkSelect2Valid(event);
@@ -170,6 +284,7 @@ var BudgetNew = React.createClass({
 									label = "File reference no. (optional)" 
 									name = "fileReferenceNo"
 									required = {true}
+									defaultValue = {currentBudget.fileReferenceNo}
 									onChange = {
 										(event) => {
 											
@@ -183,10 +298,12 @@ var BudgetNew = React.createClass({
 
 						<div className="row">
 							<div className="columns six">
-								<InputMaterial 
+								<TextareaMaterial
+									rows = {1} 
 									required = {true}
 									name="summary"
 									label = "Gist of cuts" 
+									defaultValue = {currentBudget.summary}
 									onChange = {
 										(event) => {
 											
@@ -205,6 +322,7 @@ var BudgetNew = React.createClass({
 									name="time" 
 									required = {true}
 									label = "Time for MP to speak (min)" 
+									defaultValue = {currentBudget.time}
 									onChange = {
 										(event) => {
 											
@@ -218,88 +336,98 @@ var BudgetNew = React.createClass({
 						</div>
 
 
+						{AssignTo}
+						
+
 						<div className="form-control">
-							<h4>Assign to officer</h4>
+							<button className="btn btn-primary" onClick = {this.create}>{buttonTitle}</button>
+							<a className="btn btn--unstyled" onClick = {() =>{
 
-							<Select2 
-								label = 'Select action' onChange = { (val) => {
-								
-								this.setState({
-									status: val
-								}, this.updateSubject)
-							}} >
-								{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
-									return <option key = {idx}>{status}</option>
-								})}
-							</Select2>
+								this.context.router.transitionTo('budgets')
 
-							<Select2  
-								url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
-								required = {true}
-								placeholder= 'Responsible officers'
-								multiple = {true}
-								name="responsibleOfficer"
-								onChange = { (val) => {
-									
-									this.setState({
-										responsibleOfficer: val
-									})
-								}}
-							/>
-
-							<Select2  
-								url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY} 
-								placeholder= 'Officers to notify'
-								multiple = {true}
-								name="officersToNotify"
-								onChange = { (val) => {
-									
-									this.setState({
-										officersToNotify: val
-									})
-								}}
-							/>
-
-							<div className="row">
-								<div className="columns six">
-
-									<InputMaterial
-										label="Subject"
-										value = {this.state.subject}
-										readOnly = {true}
-										/>
-								</div>
-							</div>
-
-							<div className="row">
-								<div className="columns six">
-									
-									<TextareaMaterial 
-										name="message"
-										required = {true}
-										label="Message" 
-										rows = {1} 
-										onChange = { (event) => {
-											this.setState({
-												message: event.target.value
-											})
-									}} />
-								</div>
-							</div>
-
-							<div className="form-control">
-								<button className="btn btn-primary" onClick = {this.create}>Create and assign</button>
-								<a className="btn btn--unstyled" onClick = {() =>{
-
-									this.context.router.transitionTo('budgets')
-
-								}}>Cancel</a>
-							</div>
+							}}>Cancel</a>
 						</div>
 
 					</div>
 				</div>
 			</form>
+		)
+	},
+	renderAssignToOfficer: function(){
+
+		return (
+			<div className="form-control">
+				<h4>Assign to officer</h4>
+
+				<Select2 
+					placeholder="Select status"
+					label = 'Select action' 
+					onChange = { (val) => {					
+						this.setState({
+							status: val
+						}, this.updateSubject)
+					}} >
+					<option></option>
+					{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
+						return <option key = {idx}>{status}</option>
+					})}
+				</Select2>
+
+				<Select2  
+					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
+					required = {true}
+					placeholder= 'Responsible officers'
+					multiple = {true}
+					name="responsibleOfficer"
+					onChange = { (val) => {
+						
+						this.setState({
+							responsibleOfficer: val
+						})
+					}}
+				/>
+
+				<Select2  
+					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY} 
+					placeholder= 'Officers to notify'
+					multiple = {true}
+					name="officersToNotify"
+					onChange = { (val) => {
+						
+						this.setState({
+							officersToNotify: val
+						})
+					}}
+				/>
+
+				<div className="row">
+					<div className="columns six">
+
+						<InputMaterial
+							label="Subject"
+							value = {this.state.subject}
+							readOnly = {true}
+							/>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="columns six">
+						
+						<TextareaMaterial 
+							name="message"
+							required = {true}
+							label="Message" 
+							rows = {1} 
+							onChange = { (event) => {
+								this.setState({
+									message: event.target.value
+								})
+						}} />
+					</div>
+				</div>
+				
+			</div>
 		)
 	}
 })

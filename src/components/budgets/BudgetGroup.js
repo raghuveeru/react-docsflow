@@ -32,6 +32,10 @@ var BudgetGroup = React.createClass({
 				{group.items.map((item, index) => {
 
 					var statusIdx = 5;
+					var memberOfParliament = item.memberOfParliament? item.memberOfParliament.name : '';
+					var hodSourcing = item.hodSourcing? item.hodSourcing.name : '';
+					var hodDrafting = item.hodDrafting? item.hodDrafting.name : '';
+					var liasonOfficer = item.liasonOfficer? item.liasonOfficer.name : '';
 					
 					return (
 						<div key = {index} className="budget-list-item">
@@ -54,19 +58,19 @@ var BudgetGroup = React.createClass({
 								<tbody>
 									<tr>
 										<th>Member of Parliament</th>
-										<td>{item.memberOfParliament}</td>
+										<td>{memberOfParliament}</td>
 									</tr>
 									<tr>
 										<th>HOD Sourcing</th>
-										<td>{item.hodSourcing}</td>
+										<td>{hodSourcing}</td>
 									</tr>
 									<tr>
 										<th>HOD Drafting</th>
-										<td>{item.hodDrafting}</td>
+										<td>{hodDrafting}</td>
 									</tr>
 									<tr>
 										<th>Liason officer</th>
-										<td>{item.liasonOfficer}</td>
+										<td>{liasonOfficer}</td>
 									</tr>
 								</tbody>
 							</table>

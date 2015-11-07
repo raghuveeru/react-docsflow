@@ -43,7 +43,7 @@ var InputMaterial = React.createClass({
 
 		var klass = 'form-control' + ((hasValue)? ' label-active' : '') + (isFocused? ' label-up': '');
 		var inputKlass = 'input-control ' + (this.props.className? this.props.className : '');
-
+		
 		return (
 			<div className={klass}>
 				<label 

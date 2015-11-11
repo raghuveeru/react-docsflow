@@ -40,9 +40,10 @@ var BudgetContainer = React.createClass({
 		return jQuery.extend(
 		{
 			'query': this._query,
+			'userId': CURRENT_USER.id,
 		}, 
 		this._filters,
-		(!activeRouteName || activeRouteName == 'budgetsInbox'? {'userId': CURRENT_USER.id} : {})
+		(!activeRouteName || activeRouteName == 'budgetsInbox'? {'requestType': 'myinbox'} : {})
 		)
 
 	},

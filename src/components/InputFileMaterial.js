@@ -6,7 +6,7 @@ var InputFileMaterial = React.createClass({
 		return (
 			<div className='form-control'>				
 				<label className="material-file">
-					<input type="file" name={this.props.name} />
+					<input type="file" name={this.props.name} multiple={true} />
 				</label>
 			</div>
 		)

@@ -22,7 +22,8 @@ var BudgetCutTopicItem = React.createClass({
 			
 			this.props.flux.actions.AdminActions.deleteBudgetCutTopic({
 				topicId: topic.id,
-				budgetCutTopicId: budgetCutTopic.id
+				budgetCutTopicId: budgetCutTopic.id,
+				userId: CURRENT_USER.id
 			})
 			
 		}

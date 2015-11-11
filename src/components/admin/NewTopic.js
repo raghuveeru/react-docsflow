@@ -7,9 +7,11 @@ var FluxMixin = Fluxxor.FluxMixin(React);
 var NewTopic = React.createClass({
 	mixins: [FluxMixin],
 	getInitialState: function(){
+		var {topic} = this.props;
 
 		return {
-			topicName: ''
+			topicName: topic? topic.name: '',
+			userId: CURRENT_USER.id
 		}
 	},
 	componentDidMount: function(){
@@ -31,7 +33,8 @@ var NewTopic = React.createClass({
 
 			this.getFlux().actions.AdminActions.editMainTopic({
 				topicId: this.props.topic.id,
-				topicName: this.state.topicName
+				topicName: this.state.topicName,
+				userId: CURRENT_USER.id
 			})
 
 		}else{

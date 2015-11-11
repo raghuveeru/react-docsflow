@@ -37,9 +37,10 @@ var NewUser = React.createClass({
 			switch(type){
 				case 'user':
 					params = {
-						userId: user.id,
+						user: user.id,
 						roles: user.role,
-						type: type
+						type: type,
+						userId: CURRENT_USER.id
 					}
 					break;
 
@@ -47,25 +48,28 @@ var NewUser = React.createClass({
 					params = {
 						name: name,
 						email: email,
-						type: type
+						type: type,
+						userId: CURRENT_USER.id
 					}
 					break;
 
 				case 'hod':
 					params = {
-						userId: user.id,						
+						user: user.id,						
 						memberOfParliament: memberOfParliament,
 						type: type,
-						roles: ['Head of Department']
+						roles: ['Head of Department'],
+						userId: CURRENT_USER.id
 					}
 					break;
 
 				case 'liasonOfficer':
 					params = {
-						userId: user.id,						
+						user: user.id,						
 						hodSourcing: hodSourcing,
 						type: type,
-						roles: ['Liaison Officers']
+						roles: ['Liaison Officers'],
+						userId: CURRENT_USER.id
 					}
 					break;
 			}

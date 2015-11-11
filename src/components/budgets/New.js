@@ -100,7 +100,8 @@ var BudgetNew = React.createClass({
 				hodSourcing: this.state.hodSourcing || currentBudget.hodSourcing,
 				fileReferenceNo: this.state.fileReferenceNo || currentBudget.fileReferenceNo,
 				summary: this.state.summary || currentBudget.summary,
-				time: this.state.time || currentBudget.time
+				time: this.state.time || currentBudget.time,
+				userId: CURRENT_USER.id
 			}
 
 			

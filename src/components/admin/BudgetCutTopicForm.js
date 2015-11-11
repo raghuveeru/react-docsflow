@@ -29,14 +29,16 @@ var BudgetCutTopicForm = React.createClass({
 			this.props.flux.actions.AdminActions.editBudgetCutTopic({
 				budgetCutTopicName: this.state.budgetCutTopicName,
 				topicId: topic.id,
-				budgetCutTopicId: budgetCutTopic.id
+				budgetCutTopicId: budgetCutTopic.id,
+				userId: CURRENT_USER.id
 			})			
 
 		}else{
 
 			this.props.flux.actions.AdminActions.createBudgetCutTopic({
 				budgetCutTopicName: this.state.budgetCutTopicName,
-				topicId: topic.id
+				topicId: topic.id,
+				userId: CURRENT_USER.id
 			})
 		}
 

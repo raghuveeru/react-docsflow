@@ -142,9 +142,9 @@ var AdminActions = {
 		NProgress.start();
 		
 		request
-			.get(getUserUrl('new', payload.type))
+			.post(getUserUrl('new', payload.type))
 			.set(headers)
-			.query(JSON.stringify(payload))
+			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
 				this.dispatch(actions.CREATE_NEW_USER, JSON.parse(res.text));

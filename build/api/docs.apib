@@ -433,6 +433,7 @@ This is the API blueprint for Momster COS application
 	+ budgetCutId: `1` (string)
 	+ attachments: (attachments)
 	+ types: `['Approved draft']` (array)
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -673,6 +674,7 @@ This is the API blueprint for Momster COS application
 	+ fileReferenceNo: `reference` (string)
 	+ summary: `text` (string)
 	+ time: `time taken` (string)
+	+ userId: `12` (string)
 
 ## Delete budget cut [/api/v1/delete-budget-cut{?id}]
 
@@ -771,7 +773,7 @@ This is the API blueprint for Momster COS application
 ### Create a user [POST]
 
 + Parameters
-
+	
     + userId: `12` (string)
     + roles: ['Speech Writer', 'System Administrator'] (array)
 
@@ -799,6 +801,7 @@ This is the API blueprint for Momster COS application
 
 	+ name: `Name of mp` (string)
 	+ email: `Email of mp` (string)
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -873,6 +876,7 @@ This is the API blueprint for Momster COS application
 
 + Parameters
 	
+	+ id: `12` (string)
 	+ userId: `12` (string)
 
 + Response 200
@@ -1109,6 +1113,7 @@ This is the API blueprint for Momster COS application
 
 + Parameters
 	+ topicName: `Name of the topic` (string)
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -1130,6 +1135,7 @@ This is the API blueprint for Momster COS application
 + Parameters
 	+ topicId: `12` (string)
 	+ topicName: `name of the topic` (string)
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -1148,6 +1154,7 @@ This is the API blueprint for Momster COS application
 
 + Parameters
 	+ topicId: `12` (string)
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -1185,6 +1192,7 @@ This is the API blueprint for Momster COS application
 + Parameters
 	+ budgetCutTopicName: `Name of the new budget cut topic` (string)
 	+ topicId: `12` (string)
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -1207,6 +1215,7 @@ This is the API blueprint for Momster COS application
 	+ topicId: `12` (string)
 	+ budgetCutTopicId: `12` (string)
 	+ budgetCutTopicName: `name of the budget cut topic` (string)	
+	+ userId: `12` (string)
 
 + Response 200
 
@@ -1226,6 +1235,7 @@ This is the API blueprint for Momster COS application
 + Parameters
 	+ budgetCutTopicId:  `11` (string)
 	+ topicId: `12` (string)
+	+ userId: `12` (string)
 
 + Response 200
 

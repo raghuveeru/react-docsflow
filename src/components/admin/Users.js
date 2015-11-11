@@ -40,7 +40,8 @@ var Users = React.createClass({
 		if(confirm('Are you sure you want to delete?')){
 
 			this.props.flux.actions.AdminActions.deleteUser({
-				userId: userId
+				id: userId,
+				userId: CURRENT_USER.id
 			})
 		}
 

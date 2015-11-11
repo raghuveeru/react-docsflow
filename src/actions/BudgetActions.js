@@ -167,5 +167,20 @@ module.exports = {
 
 				callback && callback(JSON.parse(res.text))
 			})
+	},
+	deleteAttachment: function(payload, callback){
+
+		NProgress.start()
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.DELETE_ATTACHMENT)
+			.set(headers)
+			.query(JSON.stringify(payload))
+			.end((err, res) => {
+								
+				NProgress.done()
+
+				callback && callback(JSON.parse(res.text))
+			})
 	}
 }

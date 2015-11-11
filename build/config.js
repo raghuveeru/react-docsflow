@@ -23,6 +23,7 @@ var API = {
 
 		DELETE_BUDGET_CUT: 'api/delete-budget-cut-response.json',
 		UPDATE_BUDGET_CUT: 'api/budget-cuts-single.json',
+		DELETE_ATTACHMENT: 'api/delete-attachment.json'
 	},
 	TOPICS: {
 		GET_MAIN_TOPICS: 'api/get-main-topics.json',

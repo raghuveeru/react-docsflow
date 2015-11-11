@@ -733,9 +733,26 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
+
+## Delete attachment [/api/v1/delete-attachment{?budgetCutId, id}]
+
+### Delete attachment [POST]
+
++ Parameters
+	+ budgetCutdId: `12` (string)
+	+ id: `1` ID of the attachment (string)
+
++ Response 200
+
+	```
+	{
+		"success": true
+	}
+	```
+
 # Group Users
 
-## Users [/api/v1/users{?userId,roles,memberOfParliament,email,name,hodSourcing}]
+## Users [/api/v1/users{?userId,roles,memberOfParliament,email,name,hodSourcing,q}]
 
 + Model (application/json)
 
@@ -750,6 +767,10 @@ This is the API blueprint for Momster COS application
     ```
 
 ### Get all users [GET]
+
++ Parameters
+
+	+ q: `keywords` (string)
 
 + Response 200
 
@@ -887,9 +908,13 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get all Liason Officers [/api/v1/get-all-liason-officers]
+## Get all Liason Officers [/api/v1/get-all-liason-officers{?q}]
 
 ### Get all Liason Officers[GET]
+
++ Parameters
+
+	+ q: `keywords` (string)
 
 + Response 200
 	
@@ -912,9 +937,13 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get HOD Drafting Users [/api/v1/get-hod-drafting-user]
+## Get HOD Drafting Users [/api/v1/get-hod-drafting-user{?q}]
 
 ### Get HOD Drafting Users[GET]
+
++ Parameters
+
+	+ q: `keywords` (string)
 
 + Response 200
 	
@@ -982,10 +1011,14 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get officers to notify [/api/v1/get-officers-to-notify]
+## Get officers to notify [/api/v1/get-officers-to-notify{?q}]
 
 ### Get officers to notify [GET]
 
++ Parameters
+
+	+ q: `keywords` (string)
+
 + Response 200
 	
 	```
@@ -1007,10 +1040,14 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get responsible officers [/api/v1/get-responsible-officers]
+## Get responsible officers [/api/v1/get-responsible-officers{?q}]
 
 ### Get responsible officers [GET]
 
++ Parameters
+
+	+ q: `keywords` (string)
+
 + Response 200
 	
 	```
@@ -1032,9 +1069,13 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Get MPs [/api/v1/get-mps]
+## Get MPs [/api/v1/get-mps{?q}]
 
 ### Get MPs [GET]
+
++ Parameters
+
+	+ q: `keywords` (string)
 
 + Response 200
 

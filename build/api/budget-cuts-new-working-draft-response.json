@@ -4,6 +4,7 @@
             "available": true,
             "attachments": [
                 {
+                    "id": 2,
                     "fileName": "question-details.pdf",
                     "fileSize": "200kb",
                     "downloadUrl": "http://google.com"

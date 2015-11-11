@@ -2,6 +2,7 @@ import React from 'react';
 import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import Fluxxor from 'fluxxor';
+import Attachments from './Attachments';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewWorkingDraft = React.createClass({	
@@ -72,13 +73,7 @@ var BudgetNewWorkingDraft = React.createClass({
 						name="attachments"
 					 />
 
-					 {currentDraft.attachments.map((attachment, index) => {
-						return (
-							<a href={attachment.downloadUrl} key = {index}>
-								{attachment.fileName}
-							</a>
-						)
-					})}
+					 <Attachments attachments = {currentDraft.attachments} budgetCutId = {this.props.budgetCutId} />
 					
 					<div className="form-control submit-control">
 						<button className="btn btn-primary">Save</button>

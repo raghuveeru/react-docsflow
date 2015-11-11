@@ -2,6 +2,7 @@ import React from 'react';
 import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
+import Attachments from './Attachments';
 import Select2 from '../Select2';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
@@ -40,9 +41,9 @@ var BudgetNewQuestion = React.createClass({
 				this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 			}
 		})
-	},
+	},	
 	render: function(){
-
+		
 		var {isOpen} = this.state;
 		var {editMode, question} = this.props;
 		var sectionClass = 'section-form' + (isOpen? '' : ' js-hide');
@@ -81,13 +82,7 @@ var BudgetNewQuestion = React.createClass({
 					<InputFileMaterial 
 						name="attachments"
 						/>
-
-					{currentQuestion.attachments.map((attachment, idx) => {
-
-						return <a key = {idx} href={attachment.downloadUrl}>
-													{attachment.fileName}
-												</a>
-					})}
+					<Attachments attachments = {currentQuestion.attachments} budgetCutId = {this.props.budgetCutId} />					
 
 					<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_DRAFTING_USER} 

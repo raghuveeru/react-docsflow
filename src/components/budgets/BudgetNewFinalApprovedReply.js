@@ -2,6 +2,7 @@ import React from 'react';
 import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import Fluxxor from 'fluxxor';
+import Attachments from './Attachments';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewFinalApprovedReply = React.createClass({	
@@ -66,13 +67,8 @@ var BudgetNewFinalApprovedReply = React.createClass({
 					
 					<InputFileMaterial name="attachments" />			
 
-					{currentReply.attachments.map((attachment, index) => {
-						return (
-							<a className="file-attachment" href={attachment.downloadUrl} key = {index}>
-								{attachment.fileName}
-							</a>
-						)
-					})}
+					
+					<Attachments attachments = {currentReply.attachments} budgetCutId = {this.props.budgetCutId} />
 
 					<div className="form-control">
 						<label>

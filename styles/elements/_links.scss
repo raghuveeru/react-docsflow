@@ -236,3 +236,14 @@ Link more
 }
 
 
+/**
+ * Delete attachment
+ */
+
+.link-delete-attachment{
+    margin-left: 1em;
+    &:before{
+        @extend %icon;
+        content: "\f00d";
+    }   
+}

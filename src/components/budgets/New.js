@@ -80,7 +80,8 @@ var BudgetNew = React.createClass({
 			officersToNotify: this.state.officersToNotify,
 			message: this.state.message,
 			userId: CURRENT_USER.id,
-			subject: this.state.subject			
+			subject: this.state.subject,
+			status: this.state.status
 		}
 	},
 	update: function(event){

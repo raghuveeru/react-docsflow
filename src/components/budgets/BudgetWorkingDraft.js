@@ -77,7 +77,7 @@ var BudgetWorkingDraft = React.createClass({
 									<td>
 										{q.attachments.map((attachment, index) => {
 											return (
-												<a href={attachment.downloadUrl} key = {index}>
+												<a className="file-attachment" href={attachment.downloadUrl} key = {index}>
 													{attachment.fileName}
 												</a>
 											)

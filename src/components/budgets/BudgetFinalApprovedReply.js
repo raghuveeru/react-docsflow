@@ -1,5 +1,6 @@
 import React from 'react';
 import BudgetNewFinalApprovedReply from './BudgetNewFinalApprovedReply';
+import AttachmentsView from './AttachmentsView';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
@@ -75,13 +76,7 @@ var BudgetFinalApprovedReply = React.createClass({
 								<tr>
 									<th>Final approved reply</th>
 									<td>
-										{q.attachments.map((attachment, index) => {
-											return (
-												<a className="file-attachment" href={attachment.downloadUrl} key = {index}>
-													{attachment.fileName}
-												</a>
-											)
-										})}
+										<AttachmentsView attachments = {q.attachments} />
 									</td>
 								</tr>
 								<tr>

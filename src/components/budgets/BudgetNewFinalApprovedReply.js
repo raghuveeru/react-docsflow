@@ -68,7 +68,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 					<InputFileMaterial name="attachments" />			
 
 					
-					<Attachments attachments = {currentReply.attachments} budgetCutId = {this.props.budgetCutId} />
+					<Attachments attachments = {currentReply.attachments} budgetCutId = {this.props.budgetCutId} type = 'finalDraftDetails' />
 
 					<div className="form-control">
 						<label>

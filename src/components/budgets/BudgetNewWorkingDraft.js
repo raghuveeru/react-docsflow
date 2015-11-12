@@ -73,7 +73,7 @@ var BudgetNewWorkingDraft = React.createClass({
 						name="attachments"
 					 />
 
-					 <Attachments attachments = {currentDraft.attachments} budgetCutId = {this.props.budgetCutId} />
+					 <Attachments attachments = {currentDraft.attachments} budgetCutId = {this.props.budgetCutId} type = 'workingDraftDetails' />
 					
 					<div className="form-control submit-control">
 						<button className="btn btn-primary">Save</button>

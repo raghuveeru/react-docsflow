@@ -424,5 +424,15 @@
  */
 
 .file-attachment{
+    display: block;    
+}
+
+.file-attachment-block{
+    margin-bottom: 0.5em;
     display: block;
+}
+
+.file-attachment-size, .file-attachment-date{
+    color: #888;    
+    margin-right: 1em;
 }

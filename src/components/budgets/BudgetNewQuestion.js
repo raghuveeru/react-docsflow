@@ -82,7 +82,7 @@ var BudgetNewQuestion = React.createClass({
 					<InputFileMaterial 
 						name="attachments"
 						/>
-					<Attachments attachments = {currentQuestion.attachments} budgetCutId = {this.props.budgetCutId} />					
+					<Attachments attachments = {currentQuestion.attachments} budgetCutId = {this.props.budgetCutId} type = 'questionDetails' />					
 
 					<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_DRAFTING_USER} 

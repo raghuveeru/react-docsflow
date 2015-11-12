@@ -4,7 +4,7 @@ import Select2 from '../Select2';
 import TextareaMaterial from '../TextareaMaterial';
 import {mapObject, t} from './../../utilities';
 import {validationOptions} from './../../constants';
-
+import {Link} from 'react-router';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
@@ -183,14 +183,19 @@ var BudgetNew = React.createClass({
 
 		var AssignTo = !isEditMode? this.renderAssignToOfficer() : null;
 		var buttonTitle = !isEditMode? 'Create and assign': 'Save';		
-
+		var title = !isEditMode? 'Create new budget cut' : 'Edit budget cut';
 		if(isEditMode && !currentBudget.id) return null;
 
 		// console.log(currentBudget)
 
 		return (
 			<form ref="form">
-				<h1>Create new budget cut</h1>
+				<nav className="nav-crumb">
+					<Link to = "home">
+						<em className="fa fa-home" />
+					</Link>
+				</nav>
+				<h1>{title}</h1>
 				<div className="sp-card">
 					<div className="card-body">
 

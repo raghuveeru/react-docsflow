@@ -9,7 +9,7 @@ import Topics from './components/admin/Topics';
 import AdminLayout from './components/admin/Layout';
 
 module.exports = (
-	<Route handler = {Main} path = '/'>
+	<Route handler = {Main} path = '/' name="home">
 		<DefaultRoute handler={BudgetLayout} />
 				
 		<Route handler={NewBudget} path = "budgets/new" name="budgetsNew" />

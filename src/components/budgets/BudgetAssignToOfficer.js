@@ -43,10 +43,13 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	updateSubject: function(){		
 
+		var {memberOfParliament} = this.props.budget;
+		var mp = memberOfParliament?  memberOfParliament.name : '';
+
 		var sub = t(AppConfig.SUBJECT_TEMPLATE, {
 			status: this.state.status,
 			topic: this.props.budget.title,
-			mp: this.props.budget.memberOfParliament
+			mp: mp
 		});
 
 		this.setState({
@@ -73,7 +76,7 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	render: function(){
 
-
+		console.log(this.props)
 		return (
 			<form ref="form" className="assign-form">
 				<h4>Assign to officer</h4>
@@ -91,9 +94,9 @@ var BudgetAssignToOfficer = React.createClass({
 
 						this.checkSelect2Valid(event)
 
-					this.setState({
-						status: val
-					}, this.updateSubject);
+						this.setState({
+							status: val
+						}, this.updateSubject);
 
 				}} >
 					<option></option>

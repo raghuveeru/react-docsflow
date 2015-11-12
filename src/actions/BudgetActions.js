@@ -85,19 +85,21 @@ module.exports = {
 				
 			})
 	},
-	assignToOfficer: function(payload){
+	assignToOfficer: function(payload, callback){
 
 		NProgress.start()
 
 		request
-			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
 			.set(headers)
-			.send(JSON.stringify(payload))
+			.query(JSON.stringify(payload))
 			.end((err, res) => {
 
 				NProgress.done()
 				
-				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));				
+				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));	
+
+				callback && callback()			
 			})
 	},
 	getBudgetActivity: function(payload){

@@ -29,16 +29,17 @@ var BudgetAssignToOfficer = React.createClass({
 
 			event && event.preventDefault();
 
-			this.getFlux().actions.BudgetActions.assignToOfficer(this.state);
+			this.getFlux().actions.BudgetActions.assignToOfficer(this.state, () => {
 
-			this.setState({
-				status: '',
-				responsibleOfficer: [],
-				officersToNotify: [],
-				message: '',
-				showMessage: true,
-				subject: ''
-			})
+				this.setState({
+					status: '',
+					responsibleOfficer: [],
+					officersToNotify: [],
+					message: '',
+					showMessage: true,
+					subject: ''
+				})
+			});			
 		}
 	},
 	updateSubject: function(){		
@@ -76,7 +77,6 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	render: function(){
 
-		console.log(this.props)
 		return (
 			<form ref="form" className="assign-form">
 				<h4>Assign to officer</h4>

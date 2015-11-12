@@ -68,7 +68,8 @@ module.exports = {
 		NProgress.start()
 
 		var data = {
-			"id": payload
+			"id": payload,
+			"userId": CURRENT_USER.id
 		};
 
 		request

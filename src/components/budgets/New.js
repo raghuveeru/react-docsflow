@@ -91,13 +91,13 @@ var BudgetNew = React.createClass({
 		if(this.$form.valid()){
 			
 			var {currentBudget} = this.state.BudgetStore;
-
+			
 			var data = {
 				id: currentBudget.id,
 				topicId: this.state.topicId || currentBudget.topic.id,
 				budgetCutId: this.state.budgetCutId || currentBudget.budgetCutTopic.id,
-				memberOfParliament: this.state.memberOfParliament || currentBudget.memberOfParliament,
-				hodSourcing: this.state.hodSourcing || currentBudget.hodSourcing,
+				memberOfParliament: this.state.memberOfParliament || currentBudget.memberOfParliament.id,
+				hodSourcing: this.state.hodSourcing || currentBudget.hodSourcing.id,
 				fileReferenceNo: this.state.fileReferenceNo || currentBudget.fileReferenceNo,
 				summary: this.state.summary || currentBudget.summary,
 				time: this.state.time || currentBudget.time,

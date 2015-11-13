@@ -31,6 +31,8 @@ var BudgetAssignToOfficer = React.createClass({
 
 			this.getFlux().actions.BudgetActions.assignToOfficer(this.state, () => {
 
+				this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)
+
 				this.setState({
 					status: '',
 					responsibleOfficer: [],

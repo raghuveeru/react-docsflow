@@ -90,7 +90,7 @@ module.exports = {
 		NProgress.start()
 
 		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ASSIGN_TO_OFFICER)
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {

@@ -55,9 +55,9 @@ module.exports = {
 		};
 
 		request
-			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL)
 			.set(headers)
-			.send(JSON.stringify(data))
+			.query(data)
 			.end((err, res) => {
 				
 				NProgress.done()

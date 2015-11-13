@@ -12,7 +12,8 @@ var Attachments = React.createClass({
 			this.getFlux().actions.BudgetActions.deleteAttachment({
 				budgetCutId: this.props.budgetCutId,
 				id: id,
-				type: this.props.type
+				type: this.props.type,
+				userId: CURRENT_USER.id
 			}, (response) => {
 				
 				if(response.success){

@@ -19,6 +19,10 @@ module.exports = {
 		s=s.replace(new RegExp('{'+p+'}','g'), d[p]);
 		return s;
 	},
+	isSpeech: function(status){
+
+		return status.toLowerCase() == 'speech'
+	},
 	assign: function(){
 
 		if (!Object.assign) {

@@ -272,7 +272,7 @@ var NewUser = React.createClass({
 		)
 	},
 	renderLiason: function(){
-
+		
 		return (
 			<div>
 				<Select2
@@ -280,6 +280,7 @@ var NewUser = React.createClass({
 					placeholder= 'Enter name or email address...'					
 					required = {true}
 					name="email"
+					name = 'users'
 					onChange = { (val, data, event) => {
 
 						this.setState({
@@ -293,13 +294,14 @@ var NewUser = React.createClass({
 						return '<div>' + result.name + '<br /><small>' + result.email + '</small></div>'
 					}}
 				/>
-
+				<span className="js-hide">s</span>
 				<Select2  
 						url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_SOURCING_USER} 
 						placeholder= 'HOD Sourcing'
 						multiple = {false}
 						name="hodSourcing"
 						required = {true}
+						name = 'liasonOfficer'
 						onChange = { (val, data, event) => {
 
 							this.checkSelect2Valid(event);

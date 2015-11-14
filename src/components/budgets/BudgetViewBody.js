@@ -3,7 +3,7 @@ import BudgetQuestions from './BudgetQuestions';
 import BudgetWorkingDraft from './BudgetWorkingDraft';
 import BudgetFinalApprovedReply from './BudgetFinalApprovedReply';
 import BudgetAssignToOfficer from './BudgetAssignToOfficer';
-import {getStatusName} from './../../utilities';
+import {getStatusName, isSpeech} from './../../utilities';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 import Loader from './../Loader';
@@ -53,15 +53,26 @@ var BudgetViewBody = React.createClass({
 		var hodDrafting = currentBudget.hodDrafting? currentBudget.hodDrafting.name : '';
 		var liasonOfficer = currentBudget.liasonOfficer? currentBudget.liasonOfficer.name : '';
 
+		var budgetEditActions = !isSpeech(currentBudget.status)?(
+			<nav className="budget-cut-actions">
+				<Link to = 'budgetsEdit' params ={{id: currentBudget.id}} className="link-edit">Edit</Link>
+				<a className="link-delete" onClick = {this.handleDelete}>Delete</a>
+			</nav>
+		) : null;
+
+		var budgetAssign = !isSpeech(currentBudget.status)? (
+			<BudgetAssignToOfficer 
+						id = {this.props.id} 
+						budget = {currentBudget}
+					/>	
+		): null;
+
 		return (
 			<div className="sp-card sp-budget-card">
 				<div className="card-body">
 					<span className="budget-item-status budget-item-status-view">{getStatusName(currentBudget.status)}</span>
 
-					<nav className="budget-cut-actions">
-						<Link to = 'budgetsEdit' params ={{id: currentBudget.id}} className="link-edit">Edit</Link>
-						<a className="link-delete" onClick = {this.handleDelete}>Delete</a>
-					</nav>
+					{budgetEditActions}
 					<table className="table table-budget-item table-budget-single">
 							<tbody>
 								<tr>
@@ -103,10 +114,7 @@ var BudgetViewBody = React.createClass({
 
 					<BudgetFinalApprovedReply id = {this.props.id} />
 					
-					<BudgetAssignToOfficer 
-						id = {this.props.id} 
-						budget = {currentBudget}
-					/>	
+					{budgetAssign}
 				</div>
 				
 			</div>

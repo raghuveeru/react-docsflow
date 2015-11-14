@@ -11,7 +11,8 @@ var BudgetNewQuestion = React.createClass({
 	mixins: [FluxMixin],
 	getInitialState: function(){
 		return {
-			isOpen: this.props.editMode? true : false
+			isOpen: this.props.editMode? true : false,
+			hodDrafting: '',
 		}
 	},
 	toggle: function(){
@@ -92,7 +93,9 @@ var BudgetNewQuestion = React.createClass({
 							defaultValue = {currentQuestion.hodDrafting}
 							onChange = { (val) => {
 								
-								
+								this.setState({
+									hodDrafting: val
+								})
 							}}
 						/>
 
@@ -101,6 +104,7 @@ var BudgetNewQuestion = React.createClass({
 							placeholder= 'Liason officer'
 							multiple = {false}
 							name = 'liasonOfficer'
+							query = {{ hodDrafting : this.state.hodDrafting || (currentQuestion? currentQuestion.hodDrafting.id : '')}}
 							defaultValue = {currentQuestion.liasonOfficer}
 							onChange = { (val) => {
 								

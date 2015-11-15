@@ -110,7 +110,7 @@ var BudgetContainer = React.createClass({
 		var ids = this.state.BudgetStore.budgets.map((budget) => budget.id)
 		var url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL;
 
-		window.open(url + '&ids=' + encodeURIComponent(ids.join(',')) + '&userId=' + CURRENT_USER.id)
+		window.location = url + '&ids=' + encodeURIComponent(ids.join(',')) + '&userId=' + CURRENT_USER.id;
 		
 	},
 	handleSpeech: function(){

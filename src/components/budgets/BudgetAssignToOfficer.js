@@ -18,8 +18,7 @@ var BudgetAssignToOfficer = React.createClass({
 			officersToNotify: [],
 			message: '',
 			subject: '',
-			budgetCutId: this.props.id,
-			showMessage: false,
+			budgetCutId: this.props.id,			
 			userId: CURRENT_USER.id
 		}
 	},
@@ -37,8 +36,7 @@ var BudgetAssignToOfficer = React.createClass({
 					status: '',
 					responsibleOfficer: [],
 					officersToNotify: [],
-					message: '',
-					showMessage: true,
+					message: '',					
 					subject: ''
 				})
 			});			
@@ -82,12 +80,6 @@ var BudgetAssignToOfficer = React.createClass({
 		return (
 			<form ref="form" className="assign-form">
 				<h4>Assign to officer</h4>
-
-				{this.state.showMessage? 
-				<div className ="alert alert--success">
-					Assign notifications has been sent to the users
-				</div>
-				: null}
 				
 				<Select2
 					placeholder = 'Select action' 

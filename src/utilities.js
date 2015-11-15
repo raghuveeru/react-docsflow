@@ -117,6 +117,14 @@ module.exports = {
 		};
 
 		return AppConfig.API.BASE_URL + url;
+	},	
+	emitNotification(type, flux, error){
+
+		flux.actions.NotificationActions.addNotification({
+			title: (type == 'error'? 'Error' : 'Success'),
+			level: type,
+			message: error
+		});
 	},
 	handleResponse: function(response, flux, successCallback, successMessage){
 
@@ -138,11 +146,13 @@ module.exports = {
 
 			}else{
 
-				flux.actions.NotificationActions.addNotification({
-					title: 'Success',
-					level: 'success',
-					message: successMessage
-				})
+				if(successMessage){
+					flux.actions.NotificationActions.addNotification({
+						title: 'Success',
+						level: 'success',
+						message: successMessage
+					});
+				}
 
 				successCallback && successCallback(res)
 			}

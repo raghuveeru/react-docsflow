@@ -82,11 +82,11 @@ module.exports = {
 			.end((err, res) => {
 				
 
-				handleResponse(res, this.flux, () => {
+				handleResponse(res, this.flux, (jsonResponse) => {
 
-					this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
+					this.dispatch(actions.ADD_TO_SPEECH, jsonResponse);
 				
-				}, 'Selected budget cuts have been added to speech.')				
+				}, 'Selected budget cuts have been added to speech.')
 				
 				NProgress.done()				
 				
@@ -102,11 +102,16 @@ module.exports = {
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 
-				NProgress.done()
-				
-				this.dispatch(actions.ASSIGN_TO_OFFICER, JSON.parse(res.text));	
+				NProgress.done();
 
-				callback && callback()			
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.ASSIGN_TO_OFFICER, jsonResponse);	
+
+					callback && callback(jsonResponse)
+
+				}, 'Budget cut has been assigned to the selected officers')
+						
 			})
 	},
 	getBudgetActivity: function(payload){
@@ -156,11 +161,15 @@ module.exports = {
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
-				// this.dispatch(actions.UPDATE_BUDGET_CUT, JSON.parse(res.text));
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					callback && callback(jsonResponse)
+
+				}, 'Budget cut was saved successfully.')
 
 				NProgress.done()
 
-				callback && callback(JSON.parse(res.text))
+				
 			})
 
 	},
@@ -173,10 +182,16 @@ module.exports = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					callback && callback(jsonResponse)
+				
+				}, 'Budget cut has been deleted.')
 								
 				NProgress.done()
 
-				callback && callback(JSON.parse(res.text))
+				
 			})
 	},
 	deleteAttachment: function(payload, callback){

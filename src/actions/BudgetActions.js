@@ -2,6 +2,7 @@ import {actions} from '../constants';
 import request from 'superagent';
 import NProgress from 'react-nprogress';
 import {headers} from './../constants';
+import {handleNotification} from './../utilities';
 
 module.exports = {
 	getBudgets: function(params){		
@@ -65,6 +66,7 @@ module.exports = {
 			})
 	},
 	addToSpeech: function(payload){
+		
 
 		NProgress.start()
 
@@ -79,9 +81,17 @@ module.exports = {
 			.send(JSON.stringify(data))
 			.end((err, res) => {
 				
-				NProgress.done()
+				// handleNotification(this.flux, res)
 
-				this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
+				// console.log(res)
+
+				if(res.ok){
+
+					this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
+
+				}
+				
+				NProgress.done()				
 				
 			})
 	},

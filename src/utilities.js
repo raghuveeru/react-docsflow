@@ -118,5 +118,25 @@ module.exports = {
 
 		return AppConfig.API.BASE_URL + url;
 	},
+	handleNotification: function(category, flux, serverResponse){		
+
+		if(serverResponse.ok){
+
+			flux.actions.NotificationActions.addNotification({
+				title: 'Success',
+				level: 'success',
+				message: 'Selected budget cuts have been added to speech.'
+			});
+
+		}else{
+
+			flux.actions.NotificationActions.addNotification({
+				title: 'Error',
+				level: 'error',
+				message: serverResponse.text
+			});
+		}
+
+	}
 
 }

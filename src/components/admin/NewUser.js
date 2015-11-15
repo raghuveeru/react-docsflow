@@ -278,8 +278,7 @@ var NewUser = React.createClass({
 				<Select2
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS} 
 					placeholder= 'Enter name or email address...'					
-					required = {true}
-					name="email"
+					required = {true}					
 					name = 'users'
 					onChange = { (val, data, event) => {
 
@@ -300,8 +299,7 @@ var NewUser = React.createClass({
 						placeholder= 'HOD Sourcing'
 						multiple = {false}
 						name="hodSourcing"
-						required = {true}
-						name = 'liasonOfficer'
+						required = {true}						
 						onChange = { (val, data, event) => {
 
 							this.checkSelect2Valid(event);

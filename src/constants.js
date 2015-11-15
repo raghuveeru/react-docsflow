@@ -28,6 +28,7 @@ module.exports = {
 		GET_ALL_USERS: 'GET_ALL_USERS',
 		CREATE_NEW_USER: 'CREATE_NEW_USER',
 		DELETE_USER: 'DELETE_USER',
+		ADD_NOTIFICATION: 'ADD_NOTIFICATION',
 	},
 	customStyles: {
 		overlay : {

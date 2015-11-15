@@ -16,7 +16,7 @@ var NewUser = React.createClass({
 			name: '',
 			email: '',
 			memberOfParliament: '',
-			hodSourcing: ''
+			hodDrafting: ''
 		}
 	},
 	onSave: function(e){
@@ -30,7 +30,7 @@ var NewUser = React.createClass({
 				name, 
 				email, 
 				memberOfParliament,
-				hodSourcing,
+				hodDrafting,
 				} = this.state,
 				params = {};
 
@@ -66,7 +66,7 @@ var NewUser = React.createClass({
 				case 'liasonOfficer':
 					params = {
 						user: user.id,						
-						hodSourcing: hodSourcing,
+						hodDrafting: hodDrafting,
 						type: type,
 						roles: ['Liaison Officers'],
 						userId: CURRENT_USER.id
@@ -295,17 +295,17 @@ var NewUser = React.createClass({
 				/>
 				<span className="js-hide">s</span>
 				<Select2  
-						url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_SOURCING_USER} 
-						placeholder= 'HOD Sourcing'
+						url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_DRAFTING_USER} 
+						placeholder= 'HOD Drafting'
 						multiple = {false}
-						name="hodSourcing"
+						name="hodDrafting"
 						required = {true}						
 						onChange = { (val, data, event) => {
 
 							this.checkSelect2Valid(event);
 							
 							this.setState({
-								hodSourcing: val
+								hodDrafting: val
 							})
 						}}
 					/>

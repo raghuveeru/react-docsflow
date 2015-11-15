@@ -2,7 +2,7 @@ import {actions} from '../constants';
 import request from 'superagent';
 import NProgress from 'react-nprogress';
 import {headers} from './../constants';
-import {handleNotification} from './../utilities';
+import {handleResponse} from './../utilities';
 
 module.exports = {
 	getBudgets: function(params){		
@@ -81,15 +81,17 @@ module.exports = {
 			.send(JSON.stringify(data))
 			.end((err, res) => {
 				
-				// handleNotification(this.flux, res)
 
-				// console.log(res)
+				handleResponse(res, this.flux, () => {
 
-				if(res.ok){
+					this.flux.actions.NotificationActions.addNotification({
+						title: 'Success',
+						level: 'success',
+						message: 'Selected budget cuts have been added to speech.'
+					});
 
 					this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
-
-				}
+				})				
 				
 				NProgress.done()				
 				

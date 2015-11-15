@@ -47,6 +47,7 @@ var BudgetGroup = React.createClass({
 									
 									this.getFlux().actions.BudgetActions.selectBudget(item.id, event.target.checked)
 								}}
+								readOnly = {true}
 								checked = {item.checked}
 							/>
 							<h4 className="budget-item-title">

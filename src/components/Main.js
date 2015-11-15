@@ -31,7 +31,7 @@ var Main = React.createClass({
 						
 						<RouteHandler {...this.props} />
 					</div>
-					<NotificationSystem ref="notificationSystem" />
+					<NotificationSystem ref="notificationSystem" allowHTML = {true} />
  				</div>
 			</div>
 		)

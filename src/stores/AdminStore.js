@@ -16,6 +16,7 @@ var AdminStore = Fluxxor.createStore({
 			actions.EDIT_BUDGET_CUT_TOPIC, this.editBudgetCutTopic,
 			actions.DELETE_BUDGET_CUT_TOPIC, this.deleteBudgetCutTopic,
 			actions.GET_ALL_USERS, this.getAllUsers,
+			actions.GET_ALL_USERS_ADMIN, this.getAllUsers,
 			actions.CREATE_NEW_USER, this.addUser,
 			actions.DELETE_USER, this.deleteUser,
 		)

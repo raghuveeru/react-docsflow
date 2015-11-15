@@ -19,6 +19,20 @@ var AdminActions = {
 				NProgress.done()
 			})		
 	},
+	getUsersAdmin: function(){
+
+		NProgress.start()
+
+		request			
+			.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS_ADMIN)
+			.set(headers)
+			.end((err, res) => {
+				
+				this.dispatch(actions.GET_ALL_USERS_ADMIN, JSON.parse(res.text));
+
+				NProgress.done()
+			})		
+	},
 	getMainTopics: function(){
 
 		NProgress.start()

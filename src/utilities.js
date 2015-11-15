@@ -118,25 +118,40 @@ module.exports = {
 
 		return AppConfig.API.BASE_URL + url;
 	},
-	handleNotification: function(category, flux, serverResponse){		
+	handleResponse: function(response, flux, successCallback){
 
-		if(serverResponse.ok){
+		if(response.ok){
 
-			flux.actions.NotificationActions.addNotification({
-				title: 'Success',
-				level: 'success',
-				message: 'Selected budget cuts have been added to speech.'
-			});
+			// Server response is fine
 
+			var res = JSON.parse(response.text);
+
+			if(res.errors){
+
+				var errs = res.errors.map((data) => data.error);
+
+				flux.actions.NotificationActions.addNotification({
+					title: 'Error',
+					level: 'error',
+					message: errs.join('<br />')
+				});
+
+			}else{
+
+				successCallback && successCallback(res)
+			}
 		}else{
 
+			// Server error
+			
 			flux.actions.NotificationActions.addNotification({
 				title: 'Error',
 				level: 'error',
-				message: serverResponse.text
+				message: response.text
 			});
-		}
 
+		}
+		
 	}
 
 }

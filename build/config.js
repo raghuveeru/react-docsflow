@@ -37,6 +37,7 @@ var API = {
 	},
 	USERS: {
 		GET_ALL_USERS: 'api/get-all-users.json',
+		GET_ALL_USERS_ADMIN: 'api/get-all-users.json',
 		GET_RESPONSIBLE_OFFICERS: 'api/get-responsible-officers.json',
 		GET_OFFICERS_TO_NOTIFY: 'api/get-officers-to-notify.json',
 		GET_HOD_DRAFTING_USER: 'api/get-hod-drafting-user.json',

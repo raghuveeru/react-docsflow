@@ -17,7 +17,7 @@ var Users = React.createClass({
 		router: React.PropTypes.func
 	},
 	componentDidMount: function(){
-		this.props.flux.actions.AdminActions.getUsers()
+		this.props.flux.actions.AdminActions.getUsersAdmin()
 	},
 	closeModal: function(){
 		

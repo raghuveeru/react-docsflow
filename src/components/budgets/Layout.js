@@ -173,6 +173,7 @@ var BudgetContainer = React.createClass({
 									onClick = {(event) => {
 										this.getFlux().actions.BudgetActions.selectAllBudgets(event.target.checked)
 									}}
+									readOnly = {true}
 									checked = {isAllSelected}
 								/>
 

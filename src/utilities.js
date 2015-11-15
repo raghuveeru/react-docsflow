@@ -118,7 +118,7 @@ module.exports = {
 
 		return AppConfig.API.BASE_URL + url;
 	},
-	handleResponse: function(response, flux, successCallback){
+	handleResponse: function(response, flux, successCallback, successMessage){
 
 		if(response.ok){
 
@@ -137,6 +137,12 @@ module.exports = {
 				});
 
 			}else{
+
+				flux.actions.NotificationActions.addNotification({
+					title: 'Success',
+					level: 'success',
+					message: successMessage
+				})
 
 				successCallback && successCallback(res)
 			}

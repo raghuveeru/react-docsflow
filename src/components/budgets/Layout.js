@@ -108,8 +108,10 @@ var BudgetContainer = React.createClass({
 	handleExportToExcel: function(){
 
 		var ids = this.state.BudgetStore.budgets.map((budget) => budget.id)
+		var url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL;
 
-		this.getFlux().actions.BudgetActions.exportToExcel(ids);
+		window.open(url + '&ids=' + encodeURIComponent(ids.join(',')) + '&userId=' + CURRENT_USER.id)
+		
 	},
 	handleSpeech: function(){
 

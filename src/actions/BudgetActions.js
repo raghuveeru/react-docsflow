@@ -84,14 +84,9 @@ module.exports = {
 
 				handleResponse(res, this.flux, () => {
 
-					this.flux.actions.NotificationActions.addNotification({
-						title: 'Success',
-						level: 'success',
-						message: 'Selected budget cuts have been added to speech.'
-					});
-
 					this.dispatch(actions.ADD_TO_SPEECH, JSON.parse(res.text));
-				})				
+				
+				}, 'Selected budget cuts have been added to speech.')				
 				
 				NProgress.done()				
 				

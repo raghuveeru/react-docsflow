@@ -366,6 +366,7 @@ var BudgetNew = React.createClass({
 					required = {true}
 					placeholder= 'Responsible officers'
 					multiple = {true}
+					query = {{role: 'COSCoordinator'}}
 					name="responsibleOfficer"
 					onChange = { (val, data, event) => {
 

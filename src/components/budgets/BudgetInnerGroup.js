@@ -34,10 +34,13 @@ var BudgetInnerGroup = React.createClass({
 				var hodSourcing = item.hodSourcing? item.hodSourcing.name : '';
 				var hodDrafting = item.hodDrafting? item.hodDrafting.name : '';
 				var liasonOfficer = item.liasonOfficer? item.liasonOfficer.name : '';
+
+				var showCheckbox = (item.status.toLowerCase() == 'final draft');
 				
 				return (
 					<Link to = 'budgetsView' params={{id: item.id}} className="budget-list-item-inner" key = {index}>					
 						<span className="budget-item-status" style = {{backgroundColor: getStatusName(item.status).color}}>{getStatusName(item.status).name}</span>
+						{showCheckbox? 
 						<input 
 							type="checkbox" 
 							className="budget-item-checkbox"  
@@ -50,6 +53,7 @@ var BudgetInnerGroup = React.createClass({
 							readOnly = {true}
 							checked = {item.checked}
 						/>
+						: null}
 						
 						<p  className="budget-item-summary">{item.summary}</p>
 

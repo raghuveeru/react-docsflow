@@ -23,7 +23,7 @@ var FilterList = React.createClass({
 		var maxCount = 5;
 		var {isOpen} = this.state;
 		
-		var showMoreLink = (values.length > maxCount? (isOpen? <a onClick = {this.toggleShowMore}>Show less</a>: <a onClick = {this.toggleShowMore}>Show more</a>): null);
+		var showMoreLink = (values.length > maxCount? (isOpen? <a className="facet-showmore facet-showless" onClick = {this.toggleShowMore}>Show less</a>: <a className="facet-showmore" onClick = {this.toggleShowMore}>Show more</a>): null);
 
 		if(!isOpen && values.length > maxCount){
 			values = values.slice(0, maxCount);

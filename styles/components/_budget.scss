@@ -77,6 +77,10 @@
         }
     }
 
+    .group-admin-topic{
+        width: 100%;
+    }
+
     .budget-group-title-inner{
         font-size: 18px;
         font-weight: normal;
@@ -440,6 +444,26 @@
         }
     }
 
+/**
+ * Sidemenu
+ */
+
+.nav-sidemenu{
+
+    .facet-showmore{
+        &:after{
+            @extend %icon;
+            content: "\f107";
+            margin-left: 0.5em;
+        }
+    }
+
+    .facet-showless{
+        &:after{
+            content: "\f106";
+        }
+    }
+}
 
 /**
  * User role item

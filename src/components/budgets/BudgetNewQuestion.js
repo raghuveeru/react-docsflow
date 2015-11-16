@@ -4,7 +4,7 @@ import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
 import Attachments from './Attachments';
 import Select2 from '../Select2';
-import {handleResponse, emitNotification} from './../../utilities';
+import {emitNotification} from './../../utilities';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
@@ -50,13 +50,14 @@ var BudgetNewQuestion = React.createClass({
 
 					/* Emit success notification */
 
-					emitNotification('success', this.getFlux(), this.props.editMode? 'Question details successfully updated.' : 'Question details successfull added.')
+					emitNotification('success', this.getFlux(), this.props.editMode? 'Question details successfully updated.' : 'Question details successfull added.');
+
+					this.getFlux().actions.BudgetDetailActions.addQuestion(data, this.toggle)
+
+					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 
 				}
-				
-				this.getFlux().actions.BudgetDetailActions.addQuestion(data, this.toggle)
-
-				this.props.onFinishEdit && this.props.onFinishEdit.call(this)
+								
 			},
 			error: (data) => {				
 

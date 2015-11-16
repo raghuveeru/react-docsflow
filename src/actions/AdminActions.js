@@ -3,6 +3,7 @@ import request from 'superagent';
 import {headers} from './../constants';
 import NProgress from 'react-nprogress';
 import {getUserUrl} from './../utilities';
+import {handleResponse} from './../utilities';
 
 var AdminActions = {
 	getUsers: function(){
@@ -56,8 +57,14 @@ var AdminActions = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.CREATE_MAIN_TOPIC, jsonResponse);
+
+					callback && callback()
 				
-				this.dispatch(actions.CREATE_MAIN_TOPIC, JSON.parse(res.text));
+				}, 'Topic saved successfully.')		
 
 				NProgress.done()
 			})	
@@ -71,8 +78,15 @@ var AdminActions = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.EDIT_MAIN_TOPIC, jsonResponse);
+
+					callback && callback()
 				
-				this.dispatch(actions.EDIT_MAIN_TOPIC, JSON.parse(res.text));
+				}, 'Budget cut topic saved successfully.')				
+				
 
 				NProgress.done()
 			})	
@@ -86,11 +100,17 @@ var AdminActions = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.CREATE_BUDGET_CUT_TOPIC, {
+						data: jsonResponse,
+						topicId: payload.topicId
+					});
+
+					callback && callback()
 				
-				this.dispatch(actions.CREATE_BUDGET_CUT_TOPIC, {
-					data: JSON.parse(res.text),
-					topicId: payload.topicId
-				});
+				}, 'Budget cut topic saved successfully.')
 
 				NProgress.done()
 			})	
@@ -105,10 +125,16 @@ var AdminActions = {
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
-				this.dispatch(actions.EDIT_BUDGET_CUT_TOPIC, {
-					data: JSON.parse(res.text),
-					topicId: payload.topicId					
-				});
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.EDIT_BUDGET_CUT_TOPIC, {
+						data: jsonResponse,
+						topicId: payload.topicId					
+					});
+
+					callback && callback()
+				
+				}, 'Topic saved successfully.')
 
 				NProgress.done()
 			})	
@@ -121,13 +147,19 @@ var AdminActions = {
 			.post(AppConfig.API.BASE_URL + AppConfig.API.TOPICS.DELETE_BUDGET_CUT_TOPIC)
 			.set(headers)
 			.send(JSON.stringify(payload))
-			.end((err, res) => {
+			.end((err, res) => {				
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.DELETE_BUDGET_CUT_TOPIC, {
+						data: jsonResponse,
+						topicId: payload.topicId,
+						budgetCutTopicId: payload.budgetCutTopicId
+					});
+
+					callback && callback()
 				
-				this.dispatch(actions.DELETE_BUDGET_CUT_TOPIC, {
-					data: JSON.parse(res.text),
-					topicId: payload.topicId,
-					budgetCutTopicId: payload.budgetCutTopicId
-				});
+				}, 'Budget cut topic deleted successfully.')
 
 				NProgress.done()
 			})
@@ -141,11 +173,17 @@ var AdminActions = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.DELETE_MAIN_TOPIC, {
+						data: jsonResponse,
+						topicId: payload.topicId
+					});
+
+					callback && callback()
 				
-				this.dispatch(actions.DELETE_MAIN_TOPIC, {
-					data: JSON.parse(res.text),
-					topicId: payload.topicId
-				});
+				}, 'Topic deleted successfully.')	
 
 				NProgress.done()
 			})
@@ -160,10 +198,14 @@ var AdminActions = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
-				
-				this.dispatch(actions.CREATE_NEW_USER, JSON.parse(res.text));
 
-				callback && callback()
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.CREATE_NEW_USER, jsonResponse);
+
+					callback && callback()
+				
+				}, 'New user added successfully.')				
 
 				NProgress.done()
 			})
@@ -177,11 +219,17 @@ var AdminActions = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.DELETE_USER, {
+						data: jsonResponse,
+						userId: payload.userId
+					});
+
+					callback && callback()
 				
-				this.dispatch(actions.DELETE_USER, {
-					data: JSON.parse(res.text),
-					userId: payload.userId
-				});
+				}, 'User deleted successfully.')				
 
 				NProgress.done()
 			})

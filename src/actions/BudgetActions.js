@@ -143,11 +143,13 @@ module.exports = {
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
-				// this.dispatch(actions.CREATE_NEW_BUDGET_CUT, JSON.parse(res.text));
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					callback && callback(jsonResponse)
+
+				}, 'Budget cut was saved successfully.')
 
 				NProgress.done()
-
-				callback && callback(JSON.parse(res.text))
 			})
 
 	},
@@ -203,10 +205,15 @@ module.exports = {
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					callback && callback(jsonResponse)
+				
+				}, 'Attachment deleted successfully.')
 								
 				NProgress.done()
-
-				callback && callback(JSON.parse(res.text))
+				
 			})
 	}
 }

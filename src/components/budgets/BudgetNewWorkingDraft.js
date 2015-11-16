@@ -3,6 +3,7 @@ import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import Fluxxor from 'fluxxor';
 import Attachments from './Attachments';
+import {emitNotification} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewWorkingDraft = React.createClass({	
@@ -35,10 +36,33 @@ var BudgetNewWorkingDraft = React.createClass({
 		$form.ajaxForm({
 			dataType: 'json',
 			success: (data) => {
-				
-				this.getFlux().actions.BudgetDetailActions.addWorkingDraft(data, this.toggle)
 
-				this.props.onFinishEdit && this.props.onFinishEdit.call(this)
+				if(data.errors){
+
+					var errs = data.errors.map((data) => data.error);
+
+					/* Emit error notification */
+
+					emitNotification('error', this.getFlux(), errs.join('<br />'))
+
+				}else{
+
+					/* Emit success notification */
+
+					emitNotification('success', this.getFlux(), this.props.editMode? 'Working draft details successfully updated.' : 'Working draft details successfull added.');
+
+					this.getFlux().actions.BudgetDetailActions.addWorkingDraft(data, this.toggle)
+
+					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
+
+				}
+							
+			},
+			error: (data) => {				
+
+				/* Emit error notification */
+
+				emitNotification('error', this.getFlux(), data.responseText)
 			}
 		})
 	},

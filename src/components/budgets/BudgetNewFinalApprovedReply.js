@@ -3,6 +3,7 @@ import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import Fluxxor from 'fluxxor';
 import Attachments from './Attachments';
+import {emitNotification} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewFinalApprovedReply = React.createClass({	
@@ -27,10 +28,32 @@ var BudgetNewFinalApprovedReply = React.createClass({
 		$form.ajaxForm({
 			dataType: 'json',
 			success: (data) => {
-				
-				this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data, this.toggle)
 
-				this.props.onFinishEdit && this.props.onFinishEdit.call(this)
+				if(data.errors){
+
+					var errs = data.errors.map((data) => data.error);
+
+					/* Emit error notification */
+
+					emitNotification('error', this.getFlux(), errs.join('<br />'))
+
+				}else{
+
+					/* Emit success notification */
+
+					emitNotification('success', this.getFlux(), this.props.editMode? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
+
+					this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data, this.toggle)
+
+					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
+
+				}
+			},
+			error: (data) => {				
+
+				/* Emit error notification */
+
+				emitNotification('error', this.getFlux(), data.responseText)
 			}
 		})
 	},

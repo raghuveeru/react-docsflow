@@ -289,8 +289,7 @@ var BudgetNew = React.createClass({
 							<div className="columns six">
 								<InputMaterial 
 									label = "File reference no. (optional)" 
-									name = "fileReferenceNo"
-									required = {true}
+									name = "fileReferenceNo"									
 									defaultValue = {currentBudget.fileReferenceNo}
 									onChange = {
 										(event) => {
@@ -369,7 +368,11 @@ var BudgetNew = React.createClass({
 				<Select2 
 					placeholder="Select status"
 					label = 'Select action' 
-					onChange = { (val) => {					
+					required = {true}
+					onChange = { (val, data, event) => {					
+
+						this.checkSelect2Valid(event);
+
 						this.setState({
 							status: val
 						}, this.updateSubject)
@@ -386,7 +389,9 @@ var BudgetNew = React.createClass({
 					placeholder= 'Responsible officers'
 					multiple = {true}
 					name="responsibleOfficer"
-					onChange = { (val) => {
+					onChange = { (val, data, event) => {
+
+						this.checkSelect2Valid(event);
 						
 						this.setState({
 							responsibleOfficer: val

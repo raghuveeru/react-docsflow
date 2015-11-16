@@ -47,8 +47,15 @@ module.exports = React.createClass({
                         className="CircularProgress-Text"
                         x={this.props.r}
                         y={this.props.r}
-                        dy=".4em"
+                        dy=".0em"
                         textAnchor="middle">{this.props.percentage + "%"}</text>
+                    <text
+                        className="CircularProgress-Text2"
+                        x={this.props.r}
+                        y={this.props.r}
+                        dy = "2em"
+                        textAnchor="middle"
+                        >Closed</text>
             </svg>
         );
     }

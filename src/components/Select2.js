@@ -1,5 +1,6 @@
 import React from 'react';
 import utils from './../utilities';
+import _ from 'lodash';
 
 var Select2 = React.createClass({
 	getDefaultProps: function(){
@@ -11,8 +12,8 @@ var Select2 = React.createClass({
 	},
 	componentDidUpdate: function(nextProps){
 
-		if(nextProps.defaultValue != this.props.defaultValue){
-	
+		if(!_.isEqual(nextProps.defaultValue, this.props.defaultValue)){
+			
 			$(this.refs.select.getDOMNode()).select2('val', nextProps.defaultValue)
 		}
 	},
@@ -22,7 +23,8 @@ var Select2 = React.createClass({
 		var self = this;
 
 		var options = {			
-			placeholder: this.props.placeholder,
+			// placeholder: this.props.placeholder,
+			placeholder: 'Select',
 			allowClear: this.props.allowClear,
 			formatResult: this.props.formatResult
 		};
@@ -92,13 +94,18 @@ var Select2 = React.createClass({
 			}
 		}
 
+		var label = <label className="label-select">{this.props.placeholder}</label>;
+
 		if(!this.props.url){
 
 			return (
-				<div className="select2-element">
+				<div className="select2-element">					
+					{label}
 					<select 
 						required ={this.props.required}
 						ref= "select" 
+						disabled = {this.props.disabled}
+						defaultValue = {this.props.value}
 						name = {this.props.name}>
 						{this.props.children}
 					</select>
@@ -108,12 +115,13 @@ var Select2 = React.createClass({
 		
 		return (
 			<div className="select2-element">
+				{label}
 				<input 
 					required ={this.props.required}
 					type="text" 
 					ref="select" 
 					name = {this.props.name} 
-					value = {selected} />
+					value = {selected} />				
 			</div>
 		)
 	}

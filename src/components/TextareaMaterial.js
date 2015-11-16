@@ -33,6 +33,16 @@ var TextareaMaterial = React.createClass({
 
 		this.expandTextarea();
 	},
+	componentDidUpdate: function(nextProps){
+		
+		if(nextProps.defaultValue != this.props.defaultValue || nextProps.value != this.props.value){			
+			this.setState({
+				hasValue: true
+			});
+
+			this.expandTextarea();
+		}
+	},
 	expandTextarea: function(){
 
 		var el = this.refs.textarea.getDOMNode();
@@ -62,10 +72,12 @@ var TextareaMaterial = React.createClass({
 					onBlur = {this.handleOnBlur}
 					onInput = {this.expandTextarea}
 					defaultValue = {this.props.defaultValue}
+					value = {this.props.value}
 					rows={this.props.rows}
 					onChange = {this.props.onChange}
 					ref = 'textarea'
 					name = {this.props.name}
+					readOnly = {this.props.readOnly}
 				/>
 			</div>
 		)

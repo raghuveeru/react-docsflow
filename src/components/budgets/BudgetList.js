@@ -21,13 +21,49 @@ var BudgetList = React.createClass({
 			temp[group]['name'] = temp[group]['name'] || group;
 			temp[group]['items'] = temp[group]['items'] || []
 			temp[group]['items'].push(budget);
-		})
+		});
 
 
-		Object.keys(temp).map( function( group )
+		var tmp = {};
+		budgets.forEach( (budget) => {
+
+			var group = budget.relationships.category,
+				title = budget.title;
+
+			tmp[group] = tmp[group] || []
+
+			tmp[group]['name'] = tmp[group]['name'] || group
+
+			tmp[group]['items'] = tmp[group]['items'] || [];
+
+			tmp[group]['items'][title] = tmp[group]['items'][title] || {};
+
+			tmp[group]['items'][title]['name'] = tmp[group]['items'][title]['name'] || title;
+
+			tmp[group]['items'][title]['items'] = tmp[group]['items'][title]['items'] || [];
+
+			tmp[group]['items'][title]['items'].push(budget)
+
+			// tmp[group]['items'][title]['name']['items'].push(budget)
+
+		});
+
+		
+		Object.keys(tmp).map( function( group )
   		{
-  			budgetGroups.push(temp[group])
-  		})
+
+  			var items = tmp[group]['items'];
+
+  			tmp[group]['items'] = [];
+
+  			Object.keys(items).map( (item) => {
+  				tmp[group]['items'].push(items[item])
+  			})
+
+  			budgetGroups.push(tmp[group]);
+  		});
+
+  		// console.log(budgetGroups)
 		
 
 		return (

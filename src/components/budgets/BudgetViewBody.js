@@ -70,7 +70,7 @@ var BudgetViewBody = React.createClass({
 		return (
 			<div className="sp-card sp-budget-card">
 				<div className="card-body">
-					<span className="budget-item-status budget-item-status-view">{getStatusName(currentBudget.status)}</span>
+					<span className="budget-item-status budget-item-status-view" style = {{backgroundColor: getStatusName(currentBudget.status).color}}>{getStatusName(currentBudget.status).name}</span>
 
 					{budgetEditActions}
 					<table className="table table-budget-item table-budget-single">

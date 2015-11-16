@@ -3,7 +3,10 @@ import MainTopicTitle from './MainTopicTitle';
 import BudgetCutTopicItem from './BudgetCutTopicItem';
 import BudgetCutTopicForm from './BudgetCutTopicForm';
 
+var sortable = require('react-sortable-mixin');
+
 var TopicList = React.createClass({
+	mixins: [sortable.ItemMixin],
 	getInitialState: function(){
 
 		return {

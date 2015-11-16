@@ -60,16 +60,33 @@ var API = {
  * Status Name Mapping
  */
 
-var STATUS_MAPPING = {
-	'On sourcing': 'On Sourcing',
-	'Working draft': 'Working Draft',
-	'Final draft': 'Final draft',
-	'Speech': 'Speech'
-};
+var STATUS_MAPPING = [
+	{
+		name: 'On sourcing',
+		color: '#F36C60'
+	},
+	{
+		name: 'Working draft',
+		color: '#FFAE6E'
+	},
+	{
+		name: 'Final draft',
+		color: '#0699F9'
+	},
+	{
+		name: 'Speech',
+		color: '#D687C6'
+	}
+]
+// 	'On sourcing': 'On Sourcing',
+// 	'Working draft': 'Working Draft',
+// 	'Final draft': 'Final draft',
+// 	'Speech': 'Speech'
+// };
 
 var ROLE_PERMISSION_MAPPING = {
 	'System Administrator': ['Admin'],
-	'COS Administrator': ['canViewSpeech'],
+	'COS Administrator': ['canViewSpeech', 'canEdit'],
 	// 'Liaison Officers': [],
 	'Registry Officers': [],
 	// 'Head of Department': [],

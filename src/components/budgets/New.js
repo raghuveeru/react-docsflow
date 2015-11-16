@@ -37,7 +37,7 @@ var BudgetNew = React.createClass({
 			fileReferenceNo: '',
 			summary: '',
 			time: '',
-			status: '',
+			status: 'On sourcing',
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',
@@ -210,12 +210,7 @@ var BudgetNew = React.createClass({
 
 								var bcTopic = data.budgetCutTopic;
 
-								var select = this.refs.budgetCutTopicSelect.refs.select.getDOMNode();
 								
-								setTimeout(() => {
-									bcTopic.length > 0 && $(select).select2('data', bcTopic[0], true)
-								}, 100)
-
 								this.checkSelect2Valid(event);
 								
 								this.setState({
@@ -365,23 +360,6 @@ var BudgetNew = React.createClass({
 			<div className="form-control">
 				<h4>Assign to officer</h4>
 
-				<Select2 
-					placeholder="Select status"
-					label = 'Select action' 
-					required = {true}
-					onChange = { (val, data, event) => {					
-
-						this.checkSelect2Valid(event);
-
-						this.setState({
-							status: val
-						}, this.updateSubject)
-					}} >
-					<option></option>
-					{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
-						return <option key = {idx}>{status}</option>
-					})}
-				</Select2>
 
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
@@ -415,8 +393,9 @@ var BudgetNew = React.createClass({
 				<div className="row">
 					<div className="columns six">
 
-						<InputMaterial
+						<TextareaMaterial
 							label="Subject"
+							rows = {1}
 							value = {this.state.subject}
 							readOnly = {true}
 							/>

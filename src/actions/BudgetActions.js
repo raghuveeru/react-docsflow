@@ -163,13 +163,13 @@ module.exports = {
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
-				handleResponse(res, this.flux, (jsonResponse) => {
+				// handleResponse(res, this.flux, (jsonResponse) => {
 				
-					callback && callback(jsonResponse)
+				// 	callback && callback(jsonResponse)
 
-				}, 'Budget cut was saved successfully.')
+				// }, 'Budget cut was saved successfully.')
 
-				NProgress.done()
+				// NProgress.done()
 
 				
 			})

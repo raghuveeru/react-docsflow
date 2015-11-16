@@ -186,8 +186,18 @@ label.label-error{
 
 
 /**
- * Error label
+ * Select label
  */
+
+.label-select{
+    display: block;
+    // color: #666;
+    // font-weight: 600;
+    transform: translateY(0.5em) scale(0.7);
+    // color: #777;
+    transform-origin: 0 0;   
+    // font-weight: bold;
+}
 
 
 

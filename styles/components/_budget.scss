@@ -77,12 +77,70 @@
         }
     }
 
+    .budget-group-title-inner{
+        font-size: 18px;
+        font-weight: normal;
+        cursor: pointer;
+        
+        position: relative;
+        margin: 0;
+        padding: 1em 0;
+        padding-left: 24px;
+        border-bottom: 1px $base-ui-color solid;
+
+        &:before{
+            @extend %icon;
+            content: "\f067";
+            position: absolute;
+            left: 0px;
+            top: 18px;
+            color: #E3571A;
+        }
+
+        .inner-group-open &{
+            &:before{
+                content: "\f068";
+            }
+        }
+    }
+
+    .budget-list-item-inner{
+        padding: 1em 0;
+        border-bottom: 1px $base-ui-color solid;
+        padding-left: 30px;
+
+        &:hover{
+            background-color: #eee;
+        }
+    }
+
     /**
      * CLosed group
      */
     
     .group-closed {
         .budget-list-item{
+            display: none;
+        }
+    }
+
+    /**
+     * Inner
+     */
+    
+    .budget-list-item-inner{        
+        position: relative;
+        display: block;
+
+        &, &:hover, &:visited{
+            color: $base-color;
+        }
+
+        &:hover{
+            text-decoration: none;
+        }
+
+        .inner-group-closed &{
             display: none;
         }
     }
@@ -94,17 +152,17 @@
      */
     
     .budget-list-item{
-        padding: 1em;
+        padding: 0;
         padding-left: 30px;
         position: relative;
-        border-bottom: 1px $base-ui-color solid;
-        margin: 8px;
+        // border-bottom: 1px $base-ui-color solid;
+        margin: 8px 0;
         margin-top: 0;
         margin-bottom: 0;
 
         .budget-item-checkbox{
             position: absolute;
-            top: 20px;
+            top: 22px;
             left: 8px;            
         }
     }
@@ -120,7 +178,7 @@
     
     .budget-item-status{
         position: absolute;
-        right: -8px;
+        right: 0px;
         top: 0;
         background-color: #0699F9;
         color: white;

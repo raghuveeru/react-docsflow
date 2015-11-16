@@ -6,7 +6,7 @@ var BudgetStatus = React.createClass({
 
 		var {totalStatusCount, totalCount} = this.props;
 
-		if(!totalStatusCount) return null;
+		if(!totalStatusCount && !totalStatusCount.length) return null;
 
 		var speechStatus = totalStatusCount.filter((status) => status.name.toLowerCase() == 'speech')
 		

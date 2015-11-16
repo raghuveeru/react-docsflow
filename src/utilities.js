@@ -4,12 +4,31 @@ module.exports = {
 			return callback(key, object[key], idx);
 		});
 	},
+	filterStatus: function(statuses, currentStatus){
+
+		var index = 0;
+
+		for(var i = 0; i < AppConfig.STATUS_MAPPING.length; i++){
+			if(AppConfig.STATUS_MAPPING[i].name.toLowerCase() == currentStatus.toLowerCase()){
+				index = i;
+			}
+		}
+
+		return statuses.filter( (status, idx) => {			
+			return status.name.toLowerCase() != 'speech' && idx >= index
+		})
+	},
 	getStatusName: function(status){
 		
 		var _status = status.toLowerCase();
 
-		for(var s in AppConfig.STATUS_MAPPING){
-			if(s.toLowerCase() == _status) return AppConfig.STATUS_MAPPING[s]
+		for(var i = 0; i < AppConfig.STATUS_MAPPING.length; i++){
+			
+			if(
+				AppConfig.STATUS_MAPPING[i].name.toLowerCase() == _status
+			){
+				return AppConfig.STATUS_MAPPING[i]
+			}
 		}
 		
 		return 'Please provide status mapping in config file for ' + status;

@@ -2,7 +2,7 @@ import React from 'react';
 import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
-import {mapObject, t} from './../../utilities';
+import {mapObject, t, filterStatus} from './../../utilities';
 import {validationOptions} from './../../constants';
 import Select2 from '../Select2';
 import Fluxxor from 'fluxxor';
@@ -77,6 +77,8 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	render: function(){
 
+		var {budget} = this.props;
+
 		return (
 			<form ref="form" className="assign-form">
 				<h4>Assign to officer</h4>
@@ -94,8 +96,8 @@ var BudgetAssignToOfficer = React.createClass({
 
 				}} >
 					<option></option>
-					{mapObject(AppConfig.STATUS_MAPPING, (status, idx) => {
-						return <option key = {idx}>{status}</option>
+					{filterStatus(AppConfig.STATUS_MAPPING, budget.status).map((status, idx) => {
+						return <option key = {idx}>{status.name}</option>
 					})}
 				</Select2>
 

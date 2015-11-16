@@ -169,20 +169,11 @@ var BudgetContainer = React.createClass({
 							</nav>
 							{budgetStatus}
 							
-							<div className="budget-actions">
-								<input 
-									type = "checkbox"
-									onClick = {(event) => {
-										this.getFlux().actions.BudgetActions.selectAllBudgets(event.target.checked)
-									}}
-									readOnly = {true}
-									checked = {isAllSelected}
-								/>
-
+							<div className="budget-actions">								
 								<a 
 									className="link-speech"
 									onClick = {this.handleSpeech}
-								>Speech</a>
+								>Incorporate into speech</a>
 
 								<a className="link-export-excel" onClick = {this.handleExportToExcel}>Export to excel</a>
 							</div>

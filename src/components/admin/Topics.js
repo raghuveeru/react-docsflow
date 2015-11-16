@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import NewTopic from './NewTopic';
 import {customStyles} from '../../constants';
 import TopicList from './TopicList';
+import TopicsSortable from './TopicsSortable';
 
 
 var Topics = React.createClass({
@@ -49,11 +50,8 @@ var Topics = React.createClass({
 					>
 					<NewTopic {...this.props} closeModal = {this.closeModal} />
 				</Modal>
-				
-				{topics.map((topic, idx) => {
 
-					return <TopicList {...this.props} key = {idx} topic = {topic} />
-				})}
+				<TopicsSortable topics = {topics} />
 			</div>
 		)
 	}

@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import NewTopic from './NewTopic';
 import {customStyles} from '../../constants';
 import TopicList from './TopicList';
-import TopicsSortable from './TopicsSortable';
+import SortableMixin from 'Sortablejs/react-sortable-mixin';
 
 
 var Topics = React.createClass({
@@ -38,7 +38,9 @@ var Topics = React.createClass({
 	},
 	render: function(){
 
-		var {topics} = this.state.AdminStore;				
+		var {topics} = this.state.AdminStore;
+
+		if(!topics.length) return null;
 		
 		return (
 			<div>
@@ -51,8 +53,45 @@ var Topics = React.createClass({
 					<NewTopic {...this.props} closeModal = {this.closeModal} />
 				</Modal>
 
-				<TopicsSortable topics = {topics} />
+				<TopicsSortable topics = {topics} {...this.props} />
 			</div>
+		)
+	}
+});
+
+
+var TopicsSortable = React.createClass({
+	mixins: [SortableMixin],
+	sortableOptions: { 
+		model: "maintopics",
+		handle: '.drag-handle-main-topic'
+	},
+	getInitialState: function(){
+		return {
+			maintopics: this.props.topics
+		}
+	},
+	componentWillReceiveProps: function(nextProps){
+		
+		this.setState({
+			maintopics: nextProps.topics
+		})
+	},
+	handleSort: function (event) {
+
+		this.props.flux.actions.AdminActions.updateMainTopics(this.state.maintopics)
+	},
+	render: function(){
+
+		var {maintopics} = this.state;
+
+		return (
+			<ul className="main-topic-list">
+			{maintopics.map((topic, idx) => {
+
+					return <TopicList {...this.props} index = {idx} key = {idx} topic = {topic} {...this.movableProps} />
+				})}
+			</ul>
 		)
 	}
 });

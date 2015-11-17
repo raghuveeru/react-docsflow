@@ -194,11 +194,11 @@ module.exports = {
 
 		/* For Admin */
 
-		if(roleId == 1) return true;
+		if(roleId.indexOf(1) != -1) return true;
 
 		for(var i = 0; i < AppConfig.ROLES.length; i++){
 
-			if(AppConfig.ROLES[i].id == roleId){
+			if(roleId.indexOf(AppConfig.ROLES[i].id) != -1){
 
 				return AppConfig.ROLES[i].permissions.indexOf(permission) != -1
 			}

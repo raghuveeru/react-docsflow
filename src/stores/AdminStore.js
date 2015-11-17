@@ -1,5 +1,6 @@
 import Fluxxor from 'fluxxor';
 import {actions} from '../constants';
+import _ from 'lodash';
 
 var AdminStore = Fluxxor.createStore({
 	initialize: function(){
@@ -19,6 +20,8 @@ var AdminStore = Fluxxor.createStore({
 			actions.GET_ALL_USERS_ADMIN, this.getAllUsers,
 			actions.CREATE_NEW_USER, this.addUser,
 			actions.DELETE_USER, this.deleteUser,
+			actions.UPDATE_MAIN_TOPICS, this.updateMainTopics,
+			actions.UPDATE_SUB_TOPICS, this.updateSubTopics
 		)
 	},
 	getState: function(){
@@ -40,6 +43,22 @@ var AdminStore = Fluxxor.createStore({
 		this.topics.unshift(data)
 
 		this.emit('change')
+	},
+	updateMainTopics: function(payload){
+		
+		this.topics = payload
+	},
+	updateSubTopics: function(payload){
+
+		var _topics = _.clone(this.topics);
+
+		for(var i = 0; i < _topics.length; i++){
+			if(_topics[i].id == payload.mainTopicId){
+				_topics.budgetCutTopic = payload.subTopics
+			}
+		}
+
+		this.topics = _topics
 	},
 	editMainTopic: function(payload){
 

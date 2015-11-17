@@ -48,7 +48,7 @@ var AdminActions = {
 				NProgress.done()
 			})	
 	},
-	createMainTopic: function(payload){
+	createMainTopic: function(payload, callback){
 
 		NProgress.start()
 
@@ -69,7 +69,76 @@ var AdminActions = {
 				NProgress.done()
 			})	
 	},
-	editMainTopic: function(payload){
+	updateMainTopics: function(payload, callback){
+
+		var topics = payload;
+
+		for(var i = 0; i < topics.length; i++){
+			topics[i].order = i + 1
+		}
+
+		var data = {
+			topics: payload
+		}
+
+		NProgress.start();
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.TOPICS.UPDATE_ORDER_MAIN_TOPICS)
+			.set(headers)
+			.send(JSON.stringify(data))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+					
+					if(jsonResponse.success){
+						
+						this.dispatch(actions.UPDATE_MAIN_TOPICS, payload)
+
+						callback && callback()
+					}
+				
+				}, 'Order saved successfully.')
+
+				NProgress.done();
+				
+			});
+
+		
+	},
+	updateSubTopics: function(payload, callback){
+
+		var topics = payload.subTopics;
+
+		for(var i = 0; i < topics.length; i++){
+			topics[i].order = i + 1
+		}
+
+		NProgress.start();
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.TOPICS.UPDATE_ORDER_SUB_TOPICS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+					
+					if(jsonResponse.success){
+						
+						this.dispatch(actions.UPDATE_SUB_TOPICS, payload)
+
+						callback && callback()
+					}
+				
+				}, 'Order saved successfully.')
+
+				NProgress.done();
+				
+			});
+		
+	},
+	editMainTopic: function(payload, callback){
 
 		NProgress.start()
 
@@ -91,7 +160,7 @@ var AdminActions = {
 				NProgress.done()
 			})	
 	},
-	createBudgetCutTopic: function(payload){
+	createBudgetCutTopic: function(payload, callback){
 
 		NProgress.start()
 
@@ -115,7 +184,7 @@ var AdminActions = {
 				NProgress.done()
 			})	
 	},
-	editBudgetCutTopic: function(payload){
+	editBudgetCutTopic: function(payload, callback){
 
 		NProgress.start()
 
@@ -139,7 +208,7 @@ var AdminActions = {
 				NProgress.done()
 			})	
 	},
-	deleteBudgetCutTopic: function(payload){
+	deleteBudgetCutTopic: function(payload, callback){
 
 		NProgress.start()
 
@@ -164,7 +233,7 @@ var AdminActions = {
 				NProgress.done()
 			})
 	},
-	deleteTopic: function(payload){
+	deleteTopic: function(payload, callback){
 
 		NProgress.start()
 
@@ -210,7 +279,7 @@ var AdminActions = {
 				NProgress.done()
 			})
 	},
-	deleteUser: function(payload){
+	deleteUser: function(payload, callback){
 
 		NProgress.start();
 

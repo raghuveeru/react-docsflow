@@ -34,6 +34,9 @@ var API = {
 		CREATE_BUDGET_CUT_TOPIC: 'api/new-budget-cut-topic-response.json',
 		EDIT_BUDGET_CUT_TOPIC: 'api/edit-budget-cut-topic-response.json',
 		DELETE_BUDGET_CUT_TOPIC: 'api/delete-budget-cut-topic-response.json',
+
+		UPDATE_ORDER_MAIN_TOPICS: 'api/update-order-main-topics.json',
+		UPDATE_ORDER_SUB_TOPICS: 'api/update-order-sub-topics.json',
 	},
 	USERS: {
 		GET_ALL_USERS: 'api/get-all-users.json',

@@ -48,10 +48,12 @@ var MainTopicTitle = React.createClass({
 		var {topic} = this.props;
 
 		return (
-			<div>
+			<div>				
 				<h3 
 					className="budget-group-title"
-					onClick = {this.props.toggleGroup}>{topic.name}
+					onClick = {this.props.toggleGroup}>
+					<span className="drag-handle-main-topic topic-drag-handle fa fa-bars"></span>
+					{topic.name}
 
 					<div className="topic-cell-actions">
 						<a onClick = {this.onEditMainTopic.bind(this, topic.id)}>Edit</a>

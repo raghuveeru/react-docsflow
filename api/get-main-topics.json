@@ -6,13 +6,16 @@
 			"budgetCutTopic": [
 				{
 					"id": "1231312",
-					"name": "Manpower challenges"
+					"name": "Manpower challenges",
+					"order": 1
 				},
 				{
 					"id": "123",
-					"name": "Manpower challenges 2"
+					"name": "Manpower challenges 2",
+					"order": 2
 				}
-			]
+			],
+			"order": 1
 		},
 		{
 			"id": "2",
@@ -20,9 +23,11 @@
 			"budgetCutTopic": [
 				{
 					"id": "1231312",
-					"name": "Manpower challenges for CPF"
+					"name": "Manpower challenges for CPF",
+					"order": 1
 				}
-			]
+			],
+			"order": 1
 		}
 	]
 }

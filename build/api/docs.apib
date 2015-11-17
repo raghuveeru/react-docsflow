@@ -1305,6 +1305,94 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
+## Order Topics [/api/v1/update-order-topic{?topics,mainTopicId,subTopics}]
+
+### Order Main Topics [POST]
+
++ Parameters
+	+ topics: (array)
+
++ Request
+
+	```
+	{
+	    "topics": [
+	        {
+	            "id": "2",
+	            "name": "Central Providence Fund",
+	            "budgetCutTopic": [
+	                {
+	                    "id": "1231312",
+	                    "name": "Manpower challenges for CPF",
+	                    "order": 1
+	                }
+	            ],
+	            "order": 1
+	        },
+	        {
+	            "id": "1",
+	            "name": "Workplace Safety & Health",
+	            "budgetCutTopic": [
+	                {
+	                    "id": "1231312",
+	                    "name": "Manpower challenges",
+	                    "order": 1
+	                },
+	                {
+	                    "id": "123",
+	                    "name": "Manpower challenges 2",
+	                    "order": 2
+	                }
+	            ],
+	            "order": 2
+	        }
+	    ]
+	}
+	```
+
++ Response 200
+
+	```
+	{
+		"success": true
+	}
+	```
+
+### Order Sub Topics [POST]
+
++ Parameters
+	+ mainTopicId:  `12` (string)
+	+ subTopics:  (array)
+
+
++ Request
+
+	```
+	{
+	    "mainTopicId": "1",
+	    "subTopics": [
+	        {
+	            "id": "123",
+	            "name": "Manpower challenges 2",
+	            "order": 1
+	        },
+	        {
+	            "id": "1231312",
+	            "name": "Manpower challenges",
+	            "order": 2
+	        }
+	    ]
+	}
+	```
+
++ Response 200
+
+	```
+	{
+		"success": true
+	}
+	```
+
 
 # Group Notifications
 

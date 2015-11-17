@@ -383,11 +383,17 @@
 .group-admin-topic{
 
     .budget-group-title{
-        padding-left: 24px;
+        padding-left: 54px;
 
         &:before{
-            left: 0;
+            left: 28px;
         }
+    }
+
+    .drag-handle-main-topic{
+        position: absolute;
+        left: 0;
+        top: 18px;
     }
 
     .budget-list-item{
@@ -519,3 +525,23 @@
     color: #888;    
     margin-right: 1em;
 }
+
+
+/**
+ * Sub topic list
+ */
+
+.sub-topic-list, .main-topic-list{
+    list-style: none;
+    margin: 0;
+    padding-bottom: 1em;
+}
+
+    .topic-drag-handle {
+        cursor: move;
+        color: #888;
+
+        &:hover{
+            color: $base-color;
+        }
+    }

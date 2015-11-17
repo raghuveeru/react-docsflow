@@ -23,13 +23,20 @@ flux.on("dispatch", function(type, payload) {
 	}
 });
 
-$(function(){
+/**
+ * Render notifications
+ */
 
-	/**
-	 * Run the APP only after Role id is obtained
-	 */
-	
-	request.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_USER_ROLE)
+React.render(<Notifications flux = {flux} />, document.getElementById('momster-notification'))
+
+/**
+ * Run the APP only after Role id is obtained
+ */
+
+window.INITIALIZE_MOMSTER_COS = function(){
+
+	request
+		.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_USER_ROLE)
 		.set(headers)
 		.query({
 			'userId': CURRENT_USER.id
@@ -51,11 +58,4 @@ $(function(){
 
 			}
 		})
-
-
-	/**
-	 * Render notifications
-	 */
-	
-	React.render(<Notifications flux = {flux} />, document.getElementById('momster-notification'))
-});
+};

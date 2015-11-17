@@ -53,6 +53,7 @@ var API = {
 		CREATE_NEW_LIASON_OFFICER: 'api/create-new-liason-officer.json',
 
 		DELETE_USER: 'api/delete-user.json',
+		GET_USER_ROLE: 'api/get-user-role.json'
 	},
 	NOTIFICATIONS: {
 		ALL: 'api/notifications.json'

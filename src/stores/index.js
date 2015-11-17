@@ -7,5 +7,5 @@ module.exports = {
 	BudgetStore: new BudgetStore(),
 	AdminStore: new AdminStore(),
 	BudgetDetailStore: new BudgetDetailStore(),
-	NotificationStore: new NotificationStore()
+	NotificationStore: new NotificationStore(),	
 }

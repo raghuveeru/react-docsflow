@@ -7,5 +7,5 @@ module.exports = {
 	BudgetActions: BudgetActions,
 	AdminActions: AdminActions,
 	BudgetDetailActions: BudgetDetailActions,
-	NotificationActions: NotificationActions
+	NotificationActions: NotificationActions,
 }

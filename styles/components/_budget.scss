@@ -222,6 +222,7 @@
 .budget-actions{
     padding: 1em 1em 1em 1em;
     border-bottom: 1px $base-ui-color solid;
+    @include clearfix;
 
     .link-export-excel{
         float: right;
@@ -295,7 +296,7 @@
  */
 
 .link-view-message{
-    float: right;
+    display: block;
 }
 
 

@@ -2,38 +2,16 @@ import React from 'react';
 import TopicList from './TopicList';
 import _ from 'lodash';
 
-var sortable = require('react-sortable-mixin');
-
-var TopicsSortable = React.createClass({
-	mixins: [sortable.ListMixin],
-	onResorted: function(items){
-		console.log(items)
-	},
-	componentDidMount: function(){
-
-		return {
-			items: this.props.topics
-		}
-	},
-	componentWillReceiveProps: function(nextProps){
-		
-		if(!_.isEqual(nextProps, this.props)){
-
-			this.setState({
-				items: nextProps.topics
-			})
-		}
-
-	},
+var TopicsSortable = React.createClass({		
 	render: function(){
 
-		var {items} = this.state;
+		var {topics} = this.props;
 
 		return (
 			<div>
-			{items.map((item, idx) => {
+			{topics.map((topic, idx) => {
 
-					return <TopicList {...this.props} index = {idx} key = {idx} topic = {item} {...this.movableProps} />
+					return <TopicList {...this.props} index = {idx} key = {idx} topic = {topic} {...this.movableProps} />
 				})}
 			</div>
 		)

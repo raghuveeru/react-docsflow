@@ -8,6 +8,7 @@ import {debounce} from './../../utilities';
 import {StoreWatchMixin} from 'fluxxor';
 import Fluxxor from 'fluxxor';
 import _ from 'lodash';
+import PermissionJail from './../PermissionJail';
 
 var FluxMixin = Fluxxor.FluxMixin(React)
 
@@ -169,11 +170,13 @@ var BudgetContainer = React.createClass({
 							</nav>
 							{budgetStatus}
 							
-							<div className="budget-actions">								
+							<div className="budget-actions">
+								<PermissionJail permission='canViewSpeech'>
 								<a 
 									className="link-speech"
 									onClick = {this.handleSpeech}
 								>Incorporate into speech</a>
+								</PermissionJail>
 
 								<a className="link-export-excel" onClick = {this.handleExportToExcel}>Export to excel</a>
 							</div>

@@ -8,6 +8,8 @@ import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 import Loader from './../Loader';
 import {Link} from 'react-router';
+import PermissionJail from './../PermissionJail';
+
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetViewBody = React.createClass({
@@ -72,7 +74,9 @@ var BudgetViewBody = React.createClass({
 				<div className="card-body">
 					<span className="budget-item-status budget-item-status-view" style = {{backgroundColor: getStatusName(currentBudget.status).color}}>{getStatusName(currentBudget.status).name}</span>
 
-					{budgetEditActions}
+					<PermissionJail permission="canEditDeleteBudgetCut">
+						{budgetEditActions}
+					</PermissionJail>
 					<table className="table table-budget-item table-budget-single">
 							<tbody>
 								<tr>
@@ -108,11 +112,11 @@ var BudgetViewBody = React.createClass({
 
 					<div className="rule" />
 
-					<BudgetQuestions id = {this.props.id} />
+					<BudgetQuestions id = {this.props.id} status = {currentBudget.status} />
 					
-					<BudgetWorkingDraft id = {this.props.id} />
+					<BudgetWorkingDraft id = {this.props.id} status = {currentBudget.status} />
 
-					<BudgetFinalApprovedReply id = {this.props.id} />
+					<BudgetFinalApprovedReply id = {this.props.id} status = {currentBudget.status} />
 					
 					{budgetAssign}
 				</div>

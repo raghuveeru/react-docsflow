@@ -7,5 +7,15 @@ module.exports = {
 	addNotification: function(payload){
 
 		this.dispatch(actions.ADD_NOTIFICATION, payload);
+	},
+	getSiteNotifications: function(){
+
+		request			
+			.get(AppConfig.API.BASE_URL + AppConfig.API.NOTIFICATIONS.ALL)
+			.set(headers)
+			.end((err, res) => {
+
+				this.dispatch(actions.GET_SITE_NOTIFICATIONS, JSON.parse(res.text));
+			})
 	}
 }

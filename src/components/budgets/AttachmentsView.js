@@ -9,7 +9,7 @@ var AttachmentsView = React.createClass({
 			<div>
 			{attachments.map((attachment, index) => {
 				return (
-					<div className="file-attachment-block">
+					<div className="file-attachment-block" key = {index}>
 						<a className="file-attachment" href={attachment.downloadUrl} key = {index}>
 							<span className="file-attachment-name">{attachment.fileName}</span>
 						</a>

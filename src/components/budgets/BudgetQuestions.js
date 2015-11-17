@@ -3,6 +3,7 @@ import BudgetNewQuestion from './BudgetNewQuestion';
 import AttachmentsView from './AttachmentsView';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
+import PermissionJail from './../PermissionJail';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetQuestions = React.createClass({
@@ -37,6 +38,8 @@ var BudgetQuestions = React.createClass({
 	render: function(){
 
 		var {question} = this.state.BudgetDetailStore;
+		var {status} = this.props;
+
 
 		if(this.state.editMode){
 
@@ -60,7 +63,9 @@ var BudgetQuestions = React.createClass({
 					<hr className="rule" />
 				</div>
 			)
-		}
+		};
+
+		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit-question" onClick = {this.onEdit}>Edit</a> : null)
 
 		if(question.length){
 
@@ -95,7 +100,10 @@ var BudgetQuestions = React.createClass({
 									<td colSpan="2">
 										<div className="activity-meta">
 											{q.date}
-											<a className="link-edit-question" onClick = {this.onEdit}>Edit</a>
+
+											<PermissionJail permission="canEditQuestionDetails">
+												{editLink}
+											</PermissionJail>
 										</div>
 									</td>
 								</tr>

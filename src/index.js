@@ -5,6 +5,8 @@ import Fluxxor from 'fluxxor';
 import stores from './stores';
 import actions from './actions';
 
+import Notifications from './components/Notifications';
+
 var flux = new Fluxxor.Flux(stores, actions);
 
 /**
@@ -26,4 +28,11 @@ $(function(){
 	    document.getElementById("root")
 	  );
 	});
-})
+
+
+	/**
+	 * Render notifications
+	 */
+	
+	React.render(<Notifications flux = {flux} />, document.getElementById('momster-notification'))
+});

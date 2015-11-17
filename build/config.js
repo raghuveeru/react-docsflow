@@ -53,6 +53,9 @@ var API = {
 		CREATE_NEW_LIASON_OFFICER: 'api/create-new-liason-officer.json',
 
 		DELETE_USER: 'api/delete-user.json',
+	},
+	NOTIFICATIONS: {
+		ALL: 'api/notifications.json'
 	}
 };
 
@@ -77,30 +80,72 @@ var STATUS_MAPPING = [
 		name: 'Speech',
 		color: '#D687C6'
 	}
-]
-// 	'On sourcing': 'On Sourcing',
-// 	'Working draft': 'Working Draft',
-// 	'Final draft': 'Final draft',
-// 	'Speech': 'Speech'
-// };
+];
+
+var ALL_NOTIFICATIONS_LINK = 'http://href.xom';
 
 var ROLE_PERMISSION_MAPPING = {
 	'System Administrator': ['Admin'],
-	'COS Administrator': ['canViewSpeech', 'canEdit'],
+	'COS Administrator': ['canViewSpeech', 'canEditDeleteBudgetCut'],
 	// 'Liaison Officers': [],
-	'Registry Officers': [],
+	'Registry Officers': ['canCreateBudgetCut'],
 	// 'Head of Department': [],
 	'Desk Officer': [],
-	'Speech Writer': []
-}
+	'Speech Writer': ['canViewSpeech']
+};
+
+var ROLES = [
+	{
+		name: 'System Administrator',
+		id: 1,
+		showInCreateUser: true,
+		permissions: ['Admin']
+	},
+	{
+		name: 'COS Administrator',
+		id: 2,		
+		permissions: ['canViewSpeech', 'canEditDeleteBudgetCut', 'canSeeAdminMenu']
+	},
+	{
+		name: 'Liaison Officers',
+		id: 3,
+		showInCreateUser: false,
+		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft']
+	},
+	{
+		name: 'Registry Officers',
+		id: 4,
+		showInCreateUser: true,
+		permissions: ['canCreateBudgetCut']
+	},
+	{
+		name: 'Head of Department',
+		id: 5,
+		showInCreateUser: false,
+		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft']
+	},
+	{
+		name: 'Desk Officer',
+		id: 6,
+		showInCreateUser: true,
+		permissions: ['canEditWorkingDraft', 'canEditFinalDraft']
+	},
+	{
+		name: 'Speech Writer',
+		id: 7,
+		showInCreateUser: true,
+		permissions: ['canViewSpeech']
+	},
+];
 
 var APPROVED_REPLY_TYPES = ["Approved draft", "Anticipated Q&A", "Supplementary Info (upto confidential only)"];
 
 window.AppConfig = {
 	API                    : API,
-	STATUS_MAPPING         : STATUS_MAPPING,
-	ROLE_PERMISSION_MAPPING: ROLE_PERMISSION_MAPPING,
+	STATUS_MAPPING         : STATUS_MAPPING,	
 	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
-	SUBJECT_TEMPLATE: '[MOM COS - {status}] - {topic} - {mp}'
+	ROLES: ROLES,
+	SUBJECT_TEMPLATE: '[MOM COS - {status}] - {topic} - {mp}',
+	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK
 }
 

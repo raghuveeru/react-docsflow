@@ -2,7 +2,7 @@ import React from 'react';
 import InputMaterial from '../InputMaterial';
 import Select2 from '../Select2';
 import TextareaMaterial from '../TextareaMaterial';
-import {mapObject, t} from './../../utilities';
+import {mapObject, t, checkForPermission} from './../../utilities';
 import {validationOptions} from './../../constants';
 import {Link} from 'react-router';
 import Fluxxor from 'fluxxor';
@@ -156,6 +156,16 @@ var BudgetNew = React.createClass({
 		 */
 		
 		if(this.props.params.id){
+
+			/**
+			 * Check if the user has permission
+			 */
+			
+			if(!checkForPermission('canEditDeleteBudgetCut')){
+
+				this.context.router.transitionTo('budgets')
+			}
+
 
 			/**
 			 * Get Budget cut

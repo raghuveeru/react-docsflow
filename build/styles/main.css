@@ -1182,6 +1182,13 @@ a.ms-storefront-selectanchor, a.ms-storefront-selectanchor:link, a.ms-storefront
 .suite-bar-branding {
   float: left; }
 
+/**
+ * Suite bar dropdown
+ */
+.notification-dropdown {
+  display: inline-block;
+  position: relative; }
+
 /*------------------------------------*    GLOBAL NAV
 \*------------------------------------*/
 .sp-global-nav {
@@ -5572,7 +5579,6 @@ li {
   padding-bottom: 0.8em;
   border-bottom: 1px #e5e5e5 solid;
   position: relative;
-  padding-left: 3em;
   line-height: 1.4;
   display: block; }
   .notification-list a:hover, .notification-list a:focus {
@@ -7264,7 +7270,13 @@ li {
  */
 .budget-actions {
   padding: 1em 1em 1em 1em;
-  border-bottom: 1px #e5e5e5 solid; }
+  border-bottom: 1px #e5e5e5 solid;
+  *zoom: 1; }
+  .budget-actions:before, .budget-actions:after {
+    content: " ";
+    display: table; }
+  .budget-actions:after {
+    clear: both; }
   .budget-actions .link-export-excel {
     float: right; }
     .budget-actions .link-export-excel:before {
@@ -7311,7 +7323,7 @@ li {
  * View message link
  */
 .link-view-message {
-  float: right; }
+  display: block; }
 
 /**
  * Loader

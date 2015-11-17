@@ -10,7 +10,7 @@ var BudgetStatus = React.createClass({
 
 		var speechStatus = totalStatusCount.filter((status) => status.name.toLowerCase() == 'speech')
 		
-		var totalPercent = (speechStatus[0].count/totalCount * 100).toFixed(2);
+		var totalPercent = (speechStatus[0].count/totalCount * 100).toFixed(1);
 		
 		return (
 			<div className="budget-status">

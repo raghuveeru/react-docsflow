@@ -187,6 +187,24 @@ module.exports = {
 
 		}
 		
+	},
+	checkForPermission: function(permission){
+
+		var roleId = CURRENT_USER.roleId;
+
+		/* For Admin */
+
+		if(roleId == 1) return true;
+
+		for(var i = 0; i < AppConfig.ROLES.length; i++){
+
+			if(AppConfig.ROLES[i].id == roleId){
+
+				return AppConfig.ROLES[i].permissions.indexOf(permission) != -1
+			}
+		}
+
+		return false
 	}
 
 }

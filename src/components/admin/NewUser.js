@@ -5,7 +5,7 @@ import {mapObject} from './../../utilities';
 import {validationOptions} from './../../constants';
 import _ from 'lodash';
 
-var USER_GROUPS = AppConfig.ROLE_PERMISSION_MAPPING;
+var USER_GROUPS = AppConfig.ROLES.filter( (role) => role.showInCreateUser);
 
 var NewUser = React.createClass({	
 	getInitialState: function(){
@@ -102,9 +102,15 @@ var NewUser = React.createClass({
 		
 		return roles.indexOf(role) != -1
 	},
-	addRole: function(value){
+	addRole: function(value, event){
 
 		var user = _.clone(this.state.user);
+
+		if(!user.role){
+			alert('Please select a user first.');
+
+			return event.preventDefault();
+		}
 
 		user.role.push(value);
 
@@ -117,7 +123,7 @@ var NewUser = React.createClass({
 
 		var user = _.clone(this.state.user);
 
-		user.role.splice(user.indexOf(value), 1);
+		user.role.splice(user.role.indexOf(value), 1);
 
 		this.setState({
 			user: user
@@ -319,27 +325,28 @@ var NewUser = React.createClass({
 		return (
 			<div className="form-control">
 				<label>Select user group</label>
-				{mapObject(USER_GROUPS, (key, value, idx) => {
+				{USER_GROUPS.map( (group, idx) => {
 
 					return (
 					<label className="label-checkbox label-block" key = {idx}>
 						<input 
 							type="checkbox" 
 							name="groups" 
-							value = {key}
+							value = {group.name}
 							onChange = {(event) => {
 
 								var value = event.target.value;
+
 								if(event.target.checked){
-									this.addRole(value)
+									this.addRole(value, event)
 								}else{
-									this.removeRole(value)
+									this.removeRole(value, event)
 								}
 							}}
-							checked = {this.isRoleChecked(key)}
+							checked = {this.isRoleChecked(group.name)}
 							required 
 						/>
-						{key}
+						{group.name}
 					</label>
 					)
 				})}

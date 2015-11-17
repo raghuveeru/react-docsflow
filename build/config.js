@@ -104,31 +104,31 @@ var ROLES = [
 	{
 		name: 'COS Administrator',
 		id: 2,		
-		permissions: ['canViewSpeech', 'canEditDeleteBudgetCut', 'canSeeAdminMenu']
+		permissions: ['canViewSpeech', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer']
 	},
 	{
 		name: 'Liaison Officers',
 		id: 3,
 		showInCreateUser: false,
-		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft']
+		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer']
 	},
 	{
 		name: 'Registry Officers',
 		id: 4,
 		showInCreateUser: true,
-		permissions: ['canCreateBudgetCut']
+		permissions: ['canCreateBudgetCut', 'canAssignToOfficer']
 	},
 	{
 		name: 'Head of Department',
 		id: 5,
 		showInCreateUser: false,
-		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft']
+		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer']
 	},
 	{
 		name: 'Desk Officer',
 		id: 6,
 		showInCreateUser: true,
-		permissions: ['canEditWorkingDraft', 'canEditFinalDraft']
+		permissions: ['canEditWorkingDraft', 'canEditFinalDraft', 'canAssignToOfficer']
 	},
 	{
 		name: 'Speech Writer',

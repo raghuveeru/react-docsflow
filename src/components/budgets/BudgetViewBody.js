@@ -118,7 +118,9 @@ var BudgetViewBody = React.createClass({
 
 					<BudgetFinalApprovedReply id = {this.props.id} status = {currentBudget.status} />
 					
-					{budgetAssign}
+					<PermissionJail permission="canAssignToOfficer">
+						{budgetAssign}
+					</PermissionJail>
 				</div>
 				
 			</div>

@@ -108,10 +108,12 @@ var BudgetWorkingDraft = React.createClass({
 		}
 		
 		return (
-			<div>				
-				<BudgetNewWorkingDraft budgetCutId = {this.props.id} />
-				<hr className="rule" />	
-			</div>
+			<PermissionJail permission = 'canEditWorkingDraft'>
+				<div>
+					<BudgetNewWorkingDraft budgetCutId = {this.props.id} />
+					<hr className="rule" />	
+				</div>
+			</PermissionJail>
 		)
 	}
 });

@@ -112,10 +112,12 @@ var BudgetFinalApprovedReply = React.createClass({
 		}
 		
 		return (
-			<div>				
-				<BudgetNewFinalApprovedReply budgetCutId = {this.props.id} />
-				<hr className="rule" />	
-			</div>
+			<PermissionJail permission = 'canEditFinalDraft'>
+				<div>
+					<BudgetNewFinalApprovedReply budgetCutId = {this.props.id} />
+					<hr className="rule" />	
+				</div>
+			</PermissionJail>
 		)
 	}
 });

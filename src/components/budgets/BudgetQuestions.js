@@ -118,10 +118,12 @@ var BudgetQuestions = React.createClass({
 		}
 		
 		return (
-			<div>
+			<PermissionJail permission="canEditQuestionDetails">
+			<div>				
 				<BudgetNewQuestion budgetCutId = {this.props.id} />
 				<hr className="rule" />
 			</div>
+			</PermissionJail>
 		)
 	}
 });

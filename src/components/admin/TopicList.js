@@ -77,8 +77,9 @@ var BudgetCutTopicList = React.createClass({
 	handleSort: function (event) {
 
 		this.props.flux.actions.AdminActions.updateSubTopics({
-			mainTopicId: this.props.topic.id,
-			subTopics: this.state.topics
+			topicId: this.props.topic.id,
+			topics: this.state.topics,
+			userId: CURRENT_USER.id
 		})
 	},
 	render: function(){

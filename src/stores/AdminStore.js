@@ -46,7 +46,7 @@ var AdminStore = Fluxxor.createStore({
 	},
 	updateMainTopics: function(payload){
 		
-		this.topics = payload
+		this.topics = payload;
 	},
 	updateSubTopics: function(payload){
 

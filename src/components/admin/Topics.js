@@ -79,7 +79,10 @@ var TopicsSortable = React.createClass({
 	},
 	handleSort: function (event) {
 
-		this.props.flux.actions.AdminActions.updateMainTopics(this.state.maintopics)
+		this.props.flux.actions.AdminActions.updateMainTopics({
+			topics: this.state.maintopics,
+			userId: CURRENT_USER.id
+		})
 	},
 	render: function(){
 

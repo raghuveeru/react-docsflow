@@ -108,7 +108,7 @@ var AdminActions = {
 	},
 	updateSubTopics: function(payload, callback){
 
-		var topics = payload.subTopics;
+		var topics = payload.topics;
 
 		for(var i = 0; i < topics.length; i++){
 			topics[i].order = i + 1

@@ -10,7 +10,7 @@ var NewTopic = React.createClass({
 		var {topic} = this.props;
 
 		return {
-			topicName: topic? topic.name: '',
+			name: topic? topic.name: '',
 			userId: CURRENT_USER.id
 		}
 	},
@@ -32,8 +32,8 @@ var NewTopic = React.createClass({
 		if(this.props.topic){
 
 			this.getFlux().actions.AdminActions.editMainTopic({
-				topicId: this.props.topic.id,
-				topicName: this.state.topicName,
+				id: this.props.topic.id,
+				name: this.state.name,
 				userId: CURRENT_USER.id
 			})
 
@@ -72,7 +72,7 @@ var NewTopic = React.createClass({
 						defaultValue = {topic_name}
 						onChange = { (event) => {
 							this.setState({
-								topicName: event.target.value
+								name: event.target.value
 							})
 						}}
 						 />

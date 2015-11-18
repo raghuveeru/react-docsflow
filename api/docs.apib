@@ -1172,7 +1172,7 @@ This is the API blueprint for Momster COS application
 ### Create Main Topic [POST]
 
 + Parameters
-	+ topicName: `Name of the topic` (string)
+	+ name: `Name of the topic` (string)
 	+ userId: `12` (string)
 
 + Response 200
@@ -1193,8 +1193,8 @@ This is the API blueprint for Momster COS application
 ### Edit Main Topic [POST]
 
 + Parameters
-	+ topicId: `12` (string)
-	+ topicName: `name of the topic` (string)
+	+ id: `12` (string)
+	+ name: `name of the topic` (string)
 	+ userId: `12` (string)
 
 + Response 200
@@ -1213,7 +1213,7 @@ This is the API blueprint for Momster COS application
 ### Delete Main Topic [POST]
 
 + Parameters
-	+ topicId: `12` (string)
+	+ id: `12` (string)
 	+ userId: `12` (string)
 
 + Response 200
@@ -1229,7 +1229,7 @@ This is the API blueprint for Momster COS application
 ### Get all Budget Cut Topics [GET]
 
 + Parameters
-	+ topicId: `12` (string)
+	+ id: `12` (string)
 	+ q: `query text` (string)
 
 
@@ -1250,7 +1250,7 @@ This is the API blueprint for Momster COS application
 ### Create Budget Cut Topic [POST]
 
 + Parameters
-	+ budgetCutTopicName: `Name of the new budget cut topic` (string)
+	+ name: `Name of the new budget cut topic` (string)
 	+ topicId: `12` (string)
 	+ userId: `12` (string)
 
@@ -1273,8 +1273,8 @@ This is the API blueprint for Momster COS application
 + Parameters
 
 	+ topicId: `12` (string)
-	+ budgetCutTopicId: `12` (string)
-	+ budgetCutTopicName: `name of the budget cut topic` (string)	
+	+ id: `12` (string)
+	+ name: `name of the budget cut topic` (string)	
 	+ userId: `12` (string)
 
 + Response 200
@@ -1293,7 +1293,7 @@ This is the API blueprint for Momster COS application
 ### Delete Budget Cut Topic [POST]
 
 + Parameters
-	+ budgetCutTopicId:  `11` (string)
+	+ id:  `11` (string)
 	+ topicId: `12` (string)
 	+ userId: `12` (string)
 

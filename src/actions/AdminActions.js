@@ -71,14 +71,10 @@ var AdminActions = {
 	},
 	updateMainTopics: function(payload, callback){
 
-		var topics = payload;
+		var topics = payload.topics;
 
 		for(var i = 0; i < topics.length; i++){
 			topics[i].order = i + 1
-		}
-
-		var data = {
-			topics: payload
 		}
 
 		NProgress.start();
@@ -86,7 +82,7 @@ var AdminActions = {
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.TOPICS.UPDATE_ORDER_MAIN_TOPICS)
 			.set(headers)
-			.send(JSON.stringify(data))
+			.send(JSON.stringify(payload))
 			.end((err, res) => {
 
 				handleResponse(res, this.flux, (jsonResponse) => {

@@ -1311,6 +1311,7 @@ This is the API blueprint for Momster COS application
 
 + Parameters
 	+ topics: (array)
+	+ userId: `12` (string)
 
 + Request
 
@@ -1361,16 +1362,17 @@ This is the API blueprint for Momster COS application
 ### Order Sub Topics [POST]
 
 + Parameters
-	+ mainTopicId:  `12` (string)
-	+ subTopics:  (array)
+	+ topicId:  `12` (string)
+	+ topics:  (array)
+	+ userId: `12` (string)
 
 
 + Request
 
 	```
 	{
-	    "mainTopicId": "1",
-	    "subTopics": [
+	    "topicId": "1",
+	    "topics": [
 	        {
 	            "id": "123",
 	            "name": "Manpower challenges 2",
@@ -1381,7 +1383,8 @@ This is the API blueprint for Momster COS application
 	            "name": "Manpower challenges",
 	            "order": 2
 	        }
-	    ]
+	    ],
+	    userId: "12"
 	}
 	```
 

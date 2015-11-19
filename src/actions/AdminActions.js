@@ -280,7 +280,7 @@ var AdminActions = {
 		NProgress.start();
 
 		request
-			.post(AppConfig.API.BASE_URL + AppConfig.API.USERS.DELETE_USER)
+			.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.DELETE_USER)
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
@@ -289,7 +289,7 @@ var AdminActions = {
 
 					this.dispatch(actions.DELETE_USER, {
 						data: jsonResponse,
-						userId: payload.userId
+						userId: payload.id
 					});
 
 					callback && callback()

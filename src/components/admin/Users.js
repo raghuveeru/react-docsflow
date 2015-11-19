@@ -77,7 +77,7 @@ var Users = React.createClass({
 							return (
 								<tr key = {idx}>
 									<td className="cell-image">
-										<img src={user.image} />										
+										<img src={user.image} style = {{width: 40}} />										
 									</td>
 									<td>
 										{user.name}

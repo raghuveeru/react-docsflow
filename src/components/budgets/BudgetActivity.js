@@ -73,7 +73,7 @@ var BudgetActivityItem = React.createClass({
 		return (
 			<li>
 				<div className="media-item">
-					<img src = {fromUser.image} />
+					<img src = {fromUser.image} style = {{width: '40'}} />
 				</div>
 				<div className="media-content">
 					<strong>{fromUser.name}</strong> {activity.action} to {toUser.role.name} <strong>{toUser.name}</strong>

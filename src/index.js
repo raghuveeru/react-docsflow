@@ -24,12 +24,6 @@ flux.on("dispatch", function(type, payload) {
 });
 
 /**
- * Render notifications
- */
-
-React.render(<Notifications flux = {flux} />, document.getElementById('momster-notification'))
-
-/**
  * Run the APP only after Role id is obtained
  */
 
@@ -55,6 +49,13 @@ window.INITIALIZE_MOMSTER_COS = function(){
 				    document.getElementById("root")
 				  );
 				});
+
+				/**
+				 * Render notifications
+				 */
+
+				React.render(<Notifications flux = {flux} />, document.getElementById('momster-notification'))
+
 
 			}
 		})

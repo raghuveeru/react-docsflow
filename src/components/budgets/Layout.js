@@ -130,7 +130,7 @@ var BudgetContainer = React.createClass({
 		var currentRoutes = this.context.router.getCurrentRoutes();
 		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;
 
-		var {facets, totalCount, totalStatusCount, budgets} = this.state.BudgetStore;
+		var {facets, totalCount, totalStatusCount, budgets, openStatus} = this.state.BudgetStore;
 		var budgetStatus = (activeRouteName && activeRouteName != 'budgetsInbox'? <BudgetStatus 
 								totalCount = {totalCount}
 								totalStatusCount = {totalStatusCount}
@@ -180,7 +180,7 @@ var BudgetContainer = React.createClass({
 
 								<a className="link-export-excel" onClick = {this.handleExportToExcel}>Export to excel</a>
 							</div>
-							<BudgetList budgets = {budgets} />
+							<BudgetList budgets = {budgets} openStatus = {openStatus} {...this.props} />
 							
 						</div>
 

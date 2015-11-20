@@ -29528,6 +29528,8 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
@@ -29689,6 +29691,7 @@
 			var totalCount = _state$BudgetStore.totalCount;
 			var totalStatusCount = _state$BudgetStore.totalStatusCount;
 			var budgets = _state$BudgetStore.budgets;
+			var openStatus = _state$BudgetStore.openStatus;
 
 			var budgetStatus = activeRouteName && activeRouteName != 'budgetsInbox' ? _react2['default'].createElement(_BudgetStatus2['default'], {
 				totalCount: totalCount,
@@ -29774,7 +29777,7 @@
 									'Export to excel'
 								)
 							),
-							_react2['default'].createElement(_BudgetList2['default'], { budgets: budgets })
+							_react2['default'].createElement(_BudgetList2['default'], _extends({ budgets: budgets, openStatus: openStatus }, this.props))
 						)
 					)
 				)
@@ -30007,6 +30010,8 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
@@ -30021,6 +30026,8 @@
 		displayName: 'BudgetList',
 
 		render: function render() {
+			var _this = this;
+
 			var budgets = this.props.budgets;
 
 			var temp = {},
@@ -30083,7 +30090,7 @@
 				{ className: 'budget-list' },
 				budgetGroups.map(function (group, idx) {
 
-					return _react2['default'].createElement(_BudgetGroup2['default'], { group: group, key: idx });
+					return _react2['default'].createElement(_BudgetGroup2['default'], _extends({}, _this.props, { group: group, key: idx }));
 				})
 			);
 		}
@@ -30096,6 +30103,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -30119,28 +30128,39 @@
 		displayName: 'BudgetGroup',
 
 		getInitialState: function getInitialState() {
+			var _props = this.props;
+			var openStatus = _props.openStatus;
+			var group = _props.group;
 
 			return {
-				isOpen: true
+				isOpen: openStatus.indexOf(group.name) != -1
 			};
 		},
-		toggleGroup: function toggleGroup() {
+		toggleGroup: function toggleGroup(name) {
+
+			var isOpen = !this.state.isOpen;
 
 			this.setState({
-				isOpen: !this.state.isOpen
+				isOpen: isOpen
 			});
+
+			this.props.flux.actions.BudgetActions.setBudgetOpenStatus(name, isOpen);
 		},
 		render: function render() {
+			var _this = this;
+
 			var group = this.props.group;
 
 			var klassName = 'group' + (this.state.isOpen ? ' group-open' : ' group-closed');
+
+			var toggleBound = this.toggleGroup.bind(this, group.name);
 
 			return _react2['default'].createElement(
 				'div',
 				{ className: klassName },
 				_react2['default'].createElement(
 					'h3',
-					{ className: 'budget-group-title', onClick: this.toggleGroup },
+					{ className: 'budget-group-title', onClick: toggleBound },
 					group.name,
 					' (',
 					group.items.length,
@@ -30148,7 +30168,7 @@
 				),
 				group.items.map(function (grp) {
 
-					return _react2['default'].createElement(_BudgetInnerGroup2['default'], { grp: grp });
+					return _react2['default'].createElement(_BudgetInnerGroup2['default'], _extends({ grp: grp }, _this.props));
 				})
 			);
 		}
@@ -42557,16 +42577,23 @@
 
 		mixins: [FluxMixin],
 		getInitialState: function getInitialState() {
+			var _props = this.props;
+			var openStatus = _props.openStatus;
+			var grp = _props.grp;
 
 			return {
-				isOpen: false
+				isOpen: openStatus.indexOf(grp.name) != -1
 			};
 		},
-		toggleGroup: function toggleGroup() {
+		toggleGroup: function toggleGroup(name) {
+
+			var isOpen = !this.state.isOpen;
 
 			this.setState({
-				isOpen: !this.state.isOpen
+				isOpen: isOpen
 			});
+
+			this.props.flux.actions.BudgetActions.setBudgetOpenStatus(name, isOpen);
 		},
 		render: function render() {
 			var _this = this;
@@ -42575,12 +42602,14 @@
 
 			var klassName = 'budget-list-item' + (this.state.isOpen ? ' inner-group-open' : ' inner-group-closed');
 
+			var toggleBound = this.toggleGroup.bind(this, grp.name);
+
 			return _react2['default'].createElement(
 				'div',
 				{ className: klassName },
 				_react2['default'].createElement(
 					'h3',
-					{ className: 'budget-group-title-inner', onClick: this.toggleGroup },
+					{ className: 'budget-group-title-inner', onClick: toggleBound },
 					grp.name
 				),
 				grp.items.map(function (item, index) {
@@ -44881,7 +44910,8 @@
 			GET_SITE_NOTIFICATIONS: 'GET_SITE_NOTIFICATIONS',
 			GET_USER_ROLE: 'GET_USER_ROLE',
 			UPDATE_MAIN_TOPICS: 'UPDATE_MAIN_TOPICS',
-			UPDATE_SUB_TOPICS: 'UPDATE_SUB_TOPICS'
+			UPDATE_SUB_TOPICS: 'UPDATE_SUB_TOPICS',
+			SET_BUDGET_OPEN_STATUS: 'SET_BUDGET_OPEN_STATUS'
 		},
 		customStyles: {
 			overlay: {
@@ -51367,6 +51397,8 @@
 	var BudgetStore = _fluxxor2['default'].createStore({
 		initialize: function initialize() {
 
+			var openStatusFromLocalStorage = JSON.parse(localStorage.getItem('openStatus') || []);
+
 			this.budgets = [];
 			this.facets = [];
 			this.totalCount = 0;
@@ -51377,7 +51409,21 @@
 			this.activity = [];
 			this.isFetchingBudgetActivity = false;
 
-			this.bindActions(_constants.actions.UPDATE_BUDGETS, this.updateBudgets, _constants.actions.SELECT_BUDGET, this.selectBudget, _constants.actions.SELECT_ALL_BUDGETS, this.selectAllBudgets, _constants.actions.GET_BUDGET_BY_ID, this.getBudgetById, _constants.actions.ADD_TO_SPEECH, this.addToSpeech, _constants.actions.ASSIGN_TO_OFFICER, this.assignToOfficer, _constants.actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity, _constants.actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity, _constants.actions.DELETE_BUDGET_CUT, this.deleteBudgetCut);
+			this.openStatus = openStatusFromLocalStorage;
+
+			this.bindActions(_constants.actions.UPDATE_BUDGETS, this.updateBudgets, _constants.actions.SELECT_BUDGET, this.selectBudget, _constants.actions.SELECT_ALL_BUDGETS, this.selectAllBudgets, _constants.actions.GET_BUDGET_BY_ID, this.getBudgetById, _constants.actions.ADD_TO_SPEECH, this.addToSpeech, _constants.actions.ASSIGN_TO_OFFICER, this.assignToOfficer, _constants.actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity, _constants.actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity, _constants.actions.DELETE_BUDGET_CUT, this.deleteBudgetCut, _constants.actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus);
+		},
+		setBudgetOpenStatus: function setBudgetOpenStatus(payload) {
+
+			if (payload.isOpen) {
+				this.openStatus.push(payload.name);
+			} else {
+				this.openStatus.splice(this.openStatus.indexOf(payload.name), 1);
+			}
+
+			localStorage.setItem('openStatus', JSON.stringify(this.openStatus));
+
+			this.emit('change');
 		},
 		updateBudgets: function updateBudgets(budgets) {
 
@@ -51406,7 +51452,8 @@
 				totalSpeechCount: this.totalSpeechCount,
 				currentBudget: this.currentBudget,
 				activity: this.activity,
-				isFetchingBudgetActivity: this.isFetchingBudgetActivity
+				isFetchingBudgetActivity: this.isFetchingBudgetActivity,
+				openStatus: this.openStatus
 			};
 		},
 		selectBudget: function selectBudget(payload) {
@@ -51851,6 +51898,13 @@
 	var _utilities = __webpack_require__(201);
 
 	module.exports = {
+		setBudgetOpenStatus: function setBudgetOpenStatus(name, isOpen) {
+
+			this.dispatch(_constants.actions.SET_BUDGET_OPEN_STATUS, {
+				name: name,
+				isOpen: isOpen
+			});
+		},
 		getBudgets: function getBudgets(params) {
 			var _this = this;
 

@@ -71,7 +71,7 @@ var BudgetList = React.createClass({
 				{budgetGroups.map((group, idx) => {
 
 					return (
-						<BudgetGroup group = {group} key = {idx} />
+						<BudgetGroup {...this.props} group = {group} key = {idx} />
 					)
 				})}
 			</div>

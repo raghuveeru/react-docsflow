@@ -5,6 +5,8 @@ import _ from 'lodash';
 var BudgetStore = Fluxxor.createStore({
 	initialize: function(){
 
+		var openStatusFromLocalStorage = JSON.parse(localStorage.getItem('openStatus') || [])
+
 		this.budgets = [];
 		this.facets = [];
 		this.totalCount = 0;
@@ -14,6 +16,8 @@ var BudgetStore = Fluxxor.createStore({
 		this.currentBudget = {};
 		this.activity = [];
 		this.isFetchingBudgetActivity = false
+
+		this.openStatus = openStatusFromLocalStorage;
 
 		this.bindActions(
 			actions.UPDATE_BUDGETS, this.updateBudgets,
@@ -25,7 +29,20 @@ var BudgetStore = Fluxxor.createStore({
 			actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity,
 			actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity,			
 			actions.DELETE_BUDGET_CUT, this.deleteBudgetCut,
+			actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus
 		)
+	},
+	setBudgetOpenStatus: function(payload){
+		
+		if(payload.isOpen){
+			this.openStatus.push(payload.name)
+		}else{
+			this.openStatus.splice(this.openStatus.indexOf(payload.name), 1);
+		}
+
+		localStorage.setItem('openStatus', JSON.stringify(this.openStatus))
+
+		this.emit('change')
 	},
 	updateBudgets: function(budgets){
 
@@ -54,7 +71,8 @@ var BudgetStore = Fluxxor.createStore({
 			totalSpeechCount: this.totalSpeechCount,
 			currentBudget: this.currentBudget,
 			activity: this.activity,
-			isFetchingBudgetActivity: this.isFetchingBudgetActivity
+			isFetchingBudgetActivity: this.isFetchingBudgetActivity,
+			openStatus: this.openStatus
 		}
 	},
 	selectBudget: function(payload){		

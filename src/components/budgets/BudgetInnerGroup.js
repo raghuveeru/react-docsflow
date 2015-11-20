@@ -8,24 +8,32 @@ var BudgetInnerGroup = React.createClass({
 	mixins: [FluxMixin],
 	getInitialState: function(){
 
+		var {openStatus, grp} = this.props;
+
 		return {
-			isOpen: false
+			isOpen: openStatus.indexOf(grp.name) != -1
 		}
 	},
-	toggleGroup: function(){
+	toggleGroup: function(name){
+
+		var isOpen = !this.state.isOpen;
 
 		this.setState({
-			isOpen: !this.state.isOpen
+			isOpen: isOpen
 		})
+
+		this.props.flux.actions.BudgetActions.setBudgetOpenStatus(name, isOpen)
 	},
 	render: function(){
-
+		
 		var {grp} = this.props;
 		var klassName = 'budget-list-item' + (this.state.isOpen? ' inner-group-open' : ' inner-group-closed');
 
+		var toggleBound = this.toggleGroup.bind(this, grp.name)
+
 		return (
 			<div className={klassName}>
-				<h3 className="budget-group-title-inner" onClick = {this.toggleGroup}>{grp.name}</h3>
+				<h3 className="budget-group-title-inner" onClick = {toggleBound}>{grp.name}</h3>
 
 				{grp.items.map((item, index) => {
 

@@ -5,6 +5,13 @@ import {headers} from './../constants';
 import {handleResponse} from './../utilities';
 
 module.exports = {
+	setBudgetOpenStatus: function(name, isOpen){
+
+		this.dispatch(actions.SET_BUDGET_OPEN_STATUS, {
+			name: name,
+			isOpen: isOpen
+		});
+	},
 	getBudgets: function(params){		
 		
 		NProgress.start()

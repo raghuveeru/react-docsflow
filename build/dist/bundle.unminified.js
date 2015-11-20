@@ -51397,7 +51397,11 @@
 	var BudgetStore = _fluxxor2['default'].createStore({
 		initialize: function initialize() {
 
-			var openStatusFromLocalStorage = JSON.parse(localStorage.getItem('openStatus') || []);
+			var item = [];
+			if (localStorage.getItem('openStatus')) {
+				item = JSON.parse(localStorage.getItem('openStatus'));
+			}
+			var openStatusFromLocalStorage = item;
 
 			this.budgets = [];
 			this.facets = [];

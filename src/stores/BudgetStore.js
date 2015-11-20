@@ -5,7 +5,11 @@ import _ from 'lodash';
 var BudgetStore = Fluxxor.createStore({
 	initialize: function(){
 
-		var openStatusFromLocalStorage = JSON.parse(localStorage.getItem('openStatus') || [])
+		var item = [];
+		if(localStorage.getItem('openStatus')){
+			item = JSON.parse(localStorage.getItem('openStatus'))
+		}
+		var openStatusFromLocalStorage = item;
 
 		this.budgets = [];
 		this.facets = [];

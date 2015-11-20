@@ -44,10 +44,11 @@ var BudgetInnerGroup = React.createClass({
 				var liasonOfficer = item.liasonOfficer? item.liasonOfficer.name : '';
 
 				var showCheckbox = (item.status.toLowerCase() == 'final draft');
+				var statusText = (item.status.toLowerCase() == 'speech')? <span className="budget-item-status" style = {{backgroundColor: getStatusName(item.status).color}}>{getStatusName(item.status).name}</span> : null;
 				
 				return (
 					<Link to = 'budgetsView' params={{id: item.id}} className="budget-list-item-inner" key = {index}>					
-						<span className="budget-item-status" style = {{backgroundColor: getStatusName(item.status).color}}>{getStatusName(item.status).name}</span>
+						{statusText}
 						{showCheckbox? 
 						<input 
 							type="checkbox" 

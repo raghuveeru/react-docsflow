@@ -219,8 +219,11 @@ label.label-error{
  */
 
 .assign-form{
-    padding-bottom: 2em;
-    padding-top: 2em;
+    padding: 1em;
+    border-radius: $base-radius;
+    box-shadow: 0 0 2px 0 #C2C2C2;
+    border: 1px #DFDFDF solid;
+    margin-bottom: 2em;
 }
 
 

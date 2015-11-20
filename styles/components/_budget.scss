@@ -545,3 +545,22 @@
             color: $base-color;
         }
     }
+
+
+/**
+ * Input disabled
+ */
+
+.input-disabled{
+    color: #888;
+    cursor: not-allowed;
+}
+
+
+/**
+ * Link edit question
+ */
+
+.link-edit-question{
+    float: right;
+}

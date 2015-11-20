@@ -261,8 +261,17 @@ var BudgetNew = React.createClass({
 							defaultValue = {currentBudget.memberOfParliament}
 							onChange = { (val, data, event) => {
 
-								this.checkSelect2Valid(event);
+								this.checkSelect2Valid(event);								
 								
+								var select = this.refs.hodSourcingSelect.refs.select.getDOMNode();
+
+								if(data.hodOfficer.length){
+									
+									setTimeout(() => {
+										$(select).select2('data', data.hodOfficer[0], true)
+									}, 100)
+								}
+
 								this.setState({
 									memberOfParliament: val,
 									memberOfParliamentName: data.name,
@@ -275,6 +284,7 @@ var BudgetNew = React.createClass({
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_SOURCING_USER} 
 							placeholder= 'HOD Sourcing'
 							multiple = {false}
+							ref = 'hodSourcingSelect'
 							name="hodSourcing"
 							required = {true}
 							defaultValue = {currentBudget.hodSourcing}

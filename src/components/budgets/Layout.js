@@ -25,6 +25,8 @@ var BudgetContainer = React.createClass({
 		this._filters = {
 			'topics': this.props.query.topics || '',
 			'status': this.props.query.status || '',
+			'hodSourcing': this.props.query.hodSourcing || '',
+			'hodDrafting': this.props.query.hodDrafting || '',
 			'year': this.props.query.year || new Date().getFullYear()
 		}
 

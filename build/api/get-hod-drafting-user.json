@@ -1,1 +1,26 @@
-{"data":[{"id":"DISGCL","name":"ROSALIND GAN CHAI LEH","designation":"HEAD, OSHD","role":[{"id":5,"name":"Head of Department"}],"liasonOfficer":{"id":"DISCWK","name":"EILEEN CHAN WHEE KHIM"},"image":"http://10.4.36.58/ViewPhoto.aspx?NRIC=S7328963G&UserID=65"}]}
+{
+    "data": [
+        {
+            "id": "DISGCL",
+            "name": "ROSALIND GAN CHAI LEH",
+            "designation": "HEAD, OSHD",
+            "role": [
+                {
+                    "id": 5,
+                    "name": "Head of Department"
+                }
+            ],
+            "liasonOfficer": [
+            	{
+                	"id": "DISCWK",
+                	"name": "EILEEN CHAN WHEE KHIM"
+            	},
+                {
+                    "id": "DISCWK2",
+                    "name": "2EILEEN CHAN WHEE KHIM"
+                }
+            ],
+            "image": "http://10.4.36.58/ViewPhoto.aspx?NRIC=S7328963G&UserID=65"
+        }
+    ]
+}

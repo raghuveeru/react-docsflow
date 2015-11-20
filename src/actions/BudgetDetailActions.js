@@ -1,5 +1,6 @@
 import {actions} from '../constants';
 import request from 'superagent';
+import {handleResponse} from './../utilities';
 
 module.exports = {	
 	getQuestion: function(payload, callback){
@@ -10,10 +11,14 @@ module.exports = {
 				budgetCutId: payload
 			})
 			.end((err, res) => {
-				
-				this.dispatch(actions.GET_QUESTION, JSON.parse(res.text));
 
-				callback && callback()
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.GET_QUESTION, jsonResponse);
+
+					callback && callback()
+				
+				});
 			})
 	},
 	addQuestion: function(payload, callback){
@@ -38,14 +43,16 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_WORKING_DRAFT)
-			.query({
-				budgetCutId: payload
-			})
+			.query(payload)
 			.end((err, res) => {
 				
-				this.dispatch(actions.GET_WORKING_DRAFT, JSON.parse(res.text));
+				handleResponse(res, this.flux, (jsonResponse) => {
 
-				callback && callback()
+					this.dispatch(actions.GET_WORKING_DRAFT, jsonResponse);
+
+					callback && callback()
+				
+				})
 			})
 	},
 	getFinalApprovedReply: function(payload, callback){
@@ -56,10 +63,14 @@ module.exports = {
 				budgetCutId: payload
 			})
 			.end((err, res) => {
-				
-				this.dispatch(actions.GET_FINAL_APPROVED_REPLY, JSON.parse(res.text));
 
-				callback && callback()
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.GET_FINAL_APPROVED_REPLY, jsonResponse);
+
+					callback && callback()
+				
+				});
 			})
 	}
 }

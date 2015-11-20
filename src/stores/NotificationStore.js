@@ -8,13 +8,19 @@ var NotificationStore = Fluxxor.createStore({
 
 		this.bindActions(
 			actions.ADD_NOTIFICATION, this.addNotification,
-			actions.GET_SITE_NOTIFICATIONS, this.getSiteNotifications
+			actions.GET_SITE_NOTIFICATIONS, this.getSiteNotifications,
+			actions.EDITING_IN_PROGRESS, this.editingInProgress
 		)
 	},
 	getState: function(){
 		return {
 			siteNotifications: this.siteNotifications
 		}
+	},
+	editingInProgress: function(payload){
+		
+		this.emit('add', payload)
+
 	},
 	addNotification: function(payload){
 		

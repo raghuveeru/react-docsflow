@@ -1,6 +1,7 @@
 import React from 'react';
 import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
+import TextareaMaterial from '../TextareaMaterial';
 import Fluxxor from 'fluxxor';
 import Attachments from './Attachments';
 import {emitNotification} from './../../utilities';
@@ -96,8 +97,14 @@ var BudgetNewWorkingDraft = React.createClass({
 					<InputFileMaterial
 						name="attachments"
 					 />
+					 
+					<Attachments attachments = {currentDraft.attachments} budgetCutId = {this.props.budgetCutId} type = 'workingDraftDetails' />
 
-					 <Attachments attachments = {currentDraft.attachments} budgetCutId = {this.props.budgetCutId} type = 'workingDraftDetails' />
+					<TextareaMaterial
+					 	label="Draft details"
+					 	name="details"
+					 	rows = {1}
+					 />
 					
 					<div className="form-control submit-control">
 						<button className="btn btn-primary">Save</button>

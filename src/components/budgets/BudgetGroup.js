@@ -36,9 +36,9 @@ var BudgetGroup = React.createClass({
 				
 				<h3 className="budget-group-title" onClick = {toggleBound}>{group.name} ({group.items.length})</h3>
 
-				{group.items.map( (grp) => {
+				{group.items.map( (grp, idx) => {
 
-					return <BudgetInnerGroup grp = {grp} {...this.props}  />
+					return <BudgetInnerGroup key = {idx} grp = {grp} {...this.props}  />
 				})}
 															
 			</div>

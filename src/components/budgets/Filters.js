@@ -19,6 +19,18 @@ var Filters = React.createClass({
 				{mapObject(facets, (key, values, index) => {
 
 					var active = this.props.selected[key];
+					var name = key;
+					console.log(name)
+					switch(key){
+						case 'hodSourcing':
+							name = 'HOD Sourcing';
+							break;
+
+						case 'hodDrafting':
+							name = 'HOD Drafting';
+							break;
+
+					}
 
 					var totalCount = 0;
 					values.forEach(function(item){
@@ -27,10 +39,10 @@ var Filters = React.createClass({
 
 					var allActiveClass = !active? 'active': '';					
 					var clearBounds = this.onClearFacet.bind(this, key);
-					var allHTML = (key != 'year'? <a 
+					var allHTML = (key != 'year'? 	<a 
 									className={allActiveClass}
 									onClick = {clearBounds}
-									>All {key} ({totalCount})</a>: null)
+									>All {name} ({totalCount})</a>: null)
 
 					return (
 						<div className="sp-module" key = {index}>

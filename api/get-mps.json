@@ -6,8 +6,8 @@
 			"designation": "HOD",
 			"role": ["Member of Parliament"],
 			"hodOfficer": [{
-				"name": "Steve Kong",
-				"id": "11"
+				"id": "1212",
+				"name": "Lisa Lawrence"
 			}],
 			"image": "images/profile-img.png"
 		},
@@ -18,8 +18,8 @@
 			"role": ["Member of Parliament"],
 			"hodOfficer": [
 				{
-					"name": "Steve Kong",
-					"id": "1"
+					"id": "1213",
+					"name": "Christopher Brown"
 				},
 				{
 					"name": "Nair Kong",

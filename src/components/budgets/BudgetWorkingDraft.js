@@ -22,12 +22,17 @@ var BudgetWorkingDraft = React.createClass({
 	},
 	componentDidMount: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getWorkingDraft(this.props.id)
+		this.getFlux().actions.BudgetDetailActions.getWorkingDraft({
+			budgetCutId: this.props.id
+		})
 		
 	},
 	onEdit: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getWorkingDraft(this.props.id, () => {
+		this.getFlux().actions.BudgetDetailActions.getWorkingDraft({
+			budgetCutId: this.props.id, 
+			edit: true
+		}, () => {
 
 			this.setState({
 				editMode: true
@@ -64,19 +69,26 @@ var BudgetWorkingDraft = React.createClass({
 			)
 		};
 
-		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit-question" onClick = {this.onEdit}>Edit</a> : null);
+		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit link-edit-question" onClick = {this.onEdit}>Edit</a> : null);
 
 		if(workingDraft.length){
 
 			return (
 				<div>
+					<PermissionJail permission = 'canEditWorkingDraft'>
+						{editLink}
+					</PermissionJail>
 					<h4>Working draft details</h4>
 					<table className="table table-budget-item table-budget-single">
 						
 						{workingDraft.map((q, idx) => {
 
 							return (
-								<tbody key = {idx}>								
+								<tbody key = {idx}>
+								<tr>
+									<th>Draft details</th>
+									<td>{q.details}</td>
+								</tr>
 								<tr>
 									<th>Working draft within division/department</th>
 									<td>										
@@ -90,10 +102,7 @@ var BudgetWorkingDraft = React.createClass({
 								<tr>
 									<td colSpan="2">
 										<div className="activity-meta">
-											{q.date}
-											<PermissionJail permission = 'canEditWorkingDraft'>
-												{editLink}
-											</PermissionJail>
+											{q.date}											
 										</div>
 									</td>
 								</tr>

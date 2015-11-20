@@ -115,10 +115,20 @@ var BudgetNewQuestion = React.createClass({
 							multiple = {false}
 							name = 'hodDrafting'
 							defaultValue = {currentQuestion.hodDrafting}
-							onChange = { (val) => {
+							onChange = { (val, data, event) => {
+
+								var select = this.refs.liasonOfficerSelect.refs.select.getDOMNode();
+
+								if(data.liasonOfficer.length){
+
+									setTimeout(() => {
+										$(select).select2('data', data.liasonOfficer[0], true)
+									}, 100)
+								}
 								
 								this.setState({
-									hodDrafting: val
+									hodDrafting: val,
+									liasonOfficer: data.liasonOfficer.length? data.liasonOfficer[0].id : []
 								})
 							}}
 						/>
@@ -126,12 +136,31 @@ var BudgetNewQuestion = React.createClass({
 					<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_LIASON_OFFICERS} 
 							placeholder= 'Liason officer'
-							multiple = {false}
+							ref = 'liasonOfficerSelect'
+							multiple = {true}
 							name = 'liasonOfficer'
 							query = {{ hodDrafting : this.state.hodDrafting || (currentQuestion? currentQuestion.hodDrafting.id : '')}}
 							defaultValue = {currentQuestion.liasonOfficer}
-							onChange = { (val) => {
+							onChange = { (val, data) => {
 								
+								this.setState({
+									liasonOfficer: data
+								})
+								
+							}}
+						/>
+
+					<Select2  
+							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_DRAFTING_OFFICERS} 
+							placeholder= 'Drafting officer'							
+							multiple = {true}
+							name = 'draftingOfficer'							
+							defaultValue = {currentQuestion.draftingOfficer}
+							onChange = { (val, data) => {
+								
+								this.setState({
+									draftingOfficer: data
+								})
 								
 							}}
 						/>

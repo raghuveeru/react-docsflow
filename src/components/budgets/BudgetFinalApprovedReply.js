@@ -64,12 +64,15 @@ var BudgetFinalApprovedReply = React.createClass({
 			)
 		}
 
-		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit-question" onClick = {this.onEdit}>Edit</a>: null);
+		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit link-edit-question" onClick = {this.onEdit}>Edit</a>: null);
 
 		if(finalApprovedReply.length){
 
 			return (
 				<div>
+					<PermissionJail permission = 'canEditFinalDraft'>
+						{editLink}
+					</PermissionJail>
 					<h4>Final approved reply details</h4>
 					<table className="table table-budget-item table-budget-single">
 						
@@ -94,10 +97,7 @@ var BudgetFinalApprovedReply = React.createClass({
 								<tr>
 									<td colSpan="2">
 										<div className="activity-meta">
-											{q.date}
-											<PermissionJail permission = 'canEditFinalDraft'>
-												{editLink}
-											</PermissionJail>
+											{q.date}											
 										</div>
 									</td>
 								</tr>

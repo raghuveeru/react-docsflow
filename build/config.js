@@ -47,6 +47,7 @@ var API = {
 		GET_HOD_SOURCING_USER: 'api/get-hod-sourcing-user.json',
 		GET_MPS: 'api/get-mps.json',
 		GET_ALL_LIASON_OFFICERS: 'api/get-all-liason-officers.json',
+		GET_ALL_DRAFTING_OFFICERS: 'api/get-all-users.json',
 		GET_USER_BY_ID: 'api/get-user-by-id.json',
 
 
@@ -69,7 +70,11 @@ var API = {
 
 var STATUS_MAPPING = [
 	{
-		name: 'On sourcing',
+		name: 'New cut',
+		color: 'red'
+	},
+	{
+		name: 'Sourced',
 		color: '#F36C60'
 	},
 	{
@@ -77,7 +82,7 @@ var STATUS_MAPPING = [
 		color: '#FFAE6E'
 	},
 	{
-		name: 'Final draft',
+		name: 'Final answer',
 		color: '#0699F9'
 	},
 	{
@@ -108,7 +113,7 @@ var ROLES = [
 	{
 		name: 'COS Administrator',
 		id: 2,		
-		permissions: ['canViewSpeech', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer']
+		permissions: ['canViewSpeech', 'canCreateBudgetCut', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer']
 	},
 	{
 		name: 'Liaison Officers',
@@ -149,7 +154,7 @@ window.AppConfig = {
 	STATUS_MAPPING         : STATUS_MAPPING,	
 	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
 	ROLES: ROLES,
-	SUBJECT_TEMPLATE: '[MOM COS - {status}] - {topic} - {mp}',
+	SUBJECT_TEMPLATE: '[MOM COS] - {topic} - {mp}',
 	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK
 }
 

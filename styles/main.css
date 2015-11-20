@@ -3494,8 +3494,11 @@ label.label-error {
  * Assign form
  */
 .assign-form {
-  padding-bottom: 2em;
-  padding-top: 2em; }
+  padding: 1em;
+  border-radius: 4px;
+  box-shadow: 0 0 2px 0 #C2C2C2;
+  border: 1px #DFDFDF solid;
+  margin-bottom: 2em; }
 
 /**
  * Label block
@@ -7475,6 +7478,19 @@ li {
   color: #888; }
   .topic-drag-handle:hover {
     color: #333; }
+
+/**
+ * Input disabled
+ */
+.input-disabled {
+  color: #888;
+  cursor: not-allowed; }
+
+/**
+ * Link edit question
+ */
+.link-edit-question {
+  float: right; }
 
 .CircularProgress-Bg,
 .CircularProgress-Fg {

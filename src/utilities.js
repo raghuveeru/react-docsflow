@@ -192,9 +192,9 @@ module.exports = {
 
 		var roleId = CURRENT_USER.roleId;
 
-		/* For Admin */
+		/* For Admin and COS Admin */
 
-		if(roleId.indexOf(1) != -1) return true;
+		if(roleId.indexOf(1) != -1 || roleId.indexOf(2) != -1) return true;
 
 		for(var i = 0; i < AppConfig.ROLES.length; i++){
 
@@ -205,6 +205,17 @@ module.exports = {
 		}
 
 		return false
+	},
+	arrayJoin: function(array, key, separator){
+
+		var out = '',
+			size = array.length;
+
+		for(var i = 0; i < size; i ++){
+			out+= array[i][key] + (i + 1 != size? ', ' : '')			
+		}
+
+		return out;
 	}
 
 }

@@ -86,6 +86,7 @@ var Select2 = React.createClass({
 		if(defaultValue){
 
 			if(defaultValue instanceof Array){
+				selected = []
 				for(var i = 0; i < defaultValue.length; i++){
 					selected.push(defaultValue[i].id)
 				}

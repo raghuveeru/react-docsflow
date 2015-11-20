@@ -12,8 +12,7 @@ var BudgetAssignToOfficer = React.createClass({
 	mixins: [FluxMixin],
 	getInitialState: function(){
 
-		return {
-			status: '',
+		return {			
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',
@@ -32,8 +31,7 @@ var BudgetAssignToOfficer = React.createClass({
 
 				this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)
 
-				this.setState({
-					status: '',
+				this.setState({					
 					responsibleOfficer: [],
 					officersToNotify: [],
 					message: '',					
@@ -47,8 +45,7 @@ var BudgetAssignToOfficer = React.createClass({
 		var {memberOfParliament} = this.props.budget;
 		var mp = memberOfParliament?  memberOfParliament.name : '';
 
-		var sub = t(AppConfig.SUBJECT_TEMPLATE, {
-			status: this.state.status,
+		var sub = t(AppConfig.SUBJECT_TEMPLATE, {			
 			topic: this.props.budget.title,
 			mp: mp
 		});
@@ -62,6 +59,8 @@ var BudgetAssignToOfficer = React.createClass({
 		this.$form = $(this.refs.form.getDOMNode());
 
 		this.$form.validate(validationOptions);
+
+		this.updateSubject();
 
 	},
 	checkSelect2Valid: function(e){
@@ -82,24 +81,7 @@ var BudgetAssignToOfficer = React.createClass({
 		return (
 			<form ref="form" className="assign-form">
 				<h4>Assign to officer</h4>
-				
-				<Select2
-					placeholder = 'Select action' 
-					required = {true}
-					onChange = { (val, data, event) => {
-
-						this.checkSelect2Valid(event)
-
-						this.setState({
-							status: val
-						}, this.updateSubject);
-
-				}} >
-					<option></option>
-					{filterStatus(AppConfig.STATUS_MAPPING, budget.status).map((status, idx) => {
-						return <option key = {idx}>{status.name}</option>
-					})}
-				</Select2>
+								
 
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS}
@@ -133,12 +115,13 @@ var BudgetAssignToOfficer = React.createClass({
 					}}
 				/>
 
-				<InputMaterial
+				<TextareaMaterial
 					required = {true}
 					label="Subject"
 					name="subject"
 					value = {this.state.subject}
 					readOnly = {true}
+					rows = {1}
 					/>
 				
 				<TextareaMaterial 

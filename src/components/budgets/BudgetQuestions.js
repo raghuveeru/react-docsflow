@@ -4,6 +4,7 @@ import AttachmentsView from './AttachmentsView';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 import PermissionJail from './../PermissionJail';
+import {arrayJoin} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetQuestions = React.createClass({
@@ -65,12 +66,15 @@ var BudgetQuestions = React.createClass({
 			)
 		};
 
-		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit-question" onClick = {this.onEdit}>Edit</a> : null)
+		var editLink = (status.toLowerCase() != 'speech'? <a className="link-edit link-edit-question" onClick = {this.onEdit}>Edit</a> : null)
 
 		if(question.length){
 
 			return (
 				<div>
+					<PermissionJail permission="canEditQuestionDetails">
+						{editLink}
+					</PermissionJail>
 					<h4>Question details</h4>
 					<table className="table table-budget-item table-budget-single">
 						
@@ -94,16 +98,18 @@ var BudgetQuestions = React.createClass({
 								</tr>
 								<tr>
 									<th>Liason officer</th>
-									<td>{q.liasonOfficer.name}</td>
+									<td>{arrayJoin(q.liasonOfficer, 'name')}</td>
+								</tr>
+								<tr>
+									<th>Drafting officer</th>
+									<td>{arrayJoin(q.draftingOfficer, 'name')}</td>
 								</tr>
 								<tr>
 									<td colSpan="2">
 										<div className="activity-meta">
 											{q.date}
 
-											<PermissionJail permission="canEditQuestionDetails">
-												{editLink}
-											</PermissionJail>
+											
 										</div>
 									</td>
 								</tr>

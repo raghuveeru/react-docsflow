@@ -69,10 +69,12 @@ var BudgetViewBody = React.createClass({
 					/>	
 		): null;
 
+		var statusText = (currentBudget.status.toLowerCase() == 'speech')? <span className="budget-item-status budget-item-status-view" style = {{backgroundColor: getStatusName(currentBudget.status).color}}>{getStatusName(currentBudget.status).name}</span> : null;
+
 		return (
 			<div className="sp-card sp-budget-card">
 				<div className="card-body">
-					<span className="budget-item-status budget-item-status-view" style = {{backgroundColor: getStatusName(currentBudget.status).color}}>{getStatusName(currentBudget.status).name}</span>
+					{statusText}
 
 					<PermissionJail permission="canEditDeleteBudgetCut">
 						{budgetEditActions}

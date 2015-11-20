@@ -42,12 +42,12 @@ var MOMINTRANET = (function(app, $, window, undefined){
 
             });
 
-            $dropcontent.click(function(e){
+            app.$body.on('click', '.dropdown', function(e){
                 e.stopPropagation();
             })
 
             app.$html.click(function(){
-                $dropdown.removeClass('dropdown-active');
+                app.$body.find('.ui-dropdown').removeClass('dropdown-active');
             })
         }
     };

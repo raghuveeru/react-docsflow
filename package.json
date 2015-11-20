@@ -4,6 +4,7 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
+    "unminify": "webpack --config webpack.prod-unminify.js",
     "start": "node server.js",
     "lint": "eslint src"
   },

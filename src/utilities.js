@@ -1,4 +1,4 @@
-module.exports = {	
+var utilities = {	
 	mapObject: function(object, callback) {
 		return Object.keys(object).map(function (key, idx) {
 			return callback(key, object[key], idx);
@@ -137,12 +137,12 @@ module.exports = {
 
 		return AppConfig.API.BASE_URL + url;
 	},	
-	emitNotification(type, flux, error){
+	emitNotification(type, flux, message){
 
 		flux.actions.NotificationActions.addNotification({
 			title: (type == 'error'? 'Error' : 'Success'),
 			level: type,
-			message: error
+			message: message
 		});
 	},
 	handleResponse: function(response, flux, successCallback, successMessage){
@@ -157,20 +157,13 @@ module.exports = {
 
 				var errs = res.errors.map((data) => data.error);
 
-				flux.actions.NotificationActions.addNotification({
-					title: 'Error',
-					level: 'error',
-					message: errs.join('<br />')
-				});
+				utilities.emitNotification('error', flux, errs.join('<br />'))
 
 			}else{
 
 				if(successMessage){
-					flux.actions.NotificationActions.addNotification({
-						title: 'Success',
-						level: 'success',
-						message: successMessage
-					});
+
+					utilities.emitNotification('success', flux, successMessage)
 				}
 
 				successCallback && successCallback(res)
@@ -179,11 +172,7 @@ module.exports = {
 
 			// Server error
 			
-			flux.actions.NotificationActions.addNotification({
-				title: 'Error',
-				level: 'error',
-				message: response.text
-			});
+			utilities.emitNotification('error', flux, response.text)
 
 		}
 		
@@ -218,4 +207,6 @@ module.exports = {
 		return out;
 	}
 
-}
+};
+
+module.exports = utilities;

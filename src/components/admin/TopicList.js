@@ -29,9 +29,15 @@ var TopicList = React.createClass({
 	render: function(){
 
 		var klassName = 'group group-admin-topic' + (this.state.isOpen? ' group-open' : ' group-closed');
-		var {topic} = this.props;
+		var {topic, disableSort} = this.props;
 		var {showAdd} = this.state;
 
+		var budgetCutForm = disableSort? null: showAdd? <BudgetCutTopicForm 
+						{...this.props} 
+						toggleAdd = {this.toggleAdd} 
+						topic = {topic} 
+						/>: <a onClick = {this.toggleAdd}>Add budget cut topic</a>;
+		
 		return (
 			<li className={klassName}>				
 				<MainTopicTitle 
@@ -43,11 +49,7 @@ var TopicList = React.createClass({
 					
 			        <BudgetCutTopicList budgetCutTopic = {topic.budgetCutTopic} {...this.props} />
 					
-					{this.state.showAdd? <BudgetCutTopicForm 
-						{...this.props} 
-						toggleAdd = {this.toggleAdd} 
-						topic = {topic} 
-						/>: <a onClick = {this.toggleAdd}>Add budget cut topic</a>}
+					{budgetCutForm}
 				</div>
 			</li>
 		)

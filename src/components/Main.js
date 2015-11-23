@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import {RouteHandler} from 'react-router';
 import Fluxxor, {StoreWatchMixin} from 'fluxxor';
 import NotificationSystem from 'react-notification-system';
-
+import {notificationStyles} from './../constants';
 
 var FluxMixin = Fluxxor.FluxMixin(React);
 
@@ -31,7 +31,7 @@ var Main = React.createClass({
 						
 						<RouteHandler {...this.props} />
 					</div>
-					<NotificationSystem ref="notificationSystem" allowHTML = {true} />
+					<NotificationSystem ref="notificationSystem" allowHTML = {true} style = {notificationStyles} />
  				</div>
 			</div>
 		)

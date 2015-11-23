@@ -26,7 +26,7 @@ var Select2 = React.createClass({
 			// placeholder: this.props.placeholder,
 			placeholder: 'Select',
 			allowClear: this.props.allowClear,
-			formatResult: this.props.formatResult
+			formatResult: this.props.formatResult			
 		};
 
 		var {query} = this.props;
@@ -34,7 +34,7 @@ var Select2 = React.createClass({
 		if(this.props.url){
 			
 			options = jQuery.extend({}, options, {
-				data:{ text: "name" },
+				data:{ text: "name" },				
 				multiple: this.props.multiple || false,				
 				initSelection: (element, callback) => {
 
@@ -80,7 +80,7 @@ var Select2 = React.createClass({
 	},
 	render: function(){
 
-		var {defaultValue} = this.props,
+		var {defaultValue, className} = this.props,
 			selected = '';
 
 		if(defaultValue){
@@ -96,11 +96,12 @@ var Select2 = React.createClass({
 		}
 
 		var label = <label className="label-select">{this.props.placeholder}</label>;
+		var klassName= 'select2-element ' + className;
 
 		if(!this.props.url){
 
 			return (
-				<div className="select2-element">					
+				<div className={klassName}>
 					{label}
 					<select 
 						required ={this.props.required}

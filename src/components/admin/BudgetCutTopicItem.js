@@ -30,23 +30,25 @@ var BudgetCutTopicItem = React.createClass({
 	},
 	render: function(){
 
-		var {budgetCutTopic, topic} = this.props
+		var {budgetCutTopic, topic, disableSort} = this.props;
+		var {isEditing} = this.state;
 		
 		return (
 			<li className="budget-list-subitem">			
 				<span className="drag-handle topic-drag-handle fa fa-bars"></span>
 				<span>{budgetCutTopic.name}</span>
-				{this.state.isEditing? <BudgetCutTopicForm
+				{isEditing? <BudgetCutTopicForm
 					{...this.props}
 					topic = {topic}
 					toggleAdd = {this.toggleEdit}
 					budgetCutTopic = {budgetCutTopic}
 					buttonTitle = 'Save'
 				/> : null}
-				<div className="topic-cell-actions">
+				
+				{disableSort? null: <div className="topic-cell-actions">
 					<a onClick = {this.toggleEdit}>Edit</a>
 					<a onClick = {this.onDelete}>Delete</a>
-				</div>
+				</div>}
 			</li>
 		)
 	}

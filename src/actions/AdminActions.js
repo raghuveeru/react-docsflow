@@ -34,12 +34,13 @@ var AdminActions = {
 				NProgress.done()
 			})		
 	},
-	getMainTopics: function(){
+	getMainTopics: function(payload){
 
 		NProgress.start()
 
 		request			
 			.get(AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_MAIN_TOPICS)
+			.query(payload)
 			.set(headers)
 			.end((err, res) => {
 				

@@ -5,7 +5,10 @@ import NewTopic from './NewTopic';
 import {customStyles} from '../../constants';
 import TopicList from './TopicList';
 import SortableMixin from 'Sortablejs/react-sortable-mixin';
+import Select2 from './../Select2';
 
+var currentDate = new Date();
+var currentYear = currentDate.getFullYear();
 
 var Topics = React.createClass({
 	mixins: [StoreWatchMixin('AdminStore')],
@@ -16,13 +19,25 @@ var Topics = React.createClass({
 			isModalOpen: false,
 		}
 	},
+	getInitialState: function(){
+
+		return {
+			year: currentYear
+		}
+	},
 	contextTypes: {
 		router: React.PropTypes.func
 	},
 	componentDidMount: function(){
 		
-		this.props.flux.actions.AdminActions.getMainTopics()
+		this.requestTopics();
 
+	},
+	requestTopics: function(){
+		
+		this.props.flux.actions.AdminActions.getMainTopics({
+			year: this.state.year
+		})
 	},
 	closeModal: function(){
 		
@@ -39,12 +54,35 @@ var Topics = React.createClass({
 	render: function(){
 
 		var {topics} = this.state.AdminStore;
-
+		var disableSort = this.state.year != currentYear;
+		
 		if(!topics.length) return null;
 		
 		return (
 			<div>
-				<a className="card-link" onClick = {this.openModal}><em className="fa fa-plus" />Add topic</a>
+				{disableSort? 
+					<span className="card-link" style = {{opacity: 0.6}}><em className="fa fa-plus" />Add topic</span>
+					: 
+					<a className="card-link" onClick = {this.openModal}><em className="fa fa-plus" />Add topic</a>
+				}
+				<Select2
+					className="topic-select-year"
+					placeholder="Select year"
+					value = {currentYear}
+					onChange = { (val) => {
+						
+						this.setState({
+							year: val
+						}, this.requestTopics)
+
+					}}
+				>
+					<option></option>
+					{AppConfig.ADMIN_TOPIC_YEARS.map( (year) => {
+						return <option>{year}</option>	
+					})}
+					
+				</Select2>
 				<Modal 
 					isOpen = {this.state.isModalOpen}
 					style={customStyles}
@@ -53,7 +91,7 @@ var Topics = React.createClass({
 					<NewTopic {...this.props} closeModal = {this.closeModal} />
 				</Modal>
 
-				<TopicsSortable topics = {topics} {...this.props} />
+				<TopicsSortable topics = {topics} {...this.props} disableSort = {disableSort} />
 			</div>
 		)
 	}
@@ -65,6 +103,11 @@ var TopicsSortable = React.createClass({
 	sortableOptions: { 
 		model: "maintopics",
 		handle: '.drag-handle-main-topic'
+	},
+	getDefaultProps: function(){
+		return {
+			disableSort : false
+		}
 	},
 	getInitialState: function(){
 		return {
@@ -84,15 +127,21 @@ var TopicsSortable = React.createClass({
 			userId: CURRENT_USER.id
 		})
 	},
-	render: function(){
+	componentDidUpdate: function(nextProps){
 
+		this._sortableInstance.option('disabled', nextProps.disableSort)		
+	},
+	render: function(){
+		
 		var {maintopics} = this.state;
+		var {disableSort} = this.props;
+		var klassName = 'main-topic-list' + (disableSort? ' disable-sort': '');
 
 		return (
-			<ul className="main-topic-list">
+			<ul className={klassName}>
 			{maintopics.map((topic, idx) => {
 
-					return <TopicList {...this.props} index = {idx} key = {idx} topic = {topic} {...this.movableProps} />
+					return <TopicList {...this.props} index = {idx} key = {idx} topic = {topic} {...this.movableProps}  />
 				})}
 			</ul>
 		)

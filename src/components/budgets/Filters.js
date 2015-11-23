@@ -20,7 +20,7 @@ var Filters = React.createClass({
 
 					var active = this.props.selected[key];
 					var name = key;
-					console.log(name)
+					
 					switch(key){
 						case 'hodSourcing':
 							name = 'HOD Sourcing';

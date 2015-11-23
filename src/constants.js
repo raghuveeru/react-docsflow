@@ -60,6 +60,16 @@ module.exports = {
 			overflow: 'auto'
 		}
 	},
+	notificationStyles: {		
+		NotificationItem: {
+			error: {
+				borderColor: '#874141'
+			},
+			success: {
+				borderColor: '#5A8321'
+			}
+		}
+	},
 	headers: {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json'

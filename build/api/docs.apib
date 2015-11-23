@@ -622,9 +622,13 @@ This is the API blueprint for Momster COS application
 	```
 
 
-## Get Main Topics [/api/v2/get-topics]
+## Get Main Topics [/api/v2/get-topics{?year}]
 
 ### Get main topics [GET]
+
++ Parameters
+
+	+ year: `2015` (string)
 
 + Response 200
 
@@ -1131,9 +1135,13 @@ This is the API blueprint for Momster COS application
 
 # Group Topics
 
-## Main Topics [/api/get-main-topics{?topicId,topicName,userId}]
+## Main Topics [/api/get-main-topics{?topicId,topicName,userId,year}]
 
 ### Get all main topics [GET]
+
++ Parameters
+
+	+ year: `2015` (string)
 
 + Response 200
 
@@ -1224,7 +1232,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Budget Cut Topic [/api/budget-cut-topics/{?budgetCutTopicId,topicId,topicName,budgetCutTopicName,q,userId}]
+## Budget Cut Topic [/api/budget-cut-topics/{?budgetCutTopicId,topicId,topicName,budgetCutTopicName,q,userId,id}]
 
 ### Get all Budget Cut Topics [GET]
 
@@ -1305,7 +1313,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Order Topics [/api/v1/update-order-topic{?topics,mainTopicId,subTopics}]
+## Order Topics [/api/v1/update-order-topic{?topics,mainTopicId,subTopics,userId}]
 
 ### Order Main Topics [POST]
 

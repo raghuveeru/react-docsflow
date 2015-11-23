@@ -93,16 +93,6 @@ var STATUS_MAPPING = [
 
 var ALL_NOTIFICATIONS_LINK = 'http://href.xom';
 
-var ROLE_PERMISSION_MAPPING = {
-	'System Administrator': ['Admin'],
-	'COS Administrator': ['canViewSpeech', 'canEditDeleteBudgetCut'],
-	// 'Liaison Officers': [],
-	'Registry Officers': ['canCreateBudgetCut'],
-	// 'Head of Department': [],
-	'Desk Officer': [],
-	'Speech Writer': ['canViewSpeech']
-};
-
 var ROLES = [
 	{
 		name: 'System Administrator',
@@ -155,6 +145,7 @@ window.AppConfig = {
 	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
 	ROLES: ROLES,
 	SUBJECT_TEMPLATE: '[MOM COS] - {topic} - {mp}',
-	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK
+	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK,
+	ADMIN_TOPIC_YEARS: ['2015', '2014', '2013', '2012']
 }
 

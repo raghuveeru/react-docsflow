@@ -45,7 +45,7 @@ var MainTopicTitle = React.createClass({
 	},
 	render: function(){
 
-		var {topic} = this.props;
+		var {topic, disableSort} = this.props;
 
 		return (
 			<div>				
@@ -55,10 +55,10 @@ var MainTopicTitle = React.createClass({
 					<span className="drag-handle-main-topic topic-drag-handle fa fa-bars"></span>
 					{topic.name}
 
-					<div className="topic-cell-actions">
+					{disableSort? null: <div className="topic-cell-actions">
 						<a onClick = {this.onEditMainTopic.bind(this, topic.id)}>Edit</a>
 						<a onClick = {this.deleteTopic}>Delete</a>
-					</div>
+					</div>}
 				</h3>
 				<Modal 
 					isOpen = {this.state.isModalOpen}

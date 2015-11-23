@@ -7471,13 +7471,25 @@ li {
 .sub-topic-list, .main-topic-list {
   list-style: none;
   margin: 0;
-  padding-bottom: 1em; }
+  padding-bottom: 1em;
+  clear: both; }
 
 .topic-drag-handle {
   cursor: move;
   color: #888; }
   .topic-drag-handle:hover {
     color: #333; }
+
+/**
+     * When disabled
+     */
+.disable-sort .topic-drag-handle {
+  display: none; }
+
+.disable-sort .budget-group-title {
+  padding-left: 26px; }
+  .disable-sort .budget-group-title:before {
+    left: 0; }
 
 /**
  * Input disabled
@@ -8683,6 +8695,13 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 
 .select2-drop-active {
   border-color: #ccc; }
+
+/**
+ * Topic select
+ */
+.topic-select-year {
+  margin-top: 0;
+  float: right; }
 
 /* Typography */
 /*------------------------------------*    TYPOGRAPHY.CSS

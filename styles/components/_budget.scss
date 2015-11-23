@@ -535,6 +535,7 @@
     list-style: none;
     margin: 0;
     padding-bottom: 1em;
+    clear: both;
 }
 
     .topic-drag-handle {
@@ -543,6 +544,24 @@
 
         &:hover{
             color: $base-color;
+        }
+    }
+
+    /**
+     * When disabled
+     */
+    
+    .disable-sort{
+        .topic-drag-handle{
+            display: none;
+        }
+
+        .budget-group-title{
+            padding-left: 26px;
+
+            &:before{
+                left: 0;
+            }
         }
     }
 

@@ -319,10 +319,11 @@ This is the API blueprint for Momster COS application
 	true
 	```
 
-## Budget Questions [/api/v1/get_question_details{?budgetCutId,userId,details,attachments,hodDrafting,liasonOfficer}]
+## Budget Questions [/api/v1/get_question_details{?budgetCutId,userId,details,attachments,hodDrafting,liasonOfficer,edit}]
 
 + Parameters
 	+ budgetCutId: `1` (string)
+	+ edit: `true|false` (string)
 
 ### Get Question details [GET]
 
@@ -392,10 +393,11 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Working draft details [/api/v1/get_working_draft_details{?budgetCutId,attachments,userId}]
+## Working draft details [/api/v1/get_working_draft_details{?budgetCutId,attachments,userId,edit}]
 
 + Parameters
 	+ budgetCutId: `1` (string)
+	+ edit: `true|false` (string)
 
 ### Get Working draft details [GET]
 
@@ -445,10 +447,11 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Final approved reply [/api/v1/get_final_approved_reply{?budgetCutId,attachments,types,userId}]
+## Final approved reply [/api/v1/get_final_approved_reply{?budgetCutId,attachments,types,userId,edit}]
 
 + Parameters
 	+ budgetCutId: `1` (string)
+	+ edit: `true|false` (string)
 
 ### Get final approved reply [GET]
 
@@ -773,6 +776,24 @@ This is the API blueprint for Momster COS application
 	+ budgetCutId: `12` (string)
 	+ id: `1` ID of the attachment (string)
 	+ type: `questionDetails|workingDraftDetails|finalDraftDetails` (string)
+
++ Response 200
+
+	```
+	{
+		"success": true
+	}
+	```
+
+## Cancel Edit [/api/v1/cancel-edit(?type,budgetCutId,edit)]
+
+### Cancel Edit [POST]
+
++ Parameters
+
+	+ type: `questionDetails|workingDraftDetails|finalDraftDetails` (string)
+	+ budgetCutId: `23` (string)
+	+ edit: `false` (string)
 
 + Response 200
 

@@ -20,6 +20,16 @@ var BudgetNewFinalApprovedReply = React.createClass({
 				isOpen: !this.state.isOpen
 			})
 		}
+
+		if(this.props.editMode){
+			// Send a API call to clear Edit session variable
+			
+			this.getFlux().actions.BudgetDetailActions.cancelEdit({
+				type: 'finalDraftDetails',
+				budgetCutId: this.props.budgetCutId,
+				edit: false
+			})
+		}
 	},
 	componentDidMount: function(){
 

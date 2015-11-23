@@ -23,7 +23,9 @@ var API = {
 
 		DELETE_BUDGET_CUT: 'api/delete-budget-cut-response.json',
 		UPDATE_BUDGET_CUT: 'api/budget-cuts-single.json',
-		DELETE_ATTACHMENT: 'api/delete-attachment.json'
+		DELETE_ATTACHMENT: 'api/delete-attachment.json',
+
+		CANCEL_EDIT: 'api/cancel-edit.json'
 	},
 	TOPICS: {
 		GET_MAIN_TOPICS: 'api/get-main-topics.json',
@@ -84,7 +86,8 @@ var STATUS_MAPPING = [
 	},
 	{
 		name: 'Final answer',
-		color: '#0699F9'
+		color: '#0699F9',
+		showCheckbox: true
 	},
 	{
 		name: 'Speech',

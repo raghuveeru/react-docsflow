@@ -4,6 +4,8 @@ import {mapObject, getStatusName} from './../../utilities';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
+var statusToShowCheckbox = AppConfig.STATUS_MAPPING.filter( (status) => status.showCheckbox).map( (status)=> status.name.toLowerCase());
+
 var BudgetInnerGroup = React.createClass({
 	mixins: [FluxMixin],
 	getInitialState: function(){
@@ -43,7 +45,7 @@ var BudgetInnerGroup = React.createClass({
 				var hodDrafting = item.hodDrafting? item.hodDrafting.name : '';
 				var liasonOfficer = item.liasonOfficer? item.liasonOfficer.name : '';
 
-				var showCheckbox = (item.status.toLowerCase() == 'final draft');
+				var showCheckbox = (statusToShowCheckbox.indexOf(item.status.toLowerCase()) != -1);
 				var statusText = (item.status.toLowerCase() == 'speech')? <span className="budget-item-status" style = {{backgroundColor: getStatusName(item.status).color}}>{getStatusName(item.status).name}</span> : null;
 
 				var {completedStatus} = item;

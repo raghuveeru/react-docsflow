@@ -7,9 +7,7 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_QUESTION)
-			.query({
-				budgetCutId: payload
-			})
+			.query(payload)
 			.end((err, res) => {
 
 				handleResponse(res, this.flux, (jsonResponse) => {
@@ -59,9 +57,7 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_FINAL_APPROVED_REPLY)
-			.query({
-				budgetCutId: payload
-			})
+			.query(payload)
 			.end((err, res) => {
 
 				handleResponse(res, this.flux, (jsonResponse) => {
@@ -71,6 +67,16 @@ module.exports = {
 					callback && callback()
 				
 				});
+			})
+	},
+	cancelEdit: function(payload){
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CANCEL_EDIT)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				this.dispatch(actions.CANCEL_EDIT, JSON.parse(res.text));
 			})
 	}
 }

@@ -23,12 +23,17 @@ var BudgetQuestions = React.createClass({
 	},
 	componentDidMount: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getQuestion(this.props.id)
+		this.getFlux().actions.BudgetDetailActions.getQuestion({
+			budgetCutId: this.props.id
+		})
 		
 	},
 	onEdit: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getQuestion(this.props.id, () => {
+		this.getFlux().actions.BudgetDetailActions.getQuestion({
+			budgetCutId: this.props.id,
+			edit: true
+		}, () => {
 
 			this.setState({
 				editMode: true

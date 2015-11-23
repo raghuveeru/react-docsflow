@@ -26,7 +26,17 @@ var BudgetNewQuestion = React.createClass({
 
 		this.setState({
 			isOpen: false
-		})	
+		})
+
+		if(this.props.editMode){
+			// Send a API call to clear Edit session variable
+			
+			this.getFlux().actions.BudgetDetailActions.cancelEdit({
+				type: 'questionDetails',
+				budgetCutId: this.props.budgetCutId,
+				edit: false
+			})
+		}
 
 		this.props.onCancelForm && this.props.onCancelForm.call(this)
 	},

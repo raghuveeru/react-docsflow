@@ -22,12 +22,17 @@ var BudgetFinalApprovedReply = React.createClass({
 	},
 	componentDidMount: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply(this.props.id)
+		this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply({
+			budgetCutId: this.props.id
+		})
 		
 	},
 	onEdit: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply(this.props.id, () => {
+		this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply({
+			budgetCutId: this.props.id,
+			edit: true
+		}, () => {
 
 			this.setState({
 				editMode: true

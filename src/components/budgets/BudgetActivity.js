@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import {customStyles} from '../../constants';
 import Loader from './../Loader';
 import Fluxxor, {StoreWatchMixin} from 'fluxxor';
+import {getUserRoleName} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetActivity = React.createClass({
@@ -64,10 +65,14 @@ var BudgetActivityItem = React.createClass({
 			isModalOpen: false
 		})	
 	},
-	renderUser: function(usersArray){
+	renderUsers: function(usersArray){
 
-		return usersArray.map( (user) => {
-			return <strong>{user.name}</strong>
+		var len = usersArray.length;
+		return usersArray.map( (user, idx) => {
+			
+			var roles = getUserRoleName(user.role);
+			var xtra = (idx != len - 1? ', ': '');
+			return (<span><strong>{user.name}</strong>, {roles}{xtra}</span>)
 		})
 	},
 	render: function(){
@@ -75,14 +80,18 @@ var BudgetActivityItem = React.createClass({
 		var {activity} = this.props;
 		var fromUser = activity.from;
 		var toUser = activity.to;
+		
+		var image = fromUser.length? fromUser[0].image: null;
 
 		return (
 			<li>
 				<div className="media-item">
-					<img src = {fromUser.image} style = {{width: '40'}} />
+					{image?
+						<img src = {image} style = {{width: '40'}} />
+					: null}
 				</div>
 				<div className="media-content">
-					<strong>{this.renderUser(fromUser)}</strong> {activity.action} to {this.renderUser(toUser)} <strong></strong>
+					{this.renderUsers(fromUser)} {activity.action} to {this.renderUsers(toUser)}<strong></strong>
 
 					<div className="activity-meta">
 						{activity.date}

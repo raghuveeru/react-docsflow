@@ -209,7 +209,7 @@ var utilities = {
 	getUserRoleName: function(roles){
 
 		var rolesHTML = [];
-		console.log(roles[0])
+		
 		if(roles.length && typeof roles[0] == 'string') return roles[0]
 
 		if(typeof roles == 'object'){

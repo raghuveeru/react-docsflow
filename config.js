@@ -71,7 +71,8 @@ var API = {
 var STATUS_MAPPING = [
 	{
 		name: 'New cut',
-		color: 'red'
+		color: 'red',
+		defaultStatus: true
 	},
 	{
 		name: 'Sourced',

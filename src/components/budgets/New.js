@@ -7,7 +7,9 @@ import {validationOptions} from './../../constants';
 import {Link} from 'react-router';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
-var FluxMixin = Fluxxor.FluxMixin(React)
+var FluxMixin = Fluxxor.FluxMixin(React);
+
+var defaultStatus = AppConfig.STATUS_MAPPING.filter( (status) => status.defaultStatus).map( (item) => item.name)
 
 var BudgetNew = React.createClass({	
 	mixins: [FluxMixin, StoreWatchMixin('BudgetStore')],
@@ -37,7 +39,7 @@ var BudgetNew = React.createClass({
 			fileReferenceNo: '',
 			summary: '',
 			time: '',
-			status: 'On sourcing',
+			status: defaultStatus[0],
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',

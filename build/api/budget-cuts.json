@@ -27,7 +27,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISGCL"
+            "userId": "DISGCL",
+            "completedStatus": ["New cut", "Working Draft"]
         },
         {
             "id": 6,
@@ -56,7 +57,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": null
+            "userId": null,
+            "completedStatus": []
         },
         {
             "id": 7,
@@ -85,7 +87,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": null
+            "userId": null,
+            "completedStatus": []
         },
         {
             "id": 8,
@@ -114,7 +117,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": null
+            "userId": null,
+            "completedStatus": []
         },
         {
             "id": 10,
@@ -143,7 +147,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 11,
@@ -172,7 +177,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 12,
@@ -201,7 +207,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 13,
@@ -230,7 +237,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 14,
@@ -259,7 +267,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 15,
@@ -288,7 +297,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 16,
@@ -317,7 +327,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 17,
@@ -346,7 +357,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 18,
@@ -375,7 +387,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 19,
@@ -404,7 +417,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 20,
@@ -433,7 +447,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 21,
@@ -462,7 +477,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 22,
@@ -491,7 +507,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 23,
@@ -520,7 +537,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 24,
@@ -549,7 +567,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 25,
@@ -578,7 +597,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 26,
@@ -607,7 +627,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 27,
@@ -636,7 +657,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 28,
@@ -665,7 +687,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 30,
@@ -694,7 +717,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISGCL"
+            "userId": "DISGCL",
+            "completedStatus": []
         },
         {
             "id": 31,
@@ -723,7 +747,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISGCL"
+            "userId": "DISGCL",
+            "completedStatus": []
         },
         {
             "id": 32,
@@ -752,7 +777,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 33,
@@ -781,7 +807,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "HQDCSY"
+            "userId": "HQDCSY",
+            "completedStatus": []
         },
         {
             "id": 35,
@@ -810,7 +837,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "FMMHWW"
+            "userId": "FMMHWW",
+            "completedStatus": []
         },
         {
             "id": 36,
@@ -839,7 +867,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "CRDQCY"
+            "userId": "CRDQCY",
+            "completedStatus": []
         },
         {
             "id": 37,
@@ -868,7 +897,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "CRDQCY"
+            "userId": "CRDQCY",
+            "completedStatus": []
         },
         {
             "id": 38,
@@ -897,7 +927,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "CRDQCY"
+            "userId": "CRDQCY",
+            "completedStatus": []
         },
         {
             "id": 39,
@@ -926,7 +957,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 40,
@@ -955,7 +987,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 41,
@@ -984,7 +1017,8 @@
                 "id": 2,
                 "category": "B1. Fair Consideration Framework(FCF) and Jobs Banks"
             },
-            "userId": "CRDQCY"
+            "userId": "CRDQCY",
+            "completedStatus": []
         },
         {
             "id": 42,
@@ -1013,7 +1047,8 @@
                 "id": 2,
                 "category": "B1. Fair Consideration Framework(FCF) and Jobs Banks"
             },
-            "userId": "CRDQCY"
+            "userId": "CRDQCY",
+            "completedStatus": []
         },
         {
             "id": 43,
@@ -1042,7 +1077,8 @@
                 "id": 4,
                 "category": "C1. Low Wage Workers (LWWs)"
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 49,
@@ -1071,7 +1107,8 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         },
         {
             "id": 50,
@@ -1100,7 +1137,8 @@
                 "id": 2,
                 "category": "B1. Fair Consideration Framework(FCF) and Jobs Banks"
             },
-            "userId": "FMMHWW"
+            "userId": "FMMHWW",
+            "completedStatus": []
         },
         {
             "id": 57,
@@ -1129,7 +1167,8 @@
                 "id": 3,
                 "category": "A2. SkillFuture (directly related only)"
             },
-            "userId": "DISGCL"
+            "userId": "DISGCL",
+            "completedStatus": []
         },
         {
             "id": 58,
@@ -1158,13 +1197,14 @@
                 "id": 1,
                 "category": "A1. Labour Market "
             },
-            "userId": "DISCWK"
+            "userId": "DISCWK",
+            "completedStatus": []
         }
     ],
     "facets": {
         "status": [
             {
-                "name": "On Sourcing",
+                "name": "New cut",
                 "count": "7"
             },
             {
@@ -1172,7 +1212,7 @@
                 "count": "26"
             },
             {
-                "name": "Final Draft",
+                "name": "Final answer",
                 "count": "4"
             },
             {
@@ -1313,7 +1353,7 @@
     },
     "totalStatusCount": [
         {
-            "name": "On Sourcing",
+            "name": "New cut",
             "count": "7"
         },
         {
@@ -1321,7 +1361,7 @@
             "count": "26"
         },
         {
-            "name": "Final Draft",
+            "name": "Final answer",
             "count": "4"
         },
         {

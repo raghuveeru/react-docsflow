@@ -94,6 +94,29 @@ var STATUS_MAPPING = [
 
 var ALL_NOTIFICATIONS_LINK = 'http://href.xom';
 
+// var BUDGET_FACETS: [
+// 	{
+// 		name: 'topics',
+// 		displayName: 'Topics'		
+// 	},
+// 	{
+// 		name: 'status',
+// 		displayName: 'Status'		
+// 	},
+// 	{
+// 		name: 'hodSourcing',
+// 		displayName: 'HOD Sourcing'		
+// 	},
+// 	{
+// 		name: 'hodDrafting',
+// 		displayName: 'HOD Drafting'		
+// 	},
+// 	{
+// 		name: 'year',
+// 		displayName: 'Year'		
+// 	}
+// ];
+
 var ROLES = [
 	{
 		name: 'System Administrator',

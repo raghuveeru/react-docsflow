@@ -7514,7 +7514,9 @@ li {
 
 .CircularProgress-Fg {
   transition: stroke-dashoffset .5s ease-in-out;
-  stroke: #2ecc40; }
+  stroke: #2ecc40;
+  transform: rotateZ(-90deg);
+  transform-origin: center; }
 
 .CircularProgress-Text {
   font-family: sans-serif;

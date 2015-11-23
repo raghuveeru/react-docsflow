@@ -18,6 +18,8 @@ svg{
 .CircularProgress-Fg {
     transition: stroke-dashoffset .5s ease-in-out;
     stroke: $fg-color;
+    transform: rotateZ(-90deg);
+    transform-origin: center;
 }
 
 .CircularProgress-Text {

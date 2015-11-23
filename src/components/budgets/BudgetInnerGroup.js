@@ -45,6 +45,9 @@ var BudgetInnerGroup = React.createClass({
 
 				var showCheckbox = (item.status.toLowerCase() == 'final draft');
 				var statusText = (item.status.toLowerCase() == 'speech')? <span className="budget-item-status" style = {{backgroundColor: getStatusName(item.status).color}}>{getStatusName(item.status).name}</span> : null;
+
+				var {completedStatus} = item;
+				var completedStatus = completedStatus? completedStatus.map( (status) => status.toLowerCase()) : [];
 				
 				return (
 					<Link to = 'budgetsView' params={{id: item.id}} className="budget-list-item-inner" key = {index}>					
@@ -88,16 +91,12 @@ var BudgetInnerGroup = React.createClass({
 						</table>
 						<div className="status-trail">
 							{AppConfig.STATUS_MAPPING.map((status, idx) => {		
-
-								var key = status.name;
-
-								if(key.toLowerCase() == item.status.toLowerCase()){
-									statusIdx = idx;
-								}
+								var completedS = completedStatus || []
 								
-								var statusClassName = 'status-trail-item' + (key == item.status? ' active' : '') + (idx > statusIdx? ' inactive': '');
+								var isCompleted = completedS.indexOf(status.name.toLowerCase()) != -1;
+								var statusClassName = 'status-trail-item' + (isCompleted? ' active' : ' inactive')
 								return (
-									<span className={statusClassName} key = {idx}>{key}</span>
+									<span className={statusClassName} key = {idx}>{status.name}</span>
 								)
 							})}
 						</div>

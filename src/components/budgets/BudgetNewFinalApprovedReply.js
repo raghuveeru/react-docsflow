@@ -3,7 +3,7 @@ import InputMaterial from '../InputMaterial';
 import InputFileMaterial from '../InputFileMaterial';
 import Fluxxor from 'fluxxor';
 import Attachments from './Attachments';
-import {emitNotification} from './../../utilities';
+import {emitNotification, createEditFlag, deleteEditFlag} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewFinalApprovedReply = React.createClass({	
@@ -15,21 +15,26 @@ var BudgetNewFinalApprovedReply = React.createClass({
 	},
 	toggle: function(){
 
-		if(this.isMounted()){
-			this.setState({
-				isOpen: !this.state.isOpen
-			})
-		}
 
-		if(this.props.editMode){
-			// Send a API call to clear Edit session variable
-			
-			this.getFlux().actions.BudgetDetailActions.cancelEdit({
-				type: 'finalDraftDetails',
-				budgetCutId: this.props.budgetCutId,
-				edit: false
-			})
-		}
+			if(!this.state.isOpen){
+
+				createEditFlag(this.getFlux(), 'finalDraftDetails', this.props.budgetCutId, () => {
+
+					this.setState({
+						isOpen: !this.state.isOpen
+					})
+				})
+			}
+	},
+	cancelForm: function(){
+
+		this.setState({
+			isOpen: false
+		})
+
+		deleteEditFlag(this.getFlux(), 'finalDraftDetails', this.props.budgetCutId)
+
+		this.props.onCancelForm && this.props.onCancelForm.call(this)
 	},
 	componentDidMount: function(){
 
@@ -53,7 +58,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 
 					emitNotification('success', this.getFlux(), this.props.editMode? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
 
-					this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data, this.toggle)
+					this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data)
 
 					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 
@@ -120,7 +125,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 					
 					<div className="form-control submit-control">
 						<button className="btn btn-primary">Save</button>
-						<a className="btn btn--unstyled" onClick = {this.toggle}>Cancel</a>
+						<a className="btn btn--unstyled" onClick = {this.cancelForm}>Cancel</a>
 					</div>
 				</div>
 			</form>

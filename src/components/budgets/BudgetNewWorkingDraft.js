@@ -4,7 +4,7 @@ import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
 import Fluxxor from 'fluxxor';
 import Attachments from './Attachments';
-import {emitNotification} from './../../utilities';
+import {emitNotification, createEditFlag, deleteEditFlag} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewWorkingDraft = React.createClass({	
@@ -16,11 +16,16 @@ var BudgetNewWorkingDraft = React.createClass({
 	},
 	toggle: function(){
 
-		if(this.isMounted()){
-			this.setState({
-				isOpen: !this.state.isOpen
+		if(!this.state.isOpen){
+
+			createEditFlag(this.getFlux(), 'workingDraftDetails', this.props.budgetCutId, () => {
+
+				this.setState({
+					isOpen: !this.state.isOpen
+				})
 			})
 		}
+
 	},
 	cancelForm: function(){
 
@@ -28,15 +33,7 @@ var BudgetNewWorkingDraft = React.createClass({
 			isOpen: false
 		})
 
-		if(this.props.editMode){
-			// Send a API call to clear Edit session variable
-			
-			this.getFlux().actions.BudgetDetailActions.cancelEdit({
-				type: 'workingDraftDetails',
-				budgetCutId: this.props.budgetCutId,
-				edit: false
-			})
-		}
+		deleteEditFlag(this.getFlux(), 'workingDraftDetails', this.props.budgetCutId)
 
 		this.props.onCancelForm && this.props.onCancelForm.call(this)
 	},
@@ -62,7 +59,7 @@ var BudgetNewWorkingDraft = React.createClass({
 
 					emitNotification('success', this.getFlux(), this.props.editMode? 'Working draft details successfully updated.' : 'Working draft details successfull added.');
 
-					this.getFlux().actions.BudgetDetailActions.addWorkingDraft(data, this.toggle)
+					this.getFlux().actions.BudgetDetailActions.addWorkingDraft(data)
 
 					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 
@@ -95,7 +92,7 @@ var BudgetNewWorkingDraft = React.createClass({
 		}
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = {url}>
+			<form ref="ajaxForm" method = 'get' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

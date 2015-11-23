@@ -4,6 +4,7 @@ import AttachmentsView from './AttachmentsView';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 import PermissionJail from './../PermissionJail';
+import {createEditFlag, deleteEditFlag} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetWorkingDraft = React.createClass({
@@ -29,15 +30,24 @@ var BudgetWorkingDraft = React.createClass({
 	},
 	onEdit: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getWorkingDraft({
-			budgetCutId: this.props.id, 
-			edit: true
-		}, () => {
+		/**
+		 * Create an edit flag
+		 */
+		
+		createEditFlag(this.getFlux(), 'workingDraftDetails', this.props.id, () => {
 
-			this.setState({
-				editMode: true
-			})
-		});
+			/* If no errors: Turn on Edit Mode */
+
+			this.getFlux().actions.BudgetDetailActions.getWorkingDraft({
+				budgetCutId: this.props.id
+			}, () => {
+
+				this.setState({
+					editMode: true
+				})
+			});
+
+		})
 
 	},
 	render: function(){
@@ -57,11 +67,13 @@ var BudgetWorkingDraft = React.createClass({
 							this.setState({
 								editMode: false
 							})
+
+							deleteEditFlag(this.getFlux(), 'workingDraftDetails', this.props.id)
 						}}
 						onCancelForm = {()=> {
 							this.setState({
 								editMode: false
-							})
+							})							
 						}}
 					/>
 					<hr className="rule" />
@@ -119,7 +131,12 @@ var BudgetWorkingDraft = React.createClass({
 		return (
 			<PermissionJail permission = 'canEditWorkingDraft'>
 				<div>
-					<BudgetNewWorkingDraft budgetCutId = {this.props.id} />
+					<BudgetNewWorkingDraft 
+						budgetCutId = {this.props.id} 
+						onFinishEdit = { () => {
+							deleteEditFlag(this.getFlux(), 'workingDraftDetails', this.props.id)
+						}}
+					/>
 					<hr className="rule" />	
 				</div>
 			</PermissionJail>

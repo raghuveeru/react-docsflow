@@ -4,7 +4,7 @@ import AttachmentsView from './AttachmentsView';
 import Fluxxor from 'fluxxor';
 import {StoreWatchMixin} from 'fluxxor';
 import PermissionJail from './../PermissionJail';
-import {arrayJoin} from './../../utilities';
+import {arrayJoin, createEditFlag, deleteEditFlag, emitNotification} from './../../utilities';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetQuestions = React.createClass({
@@ -30,15 +30,24 @@ var BudgetQuestions = React.createClass({
 	},
 	onEdit: function(){
 
-		this.getFlux().actions.BudgetDetailActions.getQuestion({
-			budgetCutId: this.props.id,
-			edit: true
-		}, () => {
+		/**
+		 * Create an edit flag
+		 */
+		
+		createEditFlag(this.getFlux(), 'questionDetails', this.props.id, () => {
 
-			this.setState({
-				editMode: true
-			})
-		});
+			/* If no errors: Turn on Edit Mode */
+
+			this.getFlux().actions.BudgetDetailActions.getQuestion({
+				budgetCutId: this.props.id
+			}, () => {
+
+				this.setState({
+					editMode: true
+				})
+			});
+
+		})
 
 	},
 	render: function(){
@@ -64,6 +73,8 @@ var BudgetQuestions = React.createClass({
 							this.setState({
 								editMode: false
 							})
+
+							deleteEditFlag(this.getFlux(), 'questionDetails', this.props.id)
 						}}
 					/>
 					<hr className="rule" />
@@ -131,7 +142,11 @@ var BudgetQuestions = React.createClass({
 		return (
 			<PermissionJail permission="canEditQuestionDetails">
 			<div>				
-				<BudgetNewQuestion budgetCutId = {this.props.id} />
+				<BudgetNewQuestion 
+					budgetCutId = {this.props.id}
+					onFinishEdit = { () => {
+						deleteEditFlag(this.getFlux(), 'questionDetails', this.props.id)
+					}} />
 				<hr className="rule" />
 			</div>
 			</PermissionJail>

@@ -205,6 +205,50 @@ var utilities = {
 		}
 
 		return out;
+	},
+	getUserRoleName: function(roles){
+
+		var rolesHTML = [];
+		console.log(roles[0])
+		if(roles.length && typeof roles[0] == 'string') return roles[0]
+
+		if(typeof roles == 'object'){
+
+			for(var i = 0; i < AppConfig.ROLES.length; i++){
+				if(roles.indexOf(AppConfig.ROLES[i].id) != -1){
+					rolesHTML.push(AppConfig.ROLES[i].name)
+				}
+			}
+
+		}else{
+
+			var _role = AppConfig.ROLES.filter( (role) => role.id == roles);
+
+			if(_role){
+				rolesHTML.push(_role[0].name)
+			}
+		}
+
+		return rolesHTML.join(', ');
+
+	},
+	createEditFlag: function(flux, type, id, callback){
+
+		flux.actions.BudgetDetailActions.createEditFlag({
+			userId: CURRENT_USER.id,
+			type: type,
+			budgetCutId: id,
+			edit: true
+		}, callback)
+	},
+	deleteEditFlag: function(flux, type, id){
+
+		flux.actions.BudgetDetailActions.deleteEditFlag({
+			userId: CURRENT_USER.id,
+			type: type,
+			budgetCutId: id,
+			edit: false
+		})
 	}
 
 };

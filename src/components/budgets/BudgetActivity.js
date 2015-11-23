@@ -64,6 +64,12 @@ var BudgetActivityItem = React.createClass({
 			isModalOpen: false
 		})	
 	},
+	renderUser: function(usersArray){
+
+		return usersArray.map( (user) => {
+			return <strong>{user.name}</strong>
+		})
+	},
 	render: function(){
 
 		var {activity} = this.props;
@@ -76,7 +82,7 @@ var BudgetActivityItem = React.createClass({
 					<img src = {fromUser.image} style = {{width: '40'}} />
 				</div>
 				<div className="media-content">
-					<strong>{fromUser.name}</strong> {activity.action} to {toUser.role.name} <strong>{toUser.name}</strong>
+					<strong>{this.renderUser(fromUser)}</strong> {activity.action} to {this.renderUser(toUser)} <strong></strong>
 
 					<div className="activity-meta">
 						{activity.date}

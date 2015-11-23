@@ -251,7 +251,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Add to speech [/api/v1/add_to_speech/{?id,userId}]
+## Add to speech [/api/v1/add_to_speech/{?ids,userId}]
 
 + Parameters
 	+ ids: `1,2,3,4` (comma separated)
@@ -305,7 +305,7 @@ This is the API blueprint for Momster COS application
 	```
 
 
-## Export to excel [/api/v1/export_to_excel/{?id,userId}]
+## Export to excel [/api/v1/export_to_excel/{?ids,userId}]
 
 + Parameters
 	+ ids: `1,2,3,4` (comma separated)
@@ -785,15 +785,45 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Cancel Edit [/api/v1/cancel-edit(?type,budgetCutId,edit)]
+## Create Edit flag [/api/v1/create-edit(?type,budgetCutId,userId,edit)]
 
-### Cancel Edit [POST]
+### Create edit flag [POST]
+
++ Parameters
+
+	+ type: `questionDetails|workingDraftDetails|finalDraftDetails` (string)
+	+ budgetCutId: `12` (string)
+	+ edit: `true` (string)
+	+ userId: `1` (string)
+
++ Response 403
+
+	```
+	{
+		"errors": [{
+			"error": "Someone else is editing the document"
+		}]
+	}
+	```
+
++ Response 200
+
+	```
+	{
+		"success": true
+	}
+	```
+
+## Cancel Edit flag [/api/v1/create-edit(?type,budgetCutId,userId,edit)]
+
+### Cancel Edit flag [POST]
 
 + Parameters
 
 	+ type: `questionDetails|workingDraftDetails|finalDraftDetails` (string)
 	+ budgetCutId: `23` (string)
 	+ edit: `false` (string)
+	+ userId: `1` (string)
 
 + Response 200
 
@@ -1185,7 +1215,7 @@ This is the API blueprint for Momster COS application
 
 # Group Topics
 
-## Main Topics [/api/get-main-topics{?topicId,topicName,userId,year}]
+## Main Topics [/api/get-main-topics{?topicId,topicName,userId,year,id,name}]
 
 ### Get all main topics [GET]
 
@@ -1363,7 +1393,7 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
-## Order Topics [/api/v1/update-order-topic{?topics,mainTopicId,subTopics,userId}]
+## Order Topics [/api/v1/update-order-topic{?topics,mainTopicId,subTopics,userId,topicId}]
 
 ### Order Main Topics [POST]
 

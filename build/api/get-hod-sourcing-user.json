@@ -4,7 +4,7 @@
 			"id": "1212",
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
-			"role": ["HOD sourcing"],
+			"role": [2],
 			"liasonOfficer": {
 				"name": "Steve Kong",
 				"id": "12"

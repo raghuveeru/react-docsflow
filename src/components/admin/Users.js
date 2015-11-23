@@ -3,6 +3,7 @@ import {StoreWatchMixin} from 'fluxxor';
 import Modal from 'react-modal';
 import NewUser from './NewUser';
 import {customStyles} from '../../constants';
+import {getUserRoleName} from './../../utilities';
 
 var Users = React.createClass({
 	mixins: [StoreWatchMixin('AdminStore')],
@@ -65,6 +66,7 @@ var Users = React.createClass({
 					<thead>
 						<tr>
 							<th colSpan="2">User details</th>
+							<th>Department</th>
 							<th>Account permissions </th>
 							<th className="cell-actions"></th>
 						</tr>
@@ -78,17 +80,21 @@ var Users = React.createClass({
 								<tr key = {idx}>
 									<td className="cell-image">
 										<img src={user.image} style = {{width: 40}} />										
-									</td>
+									</td>									
 									<td>
 										{user.name}
 										<span className="user-role-designation">{user.designation}</span>
 									</td>
-									<td>																				
-										{user.role.map((role, index) => <span key = {index} className="user-role-item">{role}</span>)}
+									<td>
+										{user.department}
+									</td>
+									<td>
+										{getUserRoleName(user.role)}										
 									</td>
 									<td className="cell-actions">
 										
-										<a href="#" onClick = {deleteFn}>Delete</a>
+										<a className="link-edit" onClick = {deleteFn}>Edit</a>
+										<a className="link-delete" onClick = {deleteFn}>Delete</a>
 									</td>
 								</tr>
 							)

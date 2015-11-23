@@ -25,7 +25,8 @@ var API = {
 		UPDATE_BUDGET_CUT: 'api/budget-cuts-single.json',
 		DELETE_ATTACHMENT: 'api/delete-attachment.json',
 
-		CANCEL_EDIT: 'api/cancel-edit.json'
+		DELETE_EDIT_FLAG: 'api/cancel-edit.json',
+		CREATE_EDIT_FLAG: 'api/create-edit.json'
 	},
 	TOPICS: {
 		GET_MAIN_TOPICS: 'api/get-main-topics.json',
@@ -97,28 +98,6 @@ var STATUS_MAPPING = [
 
 var ALL_NOTIFICATIONS_LINK = 'http://href.xom';
 
-// var BUDGET_FACETS: [
-// 	{
-// 		name: 'topics',
-// 		displayName: 'Topics'		
-// 	},
-// 	{
-// 		name: 'status',
-// 		displayName: 'Status'		
-// 	},
-// 	{
-// 		name: 'hodSourcing',
-// 		displayName: 'HOD Sourcing'		
-// 	},
-// 	{
-// 		name: 'hodDrafting',
-// 		displayName: 'HOD Drafting'		
-// 	},
-// 	{
-// 		name: 'year',
-// 		displayName: 'Year'		
-// 	}
-// ];
 
 var ROLES = [
 	{
@@ -135,7 +114,7 @@ var ROLES = [
 	{
 		name: 'Liaison Officers',
 		id: 3,
-		showInCreateUser: false,
+		showInCreateUser: true,
 		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer']
 	},
 	{
@@ -164,6 +143,30 @@ var ROLES = [
 	},
 ];
 
+var DEPARTMENTS = [
+'Political'
+,'CS'
+,'ISTD'
+,'CPMD'
+,'MPPD'
+,'CCD'
+,'ISPD'
+,'WINS'
+,'TAFEP'
+,'NHO'
+,'IAC'
+,'FMMD'
+,'WPSD'
+,'LRWD'
+,'HQ'
+,'WPD'
+,'HRD'
+,'LSD'
+,'MRSD'
+,'OSHD'
+,'IAU'
+,'CRD'];
+
 var APPROVED_REPLY_TYPES = ["Approved draft", "Anticipated Q&A", "Supplementary Info (upto confidential only)"];
 
 window.AppConfig = {
@@ -173,6 +176,7 @@ window.AppConfig = {
 	ROLES: ROLES,
 	SUBJECT_TEMPLATE: '[MOM COS] - {topic} - {mp}',
 	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK,
-	ADMIN_TOPIC_YEARS: ['2015', '2014', '2013', '2012']
+	ADMIN_TOPIC_YEARS: ['2015', '2014', '2013', '2012'],
+	DEPARTMENTS: DEPARTMENTS
 }
 

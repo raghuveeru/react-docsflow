@@ -69,14 +69,31 @@ module.exports = {
 				});
 			})
 	},
-	cancelEdit: function(payload){
+	deleteEditFlag: function(payload){
 
 		request
-			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CANCEL_EDIT)
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.DELETE_EDIT_FLAG)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 
-				this.dispatch(actions.CANCEL_EDIT, JSON.parse(res.text));
+				this.dispatch(actions.DELETE_EDIT_FLAG, JSON.parse(res.text));
+			})
+	},
+	createEditFlag: function(payload, callback){
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_EDIT_FLAG)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.CREATE_EDIT_FLAG, jsonResponse);
+
+					callback && callback()
+				
+				});
+				
 			})
 	}
 }

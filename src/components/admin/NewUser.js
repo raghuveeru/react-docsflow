@@ -5,7 +5,8 @@ import {mapObject} from './../../utilities';
 import {validationOptions} from './../../constants';
 import _ from 'lodash';
 
-var USER_GROUPS = AppConfig.ROLES.filter( (role) => role.showInCreateUser);
+var USER_GROUPS = AppConfig.ROLES;
+var DEPARTMENTS = AppConfig.DEPARTMENTS;
 
 var NewUser = React.createClass({	
 	getInitialState: function(){
@@ -14,9 +15,10 @@ var NewUser = React.createClass({
 			user: this.props.user || {},
 			type: 'user',
 			name: '',
-			email: '',
-			memberOfParliament: '',
-			hodDrafting: ''
+			email: '',			
+			department: '',
+			roles: [],
+			id: ''
 		}
 	},
 	onSave: function(e){
@@ -31,16 +33,20 @@ var NewUser = React.createClass({
 				email, 
 				memberOfParliament,
 				hodDrafting,
+				roles,
+				department,
+				id
 				} = this.state,
 				params = {};
 
 			switch(type){
 				case 'user':
 					params = {
-						user: user.id,
-						roles: user.role,
+						id: id,						
 						type: type,
-						userId: CURRENT_USER.id
+						userId: CURRENT_USER.id,
+						roles: roles,
+						department: department
 					}
 					break;
 
@@ -49,27 +55,7 @@ var NewUser = React.createClass({
 						name: name,
 						email: email,
 						type: type,
-						userId: CURRENT_USER.id
-					}
-					break;
-
-				case 'hod':
-					params = {
-						user: user.id,						
-						memberOfParliament: memberOfParliament,
-						type: type,
-						roles: ['Head of Department'],
-						userId: CURRENT_USER.id
-					}
-					break;
-
-				case 'liasonOfficer':
-					params = {
-						user: user.id,						
-						hodDrafting: hodDrafting,
-						type: type,
-						roles: ['Liaison Officers'],
-						userId: CURRENT_USER.id
+						userId: CURRENT_USER.id						
 					}
 					break;
 			}
@@ -104,29 +90,23 @@ var NewUser = React.createClass({
 	},
 	addRole: function(value, event){
 
-		var user = _.clone(this.state.user);
+		var roles = _.clone(this.state.roles);
 
-		if(!user.role){
-			alert('Please select a user first.');
-
-			return event.preventDefault();
-		}
-
-		user.role.push(value);
+		roles.push(value);
 
 		this.setState({
-			user: user
+			roles: roles
 		})
 
 	},
 	removeRole: function(value){
 
-		var user = _.clone(this.state.user);
+		var roles = _.clone(this.state.roles);
 
-		user.role.splice(user.role.indexOf(value), 1);
+		roles.splice(roles.indexOf(value), 1);
 
 		this.setState({
-			user: user
+			roles: roles
 		})
 
 	},
@@ -143,14 +123,6 @@ var NewUser = React.createClass({
 
 			case 'mp':
 				formContent = this.renderMps();
-				break;
-
-			case 'hod':
-				formContent = this.renderHods();
-				break;
-
-			case 'liasonOfficer':
-				formContent = this.renderLiason();
 				break;
 		}
 		
@@ -170,10 +142,8 @@ var NewUser = React.createClass({
 						}}
 						>
 						<option></option>
-						<option value = 'user' selected>Normal user</option>
-						<option value = 'mp'>MP</option>
-						<option value = 'hod'>HOD</option>
-						<option value = 'liasonOfficer'>Liason Officer</option>
+						<option value = 'user' selected>MOM Officer</option>
+						<option value = 'mp'>MP</option>						
 					</Select2>
 
 					{formContent}
@@ -191,15 +161,19 @@ var NewUser = React.createClass({
 
 		return (
 			<div>
+
+				{this.renderDepartments()}
+
 				<Select2
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS} 
 					placeholder= 'Enter name or email address...'					
 					required = {true}
+					query = {{'department': this.state.department}}
 					name="email"
 					onChange = { (val, data, event) => {
 
 						this.setState({
-							user: data
+							id: val
 						})
 													
 						this.checkSelect2Valid(event);
@@ -211,6 +185,7 @@ var NewUser = React.createClass({
 				/>
 
 				{this.renderRoles()}
+				
 			</div>)
 	},
 	renderMps: function(){
@@ -237,86 +212,22 @@ var NewUser = React.createClass({
 			</div>
 		)
 	},
-	renderHods: function(){
+	renderDepartments: function(){
+
 		return (
-			<div>
+			<div className="form-control">				
 				<Select2
-					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS} 
-					placeholder= 'Enter name or email address...'					
-					required = {true}
-					name="email"
-					onChange = { (val, data, event) => {
-
+					placeholder="Select department"
+					onChange = {(val) =>{
 						this.setState({
-							user: data
-						})
-													
-						this.checkSelect2Valid(event);
-
-					}}
-					formatResult = {(result) => {
-						return '<div>' + result.name + '<br /><small>' + result.email + '</small></div>'
-					}}
-				/>
-
-				<Select2  
-					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
-					placeholder= 'Member of Parliament'
-					multiple = {false}
-					required = {true}
-					name="memberOfParliament"
-					onChange = { (val, data, event) => {
-
-						this.checkSelect2Valid(event);
-						
-						this.setState({
-							memberOfParliament: val
+							department: val
 						})
 					}}
-				/>
-			</div>
-		)
-	},
-	renderLiason: function(){
-		
-		return (
-			<div>
-				<Select2
-					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS} 
-					placeholder= 'Enter name or email address...'					
-					required = {true}					
-					name = 'users'
-					onChange = { (val, data, event) => {
-
-						this.setState({
-							user: data
-						})
-													
-						this.checkSelect2Valid(event);
-
-					}}
-					formatResult = {(result) => {
-						return '<div>' + result.name + '<br /><small>' + result.email + '</small></div>'
-					}}
-				/>
-				<span className="js-hide">s</span>
-				<Select2  
-						url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_DRAFTING_USER} 
-						placeholder= 'HOD Drafting'
-						multiple = {false}
-						name="hodDrafting"
-						required = {true}						
-						onChange = { (val, data, event) => {
-
-							this.checkSelect2Valid(event);
-							
-							this.setState({
-								hodDrafting: val
-							})
-						}}
-					/>
-
-				
+				>
+				{DEPARTMENTS.map( (dept, idx) => {
+					return <option>{dept}</option>
+				})}
+				</Select2>
 			</div>
 		)
 	},
@@ -332,7 +243,7 @@ var NewUser = React.createClass({
 						<input 
 							type="checkbox" 
 							name="groups" 
-							value = {group.name}
+							value = {group.id}							
 							onChange = {(event) => {
 
 								var value = event.target.value;
@@ -343,7 +254,7 @@ var NewUser = React.createClass({
 									this.removeRole(value, event)
 								}
 							}}
-							checked = {this.isRoleChecked(group.name)}
+							// checked = {this.isRoleChecked(group.name)}
 							required 
 						/>
 						{group.name}

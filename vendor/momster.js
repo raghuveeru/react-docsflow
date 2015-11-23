@@ -31,7 +31,7 @@ var MOMINTRANET = (function(app, $, window, undefined){
 
                 var $this = $(this);
 
-                $dropdown
+                app.$body.find('.ui-dropdown')
                     .not($this)
                     .removeClass('dropdown-active');
 

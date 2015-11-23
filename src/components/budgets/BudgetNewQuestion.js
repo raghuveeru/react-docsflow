@@ -4,7 +4,7 @@ import InputFileMaterial from '../InputFileMaterial';
 import TextareaMaterial from '../TextareaMaterial';
 import Attachments from './Attachments';
 import Select2 from '../Select2';
-import {emitNotification} from './../../utilities';
+import {emitNotification, createEditFlag, deleteEditFlag} from './../../utilities';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
@@ -18,9 +18,16 @@ var BudgetNewQuestion = React.createClass({
 	},
 	toggle: function(){
 
-		this.setState({
-			isOpen: !this.state.isOpen
-		})
+		if(!this.state.isOpen){
+
+			createEditFlag(this.getFlux(), 'questionDetails', this.props.budgetCutId, () => {
+
+				this.setState({
+					isOpen: !this.state.isOpen
+				})
+			})
+		}
+		
 	},
 	cancelForm: function(){
 
@@ -28,15 +35,7 @@ var BudgetNewQuestion = React.createClass({
 			isOpen: false
 		})
 
-		if(this.props.editMode){
-			// Send a API call to clear Edit session variable
-			
-			this.getFlux().actions.BudgetDetailActions.cancelEdit({
-				type: 'questionDetails',
-				budgetCutId: this.props.budgetCutId,
-				edit: false
-			})
-		}
+		deleteEditFlag(this.getFlux(), 'questionDetails', this.props.budgetCutId)
 
 		this.props.onCancelForm && this.props.onCancelForm.call(this)
 	},
@@ -62,7 +61,7 @@ var BudgetNewQuestion = React.createClass({
 
 					emitNotification('success', this.getFlux(), this.props.editMode? 'Question details successfully updated.' : 'Question details successfull added.');
 
-					this.getFlux().actions.BudgetDetailActions.addQuestion(data, this.toggle)
+					this.getFlux().actions.BudgetDetailActions.addQuestion(data)
 
 					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 

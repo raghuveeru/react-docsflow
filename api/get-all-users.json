@@ -5,7 +5,8 @@
 			"name": "Lisa Lawrence",
 			"email": "lisa@lisa.com",
 			"designation": "HOD",
-			"role": ["Speech Writer"],
+			"department": "Department",
+			"role": 1,
 			"image": "images/profile-img.png",
 			"online": true
 		},
@@ -13,16 +14,18 @@
 			"id": "2",
 			"name": "Lisa Lawrence",
 			"email": "lisa@lisa.com",
+			"department": "Department",
 			"designation": "MP",
-			"role": ["Member of Parliament"],			
+			"role": [1, 2],
 			"online": true
 		},
 		{
 			"id": "3",
 			"name": "Christopher Brown",
 			"email": "christoper@chris.com",
+			"department": "Department",
 			"designation": "Executive",
-			"role": ["Head of Department"],
+			"role": [1, 2],
 			"image": "images/profile-img.png",
 			"online": false
 		},
@@ -30,8 +33,9 @@
 			"id": "4",
 			"name": "Christopher Brown",
 			"email": "christoper@chris.com",
+			"department": "Department",
 			"designation": "Executive",
-			"role": ["System Administrator", "Speech Writer"],
+			"role": [1, 2],
 			"image": "images/profile-img.png",
 			"online": false
 		},
@@ -39,8 +43,9 @@
 			"id": "5",
 			"name": "Christopher Brown",
 			"email": "christoper@chris.com",
+			"department": "Department",
 			"designation": "Executive",
-			"role": ["Liaison Officers"],
+			"role": [1, 2],
 			"image": "images/profile-img.png",
 			"online": false
 		}

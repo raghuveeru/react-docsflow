@@ -4,8 +4,9 @@
 			"id": "1",
 			"name": "Lisa Lawrence",
 			"email": "lisa@lisa.com",
+			"department": "CRD",
 			"designation": "HOD",
-			"role": ["Speech Writer"],
+			"role": [2],
 			"image": "images/profile-img.png",
 			"online": true
 		}

@@ -4,12 +4,7 @@
             "id": "DISGCL",
             "name": "ROSALIND GAN CHAI LEH",
             "designation": "HEAD, OSHD",
-            "role": [
-                {
-                    "id": 5,
-                    "name": "Head of Department"
-                }
-            ],
+            "role": [5],
             "liasonOfficer": [
             	{
                 	"id": "DISCWK",

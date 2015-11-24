@@ -1,9 +1,12 @@
 {
 	"data": [
 		{
+			"id": 1,
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
-			"role": ["HOD sourcing"],
+			"department": "CRD",
+			"role": [1, 2],
+			"type": "mp",
 			"image": "images/profile-img.png"
 		}
 	]

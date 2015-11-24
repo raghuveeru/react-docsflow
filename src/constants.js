@@ -39,6 +39,8 @@ module.exports = {
 		
 		DELETE_EDIT_FLAG: 'DELETE_EDIT_FLAG',
 		CREATE_EDIT_FLAG: 'CREATE_EDIT_FLAG',
+		GET_USER_BY_ID: 'GET_USER_BY_ID',
+		UPDATE_USER: 'UPDATE_USER'
 	},
 	customStyles: {
 		overlay : {

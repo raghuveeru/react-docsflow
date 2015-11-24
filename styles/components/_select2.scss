@@ -782,3 +782,13 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
     margin-top: 0;
     float: right;
 }
+
+
+.select2-container.select2-container-disabled .select2-chosen{
+    opacity: 0.5;
+}
+
+
+.select2-flushtop{
+    margin-top: 0 !important;
+}

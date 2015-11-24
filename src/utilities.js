@@ -126,11 +126,16 @@ var utilities = {
 				case 'mp':
 					url = AppConfig.API.USERS.CREATE_NEW_MP;
 					break;
-				case 'hod':
-					url = AppConfig.API.USERS.CREATE_NEW_HOD;
+			}
+		};
+
+		if(method == 'update'){
+			switch(userType){
+				case 'user':
+					url = AppConfig.API.USERS.UPDATE_USER;
 					break;
-				default:
-					url = AppConfig.API.USERS.CREATE_NEW_LIASON_OFFICER;
+				case 'mp':
+					url = AppConfig.API.USERS.UPDATE_MP;
 					break;
 			}
 		};

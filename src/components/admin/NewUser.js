@@ -11,14 +11,14 @@ var DEPARTMENTS = AppConfig.DEPARTMENTS;
 var NewUser = React.createClass({	
 	getInitialState: function(){
 
-		return {
-			user: this.props.user || {},
-			type: 'user',
-			name: '',
-			email: '',			
-			department: '',
-			roles: [],
-			id: ''
+		var {selectedUser} = this.props;
+
+		return {			
+			type: selectedUser.type || 'user',
+			name: selectedUser.name || '',			
+			department: selectedUser.department || '',
+			roles: selectedUser.role || [],
+			id: selectedUser.id || ''
 		}
 	},
 	onSave: function(e){
@@ -27,10 +27,9 @@ var NewUser = React.createClass({
 
 			event && event.preventDefault();
 
-			var {user, 
+			var {
 				type, 
-				name, 
-				email, 
+				name, 				
 				memberOfParliament,
 				hodDrafting,
 				roles,
@@ -38,6 +37,8 @@ var NewUser = React.createClass({
 				id
 				} = this.state,
 				params = {};
+
+			var {selectedUser} = this.props;
 
 			switch(type){
 				case 'user':
@@ -52,18 +53,32 @@ var NewUser = React.createClass({
 
 				case 'mp':
 					params = {
-						name: name,
-						email: email,
+						id: id,
+						name: name,						
 						type: type,
 						userId: CURRENT_USER.id						
 					}
 					break;
 			}
 
-			this.props.flux.actions.AdminActions.addUser(params, () => {
+			/**
+			 * Check if its in edit mode
+			 */
+			
+			if(selectedUser.name){
 
-				this.props.closeModal && this.props.closeModal.call(this)
-			})
+				this.props.flux.actions.AdminActions.updateUser(params, () => {
+
+					this.props.closeModal && this.props.closeModal.call(this)
+				})
+
+			}else{
+
+				this.props.flux.actions.AdminActions.addUser(params, () => {
+
+					this.props.closeModal && this.props.closeModal.call(this)
+				})
+			}
 		}
 
 	},
@@ -81,18 +96,17 @@ var NewUser = React.createClass({
 		
 		return $ele.valid();
 	},
-	isRoleChecked: function(role){
-		var {user} = this.state;
+	isRoleChecked: function(roleId){
 		
-		var roles = user.role? user.role : []
+		var {roles} = this.state;
 		
-		return roles.indexOf(role) != -1
+		return roles.indexOf(roleId) != -1
 	},
 	addRole: function(value, event){
 
 		var roles = _.clone(this.state.roles);
 
-		roles.push(value);
+		roles.push(parseInt(value));
 
 		this.setState({
 			roles: roles
@@ -112,7 +126,11 @@ var NewUser = React.createClass({
 	},
 	render: function(){
 
-		var {user, type} = this.state;
+		var {type} = this.state;
+
+		var {selectedUser} = this.props;
+
+		var editMode = selectedUser.name? true: false;
 		
 		var formContent = null;
 
@@ -129,13 +147,17 @@ var NewUser = React.createClass({
 		return (
 			<div className="modal-dialog">
 				<div className="modal-dialog-title">
-					Add user
+					{editMode? 'Edit user': 'Add user'}
 				</div>
 				<form className="modal-dialog-body" ref="form">
 
 					<Select2
-						placeholder="Select user type"						
+						value = {selectedUser.type}
+						placeholder="Select user type"
+						className = 'select2-flushtop'
+						disabled = {!!selectedUser.type}
 						onChange = {(val) => {
+							
 							this.setState({
 								type: val
 							})
@@ -159,14 +181,37 @@ var NewUser = React.createClass({
 	},
 	renderUsers: function(){
 
+		var {selectedUser} = this.props;
+
 		return (
 			<div>
 
-				{this.renderDepartments()}
+				<div className="form-control">				
+					<Select2
+						placeholder="Select department"
+						required = {true}
+						value = {selectedUser.department}
+						disabled = {!!selectedUser.department}
+						onChange = {(val, data, event) =>{
+							this.setState({
+								department: val
+							})
+
+							this.checkSelect2Valid(event);
+						}}
+					>
+					<option></option>
+					{DEPARTMENTS.map( (dept, idx) => {
+						return <option key = {idx}>{dept}</option>
+					})}
+					</Select2>
+				</div>
 
 				<Select2
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS} 
-					placeholder= 'Enter name or email address...'					
+					placeholder= 'Enter name or email address...'
+					defaultValue = {selectedUser}
+					disabled = {!!selectedUser.name}
 					required = {true}
 					query = {{'department': this.state.department}}
 					name="email"
@@ -190,44 +235,20 @@ var NewUser = React.createClass({
 	},
 	renderMps: function(){
 
+		var {selectedUser} = this.props;
+
 		return (
 			<div>
 				<InputMaterial
 					label="Name"
+					required = {true}
+					defaultValue = {selectedUser.name}
 					onChange = {(event) => {
 						this.setState({
 							name: event.target.value
 						})
 					}}
-					/>
-
-				<InputMaterial
-					label="Email"
-					onChange = {(event) => {
-						this.setState({
-							email: event.target.value
-						})
-					}}
-					/>
-			</div>
-		)
-	},
-	renderDepartments: function(){
-
-		return (
-			<div className="form-control">				
-				<Select2
-					placeholder="Select department"
-					onChange = {(val) =>{
-						this.setState({
-							department: val
-						})
-					}}
-				>
-				{DEPARTMENTS.map( (dept, idx) => {
-					return <option>{dept}</option>
-				})}
-				</Select2>
+					/>				
 			</div>
 		)
 	},
@@ -254,8 +275,8 @@ var NewUser = React.createClass({
 									this.removeRole(value, event)
 								}
 							}}
-							// checked = {this.isRoleChecked(group.name)}
-							required 
+							checked = {this.isRoleChecked(group.id)}
+							required = {true}
 						/>
 						{group.name}
 					</label>

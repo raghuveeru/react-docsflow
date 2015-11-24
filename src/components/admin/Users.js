@@ -12,6 +12,7 @@ var Users = React.createClass({
 		return {
 			AdminStore: this.props.flux.stores.AdminStore.getState(),
 			isUserModalOpen: false,
+			selectedUser: {}
 		}
 	},
 	contextTypes: {
@@ -31,6 +32,7 @@ var Users = React.createClass({
 		event && event.stopPropagation();
 		
 		this.setState({
+			selectedUser: {},
 			isUserModalOpen: true
 		})
 	},
@@ -47,9 +49,24 @@ var Users = React.createClass({
 		}
 
 	},
+	editUser: function(userId, event){
+
+		this.props.flux.actions.AdminActions.getUserById({
+			id: userId
+		}, (response) => {
+			
+			var _user = response.data[0];
+
+			this.setState({
+				selectedUser: _user,
+				isUserModalOpen: true
+			})
+		})
+
+	},
 	render: function(){		
 
-		var {isUserModalOpen} = this.state;
+		var {isUserModalOpen, selectedUser} = this.state;
 		var {users} = this.state.AdminStore;
 		
 		return (
@@ -60,7 +77,7 @@ var Users = React.createClass({
 					style={customStyles}
 					onRequestClose={this.closeModal}
 					>
-					<NewUser {...this.props} closeModal = {this.closeModal} />
+					<NewUser {...this.props} closeModal = {this.closeModal} selectedUser = {selectedUser} />
 				</Modal>
 				<table className="table table-admin">
 					<thead>
@@ -75,6 +92,8 @@ var Users = React.createClass({
 						{users.map((user, idx) => {
 
 							var deleteFn = this.deleteUser.bind(this, user.id);
+
+							var editFn = this.editUser.bind(this, user.id);
 
 							return (
 								<tr key = {idx}>
@@ -93,7 +112,7 @@ var Users = React.createClass({
 									</td>
 									<td className="cell-actions">
 										
-										<a className="link-edit" onClick = {deleteFn}>Edit</a>
+										<a className="link-edit" onClick = {editFn}>Edit</a>
 										<a className="link-delete" onClick = {deleteFn}>Delete</a>
 									</td>
 								</tr>

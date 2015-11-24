@@ -1,4 +1,4 @@
-import {actions} from '../constants';
+import {actions, headers} from '../constants';
 import request from 'superagent';
 import {handleResponse} from './../utilities';
 
@@ -7,6 +7,7 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_QUESTION)
+			.set(headers)
 			.query(payload)
 			.end((err, res) => {
 
@@ -41,6 +42,7 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_WORKING_DRAFT)
+			.set(headers)
 			.query(payload)
 			.end((err, res) => {
 				
@@ -57,6 +59,7 @@ module.exports = {
 
 		request
 			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.GET_FINAL_APPROVED_REPLY)
+			.set(headers)
 			.query(payload)
 			.end((err, res) => {
 
@@ -73,6 +76,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.DELETE_EDIT_FLAG)
+			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 
@@ -83,6 +87,7 @@ module.exports = {
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_EDIT_FLAG)
+			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
 

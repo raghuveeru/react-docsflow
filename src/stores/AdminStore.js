@@ -6,7 +6,7 @@ var AdminStore = Fluxxor.createStore({
 	initialize: function(){
 		this.topics = [];
 
-		this.users = []
+		this.users = [];
 
 		this.bindActions(
 			actions.GET_MAIN_TOPICS, this.getMainTopics,
@@ -21,7 +21,8 @@ var AdminStore = Fluxxor.createStore({
 			actions.CREATE_NEW_USER, this.addUser,
 			actions.DELETE_USER, this.deleteUser,
 			actions.UPDATE_MAIN_TOPICS, this.updateMainTopics,
-			actions.UPDATE_SUB_TOPICS, this.updateSubTopics
+			actions.UPDATE_SUB_TOPICS, this.updateSubTopics,			
+			actions.UPDATE_USER, this.updateUser
 		)
 	},
 	getState: function(){
@@ -29,6 +30,28 @@ var AdminStore = Fluxxor.createStore({
 			topics: this.topics,
 			users: this.users
 		}
+	},
+	updateUser: function(payload){
+		
+		var _user = payload.data[0];
+
+		if(!_user) return ;
+
+		var _id = _user.id;
+
+		var _users = _.clone(this.users);
+
+		for(var i = 0; i < _users.length; i++){
+
+			if(_users[i].id == _id){				
+				_users[i].role = _user.role
+			}
+		}
+
+		this.users = _users;
+
+		this.emit('change')
+
 	},
 	getMainTopics: function(topics){
 

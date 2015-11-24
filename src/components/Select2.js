@@ -66,7 +66,7 @@ var Select2 = React.createClass({
 				
 			this.props.onChange && this.props.onChange.call(this, event.val, event.added || event.removed, event)
 		});
-		
+
 	},
 	getQuery: function(){
 
@@ -119,6 +119,7 @@ var Select2 = React.createClass({
 			<div className="select2-element">
 				{label}
 				<input 
+					disabled = {this.props.disabled}
 					required ={this.props.required}
 					type="text" 
 					ref="select" 

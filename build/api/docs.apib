@@ -840,7 +840,7 @@ This is the API blueprint for Momster COS application
 
 # Group Users
 
-## Users [/api/v1/users{?userId,roles,memberOfParliament,email,name,hodSourcing,q,id}]
+## Users [/api/v1/users{?userId,roles,memberOfParliament,email,name,hodSourcing,q,id,department,type}]
 
 + Model (application/json)
 
@@ -1013,6 +1013,63 @@ This is the API blueprint for Momster COS application
 	```
 	{
 		"success": true
+	}
+	```
+
+
+### Update a user [POST]
+
++ Parameters
+
+	+ id: `1` (string)
+	+ type: `user|mp` (string)
+	+ roles: `[1,2]` (array)
+	+ department: `CRD` (string)
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "1",
+				"name": "Lisa Lawrence",
+				"email": "lisa@lisa.com",
+				"department": "CRD",
+				"designation": "HOD",
+				"role": [2,3],
+				"image": "images/profile-img.png",
+				"online": true
+			}
+		]
+	}
+	```
+
+### Update a MP [POST]
+
++ Parameters
+
+	+ id: `1` (string)
+	+ type: `user|mp` (string)
+	+ name: `Blah` (array)	
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": "2",
+				"name": "Lisa Lawrence",
+				"email": "lisa@lisa.com",
+				"department": "sds",
+				"designation": "MP",
+				"role": ["Member of Parliament"],
+				"online": true
+			}
+		]
 	}
 	```
 

@@ -6,7 +6,7 @@
 			"email": "lisa@lisa.com",
 			"department": "CRD",
 			"designation": "HOD",
-			"role": [2],
+			"role": [2,3],
 			"image": "images/profile-img.png",
 			"online": true
 		}

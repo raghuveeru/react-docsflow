@@ -20,6 +20,27 @@ var AdminActions = {
 				NProgress.done()
 			})		
 	},
+	getUserById: function(payload, callback){
+
+		NProgress.start();
+
+		request			
+			.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_USER_BY_ID)
+			.query(payload)
+			.set(headers)
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.GET_USER_BY_ID, jsonResponse);
+
+					callback && callback(jsonResponse)
+
+				});
+
+				NProgress.done()
+			})	
+	},
 	getUsersAdmin: function(){
 
 		NProgress.start()
@@ -260,7 +281,7 @@ var AdminActions = {
 		NProgress.start();
 		
 		request
-			.get(getUserUrl('new', payload.type))
+			.post(getUserUrl('new', payload.type))
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {
@@ -276,12 +297,33 @@ var AdminActions = {
 				NProgress.done()
 			})
 	},
+	updateUser: function(payload, callback){
+
+		NProgress.start();
+		
+		request
+			.post(getUserUrl('update', payload.type))
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.UPDATE_USER, jsonResponse);
+
+					callback && callback()
+				
+				}, 'User updated successfully.')				
+
+				NProgress.done()
+			})
+	},
 	deleteUser: function(payload, callback){
 
 		NProgress.start();
 
 		request
-			.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.DELETE_USER)
+			.post(AppConfig.API.BASE_URL + AppConfig.API.USERS.DELETE_USER)
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {

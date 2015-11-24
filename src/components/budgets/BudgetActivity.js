@@ -65,15 +65,19 @@ var BudgetActivityItem = React.createClass({
 			isModalOpen: false
 		})	
 	},
-	renderUsers: function(usersArray){
-
+	renderUsers: function(usersArray, prefix){
+		if(!usersArray) return null;
 		var len = usersArray.length;
-		return usersArray.map( (user, idx) => {
-			
-			var roles = getUserRoleName(user.role);
-			var xtra = (idx != len - 1? ', ': '');
-			return (<span><strong>{user.name}</strong>, {roles}{xtra}</span>)
-		})
+		return (
+			<span>
+				<span>{prefix} </span>
+				{usersArray.map( (user, idx) => {
+					var roles = getUserRoleName(user.role);
+					var xtra = (idx != len - 1? ', ': '');
+					return (<span><strong>{user.name}</strong>, {roles}{xtra}</span>)
+				})}	
+			</span>
+		)
 	},
 	render: function(){
 
@@ -91,7 +95,7 @@ var BudgetActivityItem = React.createClass({
 					: null}
 				</div>
 				<div className="media-content">
-					{this.renderUsers(fromUser)} {activity.action} to {this.renderUsers(toUser)}<strong></strong>
+					{this.renderUsers(fromUser)} {activity.action} {this.renderUsers(toUser, 'to')}<strong></strong>
 
 					<div className="activity-meta">
 						{activity.date}

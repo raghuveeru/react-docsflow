@@ -60,7 +60,10 @@ var API = {
 		CREATE_NEW_LIASON_OFFICER: 'api/create-new-liason-officer.json',
 
 		DELETE_USER: 'api/delete-user.json',
-		GET_USER_ROLE: 'api/get-user-role.json'
+		GET_USER_ROLE: 'api/get-user-role.json',
+
+		UPDATE_USER: 'api/create-new-user.json',
+		UPDATE_MP: 'api/create-new-mp.json',
 	},
 	NOTIFICATIONS: {
 		ALL: 'api/notifications.json'

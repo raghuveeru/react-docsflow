@@ -6,11 +6,131 @@ import {getUserUrl} from './../utilities';
 import {handleResponse} from './../utilities';
 
 var AdminActions = {
+	getMappingMpToHods: function(){
+		
+		NProgress.start()
+
+		request	
+			.get(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.GET_MAPPING_MP_TO_HODS)
+			.set(headers)
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.GET_MAPPING_MP_TO_HODS, jsonResponse);
+
+				});
+
+				NProgress.done()
+			})	
+	},
+	getMappingHodToLiasons: function(){
+		
+		NProgress.start()
+
+		request	
+			.get(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.GET_MAPPING_HOD_TO_LIASONS)
+			.set(headers)
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.GET_MAPPING_HOD_TO_LIASONS, jsonResponse);
+
+				});
+
+				NProgress.done()
+			})	
+	},
+	createMappingMpToHods: function(payload, callback){
+
+		NProgress.start()
+
+		request	
+			.post(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.CREATE_MAPPING_MP_TO_HODS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.CREATE_MAPPING_MP_TO_HODS, jsonResponse);
+
+					callback && callback();
+
+				});
+
+				NProgress.done()
+			})	
+	},
+	updateMappingMpToHods: function(payload, callback){
+
+		NProgress.start()
+
+		request	
+			.post(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.UPDATE_MAPPING_MP_TO_HODS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.UPDATE_MAPPING_MP_TO_HODS, jsonResponse);
+
+					callback && callback();
+
+				});
+
+				NProgress.done()
+			})	
+	},
+	createMappingHodToLiasons: function(payload, callback){
+
+		NProgress.start()
+
+		request	
+			.post(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.CREATE_MAPPING_HOD_TO_LIASONS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.CREATE_MAPPING_HOD_TO_LIASONS, jsonResponse);
+
+					callback && callback();
+
+				});
+
+				NProgress.done()
+			})	
+	},
+	updateMappingHodToLiasons: function(payload, callback){
+
+		NProgress.start()
+
+		request	
+			.post(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.UPDATE_MAPPING_HOD_TO_LIASONS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+				
+					this.dispatch(actions.UPDATE_MAPPING_HOD_TO_LIASONS, jsonResponse);
+
+					callback && callback();
+
+				});
+
+				NProgress.done()
+			})	
+	},
 	getUsers: function(){
 
 		NProgress.start()
 
-		request			
+		request	
 			.get(AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS)
 			.set(headers)
 			.end((err, res) => {
@@ -338,6 +458,62 @@ var AdminActions = {
 					callback && callback()
 				
 				}, 'User deleted successfully.')				
+
+				NProgress.done()
+			})
+		
+	},
+	deleteMappingMpToHods: function(payload, callback){
+
+		NProgress.start();
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.DELETE_MAPPING_MP_TO_HODS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					if(jsonResponse.success){
+						
+						this.dispatch(actions.DELETE_MAPPING_MP_TO_HODS, {
+							data: jsonResponse,
+							id: payload.id
+						});
+
+						callback && callback()
+					}					
+				
+				}, 'Mapping deleted successfully.')				
+
+				NProgress.done()
+			})
+		
+	},
+	deleteMappingHodToLiasons: function(payload, callback){
+
+		NProgress.start();
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.MAPPING.DELETE_MAPPING_HOD_TO_LIASONS)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					if(jsonResponse.success){
+						
+						this.dispatch(actions.DELETE_MAPPING_HOD_TO_LIASONS, {
+							data: jsonResponse,
+							id: payload.id
+						});
+
+						callback && callback()
+					}					
+				
+				}, 'Mapping deleted successfully.')				
 
 				NProgress.done()
 			})

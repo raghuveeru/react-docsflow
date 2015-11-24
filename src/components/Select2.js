@@ -17,6 +17,10 @@ var Select2 = React.createClass({
 			$(this.refs.select.getDOMNode()).select2('val', nextProps.defaultValue)
 		}
 	},
+	componentWillUnmount: function(){
+
+		$(this.refs.select.getDOMNode()).select2('destroy')
+	},
 	componentDidMount: function(){
 
 		var select = this.refs.select.getDOMNode();
@@ -75,7 +79,7 @@ var Select2 = React.createClass({
 		return query || {}
 	},
 	shouldComponentUpdate: function(nextProps){
-	
+		
 		return nextProps.children != this.props.children || nextProps.defaultValue != this.props.defaultValue
 	},
 	render: function(){

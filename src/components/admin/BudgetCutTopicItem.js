@@ -32,9 +32,10 @@ var BudgetCutTopicItem = React.createClass({
 
 		var {budgetCutTopic, topic, disableSort} = this.props;
 		var {isEditing} = this.state;
+		var klassName = 'budget-list-subitem' + (isEditing? ' budget-list-subitem--editing' : '');
 		
 		return (
-			<li className="budget-list-subitem">			
+			<li className={klassName}>
 				<span className="drag-handle topic-drag-handle fa fa-bars"></span>
 				<span>{budgetCutTopic.name}</span>
 				{isEditing? <BudgetCutTopicForm

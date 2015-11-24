@@ -7353,6 +7353,8 @@ li {
   display: none; }
   .budget-list-subitem:hover .topic-cell-actions, .budget-group-title:hover .topic-cell-actions {
     display: inline-block; }
+  .budget-list-subitem--editing .topic-cell-actions, .budget-list-subitem--editing:hover .topic-cell-actions {
+    display: none; }
   .topic-cell-actions a {
     margin: 0 0.5em;
     color: #888; }
@@ -7360,6 +7362,9 @@ li {
 /* Sub item */
 .budget-list-subitem a {
   color: #333; }
+
+.budget-list-subitem .section-form {
+  margin-top: 1em; }
 
 /**
  * Budget topic add form
@@ -7503,6 +7508,12 @@ li {
  */
 .link-edit-question {
   float: right; }
+
+/**
+ * Sumit control
+ */
+.submit-control {
+  padding-bottom: 1em; }
 
 .CircularProgress-Bg,
 .CircularProgress-Fg {

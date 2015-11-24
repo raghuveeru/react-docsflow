@@ -6,6 +6,7 @@ import BudgetView from './components/budgets/BudgetView';
 import NewBudget from './components/budgets/New';
 import Users from './components/admin/Users';
 import Topics from './components/admin/Topics';
+import Mapping from './components/admin/Mapping';
 import AdminLayout from './components/admin/Layout';
 
 module.exports = (
@@ -21,7 +22,8 @@ module.exports = (
 		<Redirect from='/admin' to='users' />
 		<Route handler = {AdminLayout} name='admin'>			
 			<Route handler = {Users} name="users" />			
-			<Route handler = {Topics} name="topics" />						
+			<Route handler = {Topics} name="topics" />
+			<Route handler = {Mapping} name="mapping" />						
 		</Route>
 		
 		

@@ -1546,6 +1546,252 @@ This is the API blueprint for Momster COS application
 	}
 	```
 
+# Group Mapping
+
+## MP to HODs [/api/v1/mp-to-hods{?hods,memberOfParliament,userId,id}]
+
+### Get All MP to HOD mapping [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 1,
+				"memberOfParliament": {
+					"id": 2,
+					"name": "Name of the MP"
+				},
+				"hods": [
+					{
+						"id": 2,
+						"name": "Hod Name 1"
+					},
+					{
+						"id": 3,
+						"name": "Hod Name 2"
+					}
+				]
+			},
+			{
+				"id": 2,
+				"memberOfParliament": {
+					"id": 2,
+					"name": "Name of the MP"
+				},
+				"hods": [
+					{
+						"id": 2,
+						"name": "Hod Name 1"
+					},
+					{
+						"id": 3,
+						"name": "Hod Name 2"
+					}
+				]
+			}
+		]
+	}
+	```
+
+### Create MP to HOD mapping [POST]
+
++ Parameters
+
+	+ memberOfParliament: `12` (string)
+	+ hods: `[1,2]` (array)
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 3,
+				"memberOfParliament": {
+					"id": 2,
+					"name": "Newly added MP"
+				},
+				"hods": [
+					{
+						"id": 2,
+						"name": "Hod Name 1"
+					},
+					{
+						"id": 3,
+						"name": "Hod Name 2"
+					}
+				]
+			}
+		]
+	}
+	```
+
+### Update MP to HOD mapping [POST]
+
++ Parameters
+	
+	+ id: `1` (string)
+	+ memberOfParliament: `12` (string)
+	+ hods: `[1,2]` (array)
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 3,
+				"memberOfParliament": {
+					"id": 2,
+					"name": "Newly added MP"
+				},
+				"hods": [
+					{
+						"id": 2,
+						"name": "Hod Name 1"
+					},
+					{
+						"id": 3,
+						"name": "Hod Name 2"
+					}
+				]
+			}
+		]
+	}
+	```
+
+### Delete MP to HOD mapping [DELETE]
+
++ Parameters
+
+	+ id: `1` (string)
+	+ userId: `12` (string)
+
++ Response
+
+	```
+	{
+		"success": true
+	}
+	```
+
+## HOD to Liason Officers [/api/v1/hod-to-liasonofficers{?hod,liasonOfficers,userId,id}]
+
+### Get All HOD to Liason officers mapping [GET]
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 2,
+				"hod": {
+					"id": 2,
+					"name": "Name of hod"
+				},
+				"liasonOfficers": [
+					{
+						"id": 2,
+						"name": "liasonOfficers Name 1"
+					},
+					{
+						"id": 3,
+						"name": "liasonOfficers Name 2"
+					}
+				]
+			}
+		]
+	}
+	```
+
+### Create HOD to Liason officer mapping [POST]
+
++ Parameters
+
+	+ liasonOfficers: `[1,2]` (string)
+	+ hod: `1` (array)
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 2,
+				"hod": {
+					"id": 2,
+					"name": "Name of a hod"
+				},
+				"liasonOfficers": [
+					{
+						"id": 2,
+						"name": "liasonOfficers Name 1"
+					},
+					{
+						"id": 3,
+						"name": "liasonOfficers Name 2"
+					}
+				]
+			}
+		]
+	}
+	```
+
+### Update HOD to Liason officer mapping [POST]
+
++ Parameters
+	
+	+ id: `1` (string)
+	+ liasonOfficers: `[1,2]` (string)
+	+ hod: `1` (array)
+	+ userId: `12` (string)
+
++ Response 200
+
+	```
+	{
+		"data": [
+			{
+				"id": 2,
+				"hod": {
+					"id": 2,
+					"name": "Name of a hod"
+				},
+				"liasonOfficers": [
+					{
+						"id": 2,
+						"name": "liasonOfficers Name 1"
+					},
+					{
+						"id": 3,
+						"name": "liasonOfficers Name 2"
+					}
+				]
+			}
+		]
+	}
+	```
+
+### Delete HOD to Liason officer mapping [DELETE]
+
++ Parameters
+
+	+ id: `1` (string)
+	+ userId: `12` (string)
+
++ Response
+
+	```
+	{
+		"success": true
+	}
+	```
 
 # Group Notifications
 

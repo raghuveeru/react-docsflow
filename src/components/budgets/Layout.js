@@ -90,6 +90,12 @@ var BudgetContainer = React.createClass({
 
 		this._debounceRoute();
 	},	
+	clearQuery: function(event){
+
+		this._query =  ''
+
+		this._debounceRoute();
+	},	
 	handleFacetChange: function(facet, value){
 
 		var newFilters = _.clone(this._filters);
@@ -153,6 +159,7 @@ var BudgetContainer = React.createClass({
 					defaultValue = {this._query} 
 					placeholder="Search budget cuts" 
 					onChange = {this.updateQuery} 
+					onClear = {this.clearQuery} 
 					onSubmit = {this.route}
 				/>
 				<section className="row">

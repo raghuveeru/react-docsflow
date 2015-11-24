@@ -77,7 +77,7 @@ var NewTopic = React.createClass({
 						}}
 						 />
 						
-					<div className="form-control">
+					<div className="form-control submit-control">
 						<button className="btn btn-primary" onClick = {this.onSave}>{this.props.buttonTitle}</button>
 						<a className="btn btn--unstyled" onClick = {this.props.closeModal}>Cancel</a>
 					</div>

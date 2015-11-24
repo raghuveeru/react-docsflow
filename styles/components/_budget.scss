@@ -351,6 +351,10 @@
         display: inline-block;
     }
 
+    .budget-list-subitem--editing &, .budget-list-subitem--editing:hover &{
+        display: none;
+    }
+
     a{
         margin: 0 0.5em;
         color: #888;
@@ -362,6 +366,10 @@
     .budget-list-subitem{
         a{
             color: $base-color;
+        }
+
+        .section-form{
+            margin-top: 1em;
         }
     }
 
@@ -582,4 +590,13 @@
 
 .link-edit-question{
     float: right;
+}
+
+
+/**
+ * Sumit control
+ */
+
+.submit-control{
+    padding-bottom: 1em;
 }

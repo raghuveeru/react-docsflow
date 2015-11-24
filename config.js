@@ -52,6 +52,7 @@ var API = {
 		GET_ALL_LIASON_OFFICERS: 'api/get-all-liason-officers.json',
 		GET_ALL_DRAFTING_OFFICERS: 'api/get-all-users.json',
 		GET_USER_BY_ID: 'api/get-user-by-id.json',
+		GET_ALL_HODS: 'api/get-hods.json',
 
 
 		CREATE_NEW_USER: 'api/create-new-user.json',
@@ -67,6 +68,19 @@ var API = {
 	},
 	NOTIFICATIONS: {
 		ALL: 'api/notifications.json'
+	},
+	MAPPING: {
+		GET_MAPPING_MP_TO_HODS: 'api/mapping-mp-hods.json',
+		GET_MAPPING_HOD_TO_LIASONS: 'api/mapping-hod-liasonofficers.json',
+
+		DELETE_MAPPING_MP_TO_HODS: 'api/delete-mapping-mp-hods.json',
+		DELETE_MAPPING_HOD_TO_LIASONS: 'api/delete-mapping-mp-hods.json',
+
+		CREATE_MAPPING_MP_TO_HODS: 'api/new-mapping-mp-hods.json',
+		CREATE_MAPPING_HOD_TO_LIASONS: 'api/new-mapping-hod-liasonofficers.json',
+
+		UPDATE_MAPPING_MP_TO_HODS: 'api/new-mapping-mp-hods.json',
+		UPDATE_MAPPING_HOD_TO_LIASONS: 'api/new-mapping-hod-liasonofficers.json',
 	}
 };
 

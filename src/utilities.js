@@ -166,6 +166,11 @@ var utilities = {
 
 			}else{
 
+				if(res.hasOwnProperty('success') && !res.success){
+
+					return utilities.emitNotification('error', flux, 'Something went wrong. Your operation was not completed.')
+				}
+
 				if(successMessage){
 
 					utilities.emitNotification('success', flux, successMessage)

@@ -8,6 +8,10 @@ var AdminStore = Fluxxor.createStore({
 
 		this.users = [];
 
+		this.mappingMPHods = [];
+
+		this.mappingHodLiasons = [];
+
 		this.bindActions(
 			actions.GET_MAIN_TOPICS, this.getMainTopics,
 			actions.CREATE_MAIN_TOPIC, this.createMainTopic,
@@ -22,13 +26,107 @@ var AdminStore = Fluxxor.createStore({
 			actions.DELETE_USER, this.deleteUser,
 			actions.UPDATE_MAIN_TOPICS, this.updateMainTopics,
 			actions.UPDATE_SUB_TOPICS, this.updateSubTopics,			
-			actions.UPDATE_USER, this.updateUser
+			actions.UPDATE_USER, this.updateUser,
+			actions.GET_MAPPING_MP_TO_HODS, this.getMappingMpToHods,
+			actions.GET_MAPPING_HOD_TO_LIASONS, this.getMappingHodLiasons,
+			actions.DELETE_MAPPING_MP_TO_HODS, this.deleteMappingMpToHods,
+			actions.DELETE_MAPPING_HOD_TO_LIASONS, this.deleteMappingHodLiasons,
+			actions.CREATE_MAPPING_MP_TO_HODS, this.createMappingMpToHods,
+			actions.CREATE_MAPPING_HOD_TO_LIASONS, this.createMappingHodLiasons,
+			actions.UPDATE_MAPPING_MP_TO_HODS, this.updateMappingMpToHods,
+			actions.UPDATE_MAPPING_HOD_TO_LIASONS, this.updateMappingHodLiasons,
 		)
 	},
 	getState: function(){
 		return {
 			topics: this.topics,
-			users: this.users
+			users: this.users,
+			mappingMPHods: this.mappingMPHods,
+			mappingHodLiasons: this.mappingHodLiasons
+		}
+	},
+	getMappingMpToHods: function(payload){
+
+		this.mappingMPHods = payload.data;
+
+		this.emit('change')
+	},
+	getMappingHodLiasons: function(payload){
+
+		this.mappingHodLiasons = payload.data;
+
+		this.emit('change')
+	},
+	createMappingMpToHods: function(payload){
+		
+		this.mappingMPHods = [].concat(this.mappingMPHods, payload.data);
+
+		this.emit('change')
+	},
+	createMappingHodLiasons: function(payload){
+		
+		this.mappingHodLiasons = [].concat(this.mappingHodLiasons, payload.data);
+
+		this.emit('change')
+	},
+	updateMappingMpToHods: function(payload){
+		
+		var _response = payload.data[0]
+
+		if(!_response) return;
+		
+		for(var i = 0; i< this.mappingMPHods.length; i++){
+			if(this.mappingMPHods[i].id == _response.id){
+				this.mappingMPHods[i] = _response
+			}
+		}
+
+		this.emit('change')
+	},
+	updateMappingHodLiasons: function(payload){
+
+		var _response = payload.data[0]
+
+		if(!_response) return;
+
+		for(var i = 0; i< this.mappingHodLiasons.length; i++){
+			if(this.mappingHodLiasons[i].id == _response.id){
+				this.mappingHodLiasons[i] = _response
+			}
+		}
+
+		this.emit('change')
+	},
+	deleteMappingMpToHods: function(payload){
+
+		var data = payload.data.success,
+			id = payload.id
+
+		if(data){
+
+			for(var j = this.mappingMPHods.length - 1; j >= 0; j--) {
+				if(this.mappingMPHods[j].id == id){
+					this.mappingMPHods.splice(j, 1);
+				}
+			}
+
+			this.emit('change')
+		}
+	},
+	deleteMappingHodLiasons: function(payload){
+
+		var data = payload.data.success,
+			id = payload.id
+
+		if(data){
+
+			for(var j = this.mappingHodLiasons.length - 1; j >= 0; j--) {
+				if(this.mappingHodLiasons[j].id == id){
+					this.mappingHodLiasons.splice(j, 1);
+				}
+			}
+
+			this.emit('change')
 		}
 	},
 	updateUser: function(payload){

@@ -92,7 +92,7 @@ var BudgetNewWorkingDraft = React.createClass({
 		}
 
 		return (
-			<form ref="ajaxForm" method = 'get' action = {url}>
+			<form ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />

@@ -110,6 +110,7 @@ var BudgetNewWorkingDraft = React.createClass({
 					<TextareaMaterial
 					 	label="Draft details"
 					 	name="details"
+					 	defaultValue = {currentDraft.details}
 					 	rows = {1}
 					 />
 					

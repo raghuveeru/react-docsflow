@@ -71,29 +71,23 @@ var AdminStore = Fluxxor.createStore({
 	},
 	updateMappingMpToHods: function(payload){
 		
-		var _response = payload.data[0]
+		var _response = payload.response.data[0],
+			index = payload.index;
 
 		if(!_response) return;
 		
-		for(var i = 0; i< this.mappingMPHods.length; i++){
-			if(this.mappingMPHods[i].id == _response.id){
-				this.mappingMPHods[i] = _response
-			}
-		}
+		this.mappingMPHods[index] = _response;
 
 		this.emit('change')
 	},
 	updateMappingHodLiasons: function(payload){
 
-		var _response = payload.data[0]
+		var _response = payload.response.data[0],
+			index = payload.index;
 
 		if(!_response) return;
 
-		for(var i = 0; i< this.mappingHodLiasons.length; i++){
-			if(this.mappingHodLiasons[i].id == _response.id){
-				this.mappingHodLiasons[i] = _response
-			}
-		}
+		this.mappingHodLiasons[index] = _response;
 
 		this.emit('change')
 	},

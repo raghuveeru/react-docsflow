@@ -59,7 +59,8 @@ var NewMapping = React.createClass({
 						this.props.flux.actions.AdminActions.updateMappingMpToHods({							
 							userId: CURRENT_USER.id,
 							memberOfParliament: memberOfParliament.id,
-							hods: _hodsMp
+							hods: _hodsMp,
+							index: this.props.index
 						}, () => {
 
 							this.props.closeModal && this.props.closeModal.call(this)
@@ -88,7 +89,8 @@ var NewMapping = React.createClass({
 						this.props.flux.actions.AdminActions.updateMappingHodToLiasons({
 							userId: CURRENT_USER.id,
 							hod: hod.id,
-							liasonOfficers: _liasonOfficers
+							liasonOfficers: _liasonOfficers,
+							index: this.props.index
 						}, () => {
 
 							this.props.closeModal && this.props.closeModal.call(this)

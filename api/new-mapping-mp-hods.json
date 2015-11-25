@@ -1,7 +1,6 @@
 {
 	"data": [
-		{
-			"id": 3,
+		{			
 			"memberOfParliament": {
 				"id": 2,
 				"name": "Newly added MP"

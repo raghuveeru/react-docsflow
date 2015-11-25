@@ -58,7 +58,7 @@ var AdminActions = {
 
 					callback && callback();
 
-				});
+				}, 'Mapping created successfully');
 
 				NProgress.done()
 			})	
@@ -75,11 +75,14 @@ var AdminActions = {
 
 				handleResponse(res, this.flux, (jsonResponse) => {
 				
-					this.dispatch(actions.UPDATE_MAPPING_MP_TO_HODS, jsonResponse);
+					this.dispatch(actions.UPDATE_MAPPING_MP_TO_HODS, {
+						response: jsonResponse,
+						index: payload.index
+					});
 
 					callback && callback();
 
-				});
+				}, 'Mapping updated successfully');
 
 				NProgress.done()
 			})	
@@ -100,7 +103,7 @@ var AdminActions = {
 
 					callback && callback();
 
-				});
+				}, 'Mapping created successfully');
 
 				NProgress.done()
 			})	
@@ -117,11 +120,14 @@ var AdminActions = {
 
 				handleResponse(res, this.flux, (jsonResponse) => {
 				
-					this.dispatch(actions.UPDATE_MAPPING_HOD_TO_LIASONS, jsonResponse);
+					this.dispatch(actions.UPDATE_MAPPING_HOD_TO_LIASONS, {
+						response: jsonResponse,
+						index: payload.index
+					});
 
 					callback && callback();
 
-				});
+				}, 'Mapping updated successfully');
 
 				NProgress.done()
 			})	

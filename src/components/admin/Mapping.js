@@ -24,7 +24,8 @@ var Mapping = React.createClass({
 		return {
 			isModalOpen: false,
 			selectedMapping: {},
-			selectedMappingType: null
+			selectedMappingType: null,
+			editIndex: ''
 		}
 	},
 	openModal: function(){
@@ -71,9 +72,10 @@ var Mapping = React.createClass({
 			}		
 		}
 	},
-	editMapping: function(item, type){
+	editMapping: function(item, idx, type){
 		
 		this.setState({
+			editIndex: idx,
 			selectedMapping: item,
 			selectedMappingType: type,
 			isModalOpen: true
@@ -85,7 +87,8 @@ var Mapping = React.createClass({
 			isModalOpen,
 			selectedMapping,
 			AdminStore,
-			selectedMappingType
+			selectedMappingType,
+			editIndex
 		} = this.state;
 
 		
@@ -102,7 +105,7 @@ var Mapping = React.createClass({
 					style={customStyles}
 					onRequestClose={this.closeModal}
 					>
-					<NewMapping {...this.props} closeModal = {this.closeModal} selectedMapping = {selectedMapping} selectedMappingType = {selectedMappingType} />
+					<NewMapping {...this.props} closeModal = {this.closeModal} selectedMapping = {selectedMapping} selectedMappingType = {selectedMappingType} index = {editIndex} />
 				</Modal>	
 				<h4>MP to HODs</h4>
 
@@ -118,7 +121,7 @@ var Mapping = React.createClass({
 						{mappingMPHods.map( (item, idx) => {
 
 							var deleteFn = this.deleteMapping.bind(this, item, idx, 1);
-							var editFn = this.editMapping.bind(this, item, 1);
+							var editFn = this.editMapping.bind(this, item, idx, 1);
 
 							return (
 								<tr key = {idx}>
@@ -150,7 +153,7 @@ var Mapping = React.createClass({
 						{mappingHodLiasons.map( (item, idx) => {
 
 							var deleteFn = this.deleteMapping.bind(this, item, idx, 2)
-							var editFn = this.editMapping.bind(this, item, 2);
+							var editFn = this.editMapping.bind(this, item, idx, 2);
 
 							return (
 								<tr key = {idx}>

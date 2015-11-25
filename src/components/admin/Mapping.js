@@ -47,18 +47,23 @@ var Mapping = React.createClass({
 		
 			switch(type){
 				case 1:
+
+					var hods = obj.hods.map( (item) => item.id);					
 					
 					this.props.flux.actions.AdminActions.deleteMappingMpToHods({
-						mapping: obj,
+						memberOfParliament: obj.memberOfParliament.id,
+						hods: hods,						
 						userId: CURRENT_USER.id,
 						index: index
 					})
 					break;
 
 				case 2:
-					
+					var liasonOfficers = obj.liasonOfficers.map( (item) => item.id);
+
 					this.props.flux.actions.AdminActions.deleteMappingHodToLiasons({
-						mapping: obj,
+						hod: obj.hod.id,
+						liasonOfficers: liasonOfficers,
 						userId: CURRENT_USER.id,
 						index: index
 					})

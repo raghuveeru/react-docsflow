@@ -1685,9 +1685,10 @@ This is the API blueprint for Momster COS application
 ### Delete MP to HOD mapping [DELETE]
 
 + Parameters
-
-	+ id: `1` (string)
-	+ userId: `12` (string)
+	
+	+ memberOfParliament: `12` (string)
+	+ hods: `[1,2]` (array)
+	+ userId: `12` (string)	
 
 + Response
 
@@ -1800,7 +1801,8 @@ This is the API blueprint for Momster COS application
 
 + Parameters
 
-	+ id: `1` (string)
+	+ hod: `1` (string)
+	+ liasonOfficers: `[1,2]` (array)
 	+ userId: `12` (string)
 
 + Response

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {mapObject, getStatusName} from './../../utilities';
+import {mapObject, getStatusName, arrayJoin} from './../../utilities';
 import Fluxxor from 'fluxxor';
 var FluxMixin = Fluxxor.FluxMixin(React)
 
@@ -42,8 +42,7 @@ var BudgetInnerGroup = React.createClass({
 				var statusIdx = 5;
 				var memberOfParliament = item.memberOfParliament? item.memberOfParliament.name : '';
 				var hodSourcing = item.hodSourcing? item.hodSourcing.name : '';
-				var hodDrafting = item.hodDrafting? item.hodDrafting.name : '';
-				var liasonOfficer = item.liasonOfficer? item.liasonOfficer.name : '';
+				var hodDrafting = item.hodDrafting? item.hodDrafting.name : '';				
 
 				var showCheckbox = (statusToShowCheckbox.indexOf(item.status.toLowerCase()) != -1);
 				var statusText = (item.status.toLowerCase() == 'speech')? <span className="budget-item-status" style = {{backgroundColor: getStatusName(item.status).color}}>{getStatusName(item.status).name}</span> : null;
@@ -87,7 +86,7 @@ var BudgetInnerGroup = React.createClass({
 								</tr>
 								<tr>
 									<th>Liason officer</th>
-									<td>{liasonOfficer}</td>
+									<td>{arrayJoin(item.liasonOfficer, 'name')}</td>
 								</tr>
 							</tbody>
 						</table>

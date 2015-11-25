@@ -18,10 +18,16 @@
                 "id": "DISGCL",
                 "name": "ROSALIND GAN CHAI LEH"
             },
-            "liasonOfficer": {
-                "id": "DISGCL",
-                "name": "ROSALIND GAN CHAI LEH"
-            },
+            "liasonOfficer": [
+                {
+                    "id": "DISGCL",
+                    "name": "ROSALIND GAN CHAI LEH"
+                },
+                {
+                    "id": "DISGCL",
+                    "name": "ROSALIND GAN CHAI LEH"
+                }
+            ],
             "year": "2015",
             "relationships": {
                 "id": 1,
@@ -48,10 +54,10 @@
                 "id": "DISGCL",
                 "name": "ROSALIND GAN CHAI LEH"
             },
-            "liasonOfficer": {
+            "liasonOfficer": [{
                 "id": "FMMGT",
                 "name": "TEY,GERKIEL"
-            },
+            }],
             "year": "2015",
             "relationships": {
                 "id": 1,

@@ -4323,7 +4323,8 @@ li {
   width: 40px; }
 
 .table-admin .cell-actions {
-  text-align: right; }
+  text-align: right;
+  white-space: nowrap; }
   .table-admin .cell-actions > a {
     margin: 0 0.5em; }
 

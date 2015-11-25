@@ -359,6 +359,10 @@ var BudgetNew = React.createClass({
 							<button className="btn btn-primary" onClick = {this.create}>{buttonTitle}</button>
 							<a className="btn btn--unstyled" onClick = {() =>{
 
+								if(isEditMode){
+									return this.context.router.transitionTo('budgetsView', {id: currentBudget.id})	
+								}
+
 								this.context.router.transitionTo('budgets')
 
 							}}>Cancel</a>

@@ -72,7 +72,7 @@ var Mapping = React.createClass({
 		}
 	},
 	editMapping: function(item, type){
-
+		
 		this.setState({
 			selectedMapping: item,
 			selectedMappingType: type,
@@ -118,7 +118,7 @@ var Mapping = React.createClass({
 						{mappingMPHods.map( (item, idx) => {
 
 							var deleteFn = this.deleteMapping.bind(this, item, idx, 1);
-							var editFn = this.editMapping.bind(this, item, idx, 1);
+							var editFn = this.editMapping.bind(this, item, 1);
 
 							return (
 								<tr key = {idx}>
@@ -150,7 +150,7 @@ var Mapping = React.createClass({
 						{mappingHodLiasons.map( (item, idx) => {
 
 							var deleteFn = this.deleteMapping.bind(this, item, idx, 2)
-							var editFn = this.editMapping.bind(this, item, idx, 2);
+							var editFn = this.editMapping.bind(this, item, 2);
 
 							return (
 								<tr key = {idx}>

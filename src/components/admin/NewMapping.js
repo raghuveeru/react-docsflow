@@ -222,7 +222,7 @@ var NewMapping = React.createClass({
 		var {
 			mappingType,
 			id,
-			isEdting
+			isEditing
 		} = this.state;
 		
 		var formContent = null;
@@ -240,13 +240,13 @@ var NewMapping = React.createClass({
 		return (
 			<div className="modal-dialog">
 				<div className="modal-dialog-title">
-					{isEdting? 'Edit mapping': 'Add mapping'}
+					{isEditing? 'Edit mapping': 'Add mapping'}
 				</div>
 				<form className="modal-dialog-body" ref="form">
 					<Select2
 						placeholder="Select mapping type"
 						className="select2-flushtop"
-						disabled = {isEdting}
+						disabled = {isEditing}
 						required = {true}
 						value = {mappingType}
 						onChange = { (val, data, event)=> {

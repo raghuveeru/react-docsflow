@@ -51,7 +51,7 @@
     "fluxxor": "^1.7.3",
     "react": "^0.13.3",
     "react-modal": "^0.5.0",
-    "react-router": "^0.13.4",
+    "react-router": "^0.13.4",    
     "superagent": "^1.4.0"
   }
 }

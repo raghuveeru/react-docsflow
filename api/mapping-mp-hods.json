@@ -1,7 +1,6 @@
 {
 	"data": [
 		{
-			"id": 1,
 			"memberOfParliament": {
 				"id": 2,
 				"name": "Name of the MP"
@@ -17,11 +16,10 @@
 				}
 			]
 		},
-		{
-			"id": 2,
+		{			
 			"memberOfParliament": {
 				"id": 2,
-				"name": "Name of the MP"
+				"name": "Name of the MP 2"
 			},
 			"hods": [
 				{

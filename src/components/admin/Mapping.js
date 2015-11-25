@@ -41,28 +41,30 @@ var Mapping = React.createClass({
 			isModalOpen: false
 		})
 	},
-	deleteMapping: function(id, type){
+	deleteMapping: function(obj, index, type){
 
-		if(confirm('Are you sure you want to delete?')){		
+		// if(confirm('Are you sure you want to delete?')){		
 		
 			switch(type){
 				case 1:
 					
 					this.props.flux.actions.AdminActions.deleteMappingMpToHods({
-						id: id,
-						userId: CURRENT_USER.id
+						mapping: obj,
+						userId: CURRENT_USER.id,
+						index: index
 					})
 					break;
 
 				case 2:
 					
 					this.props.flux.actions.AdminActions.deleteMappingHodToLiasons({
-						id: id,
-						userId: CURRENT_USER.id
+						mapping: obj,
+						userId: CURRENT_USER.id,
+						index: index
 					})
 					break;
 			}		
-		}
+		// }
 	},
 	editMapping: function(item, type){
 
@@ -110,8 +112,8 @@ var Mapping = React.createClass({
 					<tbody>
 						{mappingMPHods.map( (item, idx) => {
 
-							var deleteFn = this.deleteMapping.bind(this, item.id, 1);
-							var editFn = this.editMapping.bind(this, item, 1);
+							var deleteFn = this.deleteMapping.bind(this, item, idx, 1);
+							var editFn = this.editMapping.bind(this, item, idx, 1);
 
 							return (
 								<tr key = {idx}>
@@ -142,8 +144,8 @@ var Mapping = React.createClass({
 					<tbody>
 						{mappingHodLiasons.map( (item, idx) => {
 
-							var deleteFn = this.deleteMapping.bind(this, item.id, 2)
-							var editFn = this.editMapping.bind(this, item, 2);
+							var deleteFn = this.deleteMapping.bind(this, item, idx, 2)
+							var editFn = this.editMapping.bind(this, item, idx, 2);
 
 							return (
 								<tr key = {idx}>

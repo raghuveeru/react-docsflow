@@ -479,7 +479,7 @@ var AdminActions = {
 						
 						this.dispatch(actions.DELETE_MAPPING_MP_TO_HODS, {
 							data: jsonResponse,
-							id: payload.id
+							index: payload.index
 						});
 
 						callback && callback()
@@ -507,7 +507,7 @@ var AdminActions = {
 						
 						this.dispatch(actions.DELETE_MAPPING_HOD_TO_LIASONS, {
 							data: jsonResponse,
-							id: payload.id
+							index: payload.index
 						});
 
 						callback && callback()

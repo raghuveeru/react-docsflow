@@ -152,7 +152,7 @@ var NewUser = React.createClass({
 				<form className="modal-dialog-body" ref="form">
 
 					<Select2
-						value = {selectedUser.type}
+						value = {selectedUser.type || 'user'}
 						placeholder="Select user type"
 						className = 'select2-flushtop'
 						disabled = {!!selectedUser.type}
@@ -164,7 +164,7 @@ var NewUser = React.createClass({
 						}}
 						>
 						<option></option>
-						<option value = 'user' selected>MOM Officer</option>
+						<option value = 'user'>MOM Officer</option>
 						<option value = 'mp'>MP</option>						
 					</Select2>
 

@@ -1,19 +1,21 @@
 import React from 'react';
 import Select2 from '../Select2';
 import {validationOptions} from './../../constants';
+import {checkSelect2Valid} from './../../utilities';
 
 var NewMapping = React.createClass({
 	getInitialState: function(){
 
 		var {selectedMapping, selectedMappingType} = this.props;
-		
-		return {
-			id: selectedMapping.id || '',
+		var isEditing = !!Object.keys(selectedMapping).length;
+
+		return {			
 			mappingType: selectedMappingType || '',
 			memberOfParliament: selectedMapping.memberOfParliament || '',
 			hod: selectedMapping.hod || '',
 			hodsMp: selectedMapping.hods || [],
-			liasonOfficers: selectedMapping.liasonOfficers || []
+			liasonOfficers: selectedMapping.liasonOfficers || [],
+			isEditing: isEditing
 		}
 	},
 	componentDidMount: function(){
@@ -22,32 +24,21 @@ var NewMapping = React.createClass({
 
 		this.$form.validate(validationOptions);
 
-	},
-	checkSelect2Valid: function(e){
-
-		if(!e) return;
-		var $ele = $(e.target);
-		
-		return $ele.valid();
-	},
+	},	
 	onSave: function(){
 
 		var {
 			mappingType,
 			memberOfParliament,
-			hodsMp,
-			id,
+			hodsMp,			
 			hod,
-			liasonOfficers
+			liasonOfficers,
+			isEditing
 		} = this.state;
-
+		
 		var {
 			selectedMapping
 		} = this.props;
-
-		/* Check if its edit or create */
-
-		var isEditing = !!selectedMapping.id;		
 
 		if(this.$form.valid()){			
 
@@ -65,8 +56,7 @@ var NewMapping = React.createClass({
 
 						var _hodsMp = hodsMp.map( (item) => item.id? item.id.toString() : item.toString());
 
-						this.props.flux.actions.AdminActions.updateMappingMpToHods({
-							id: id,
+						this.props.flux.actions.AdminActions.updateMappingMpToHods({							
 							userId: CURRENT_USER.id,
 							memberOfParliament: memberOfParliament.id,
 							hods: _hodsMp
@@ -96,7 +86,6 @@ var NewMapping = React.createClass({
 						var _liasonOfficers = liasonOfficers.map( (item) => item.id? item.id.toString() : item.toString());
 
 						this.props.flux.actions.AdminActions.updateMappingHodToLiasons({
-							id: id,
 							userId: CURRENT_USER.id,
 							hod: hod.id,
 							liasonOfficers: _liasonOfficers
@@ -124,14 +113,16 @@ var NewMapping = React.createClass({
 	},
 	renderMpHods: function(){
 
-		var {selectedMapping} = this.props;		
+		var {selectedMapping} = this.props;	
+
+		var {isEditing}	 = this.state;
 		
 		return (
 			<div className="render-hod">
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
 					placeholder= 'Member of Parliament'
-					disabled = {!!selectedMapping.memberOfParliament}
+					disabled = {isEditing}
 					multiple = {false}
 					required = {true}
 					key = {1}
@@ -139,7 +130,7 @@ var NewMapping = React.createClass({
 					defaultValue = {selectedMapping.memberOfParliament}
 					onChange = { (val, data, event) => {
 
-						this.checkSelect2Valid(event);
+						checkSelect2Valid(event);
 						
 						this.setState({
 							memberOfParliament: data
@@ -158,7 +149,7 @@ var NewMapping = React.createClass({
 					defaultValue = {selectedMapping.hods}					
 					onChange = { (val, data, event) => {
 
-						this.checkSelect2Valid(event);
+						checkSelect2Valid(event);
 
 						this.setState({
 							hodsMp: val
@@ -174,6 +165,8 @@ var NewMapping = React.createClass({
 
 		var {selectedMapping} = this.props;
 
+		var {isEditing} = this.state;
+
 		return (
 			<div className="render-liason">
 				<Select2  
@@ -185,10 +178,10 @@ var NewMapping = React.createClass({
 					key = {3}
 					required = {true}
 					defaultValue = {selectedMapping.hod}
-					disabled = {!!selectedMapping.id}					
+					disabled = {isEditing}					
 					onChange = { (val, data, event) => {
 
-						this.checkSelect2Valid(event);
+						checkSelect2Valid(event);
 						
 						this.setState({
 							hod: data
@@ -208,7 +201,7 @@ var NewMapping = React.createClass({
 					defaultValue = {selectedMapping.liasonOfficers}					
 					onChange = { (val, data, event) => {
 
-						this.checkSelect2Valid(event);
+						checkSelect2Valid(event);
 
 						this.setState({
 							liasonOfficers: val
@@ -228,11 +221,10 @@ var NewMapping = React.createClass({
 
 		var {
 			mappingType,
-			id
+			id,
+			isEdting
 		} = this.state;
 		
-		var editMode = id? true: false;
-
 		var formContent = null;
 		
 		switch(parseInt(mappingType)){			
@@ -248,13 +240,13 @@ var NewMapping = React.createClass({
 		return (
 			<div className="modal-dialog">
 				<div className="modal-dialog-title">
-					{editMode? 'Edit mapping': 'Add mapping'}
+					{isEdting? 'Edit mapping': 'Add mapping'}
 				</div>
 				<form className="modal-dialog-body" ref="form">
 					<Select2
 						placeholder="Select mapping type"
 						className="select2-flushtop"
-						disabled = {editMode}
+						disabled = {isEdting}
 						required = {true}
 						value = {mappingType}
 						onChange = { (val, data, event)=> {
@@ -263,7 +255,7 @@ var NewMapping = React.createClass({
 								mappingType: val
 							})
 
-							this.checkSelect2Valid(event);
+							checkSelect2Valid(event);
 
 						}}
 					>

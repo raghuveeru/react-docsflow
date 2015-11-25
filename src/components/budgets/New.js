@@ -1,8 +1,8 @@
 import React from 'react';
 import InputMaterial from '../InputMaterial';
-import Select2 from '../Select2';
+import Select2 from './../Select2';
 import TextareaMaterial from '../TextareaMaterial';
-import {mapObject, t, checkForPermission} from './../../utilities';
+import {mapObject, t, checkForPermission, checkSelect2Valid} from './../../utilities';
 import {validationOptions} from './../../constants';
 import {Link} from 'react-router';
 import Fluxxor from 'fluxxor';
@@ -178,15 +178,7 @@ var BudgetNew = React.createClass({
 			})
 		}
 
-	},
-	checkSelect2Valid: function(e){
-		
-		if(!e) return;
-		
-		var $ele = $(e.target);
-		
-		return $ele.valid();
-	},
+	},	
 	render: function(){
 		var {currentBudget} = this.state.BudgetStore;
 		var isEditMode = !!this.props.params.id;		
@@ -196,9 +188,10 @@ var BudgetNew = React.createClass({
 		var AssignTo = !isEditMode? this.renderAssignToOfficer() : null;
 		var buttonTitle = !isEditMode? 'Create and assign': 'Save';		
 		var title = !isEditMode? 'Create new budget cut' : 'Edit budget cut';
-		if(isEditMode && !currentBudget.id) return null;
+		
+		/* Handle for edit and no Id */
 
-		// console.log(currentBudget)
+		if(isEditMode && !currentBudget.id) return null;
 
 		return (
 			<form ref="form">
@@ -223,7 +216,7 @@ var BudgetNew = React.createClass({
 								var bcTopic = data.budgetCutTopic;
 
 								
-								this.checkSelect2Valid(event);
+								checkSelect2Valid(event);
 								
 								this.setState({
 									topicId: val,
@@ -244,7 +237,7 @@ var BudgetNew = React.createClass({
 							defaultValue = {currentBudget.budgetCutTopic}
 							onChange = { (val, data, event) => {
 								
-								this.checkSelect2Valid(event);
+								checkSelect2Valid(event);
 								
 								this.setState({
 									budgetCutId: val,
@@ -263,7 +256,7 @@ var BudgetNew = React.createClass({
 							defaultValue = {currentBudget.memberOfParliament}
 							onChange = { (val, data, event) => {
 
-								this.checkSelect2Valid(event);								
+								checkSelect2Valid(event);								
 								
 								var select = this.refs.hodSourcingSelect.refs.select.getDOMNode();
 
@@ -293,7 +286,7 @@ var BudgetNew = React.createClass({
 							query = {{ memberOfParliament: this.state.memberOfParliament}}
 							onChange = { (val, data, event) => {
 
-								this.checkSelect2Valid(event);
+								checkSelect2Valid(event);
 								
 								this.setState({
 									hodSourcing: val
@@ -392,7 +385,7 @@ var BudgetNew = React.createClass({
 					name="responsibleOfficer"
 					onChange = { (val, data, event) => {
 
-						this.checkSelect2Valid(event);
+						checkSelect2Valid(event);
 						
 						this.setState({
 							responsibleOfficer: val

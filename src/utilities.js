@@ -259,8 +259,15 @@ var utilities = {
 			budgetCutId: id,
 			edit: false
 		})
+	},
+	checkSelect2Valid: function(e){
+		
+		if(!e) return;
+		
+		var $ele = $(e.target);
+		
+		return $ele.valid();
 	}
-
 };
 
 module.exports = utilities;

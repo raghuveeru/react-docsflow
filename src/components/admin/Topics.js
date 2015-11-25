@@ -78,8 +78,8 @@ var Topics = React.createClass({
 					}}
 				>
 					<option></option>
-					{AppConfig.ADMIN_TOPIC_YEARS.map( (year) => {
-						return <option>{year}</option>	
+					{AppConfig.ADMIN_TOPIC_YEARS.map( (year, idx) => {
+						return <option key = {idx}>{year}</option>	
 					})}
 					
 				</Select2>

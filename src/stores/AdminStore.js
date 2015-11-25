@@ -100,15 +100,11 @@ var AdminStore = Fluxxor.createStore({
 	deleteMappingMpToHods: function(payload){
 
 		var data = payload.data.success,
-			id = payload.id
+			index = payload.index
 
-		if(data){
+		if(data && index){
 
-			for(var j = this.mappingMPHods.length - 1; j >= 0; j--) {
-				if(this.mappingMPHods[j].id == id){
-					this.mappingMPHods.splice(j, 1);
-				}
-			}
+			this.mappingMPHods.splice(index, 1);
 
 			this.emit('change')
 		}
@@ -116,15 +112,11 @@ var AdminStore = Fluxxor.createStore({
 	deleteMappingHodLiasons: function(payload){
 
 		var data = payload.data.success,
-			id = payload.id
+			index = payload.id
 
-		if(data){
+		if(data && index){
 
-			for(var j = this.mappingHodLiasons.length - 1; j >= 0; j--) {
-				if(this.mappingHodLiasons[j].id == id){
-					this.mappingHodLiasons.splice(j, 1);
-				}
-			}
+			this.mappingHodLiasons.splice(index, 1);
 
 			this.emit('change')
 		}

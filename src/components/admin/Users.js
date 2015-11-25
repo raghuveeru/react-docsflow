@@ -50,10 +50,11 @@ var Users = React.createClass({
 		}
 
 	},
-	editUser: function(userId, event){
+	editUser: function(userId, type, event){
 
 		this.props.flux.actions.AdminActions.getUserById({
-			id: userId
+			id: userId,
+			type: type
 		}, (response) => {
 			
 			var _user = response.data[0];
@@ -94,12 +95,12 @@ var Users = React.createClass({
 
 							var deleteFn = this.deleteUser.bind(this, user.id, user.type || 'user');
 
-							var editFn = this.editUser.bind(this, user.id);
+							var editFn = this.editUser.bind(this, user.id, user.type || 'user');
 
 							return (
 								<tr key = {idx}>
 									<td className="cell-image">
-										<img src={user.image} style = {{width: 40}} />										
+										<img src={user.image} style = {{width: 40}} />
 									</td>									
 									<td>
 										{user.name}

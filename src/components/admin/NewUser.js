@@ -154,7 +154,7 @@ var NewUser = React.createClass({
 						value = {selectedUser.type || 'user'}
 						placeholder="Select user type"
 						className = 'select2-flushtop'
-						disabled = {!!selectedUser.type}
+						disabled = {editMode}
 						onChange = {(val) => {
 							
 							this.setState({

@@ -92,11 +92,11 @@ var AdminStore = Fluxxor.createStore({
 		this.emit('change')
 	},
 	deleteMappingMpToHods: function(payload){
-
+		console.log(payload)
 		var data = payload.data.success,
 			index = payload.index
 
-		if(data && index){
+		if(data){
 
 			this.mappingMPHods.splice(index, 1);
 
@@ -108,7 +108,7 @@ var AdminStore = Fluxxor.createStore({
 		var data = payload.data.success,
 			index = payload.id
 
-		if(data && index){
+		if(data){
 
 			this.mappingHodLiasons.splice(index, 1);
 

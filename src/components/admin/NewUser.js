@@ -115,8 +115,8 @@ var NewUser = React.createClass({
 	removeRole: function(value){
 
 		var roles = _.clone(this.state.roles);
-
-		roles.splice(roles.indexOf(value), 1);
+		
+		roles.splice(roles.indexOf(parseInt(value)), 1);
 
 		this.setState({
 			roles: roles

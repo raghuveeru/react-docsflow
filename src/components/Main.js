@@ -30,9 +30,9 @@ var Main = React.createClass({
 					<div className="container">
 						
 						<RouteHandler {...this.props} />
-					</div>
-					<NotificationSystem ref="notificationSystem" allowHTML = {true} style = {notificationStyles} />
+					</div>					
  				</div>
+ 				<NotificationSystem ref="notificationSystem" allowHTML = {true} style = {notificationStyles} />
 			</div>
 		)
 	}

@@ -524,6 +524,17 @@ var AdminActions = {
 				NProgress.done()
 			})
 		
+	},
+	getTopicYears: function(){
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_TOPIC_YEARS)
+			.set(headers)
+			.end((err, res) => {
+
+				this.dispatch(actions.GET_TOPIC_YEARS, JSON.parse(res.text))
+			})
+
 	}
 };
 

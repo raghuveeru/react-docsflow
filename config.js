@@ -40,6 +40,8 @@ var API = {
 
 		UPDATE_ORDER_MAIN_TOPICS: 'api/update-order-main-topics.json',
 		UPDATE_ORDER_SUB_TOPICS: 'api/update-order-sub-topics.json',
+
+		GET_TOPIC_YEARS: 'api/get-topic-years.json'
 	},
 	USERS: {
 		GET_ALL_USERS: 'api/get-all-users.json',

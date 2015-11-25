@@ -12,6 +12,8 @@ var AdminStore = Fluxxor.createStore({
 
 		this.mappingHodLiasons = [];
 
+		this.topicYears = [];
+
 		this.bindActions(
 			actions.GET_MAIN_TOPICS, this.getMainTopics,
 			actions.CREATE_MAIN_TOPIC, this.createMainTopic,
@@ -35,6 +37,7 @@ var AdminStore = Fluxxor.createStore({
 			actions.CREATE_MAPPING_HOD_TO_LIASONS, this.createMappingHodLiasons,
 			actions.UPDATE_MAPPING_MP_TO_HODS, this.updateMappingMpToHods,
 			actions.UPDATE_MAPPING_HOD_TO_LIASONS, this.updateMappingHodLiasons,
+			actions.GET_TOPIC_YEARS, this.getTopicYears
 		)
 	},
 	getState: function(){
@@ -42,8 +45,15 @@ var AdminStore = Fluxxor.createStore({
 			topics: this.topics,
 			users: this.users,
 			mappingMPHods: this.mappingMPHods,
-			mappingHodLiasons: this.mappingHodLiasons
+			mappingHodLiasons: this.mappingHodLiasons,
+			topicYears: this.topicYears
 		}
+	},
+	getTopicYears: function(payload){
+
+		this.topicYears = payload.data;
+
+		this.emit('change')
 	},
 	getMappingMpToHods: function(payload){
 

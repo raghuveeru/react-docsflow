@@ -32,6 +32,8 @@ var Topics = React.createClass({
 		
 		this.requestTopics();
 
+		this.props.flux.actions.AdminActions.getTopicYears();
+
 	},
 	requestTopics: function(){
 		
@@ -53,11 +55,11 @@ var Topics = React.createClass({
 	},
 	render: function(){
 
-		var {topics} = this.state.AdminStore;
-		var disableSort = this.state.year != currentYear;
+		var {topics, topicYears} = this.state.AdminStore;
+		var disableSort = this.state.year != currentYear;		
 		
-		if(!topics.length) return null;
-		
+		topicYears = topicYears.filter( (year) => year != currentYear)
+
 		return (
 			<div>
 				{disableSort? 
@@ -68,7 +70,7 @@ var Topics = React.createClass({
 				<Select2
 					className="topic-select-year"
 					placeholder="Select year"
-					value = {currentYear}
+					value = {currentYear}					
 					onChange = { (val) => {
 						
 						this.setState({
@@ -77,11 +79,8 @@ var Topics = React.createClass({
 
 					}}
 				>
-					<option></option>
-					{AppConfig.ADMIN_TOPIC_YEARS.map( (year, idx) => {
-						return <option key = {idx}>{year}</option>	
-					})}
-					
+					<option>{currentYear}</option>
+					{topicYears.map( (year, idx) => <option key = {idx}>{year}</option> )}
 				</Select2>
 				<Modal 
 					isOpen = {this.state.isModalOpen}

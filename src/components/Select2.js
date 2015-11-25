@@ -100,7 +100,7 @@ var Select2 = React.createClass({
 		}
 
 		var label = <label className="label-select">{this.props.placeholder}</label>;
-		var klassName= 'select2-element ' + className;
+		var klassName= 'select2-element ' + (className? className: '');
 
 		if(!this.props.url){
 
@@ -120,7 +120,7 @@ var Select2 = React.createClass({
 		}
 		
 		return (
-			<div className="select2-element">
+			<div className={klassName}>
 				{label}
 				<input 
 					disabled = {this.props.disabled}

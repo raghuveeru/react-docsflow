@@ -10,9 +10,13 @@ var Filters = React.createClass({
 	onClearFacet: function(facet){
 		this.props.onClearFacet.call(this, facet)
 	},
+	shouldComponentUpdate: function(nextProps, nextState){
+
+		return nextProps.facets != this.props.facets
+	},
 	render: function(){
 
-		const {facets} = this.props;
+		const {facets} = this.props;		
 
 		return (
 			<div>				
@@ -33,9 +37,11 @@ var Filters = React.createClass({
 					}
 
 					var totalCount = 0;
+					
 					values.forEach(function(item){
 						totalCount+= parseInt(item.count);
 					});
+					
 
 					var allActiveClass = !active? 'active': '';					
 					var clearBounds = this.onClearFacet.bind(this, key);
@@ -47,15 +53,17 @@ var Filters = React.createClass({
 					return (
 						<div className="sp-module" key = {index}>
 							<h2 className="sp-module-title">{key}</h2>
-							<nav className="nav-sidemenu">
-								{allHTML}					
+							
+							
 								
 								<FilterList 
 									values = {values} 
 									onChange = {this.onChange}  
 									keys = {key} 
-									active = {active} />
-							</nav>
+									active = {active} 
+									allHTML = {allHTML}
+								/>
+							
 						</div>
 					)
 				})}

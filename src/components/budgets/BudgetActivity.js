@@ -72,9 +72,9 @@ var BudgetActivityItem = React.createClass({
 			<span>
 				<span>{prefix} </span>
 				{usersArray.map( (user, idx) => {
-					var roles = getUserRoleName(user.role);
+					
 					var xtra = (idx != len - 1? ', ': '');
-					return (<span><strong>{user.name}</strong>, {roles}{xtra}</span>)
+					return (<span><strong>{user.name}</strong>{xtra}</span>)
 				})}	
 			</span>
 		)

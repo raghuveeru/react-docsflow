@@ -443,7 +443,7 @@ var AdminActions = {
 		NProgress.start();
 
 		request
-			.post(AppConfig.API.BASE_URL + AppConfig.API.USERS.DELETE_USER)
+			.post(getUserUrl('delete', payload.type))
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {

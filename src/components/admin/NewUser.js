@@ -52,8 +52,7 @@ var NewUser = React.createClass({
 					break;
 
 				case 'mp':
-					params = {
-						id: id,
+					params = {						
 						name: name,						
 						type: type,
 						userId: CURRENT_USER.id						

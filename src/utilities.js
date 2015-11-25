@@ -139,6 +139,17 @@ var utilities = {
 					break;
 			}
 		};
+		
+		if(method == 'delete'){
+			switch(userType){
+				case 'user':
+					url = AppConfig.API.USERS.DELETE_USER;
+					break;
+				case 'mp':
+					url = AppConfig.API.USERS.DELETE_MP;
+					break;
+			}
+		};
 
 		return AppConfig.API.BASE_URL + url;
 	},	

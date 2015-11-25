@@ -36,14 +36,15 @@ var Users = React.createClass({
 			isUserModalOpen: true
 		})
 	},
-	deleteUser: function(userId, event){
+	deleteUser: function(userId, type, event){
 
 		event && event.preventDefault();
-
+		
 		if(confirm('Are you sure you want to delete?')){
 
 			this.props.flux.actions.AdminActions.deleteUser({
 				id: userId,
+				type: type,
 				userId: CURRENT_USER.id
 			})
 		}
@@ -91,7 +92,7 @@ var Users = React.createClass({
 					<tbody>
 						{users.map((user, idx) => {
 
-							var deleteFn = this.deleteUser.bind(this, user.id);
+							var deleteFn = this.deleteUser.bind(this, user.id, user.type || 'user');
 
 							var editFn = this.editUser.bind(this, user.id);
 

@@ -16,6 +16,7 @@
 			"department": "Department",
 			"designation": "MP",
 			"role": [1, 2],
+			"type": "mp",
 			"online": true
 		},
 		{

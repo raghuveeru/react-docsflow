@@ -56,11 +56,10 @@ var API = {
 
 
 		CREATE_NEW_USER: 'api/create-new-user.json',
-		CREATE_NEW_MP: 'api/create-new-mp.json',
-		CREATE_NEW_HOD: 'api/create-new-hod.json',
-		CREATE_NEW_LIASON_OFFICER: 'api/create-new-liason-officer.json',
+		CREATE_NEW_MP: 'api/create-new-mp.json',		
 
 		DELETE_USER: 'api/delete-user.json',
+		DELETE_MP: 'api/delete-user.json',
 		GET_USER_ROLE: 'api/get-user-role.json',
 
 		UPDATE_USER: 'api/create-new-user.json',

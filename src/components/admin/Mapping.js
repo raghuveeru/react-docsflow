@@ -43,7 +43,7 @@ var Mapping = React.createClass({
 	},
 	deleteMapping: function(obj, index, type){
 
-		// if(confirm('Are you sure you want to delete?')){		
+		if(confirm('Are you sure you want to delete?')){		
 		
 			switch(type){
 				case 1:
@@ -64,7 +64,7 @@ var Mapping = React.createClass({
 					})
 					break;
 			}		
-		// }
+		}
 	},
 	editMapping: function(item, type){
 

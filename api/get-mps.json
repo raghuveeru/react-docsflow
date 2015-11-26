@@ -5,10 +5,7 @@
 			"name": "Lisa Lawrence",
 			"designation": "HOD",
 			"role": ["Member of Parliament"],
-			"hodOfficer": [{
-				"id": "1212",
-				"name": "Lisa Lawrence"
-			}],
+			"hodOfficer": [],
 			"image": "images/profile-img.png"
 		},
 		{

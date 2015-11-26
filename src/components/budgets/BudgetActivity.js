@@ -95,7 +95,7 @@ var BudgetActivityItem = React.createClass({
 					: null}
 				</div>
 				<div className="media-content">
-					{this.renderUsers(fromUser)} {activity.action} {this.renderUsers(toUser, 'to')}<strong></strong>
+					{this.renderUsers(fromUser)} {activity.action} {this.renderUsers(toUser)}<strong></strong>
 
 					<div className="activity-meta">
 						{activity.date}

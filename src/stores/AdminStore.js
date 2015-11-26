@@ -128,7 +128,7 @@ var AdminStore = Fluxxor.createStore({
 	updateUser: function(payload){
 		
 		var _user = payload.data[0];
-
+		console.log(_user)
 		if(!_user) return ;
 
 		var _id = _user.id;
@@ -138,7 +138,7 @@ var AdminStore = Fluxxor.createStore({
 		for(var i = 0; i < _users.length; i++){
 
 			if(_users[i].id == _id){				
-				_users[i].role = _user.role
+				_users[i] = _user
 			}
 		}
 

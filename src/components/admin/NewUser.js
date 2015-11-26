@@ -18,10 +18,13 @@ var NewUser = React.createClass({
 			name: selectedUser.name || '',			
 			department: selectedUser.department || '',
 			roles: selectedUser.role || [],
-			id: selectedUser.id || ''
+			id: selectedUser.id || null,
 		}
 	},
 	onSave: function(e){
+
+		var {selectedUser} = this.props;
+		var editMode = !!selectedUser.name;
 
 		if(this.$form.valid()){			
 
@@ -43,7 +46,7 @@ var NewUser = React.createClass({
 			switch(type){
 				case 'user':
 					params = {
-						id: id,						
+										
 						type: type,
 						userId: CURRENT_USER.id,
 						roles: roles,
@@ -52,7 +55,8 @@ var NewUser = React.createClass({
 					break;
 
 				case 'mp':
-					params = {						
+					params = {
+											
 						name: name,						
 						type: type,
 						userId: CURRENT_USER.id						
@@ -64,9 +68,11 @@ var NewUser = React.createClass({
 			 * Check if its in edit mode
 			 */
 			
-			if(selectedUser.name){
+			if(editMode){
 
-				this.props.flux.actions.AdminActions.updateUser(params, () => {
+				var _params = jQuery.extend({}, params, {id: id});
+
+				this.props.flux.actions.AdminActions.updateUser(_params, () => {
 
 					this.props.closeModal && this.props.closeModal.call(this)
 				})

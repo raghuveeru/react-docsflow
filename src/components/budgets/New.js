@@ -220,9 +220,8 @@ var BudgetNew = React.createClass({
 								
 								this.setState({
 									topicId: val,
-									budgetCutTopic: bcTopic,
-									budgetCutTopicName: bcTopic[0].name
-								}, this.updateSubject)
+									budgetCutTopic: bcTopic									
+								})
 							}}
 						/>
 						

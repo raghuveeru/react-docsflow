@@ -37,7 +37,7 @@ var FilterList = React.createClass({
 
 		if(!isOpen && filteredValues.length > maxCount){
 			filteredValues = filteredValues.slice(0, maxCount);
-		}		
+		}
 		
 		return (
 			<div>

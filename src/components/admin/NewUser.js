@@ -46,7 +46,7 @@ var NewUser = React.createClass({
 			switch(type){
 				case 'user':
 					params = {
-										
+						id: id,			
 						type: type,
 						userId: CURRENT_USER.id,
 						roles: roles,
@@ -55,11 +55,14 @@ var NewUser = React.createClass({
 					break;
 
 				case 'mp':
-					params = {
-											
+					params = {						
 						name: name,						
 						type: type,
 						userId: CURRENT_USER.id						
+					}
+
+					if(editMode){
+						params = jQuery.extend({}, params, {id: id})
 					}
 					break;
 			}

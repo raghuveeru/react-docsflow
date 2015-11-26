@@ -52,9 +52,7 @@ var Filters = React.createClass({
 
 					return (
 						<div className="sp-module" key = {index}>
-							<h2 className="sp-module-title">{key}</h2>
-							
-							
+							<h2 className="sp-module-title">{name}</h2>
 								
 								<FilterList 
 									values = {values} 

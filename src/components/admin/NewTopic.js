@@ -41,14 +41,16 @@ var NewTopic = React.createClass({
 					id: this.props.topic.id,
 					name: this.state.name,
 					userId: CURRENT_USER.id
+				}, () => {
+					this.props.closeModal.call(this)
 				})
 
 			}else{
 			
-				this.props.flux.actions.AdminActions.createMainTopic(this.state)
+				this.props.flux.actions.AdminActions.createMainTopic(this.state, () => {
+					this.props.closeModal.call(this)
+				})
 			}
-
-			this.props.closeModal.call(this)
 
 		}
 

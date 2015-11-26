@@ -34,7 +34,7 @@ var BudgetCutTopicForm = React.createClass({
 					topicId: topic.id,
 					id: budgetCutTopic.id,
 					userId: CURRENT_USER.id
-				})			
+				}, this.finishSaveAndEdit)			
 
 			}else{
 
@@ -42,17 +42,21 @@ var BudgetCutTopicForm = React.createClass({
 					name: this.state.budgetCutTopicName,
 					topicId: topic.id,
 					userId: CURRENT_USER.id
-				})
+				}, this.finishSaveAndEdit)
 			}
 
-			this.setState({
-				budgetCutTopicName: ''
-			});
 			
-			this.props.toggleAdd.call(this)
 
 		}
 
+	},
+	finishSaveAndEdit: function(){
+		
+		this.setState({
+			budgetCutTopicName: ''
+		});
+		
+		this.props.toggleAdd.call(this)
 	},
 	componentDidMount: function(){
 		this.refs.firstInput.getDOMNode().getElementsByTagName('input')[0].focus()

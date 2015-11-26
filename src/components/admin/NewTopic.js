@@ -59,7 +59,7 @@ var NewTopic = React.createClass({
 
 		return {
 			title: 'Create new topic',
-			buttonTitle: 'Create'
+			buttonTitle: 'Submit'
 		}
 	},
 	render: function(){

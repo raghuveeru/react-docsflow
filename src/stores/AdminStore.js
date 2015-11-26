@@ -37,7 +37,7 @@ var AdminStore = Fluxxor.createStore({
 			actions.CREATE_MAPPING_HOD_TO_LIASONS, this.createMappingHodLiasons,
 			actions.UPDATE_MAPPING_MP_TO_HODS, this.updateMappingMpToHods,
 			actions.UPDATE_MAPPING_HOD_TO_LIASONS, this.updateMappingHodLiasons,
-			actions.GET_TOPIC_YEARS, this.getTopicYears
+			actions.GET_TOPIC_YEARS, this.getTopicYears,
 		)
 	},
 	getState: function(){

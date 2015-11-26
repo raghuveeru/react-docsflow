@@ -43,7 +43,7 @@ var BudgetCutTopicItem = React.createClass({
 					topic = {topic}
 					toggleAdd = {this.toggleEdit}
 					budgetCutTopic = {budgetCutTopic}
-					buttonTitle = 'Save'
+					buttonTitle = 'Submit'
 				/> : null}
 				
 				{disableSort? null: <div className="topic-cell-actions">

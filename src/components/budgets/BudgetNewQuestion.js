@@ -176,7 +176,7 @@ var BudgetNewQuestion = React.createClass({
 
 					
 					<div className="form-control submit-control">
-						<button className="btn btn-primary">Save</button>
+						<button className="btn btn-primary">Submit</button>
 						<a className="btn btn--unstyled" onClick = {this.cancelForm}>Cancel</a>
 					</div>
 				</div>

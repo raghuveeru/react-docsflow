@@ -179,7 +179,7 @@ var NewUser = React.createClass({
 					{formContent}
 
 					<div className="form-control submit-control">
-						<button className="btn btn-primary" onClick = {this.onSave}>Save</button>
+						<button className="btn btn-primary" onClick = {this.onSave}>Submit</button>
 						<a onClick = {this.props.closeModal} className="btn btn--unstyled">Cancel</a>
 					</div>
 

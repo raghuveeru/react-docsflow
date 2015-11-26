@@ -3494,11 +3494,7 @@ label.label-error {
  * Assign form
  */
 .assign-form {
-  padding: 1em;
-  border-radius: 4px;
-  box-shadow: 0 0 2px 0 #C2C2C2;
-  border: 1px #DFDFDF solid;
-  margin-bottom: 2em; }
+  padding: 1em; }
 
 /**
  * Label block
@@ -4253,11 +4249,15 @@ li {
   border-bottom-style: solid;
   margin: 20px 0; }
   .sp-card .rule {
-    margin-left: -15px;
-    margin-right: -15px; }
+    margin-left: -16px;
+    margin-right: -16px; }
   .sp-card-body .rule {
     margin-left: -30px;
     margin-right: -30px; }
+
+.rule--thick {
+  border-width: 5px;
+  border-color: #333; }
 
 /*------------------------------------*    TABLE
 \*------------------------------------*/

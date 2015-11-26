@@ -180,7 +180,7 @@ var AdminActions = {
 
 				NProgress.done()
 			})		
-	},
+	},	
 	getMainTopics: function(payload){
 
 		NProgress.start()

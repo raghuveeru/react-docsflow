@@ -68,7 +68,7 @@ var MainTopicTitle = React.createClass({
 					<NewTopic {...this.props} 
 						closeModal = {this.closeModal} 
 						title="Edit topic" 
-						buttonTitle = 'Save' 
+						buttonTitle = 'Submit' 
 						topic = {topic} 
 					/>
 				</Modal>

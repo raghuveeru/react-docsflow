@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import NewUser from './NewUser';
 import {customStyles} from '../../constants';
 import {getUserRoleName} from './../../utilities';
+import Select2 from '../Select2';
+import _ from 'lodash';
 
 var Users = React.createClass({
 	mixins: [StoreWatchMixin('AdminStore')],
@@ -12,7 +14,8 @@ var Users = React.createClass({
 		return {
 			AdminStore: this.props.flux.stores.AdminStore.getState(),
 			isUserModalOpen: false,
-			selectedUser: {}
+			selectedUser: {},
+			roleToFilter: ''
 		}
 	},
 	contextTypes: {
@@ -65,15 +68,55 @@ var Users = React.createClass({
 			})
 		})
 
-	},
+	},	
 	render: function(){		
 
-		var {isUserModalOpen, selectedUser} = this.state;
+		var {isUserModalOpen, selectedUser, roleToFilter} = this.state;
 		var {users} = this.state.AdminStore;
+
+		var _userList = _.clone(this.users);
+
+		if(roleToFilter){
+			switch(roleToFilter){
+				case 'mp':
+					users = users.filter( (user) => user.type == roleToFilter)
+					break;
+
+				default:
+					users = users.filter( (user) => {
+						
+						var _role = user.role || [];
+
+						if(typeof _role != 'object') _role = [_role];
+						
+						return _role.indexOf(parseInt(roleToFilter)) != -1
+					});
+
+					break;
+			}
+		}
 		
 		return (
 			<div>	
-				<a className="card-link" onClick = {this.openUserModal}><em className='fa fa-plus' />Add user</a>				
+				<a className="card-link" onClick = {this.openUserModal}><em className='fa fa-plus' />Add user</a>
+				<Select2
+					className="topic-select-year"
+					placeholder="Filter by role"					
+					onChange = { (val) => {
+						
+						this.setState({
+							roleToFilter: val
+						});
+
+					}}
+				>
+					<option value = ''>All</option>
+					<option value = 'mp'>Member of Parliament</option>
+					{AppConfig.ROLES.map( (role, idx) => {
+
+						return <option key = {idx} value = {role.id}>{role.name}</option>
+					})}
+				</Select2>		
 				<Modal 
 					isOpen = {isUserModalOpen}
 					style={customStyles}

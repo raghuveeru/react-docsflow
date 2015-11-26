@@ -6,7 +6,7 @@
 			"designation": "HOD",
 			"department": "CRD",
 			"role": [1, 2],
-			"type": "user",
+			"type": "mp",
 			"image": "images/profile-img.png"
 		}
 	]

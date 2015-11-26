@@ -265,6 +265,12 @@ var BudgetNew = React.createClass({
 									setTimeout(() => {
 										$(select).select2('data', data.hodOfficer[0], true)
 									}, 100)
+								
+								}else{
+									
+									setTimeout(() => {
+										$(select).select2('data', null)
+									}, 100)
 								}
 
 								this.setState({

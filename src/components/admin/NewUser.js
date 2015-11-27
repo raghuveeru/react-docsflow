@@ -21,7 +21,7 @@ var NewUser = React.createClass({
 			id: selectedUser.id || null,
 		}
 	},
-	onSave: function(e){
+	onSave: function(event){
 
 		var {selectedUser} = this.props;
 		var editMode = !!selectedUser.name;

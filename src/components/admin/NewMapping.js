@@ -25,7 +25,7 @@ var NewMapping = React.createClass({
 		this.$form.validate(validationOptions);
 
 	},	
-	onSave: function(){
+	onSave: function(event){
 
 		var {
 			mappingType,

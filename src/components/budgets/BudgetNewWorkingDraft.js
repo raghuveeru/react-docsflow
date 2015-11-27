@@ -59,7 +59,9 @@ var BudgetNewWorkingDraft = React.createClass({
 
 					emitNotification('success', this.getFlux(), this.props.editMode? 'Working draft details successfully updated.' : 'Working draft details successfull added.');
 
-					this.getFlux().actions.BudgetDetailActions.addWorkingDraft(data)
+					this.getFlux().actions.BudgetDetailActions.addWorkingDraft(data);
+
+					this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.budgetCutId);
 
 					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 

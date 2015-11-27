@@ -4,7 +4,7 @@ import {validationOptions} from './../../constants';
 
 var BudgetCutTopicForm = React.createClass({
 	getInitialState: function(){
-
+		console.log(this)
 		var {budgetCutTopic} = this.props;
 
 		return {

@@ -2,21 +2,20 @@ import React from 'react';
 import Modal from 'react-modal';
 import {customStyles} from '../../constants';
 import Loader from './../Loader';
-import Fluxxor, {StoreWatchMixin} from 'fluxxor';
+import {StoreWatchMixin} from 'fluxxor';
 import {getUserRoleName} from './../../utilities';
-var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetActivity = React.createClass({
-	mixins: [FluxMixin, StoreWatchMixin('BudgetStore')],
+	mixins: [StoreWatchMixin('BudgetStore')],
 	getStateFromFlux: function(){
 
 		return {
-			BudgetStore: this.getFlux().store('BudgetStore').getState()
+			BudgetStore: this.props.flux.store('BudgetStore').getState()
 		}
 	},
 	componentDidMount: function(){
 		
-		this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)		
+		this.props.flux.actions.BudgetActions.getBudgetActivity(this.props.id)		
 	},
 	render: function(){
 

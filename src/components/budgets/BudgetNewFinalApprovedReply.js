@@ -58,7 +58,9 @@ var BudgetNewFinalApprovedReply = React.createClass({
 
 					emitNotification('success', this.getFlux(), this.props.editMode? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
 
-					this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data)
+					this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data);
+
+					this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.budgetCutId);
 
 					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 

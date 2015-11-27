@@ -10,7 +10,7 @@ var BudgetView = React.createClass({
 		}
 	},
 	render: function(){			
-
+		
 		return (
 			<div>
 				<nav className="nav-crumb">
@@ -24,7 +24,7 @@ var BudgetView = React.createClass({
 						<BudgetViewBody id = {this.props.params.id} />
 					</div>
 					<div className="sp-sidebar">
-						<BudgetActivity id = {this.props.params.id} />
+						<BudgetActivity id = {this.props.params.id} {...this.props} />
 					</div>
 				</div>
 			</div>

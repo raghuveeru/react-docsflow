@@ -42,7 +42,7 @@ var BudgetNewQuestion = React.createClass({
 	componentDidMount: function(){
 
 		var $form = $(this.refs.ajaxForm.getDOMNode());
-
+		
 		$form.ajaxForm({
 			dataType: 'json',
 			success: (data) => {
@@ -61,7 +61,9 @@ var BudgetNewQuestion = React.createClass({
 
 					emitNotification('success', this.getFlux(), this.props.editMode? 'Question details successfully updated.' : 'Question details successfull added.');
 
-					this.getFlux().actions.BudgetDetailActions.addQuestion(data)
+					this.getFlux().actions.BudgetDetailActions.addQuestion(data);
+
+					this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.budgetCutId);
 
 					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
 

@@ -7,7 +7,7 @@ var Navigation = React.createClass({
 		router: React.PropTypes.func
 	},
 	render: function(){
-
+		
 		var currentRoutes = this.context.router.getCurrentRoutes();
 		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;		
 

@@ -4,6 +4,9 @@ import NewTopic from './NewTopic';
 import {customStyles} from '../../constants';
 
 var MainTopicTitle = React.createClass({
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	onEditMainTopic: function(id, event){
 
 		event.stopPropagation();
@@ -38,7 +41,8 @@ var MainTopicTitle = React.createClass({
 		if(confirm('Are you sure you want to delete?')){
 
 			this.props.flux.actions.AdminActions.deleteTopic({
-				topicId: topic.id
+				topicId: topic.id,
+				userId: this.context.currentUser.id
 			})
 		}
 

@@ -4,11 +4,12 @@ import {Link, RouteHandler} from 'react-router';
 
 var Layout = React.createClass({
 	contextTypes: {
-		router: React.PropTypes.func
+		router: React.PropTypes.func,
+		currentUser: React.PropTypes.object
 	},
 	componentDidMount: function(){
 
-		if(!checkForPermission('canSeeAdminMenu')){
+		if(!checkForPermission(this.context.currentUser, 'canSeeAdminMenu')){
 			
 			this.context.router.transitionTo('home')
 		}

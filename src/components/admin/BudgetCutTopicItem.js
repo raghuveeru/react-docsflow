@@ -2,6 +2,9 @@ import React from 'react';
 import BudgetCutTopicForm from './BudgetCutTopicForm';
 
 var BudgetCutTopicItem = React.createClass({
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getInitialState: function(){
 
 		return {
@@ -23,7 +26,7 @@ var BudgetCutTopicItem = React.createClass({
 			this.props.flux.actions.AdminActions.deleteBudgetCutTopic({
 				topicId: topic.id,
 				budgetCutTopicId: budgetCutTopic.id,
-				userId: CURRENT_USER.id
+				userId: this.context.currentUser.id
 			})
 			
 		}

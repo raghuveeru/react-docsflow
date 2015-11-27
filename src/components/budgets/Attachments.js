@@ -5,6 +5,9 @@ var FluxMixin = Fluxxor.FluxMixin(React)
 
 var Attachments = React.createClass({
 	mixins: [FluxMixin],
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	deleteAttachment: function(id){
 
 		if(confirm('Are you sure you want to delete?')){
@@ -13,7 +16,7 @@ var Attachments = React.createClass({
 				budgetCutId: this.props.budgetCutId,
 				id: id,
 				type: this.props.type,
-				userId: CURRENT_USER.id
+				userId: this.context.currentUser.id
 			}, (response) => {
 				
 				if(response.success){

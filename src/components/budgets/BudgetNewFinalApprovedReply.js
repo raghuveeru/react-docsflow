@@ -8,6 +8,9 @@ var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetNewFinalApprovedReply = React.createClass({	
 	mixins: [FluxMixin],
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getInitialState: function(){
 		return {
 			isOpen: this.props.editMode? true : false
@@ -99,7 +102,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 			<form ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
-				<input type = "hidden" name="userId" value = {CURRENT_USER.id} />
+				<input type = "hidden" name="userId" value = {this.context.currentUser.id} />
 				<input type = "hidden" name="budgetCutId" value = {this.props.budgetCutId} />
 
 				<div className={sectionClass}>

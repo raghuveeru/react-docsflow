@@ -3,8 +3,11 @@ import InputMaterial from '../InputMaterial';
 import {validationOptions} from './../../constants';
 
 var BudgetCutTopicForm = React.createClass({
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getInitialState: function(){
-		console.log(this)
+		
 		var {budgetCutTopic} = this.props;
 
 		return {
@@ -33,7 +36,7 @@ var BudgetCutTopicForm = React.createClass({
 					name: this.state.budgetCutTopicName,
 					topicId: topic.id,
 					id: budgetCutTopic.id,
-					userId: CURRENT_USER.id
+					userId: this.context.currentUser.id
 				}, this.finishSaveAndEdit)			
 
 			}else{
@@ -41,7 +44,7 @@ var BudgetCutTopicForm = React.createClass({
 				this.props.flux.actions.AdminActions.createBudgetCutTopic({
 					name: this.state.budgetCutTopicName,
 					topicId: topic.id,
-					userId: CURRENT_USER.id
+					userId: this.context.currentUser.id
 				}, this.finishSaveAndEdit)
 			}
 

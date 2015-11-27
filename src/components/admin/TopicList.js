@@ -59,6 +59,9 @@ var TopicList = React.createClass({
 
 var BudgetCutTopicList = React.createClass({
 	mixins: [SortableMixin],
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	sortableOptions: { 
 		model: "topics",
 		handle: '.drag-handle'
@@ -69,19 +72,17 @@ var BudgetCutTopicList = React.createClass({
 		}
 	},
 	componentWillReceiveProps: function(nextProps){
-		
-		// if(!_.isEqual(nextProps.budgetCutTopic, this.props.budgetCutTopic)){
-			this.setState({
-				topics: nextProps.budgetCutTopic
-			})
-		// }
+				
+		this.setState({
+			topics: nextProps.budgetCutTopic
+		})
 	},
 	handleSort: function (event) {
 
 		this.props.flux.actions.AdminActions.updateSubTopics({
 			topicId: this.props.topic.id,
 			topics: this.state.topics,
-			userId: CURRENT_USER.id
+			userId: this.context.currentUser.id
 		})
 	},
 	render: function(){

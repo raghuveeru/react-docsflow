@@ -5,13 +5,16 @@ import {validationOptions} from './../../constants';
 
 var FluxMixin = Fluxxor.FluxMixin(React);
 
-var NewTopic = React.createClass({	
+var NewTopic = React.createClass({
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getInitialState: function(){
 		var {topic} = this.props;
 
 		return {
 			name: topic? topic.name: '',
-			userId: CURRENT_USER.id
+			userId: this.context.currentUser.id
 		}
 	},
 	componentDidMount: function(){
@@ -40,7 +43,7 @@ var NewTopic = React.createClass({
 				this.props.flux.actions.AdminActions.editMainTopic({
 					id: this.props.topic.id,
 					name: this.state.name,
-					userId: CURRENT_USER.id
+					userId: this.context.currentUser.id
 				}, () => {
 					this.props.closeModal.call(this)
 				})

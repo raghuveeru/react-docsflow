@@ -9,6 +9,9 @@ import _ from 'lodash';
 
 var Users = React.createClass({
 	mixins: [StoreWatchMixin('AdminStore')],
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getStateFromFlux: function(){
 
 		return {
@@ -48,7 +51,7 @@ var Users = React.createClass({
 			this.props.flux.actions.AdminActions.deleteUser({
 				id: userId,
 				type: type,
-				userId: CURRENT_USER.id
+				userId: this.context.currentUser.id
 			})
 		}
 

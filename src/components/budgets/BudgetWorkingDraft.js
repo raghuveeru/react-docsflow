@@ -9,6 +9,9 @@ var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetWorkingDraft = React.createClass({
 	mixins: [FluxMixin, StoreWatchMixin('BudgetDetailStore')],
+	contextTypes: {	
+		currentUser: React.PropTypes.object
+	},
 	getStateFromFlux: function(){
 
 		return {
@@ -34,7 +37,7 @@ var BudgetWorkingDraft = React.createClass({
 		 * Create an edit flag
 		 */
 		
-		createEditFlag(this.getFlux(), 'workingDraftDetails', this.props.id, () => {
+		createEditFlag(this.context.currentUser, this.getFlux(), 'workingDraftDetails', this.props.id, () => {
 
 			/* If no errors: Turn on Edit Mode */
 
@@ -68,7 +71,7 @@ var BudgetWorkingDraft = React.createClass({
 								editMode: false
 							})
 
-							deleteEditFlag(this.getFlux(), 'workingDraftDetails', this.props.id)
+							deleteEditFlag(this.context.currentUser, this.getFlux(), 'workingDraftDetails', this.props.id)
 						}}
 						onCancelForm = {()=> {
 							this.setState({
@@ -134,7 +137,7 @@ var BudgetWorkingDraft = React.createClass({
 					<BudgetNewWorkingDraft 
 						budgetCutId = {this.props.id} 
 						onFinishEdit = { () => {
-							deleteEditFlag(this.getFlux(), 'workingDraftDetails', this.props.id)
+							deleteEditFlag(this.context.currentUser, this.getFlux(), 'workingDraftDetails', this.props.id)
 						}}
 					/>
 					<hr className="rule" />	

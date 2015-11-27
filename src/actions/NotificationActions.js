@@ -10,11 +10,13 @@ module.exports = {
 	},
 	getSiteNotifications: function(){
 
+		var {currentUser} = this.flux.store('AuthStore').getState();
+
 		request			
 			.get(AppConfig.API.BASE_URL + AppConfig.API.NOTIFICATIONS.ALL)
 			.set(headers)
 			.query({
-				userId: CURRENT_USER.id
+				userId: currentUser.id
 			})
 			.end((err, res) => {
 

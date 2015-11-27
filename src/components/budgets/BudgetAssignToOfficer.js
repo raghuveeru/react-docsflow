@@ -10,6 +10,9 @@ var FluxMixin = Fluxxor.FluxMixin(React);
 
 var BudgetAssignToOfficer = React.createClass({
 	mixins: [FluxMixin],
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getInitialState: function(){
 
 		return {			
@@ -18,7 +21,7 @@ var BudgetAssignToOfficer = React.createClass({
 			message: '',
 			subject: '',
 			budgetCutId: this.props.id,			
-			userId: CURRENT_USER.id
+			userId: this.context.currentUser.id
 		}
 	},
 	onSave: function(event){

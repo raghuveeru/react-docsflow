@@ -4,15 +4,15 @@ import {RouteHandler} from 'react-router';
 import Fluxxor, {StoreWatchMixin} from 'fluxxor';
 import NotificationSystem from 'react-notification-system';
 import {notificationStyles} from './../constants';
+import AuthMixin from './../mixins/AuthMixin';
 
 var FluxMixin = Fluxxor.FluxMixin(React);
 
 var Main = React.createClass({
-	mixins: [FluxMixin],
+	mixins: [FluxMixin, AuthMixin],	
 	componentDidMount: function() {
 		
 		this._notificationSystem = this.refs.notificationSystem;
-
 		
 		this.props.flux.store('NotificationStore')
 			.on("add", (payload) => {

@@ -7,6 +7,9 @@ import {StoreWatchMixin} from 'fluxxor';
 
 var Mapping = React.createClass({
 	mixins: [StoreWatchMixin('AdminStore')],
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	componentDidMount: function(){
 
 		this.props.flux.actions.AdminActions.getMappingMpToHods();
@@ -54,7 +57,7 @@ var Mapping = React.createClass({
 					this.props.flux.actions.AdminActions.deleteMappingMpToHods({
 						memberOfParliament: obj.memberOfParliament.id,
 						hods: hods,						
-						userId: CURRENT_USER.id,
+						userId: this.context.currentUser.id,
 						index: index
 					})
 					break;
@@ -65,7 +68,7 @@ var Mapping = React.createClass({
 					this.props.flux.actions.AdminActions.deleteMappingHodToLiasons({
 						hod: obj.hod.id,
 						liasonOfficers: liasonOfficers,
-						userId: CURRENT_USER.id,
+						userId: this.context.currentUser.id,
 						index: index
 					})
 					break;

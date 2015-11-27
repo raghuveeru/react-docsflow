@@ -9,6 +9,9 @@ var FluxMixin = Fluxxor.FluxMixin(React)
 
 var BudgetQuestions = React.createClass({
 	mixins: [FluxMixin, StoreWatchMixin('BudgetDetailStore')],
+	contextTypes: {	
+		currentUser: React.PropTypes.object
+	},
 	getStateFromFlux: function(){
 
 		return {
@@ -34,7 +37,7 @@ var BudgetQuestions = React.createClass({
 		 * Create an edit flag
 		 */
 		
-		createEditFlag(this.getFlux(), 'questionDetails', this.props.id, () => {
+		createEditFlag(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.id, () => {
 
 			/* If no errors: Turn on Edit Mode */
 
@@ -74,7 +77,7 @@ var BudgetQuestions = React.createClass({
 								editMode: false
 							})
 
-							deleteEditFlag(this.getFlux(), 'questionDetails', this.props.id)
+							deleteEditFlag(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.id)
 						}}
 					/>
 					<hr className="rule" />
@@ -145,7 +148,7 @@ var BudgetQuestions = React.createClass({
 				<BudgetNewQuestion 
 					budgetCutId = {this.props.id}
 					onFinishEdit = { () => {
-						deleteEditFlag(this.getFlux(), 'questionDetails', this.props.id)
+						deleteEditFlag(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.id)
 					}} />
 				<hr className="rule" />
 			</div>

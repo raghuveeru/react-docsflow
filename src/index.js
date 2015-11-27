@@ -37,11 +37,14 @@ window.INITIALIZE_MOMSTER_COS = function(){
 		})
 		.end((err, res) => {
 			if(res.ok){
+				
 				var userData = JSON.parse(res.text);
-
-				window.CURRENT_USER.roleId = userData.data[0].roleId;
-				window.CURRENT_USER.name = userData.data[0].name;
-			
+				
+				flux.actions.AuthActions.authenticateUser({
+					id: CURRENT_USER.id,
+					name: userData.data[0].name,
+					roleId: userData.data[0].roleId
+				})
 
 				Router.run(routes, function(Handler) {
 				  React.render(

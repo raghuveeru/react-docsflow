@@ -4,6 +4,9 @@ import {validationOptions} from './../../constants';
 import {checkSelect2Valid} from './../../utilities';
 
 var NewMapping = React.createClass({
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getInitialState: function(){
 
 		var {selectedMapping, selectedMappingType} = this.props;
@@ -57,7 +60,7 @@ var NewMapping = React.createClass({
 						var _hodsMp = hodsMp.map( (item) => item.id? item.id.toString() : item.toString());
 
 						this.props.flux.actions.AdminActions.updateMappingMpToHods({							
-							userId: CURRENT_USER.id,
+							userId: this.context.currentUser.id,
 							memberOfParliament: memberOfParliament.id,
 							hods: _hodsMp,
 							index: this.props.index
@@ -69,7 +72,7 @@ var NewMapping = React.createClass({
 					}else{
 
 						this.props.flux.actions.AdminActions.createMappingMpToHods({
-							userId: CURRENT_USER.id,
+							userId: this.context.currentUser.id,
 							memberOfParliament: memberOfParliament.id,
 							hods: hodsMp
 						}, () => {
@@ -87,7 +90,7 @@ var NewMapping = React.createClass({
 						var _liasonOfficers = liasonOfficers.map( (item) => item.id? item.id.toString() : item.toString());
 
 						this.props.flux.actions.AdminActions.updateMappingHodToLiasons({
-							userId: CURRENT_USER.id,
+							userId: this.context.currentUser.id,
 							hod: hod.id,
 							liasonOfficers: _liasonOfficers,
 							index: this.props.index
@@ -99,7 +102,7 @@ var NewMapping = React.createClass({
 					}else{
 
 						this.props.flux.actions.AdminActions.createMappingHodToLiasons({
-							userId: CURRENT_USER.id,
+							userId: this.context.currentUser.id,
 							hod: hod.id,
 							liasonOfficers: liasonOfficers
 						}, () => {

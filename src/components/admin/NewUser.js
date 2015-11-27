@@ -8,7 +8,10 @@ import _ from 'lodash';
 var USER_GROUPS = AppConfig.ROLES;
 var DEPARTMENTS = AppConfig.DEPARTMENTS;
 
-var NewUser = React.createClass({	
+var NewUser = React.createClass({
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},	
 	getInitialState: function(){
 
 		var {selectedUser} = this.props;
@@ -48,7 +51,7 @@ var NewUser = React.createClass({
 					params = {
 						id: id,			
 						type: type,
-						userId: CURRENT_USER.id,
+						userId: this.context.currentUser.id,
 						roles: roles,
 						department: department
 					}
@@ -58,7 +61,7 @@ var NewUser = React.createClass({
 					params = {						
 						name: name,						
 						type: type,
-						userId: CURRENT_USER.id						
+						userId: this.context.currentUser.id
 					}
 
 					if(editMode){

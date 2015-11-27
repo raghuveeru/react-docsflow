@@ -198,9 +198,9 @@ var utilities = {
 		}
 		
 	},
-	checkForPermission: function(permission){
-
-		var roleId = CURRENT_USER.roleId;
+	checkForPermission: function(currentUser, permission){
+		
+		var roleId = currentUser.roleId;
 
 		/* For Admin and COS Admin */
 
@@ -253,19 +253,19 @@ var utilities = {
 		return rolesHTML.join(', ');
 
 	},
-	createEditFlag: function(flux, type, id, callback){
+	createEditFlag: function(currentUser, flux, type, id, callback){
 
 		flux.actions.BudgetDetailActions.createEditFlag({
-			userId: CURRENT_USER.id,
+			userId: currentUser.id,
 			type: type,
 			budgetCutId: id,
 			edit: true
 		}, callback)
 	},
-	deleteEditFlag: function(flux, type, id){
+	deleteEditFlag: function(currentUser, flux, type, id){
 
 		flux.actions.BudgetDetailActions.deleteEditFlag({
-			userId: CURRENT_USER.id,
+			userId: currentUser.id,
 			type: type,
 			budgetCutId: id,
 			edit: false

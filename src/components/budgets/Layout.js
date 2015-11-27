@@ -33,7 +33,8 @@ var BudgetContainer = React.createClass({
 		this._query = this.props.query.query;
 	},	
 	contextTypes: {
-		router: React.PropTypes.func
+		router: React.PropTypes.func,
+		currentUser: React.PropTypes.object
 	},
 	getParams: function(){
 
@@ -43,7 +44,7 @@ var BudgetContainer = React.createClass({
 		return jQuery.extend(
 		{
 			'query': this._query,
-			'userId': CURRENT_USER.id,
+			'userId': this.context.currentUser.id
 		}, 
 		this._filters,
 		(!activeRouteName || activeRouteName == 'budgetsInbox'? {'requestType': 'myinbox'} : {})
@@ -119,7 +120,7 @@ var BudgetContainer = React.createClass({
 		var ids = this.state.BudgetStore.budgets.map((budget) => budget.id)
 		var url = AppConfig.API.BASE_URL + AppConfig.API.BUDGET.EXPORT_TO_EXCEL;
 
-		window.location = url + '&ids=' + encodeURIComponent(ids.join(',')) + '&userId=' + CURRENT_USER.id;
+		window.location = url + '&ids=' + encodeURIComponent(ids.join(',')) + '&userId=' + this.context.currentUser.id;
 		
 	},
 	handleSpeech: function(){
@@ -132,7 +133,10 @@ var BudgetContainer = React.createClass({
 			return alert('Please select atleast one budget cut to add to speech');
 		}
 		
-		this.getFlux().actions.BudgetActions.addToSpeech(ids);
+		this.getFlux().actions.BudgetActions.addToSpeech({
+			ids: ids,
+			userId: this.context.currentUser.id
+		});
 	},
 	render: function(){
 		var currentRoutes = this.context.router.getCurrentRoutes();

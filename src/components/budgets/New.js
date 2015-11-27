@@ -20,7 +20,8 @@ var BudgetNew = React.createClass({
 		}
 	},
 	contextTypes: {
-		router: React.PropTypes.func
+		router: React.PropTypes.func,
+		currentUser: React.PropTypes.object
 	},
 	goBack: function(){
 		this.context.router.transitionTo('budgetsInbox', {type: 'inbox'})	
@@ -43,7 +44,7 @@ var BudgetNew = React.createClass({
 			responsibleOfficer: [],
 			officersToNotify: [],
 			message: '',
-			userId: CURRENT_USER.id,
+			userId: this.context.currentUser.id,
 			subject: ''
 		}
 	},
@@ -81,7 +82,7 @@ var BudgetNew = React.createClass({
 			responsibleOfficer: this.state.responsibleOfficer,
 			officersToNotify: this.state.officersToNotify,
 			message: this.state.message,
-			userId: CURRENT_USER.id,
+			userId: this.context.currentUser.id,
 			subject: this.state.subject,
 			status: this.state.status
 		}
@@ -103,7 +104,7 @@ var BudgetNew = React.createClass({
 				fileReferenceNo: this.state.fileReferenceNo || currentBudget.fileReferenceNo,
 				summary: this.state.summary || currentBudget.summary,
 				time: this.state.time || currentBudget.time,
-				userId: CURRENT_USER.id
+				userId: this.context.currentUser.id
 			}
 
 			

@@ -73,19 +73,13 @@ module.exports = {
 			})
 	},
 	addToSpeech: function(payload){
-		
-
+				
 		NProgress.start()
-
-		var data = {
-			"ids": payload,
-			"userId": CURRENT_USER.id
-		};
 
 		request
 			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.ADD_TO_SPEECH)
 			.set(headers)
-			.send(JSON.stringify(data))
+			.send(JSON.stringify(payload))
 			.end((err, res) => {
 				
 

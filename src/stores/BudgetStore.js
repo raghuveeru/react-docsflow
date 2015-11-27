@@ -9,7 +9,6 @@ var BudgetStore = Fluxxor.createStore({
 		if(localStorage.getItem('openStatus')){
 			item = JSON.parse(localStorage.getItem('openStatus'))
 		}
-		var openStatusFromLocalStorage = item;
 
 		this.budgets = [];
 		this.facets = [];
@@ -21,7 +20,7 @@ var BudgetStore = Fluxxor.createStore({
 		this.activity = [];
 		this.isFetchingBudgetActivity = false
 
-		this.openStatus = openStatusFromLocalStorage;
+		this.openStatus = item;
 
 		this.bindActions(
 			actions.UPDATE_BUDGETS, this.updateBudgets,

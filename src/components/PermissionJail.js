@@ -1,10 +1,15 @@
 import React from 'react';
 import {checkForPermission} from './../utilities';
 
-export default class PermissionJail extends React.Component{
+var PermissionJail = React.createClass({
+	
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
+	
 	render(){
-
-		if(checkForPermission(this.props.permission)){
+		
+		if(checkForPermission(this.context.currentUser, this.props.permission)){
 
 			return this.props.children
 		}
@@ -12,4 +17,6 @@ export default class PermissionJail extends React.Component{
 
 		return null;
 	}
-};
+});
+
+module.exports = PermissionJail

@@ -103,6 +103,9 @@ var TopicsSortable = React.createClass({
 		model: "maintopics",
 		handle: '.drag-handle-main-topic'
 	},
+	contextTypes: {
+		currentUser: React.PropTypes.object
+	},
 	getDefaultProps: function(){
 		return {
 			disableSort : false
@@ -123,7 +126,7 @@ var TopicsSortable = React.createClass({
 
 		this.props.flux.actions.AdminActions.updateMainTopics({
 			topics: this.state.maintopics,
-			userId: CURRENT_USER.id
+			userId: this.context.currentUser.id
 		})
 	},
 	componentDidUpdate: function(nextProps){

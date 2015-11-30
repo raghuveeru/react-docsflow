@@ -20850,8 +20850,6 @@
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
 	 */
 
 	'use strict';
@@ -20885,9 +20883,9 @@
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
 	      error = new Error(
-	        'Invariant Violation: ' +
 	        format.replace(/%s/g, function() { return args[argIndex++]; })
 	      );
+	      error.name = 'Invariant Violation';
 	    }
 
 	    error.framesToPop = 1; // we don't care about invariant's own frame
@@ -49965,6 +49963,7 @@
 		render: function render() {
 			var _this2 = this;
 
+			console.log(this.state);
 			var maintopics = this.state.maintopics;
 			var disableSort = this.props.disableSort;
 
@@ -53050,7 +53049,7 @@
 		},
 		updateMainTopics: function updateMainTopics(payload) {
 
-			this.topics = payload;
+			this.topics = payload.topics;
 		},
 		updateSubTopics: function updateSubTopics(payload) {
 

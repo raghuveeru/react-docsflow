@@ -120,8 +120,7 @@ var ALL_NOTIFICATIONS_LINK = 'http://href.xom';
 var ROLES = [
 	{
 		name: 'System Administrator',
-		id: 1,
-		showInCreateUser: true,
+		id: 1,		
 		permissions: ['Admin']
 	},
 	{
@@ -131,32 +130,27 @@ var ROLES = [
 	},
 	{
 		name: 'Liaison Officers',
-		id: 3,
-		showInCreateUser: true,
+		id: 3,		
 		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer']
 	},
 	{
 		name: 'Registry Officers',
-		id: 4,
-		showInCreateUser: true,
+		id: 4,		
 		permissions: ['canCreateBudgetCut', 'canAssignToOfficer']
 	},
 	{
 		name: 'Head of Department',
-		id: 5,
-		showInCreateUser: false,
+		id: 5,		
 		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer']
 	},
 	{
 		name: 'Desk Officer',
-		id: 6,
-		showInCreateUser: true,
+		id: 6,		
 		permissions: ['canEditWorkingDraft', 'canEditFinalDraft', 'canAssignToOfficer']
 	},
 	{
 		name: 'Speech Writer',
-		id: 7,
-		showInCreateUser: true,
+		id: 7,		
 		permissions: ['canViewSpeech']
 	},
 ];
@@ -193,8 +187,7 @@ window.AppConfig = {
 	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
 	ROLES: ROLES,
 	SUBJECT_TEMPLATE: '[MOM COS] - {topic} - {mp}',
-	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK,
-	ADMIN_TOPIC_YEARS: ['2015', '2014', '2013', '2012'],
+	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK,	
 	DEPARTMENTS: DEPARTMENTS
 }
 

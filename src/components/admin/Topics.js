@@ -134,7 +134,7 @@ var TopicsSortable = React.createClass({
 		this._sortableInstance.option('disabled', nextProps.disableSort)		
 	},
 	render: function(){
-		console.log(this.state)
+		
 		var {maintopics} = this.state;
 		var {disableSort} = this.props;
 		var klassName = 'main-topic-list' + (disableSort? ' disable-sort': '');

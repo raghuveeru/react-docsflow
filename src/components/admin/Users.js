@@ -10,7 +10,8 @@ import _ from 'lodash';
 var Users = React.createClass({
 	mixins: [StoreWatchMixin('AdminStore')],
 	contextTypes: {
-		currentUser: React.PropTypes.object
+		currentUser: React.PropTypes.object,
+		router: React.PropTypes.func
 	},
 	getStateFromFlux: function(){
 
@@ -20,9 +21,6 @@ var Users = React.createClass({
 			selectedUser: {},
 			roleToFilter: ''
 		}
-	},
-	contextTypes: {
-		router: React.PropTypes.func
 	},
 	componentDidMount: function(){
 		this.props.flux.actions.AdminActions.getUsersAdmin()

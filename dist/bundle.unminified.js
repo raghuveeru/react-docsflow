@@ -49191,7 +49191,8 @@
 
 		mixins: [(0, _fluxxor.StoreWatchMixin)('AdminStore')],
 		contextTypes: {
-			currentUser: _react2['default'].PropTypes.object
+			currentUser: _react2['default'].PropTypes.object,
+			router: _react2['default'].PropTypes.func
 		},
 		getStateFromFlux: function getStateFromFlux() {
 
@@ -49201,9 +49202,6 @@
 				selectedUser: {},
 				roleToFilter: ''
 			};
-		},
-		contextTypes: {
-			router: _react2['default'].PropTypes.func
 		},
 		componentDidMount: function componentDidMount() {
 			this.props.flux.actions.AdminActions.getUsersAdmin();
@@ -49963,7 +49961,6 @@
 		render: function render() {
 			var _this2 = this;
 
-			console.log(this.state);
 			var maintopics = this.state.maintopics;
 			var disableSort = this.props.disableSort;
 

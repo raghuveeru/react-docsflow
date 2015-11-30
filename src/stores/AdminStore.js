@@ -163,10 +163,10 @@ var AdminStore = Fluxxor.createStore({
 	},
 	updateMainTopics: function(payload){
 		
-		this.topics = payload;
+		this.topics = payload.topics;
 	},
 	updateSubTopics: function(payload){
-
+		
 		var _topics = _.clone(this.topics);
 
 		for(var i = 0; i < _topics.length; i++){

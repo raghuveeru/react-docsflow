@@ -7,7 +7,7 @@ var AuthMixin = {
   getChildContext: function() {
 
     var _flux = this.props.flux || (this.context && this.context.flux);
-
+    
     return {
       currentUser: _flux.store('AuthStore').getState().currentUser
     }

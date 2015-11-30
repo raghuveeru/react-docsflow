@@ -57,7 +57,10 @@ window.INITIALIZE_MOMSTER_COS = function(){
 				 * Render notifications
 				 */
 
-				React.render(<Notifications flux = {flux} />, document.getElementById('momster-notification'))
+				React.render(
+					<Notifications flux = {flux} />, 
+					document.getElementById('momster-notification')
+				)
 
 
 			}

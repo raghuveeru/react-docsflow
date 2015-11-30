@@ -11,15 +11,17 @@ import AdminLayout from './components/admin/Layout';
 
 module.exports = (
 	<Route handler = {Main} path = '/' name="home">
+		
 		<DefaultRoute handler={BudgetLayout} />
-				
+		
 		<Route handler={NewBudget} path = "budgets/new" name="budgetsNew" />
 		<Route handler={BudgetLayout} path = "budgets" name="budgets" />		
-		<Route handler={BudgetLayout} path = "budgets/:type" name="budgetsInbox" />		
+		<Route handler={BudgetLayout} path = "budgets/:type" name="budgetsInbox" />				
 		<Route handler={BudgetView} path = "budgets/view/:id" name="budgetsView" />		
 		<Route handler={NewBudget} path = "budgets/edit/:id" name="budgetsEdit" />		
 
 		<Redirect from='/admin' to='users' />
+		
 		<Route handler = {AdminLayout} name='admin'>			
 			<Route handler = {Users} name="users" />			
 			<Route handler = {Topics} name="topics" />

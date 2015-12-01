@@ -46932,7 +46932,7 @@
 
 			if (!this.state.isOpen) {
 
-				(0, _utilities.createEditFlag)(this.getFlux(), 'questionDetails', this.props.budgetCutId, function () {
+				(0, _utilities.createEditFlag)(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.budgetCutId, function () {
 
 					_this.setState({
 						isOpen: !_this.state.isOpen
@@ -46946,7 +46946,7 @@
 				isOpen: false
 			});
 
-			(0, _utilities.deleteEditFlag)(this.getFlux(), 'questionDetails', this.props.budgetCutId);
+			(0, _utilities.deleteEditFlag)(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.budgetCutId);
 
 			this.props.onCancelForm && this.props.onCancelForm.call(this);
 		},
@@ -47924,7 +47924,7 @@
 
 			if (!this.state.isOpen) {
 
-				(0, _utilities.createEditFlag)(this.getFlux(), 'workingDraftDetails', this.props.budgetCutId, function () {
+				(0, _utilities.createEditFlag)(this.context.currentUser, this.getFlux(), 'workingDraftDetails', this.props.budgetCutId, function () {
 
 					_this.setState({
 						isOpen: !_this.state.isOpen
@@ -47938,7 +47938,7 @@
 				isOpen: false
 			});
 
-			(0, _utilities.deleteEditFlag)(this.getFlux(), 'workingDraftDetails', this.props.budgetCutId);
+			(0, _utilities.deleteEditFlag)(this.context.currentUser, this.getFlux(), 'workingDraftDetails', this.props.budgetCutId);
 
 			this.props.onCancelForm && this.props.onCancelForm.call(this);
 		},
@@ -48325,7 +48325,7 @@
 
 			if (!this.state.isOpen) {
 
-				(0, _utilities.createEditFlag)(this.getFlux(), 'finalDraftDetails', this.props.budgetCutId, function () {
+				(0, _utilities.createEditFlag)(this.context.currentUser, this.getFlux(), 'finalDraftDetails', this.props.budgetCutId, function () {
 
 					_this.setState({
 						isOpen: !_this.state.isOpen
@@ -48339,7 +48339,7 @@
 				isOpen: false
 			});
 
-			(0, _utilities.deleteEditFlag)(this.getFlux(), 'finalDraftDetails', this.props.budgetCutId);
+			(0, _utilities.deleteEditFlag)(this.context.currentUser, this.getFlux(), 'finalDraftDetails', this.props.budgetCutId);
 
 			this.props.onCancelForm && this.props.onCancelForm.call(this);
 		},

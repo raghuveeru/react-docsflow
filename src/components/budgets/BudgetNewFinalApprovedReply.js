@@ -21,7 +21,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 
 			if(!this.state.isOpen){
 
-				createEditFlag(this.getFlux(), 'finalDraftDetails', this.props.budgetCutId, () => {
+				createEditFlag(this.context.currentUser, this.getFlux(), 'finalDraftDetails', this.props.budgetCutId, () => {
 
 					this.setState({
 						isOpen: !this.state.isOpen
@@ -35,7 +35,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 			isOpen: false
 		})
 
-		deleteEditFlag(this.getFlux(), 'finalDraftDetails', this.props.budgetCutId)
+		deleteEditFlag(this.context.currentUser, this.getFlux(), 'finalDraftDetails', this.props.budgetCutId)
 
 		this.props.onCancelForm && this.props.onCancelForm.call(this)
 	},

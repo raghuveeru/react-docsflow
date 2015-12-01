@@ -48590,7 +48590,7 @@
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS,
 					required: true,
-					placeholder: 'Responsible officers',
+					placeholder: 'To',
 					multiple: true,
 					name: 'responsibleOfficer',
 					onChange: function (val, data, event) {
@@ -48604,7 +48604,7 @@
 				}),
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY,
-					placeholder: 'Officers to notify',
+					placeholder: 'CC',
 					multiple: true,
 					required: true,
 					name: 'officersToNotify',
@@ -49087,7 +49087,7 @@
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS,
 					required: true,
-					placeholder: 'Responsible officers',
+					placeholder: 'To',
 					multiple: true,
 					query: { role: 'COSCoordinator' },
 					name: 'responsibleOfficer',
@@ -49102,7 +49102,7 @@
 				}),
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY,
-					placeholder: 'Officers to notify',
+					placeholder: 'CC',
 					multiple: true,
 					name: 'officersToNotify',
 					onChange: function (val) {

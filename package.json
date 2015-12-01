@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "unminify": "webpack --config webpack.prod-unminify.js",
+    "build": "NODE_ENV=production webpack -p --config webpack.prod.js",
+    "unminify": "NODE_ENV=production webpack --config webpack.prod-unminify.js",
     "start": "node server.js",
     "lint": "eslint src"
   },

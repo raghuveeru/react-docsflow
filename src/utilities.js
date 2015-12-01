@@ -254,7 +254,7 @@ var utilities = {
 
 	},
 	createEditFlag: function(currentUser, flux, type, id, callback){
-
+		
 		flux.actions.BudgetDetailActions.createEditFlag({
 			userId: currentUser.id,
 			type: type,

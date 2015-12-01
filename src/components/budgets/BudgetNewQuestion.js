@@ -23,7 +23,7 @@ var BudgetNewQuestion = React.createClass({
 
 		if(!this.state.isOpen){
 
-			createEditFlag(this.getFlux(), 'questionDetails', this.props.budgetCutId, () => {
+			createEditFlag(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.budgetCutId, () => {
 
 				this.setState({
 					isOpen: !this.state.isOpen
@@ -38,7 +38,7 @@ var BudgetNewQuestion = React.createClass({
 			isOpen: false
 		})
 
-		deleteEditFlag(this.getFlux(), 'questionDetails', this.props.budgetCutId)
+		deleteEditFlag(this.context.currentUser, this.getFlux(), 'questionDetails', this.props.budgetCutId)
 
 		this.props.onCancelForm && this.props.onCancelForm.call(this)
 	},

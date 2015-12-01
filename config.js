@@ -1,5 +1,6 @@
 var API = {
-	BASE_URL: 'http://localhost:3000/',
+	// BASE_URL: 'http://localhost:3000/',
+	BASE_URL: document.location.origin + document.location.pathname,
 	BUDGET: {
 		ALL: 'api/budget-cuts.json',
 		SINGLE: 'api/budget-cuts-single.json',
@@ -104,7 +105,7 @@ var STATUS_MAPPING = [
 		color: '#FFAE6E'
 	},
 	{
-		name: 'Final answer',
+		name: 'Cleared Response',
 		color: '#0699F9',
 		showCheckbox: true
 	},

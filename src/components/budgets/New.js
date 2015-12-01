@@ -389,7 +389,7 @@ var BudgetNew = React.createClass({
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
 					required = {true}
-					placeholder= 'Responsible officers'
+					placeholder= 'To'
 					multiple = {true}
 					query = {{role: 'COSCoordinator'}}
 					name="responsibleOfficer"
@@ -405,7 +405,7 @@ var BudgetNew = React.createClass({
 
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY} 
-					placeholder= 'Officers to notify'
+					placeholder= 'CC'
 					multiple = {true}
 					name="officersToNotify"
 					onChange = { (val) => {

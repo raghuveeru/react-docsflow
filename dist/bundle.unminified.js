@@ -43247,7 +43247,7 @@
 				return status.name.toLowerCase() == 'speech';
 			});
 
-			var totalPercent = (speechStatus[0].count / totalCount * 100).toPrecision(2);
+			var totalPercent = (speechStatus[0].count / totalCount * 100).toFixed(0);
 
 			return _react2['default'].createElement(
 				'div',
@@ -52986,7 +52986,7 @@
 			this.emit('change');
 		},
 		deleteMappingMpToHods: function deleteMappingMpToHods(payload) {
-			console.log(payload);
+
 			var data = payload.data.success,
 			    index = payload.index;
 
@@ -53012,7 +53012,7 @@
 		updateUser: function updateUser(payload) {
 
 			var _user = payload.data[0];
-			console.log(_user);
+
 			if (!_user) return;
 
 			var _id = _user.id;

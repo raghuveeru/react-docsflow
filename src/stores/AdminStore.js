@@ -102,7 +102,7 @@ var AdminStore = Fluxxor.createStore({
 		this.emit('change')
 	},
 	deleteMappingMpToHods: function(payload){
-		console.log(payload)
+		
 		var data = payload.data.success,
 			index = payload.index
 
@@ -128,7 +128,7 @@ var AdminStore = Fluxxor.createStore({
 	updateUser: function(payload){
 		
 		var _user = payload.data[0];
-		console.log(_user)
+		
 		if(!_user) return ;
 
 		var _id = _user.id;

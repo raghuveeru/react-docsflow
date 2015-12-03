@@ -123,10 +123,10 @@ var BudgetStore = Fluxxor.createStore({
 			
 			var id = response[i].id,
 				needle = _.findIndex(budgets, (item) => item.id == id)
-
+			
 			if(needle != -1){
 
-				budgets[needle].status = response[i].status
+				budgets[needle] = response[i]
 			}
 			
 		}	

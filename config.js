@@ -85,6 +85,7 @@ var API = {
 		UPDATE_MAPPING_HOD_TO_LIASONS: 'api/new-mapping-hod-liasonofficers.json',
 	},
 	GROUPS: {
+		GET_ALL_USERS: 'api/get-all-users.json',
 		GET_ALL_GROUPS: 'api/get-all-groups.json',
 		CREATE_NEW_GROUP: 'api/create-new-group.json',
 		EDIT_GROUP: 'api/edit-group.json',

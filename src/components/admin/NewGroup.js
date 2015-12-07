@@ -97,7 +97,7 @@ var NewGroup = React.createClass({
 						/>	
 
 					<Select2
-						url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS} 
+						url = {AppConfig.API.BASE_URL + AppConfig.API.GROUPS.GET_ALL_USERS} 
 						placeholder= 'Enter name or email address...'
 						defaultValue = {selectedGroup.users}						
 						required = {true}						

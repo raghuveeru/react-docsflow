@@ -71,21 +71,21 @@
 
 	var _fluxxor2 = _interopRequireDefault(_fluxxor);
 
-	var _stores = __webpack_require__(398);
+	var _stores = __webpack_require__(400);
 
 	var _stores2 = _interopRequireDefault(_stores);
 
-	var _actions = __webpack_require__(404);
+	var _actions = __webpack_require__(406);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
-	var _superagent = __webpack_require__(406);
+	var _superagent = __webpack_require__(408);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
 	var _constants = __webpack_require__(309);
 
-	var _componentsNotifications = __webpack_require__(414);
+	var _componentsNotifications = __webpack_require__(416);
 
 	var _componentsNotifications2 = _interopRequireDefault(_componentsNotifications);
 
@@ -23794,6 +23794,10 @@
 
 	var _componentsAdminLayout2 = _interopRequireDefault(_componentsAdminLayout);
 
+	var _componentsAdminGroups = __webpack_require__(398);
+
+	var _componentsAdminGroups2 = _interopRequireDefault(_componentsAdminGroups);
+
 	module.exports = _react2['default'].createElement(
 		_reactRouter.Route,
 		{ handler: _componentsMain2['default'], path: '/', name: 'home' },
@@ -23809,7 +23813,8 @@
 			{ handler: _componentsAdminLayout2['default'], name: 'admin' },
 			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminUsers2['default'], name: 'users' }),
 			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminTopics2['default'], name: 'topics' }),
-			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminMapping2['default'], name: 'mapping' })
+			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminMapping2['default'], name: 'mapping' }),
+			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminGroups2['default'], name: 'groups' })
 		),
 		_react2['default'].createElement(_reactRouter.Redirect, { from: '/', to: 'budgetsInbox', params: { type: 'inbox' } })
 	);
@@ -29809,7 +29814,12 @@
 			CREATE_MAPPING_HOD_TO_LIASONS: 'CREATE_MAPPING_HOD_TO_LIASONS',
 			UPDATE_MAPPING_MP_TO_HODS: 'UPDATE_MAPPING_MP_TO_HODS',
 			UPDATE_MAPPING_HOD_TO_LIASONS: 'UPDATE_MAPPING_HOD_TO_LIASONS',
-			GET_TOPIC_YEARS: 'GET_TOPIC_YEARS'
+			GET_TOPIC_YEARS: 'GET_TOPIC_YEARS',
+
+			GET_ALL_GROUPS: 'GET_ALL_GROUPS',
+			CREATE_NEW_GROUP: 'CREATE_NEW_GROUP',
+			DELETE_GROUP: 'DELETE_GROUP',
+			EDIT_GROUP: 'EDIT_GROUP'
 		},
 		customStyles: {
 			overlay: {
@@ -30075,9 +30085,11 @@
 		},
 		handleSpeech: function handleSpeech() {
 
-			var ids = this.state.BudgetStore.budgets.filter(function (budget) {
+			var budgets = this.state.BudgetStore.budgets.filter(function (budget) {
 				return budget.checked;
-			}).map(function (budget) {
+			});
+
+			var ids = budgets.map(function (budget) {
 				return budget.id;
 			});
 
@@ -30085,10 +30097,13 @@
 				return alert('Please select atleast one budget cut to add to speech');
 			}
 
-			this.getFlux().actions.BudgetActions.addToSpeech({
-				ids: ids,
-				userId: this.context.currentUser.id
-			});
+			if (confirm('The following budget cuts will be incorporated to speech. \n\n' + ids + '\n\nAre you sure you want to continue?')) {
+
+				this.getFlux().actions.BudgetActions.addToSpeech({
+					ids: ids,
+					userId: this.context.currentUser.id
+				});
+			}
 		},
 		render: function render() {
 			var currentRoutes = this.context.router.getCurrentRoutes();
@@ -30181,9 +30196,13 @@
 									)
 								),
 								_react2['default'].createElement(
-									'a',
-									{ className: 'link-export-excel', onClick: this.handleExportToExcel },
-									'Export to excel'
+									_PermissionJail2['default'],
+									{ permission: 'canViewExport' },
+									_react2['default'].createElement(
+										'a',
+										{ className: 'link-export-excel', onClick: this.handleExportToExcel },
+										'Export to excel'
+									)
 								)
 							),
 							_react2['default'].createElement(_BudgetList2['default'], _extends({ budgets: budgets, openStatus: openStatus }, this.props))
@@ -46466,7 +46485,7 @@
 			var hodDrafting = currentBudget.hodDrafting ? currentBudget.hodDrafting.name : '';
 			var liasonOfficer = currentBudget.liasonOfficer ? currentBudget.liasonOfficer.name : '';
 
-			var budgetEditActions = !(0, _utilities.isSpeech)(currentBudget.status) ? _react2['default'].createElement(
+			var budgetEditActions = _react2['default'].createElement(
 				'nav',
 				{ className: 'budget-cut-actions' },
 				_react2['default'].createElement(
@@ -46479,12 +46498,12 @@
 					{ className: 'link-delete', onClick: this.handleDelete },
 					'Delete'
 				)
-			) : null;
+			);
 
-			var budgetAssign = !(0, _utilities.isSpeech)(currentBudget.status) ? _react2['default'].createElement(_BudgetAssignToOfficer2['default'], {
+			var budgetAssign = _react2['default'].createElement(_BudgetAssignToOfficer2['default'], {
 				id: this.props.id,
 				budget: currentBudget
-			}) : null;
+			});
 
 			var statusText = currentBudget.status.toLowerCase() == 'speech' ? _react2['default'].createElement(
 				'span',
@@ -47228,6 +47247,11 @@
 					'label',
 					{ className: 'material-file' },
 					_react2['default'].createElement('input', { type: 'file', name: this.props.name, multiple: true })
+				),
+				_react2['default'].createElement(
+					'span',
+					{ className: 'text-hint' },
+					'max per file size limit is 4 MB'
 				)
 			);
 		}
@@ -48519,7 +48543,8 @@
 				message: '',
 				subject: '',
 				budgetCutId: this.props.id,
-				userId: this.context.currentUser.id
+				userId: this.context.currentUser.id,
+				status: ''
 			};
 		},
 		onSave: function onSave(event) {
@@ -48586,6 +48611,30 @@
 					'h4',
 					null,
 					'Assign to officer'
+				),
+				_react2['default'].createElement(
+					_Select22['default'],
+					{
+						placeholder: 'Select status',
+						label: 'Select action',
+						value: this.state.status,
+						required: true,
+						onChange: function (val, data, event) {
+
+							_this2.checkSelect2Valid(event);
+
+							_this2.setState({
+								status: val
+							}, _this2.updateSubject);
+						} },
+					_react2['default'].createElement('option', null),
+					AppConfig.STATUS_MAPPING.map(function (status, idx) {
+						return _react2['default'].createElement(
+							'option',
+							{ key: idx },
+							status.name
+						);
+					})
 				),
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS,
@@ -49037,6 +49086,7 @@
 									name: 'time',
 									required: true,
 									label: 'Time for MP to speak (min)',
+									type: 'number',
 									defaultValue: currentBudget.time,
 									onChange: function (event) {
 
@@ -49083,6 +49133,30 @@
 					'h4',
 					null,
 					'Assign to officer'
+				),
+				_react2['default'].createElement(
+					_Select22['default'],
+					{
+						placeholder: 'Select status',
+						label: 'Select action',
+						value: this.state.status,
+						required: true,
+						onChange: function (val, data, event) {
+
+							(0, _utilities.checkSelect2Valid)(event);
+
+							_this4.setState({
+								status: val
+							}, _this4.updateSubject);
+						} },
+					_react2['default'].createElement('option', null),
+					AppConfig.STATUS_MAPPING.map(function (status, idx) {
+						return _react2['default'].createElement(
+							'option',
+							{ key: idx },
+							status.name
+						);
+					})
 				),
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS,
@@ -52670,6 +52744,11 @@
 						),
 						_react2['default'].createElement(
 							_reactRouter.Link,
+							{ to: '/admin/groups' },
+							'Groups'
+						),
+						_react2['default'].createElement(
+							_reactRouter.Link,
 							{ to: '/admin/mapping' },
 							'Mapping'
 						)
@@ -52692,25 +52771,358 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _BudgetStore = __webpack_require__(399);
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _fluxxor = __webpack_require__(205);
+
+	var _utilities = __webpack_require__(204);
+
+	var _constants = __webpack_require__(309);
+
+	var _reactModal = __webpack_require__(324);
+
+	var _reactModal2 = _interopRequireDefault(_reactModal);
+
+	var _NewGroup = __webpack_require__(399);
+
+	var _NewGroup2 = _interopRequireDefault(_NewGroup);
+
+	var Groups = _react2['default'].createClass({
+		displayName: 'Groups',
+
+		mixins: [(0, _fluxxor.StoreWatchMixin)('AdminStore')],
+		contextTypes: {
+			currentUser: _react2['default'].PropTypes.object,
+			router: _react2['default'].PropTypes.func
+		},
+		getStateFromFlux: function getStateFromFlux() {
+
+			return {
+				AdminStore: this.props.flux.stores.AdminStore.getState(),
+				isModalOpen: false,
+				selectedGroup: {}
+			};
+		},
+		componentDidMount: function componentDidMount() {
+
+			this.props.flux.actions.AdminActions.getAllGroups();
+		},
+		openGroupModal: function openGroupModal() {
+
+			this.setState({
+				isModalOpen: true
+			});
+		},
+		closeModal: function closeModal() {
+
+			this.setState({
+				isModalOpen: false,
+				selectedGroup: {}
+			});
+		},
+		editGroup: function editGroup(group, event) {
+
+			this.setState({
+				selectedGroup: group,
+				isModalOpen: true
+			});
+		},
+		deleteGroup: function deleteGroup(id, event) {
+
+			event && event.preventDefault();
+
+			if (confirm('Are you sure you want to delete?')) {
+
+				this.props.flux.actions.AdminActions.deleteGroup({
+					id: id,
+					userId: this.context.currentUser.id
+				});
+			}
+		},
+		render: function render() {
+			var _this = this;
+
+			var groups = this.state.AdminStore.groups;
+			var _state = this.state;
+			var isModalOpen = _state.isModalOpen;
+			var selectedGroup = _state.selectedGroup;
+
+			return _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement(
+					'a',
+					{ className: 'card-link', onClick: this.openGroupModal },
+					_react2['default'].createElement('em', { className: 'fa fa-plus' }),
+					'Add group'
+				),
+				_react2['default'].createElement(
+					_reactModal2['default'],
+					{
+						isOpen: isModalOpen,
+						style: _constants.customStyles,
+						onRequestClose: this.closeModal
+					},
+					_react2['default'].createElement(_NewGroup2['default'], _extends({}, this.props, { closeModal: this.closeModal, selectedGroup: selectedGroup }))
+				),
+				_react2['default'].createElement(
+					'table',
+					{ className: 'table table-admin' },
+					_react2['default'].createElement(
+						'thead',
+						null,
+						_react2['default'].createElement(
+							'tr',
+							null,
+							_react2['default'].createElement(
+								'th',
+								null,
+								'Name'
+							),
+							_react2['default'].createElement(
+								'th',
+								null,
+								'Users'
+							),
+							_react2['default'].createElement('th', { className: 'cell-actions' })
+						)
+					),
+					_react2['default'].createElement(
+						'tbody',
+						null,
+						groups.map(function (group, idx) {
+
+							var editFn = _this.editGroup.bind(_this, group);
+							var deleteFn = _this.deleteGroup.bind(_this, group.id);
+
+							return _react2['default'].createElement(
+								'tr',
+								{ key: idx },
+								_react2['default'].createElement(
+									'td',
+									null,
+									group.name
+								),
+								_react2['default'].createElement(
+									'td',
+									null,
+									(0, _utilities.arrayJoin)(group.users, 'name')
+								),
+								_react2['default'].createElement(
+									'td',
+									{ className: 'cell-actions' },
+									_react2['default'].createElement(
+										'a',
+										{ className: 'link-edit', onClick: editFn },
+										'Edit'
+									),
+									_react2['default'].createElement(
+										'a',
+										{ className: 'link-delete', onClick: deleteFn },
+										'Delete'
+									)
+								)
+							);
+						})
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Groups;
+
+/***/ },
+/* 399 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _constants = __webpack_require__(309);
+
+	var _utilities = __webpack_require__(204);
+
+	var _Select2 = __webpack_require__(377);
+
+	var _Select22 = _interopRequireDefault(_Select2);
+
+	var _InputMaterial = __webpack_require__(373);
+
+	var _InputMaterial2 = _interopRequireDefault(_InputMaterial);
+
+	var NewGroup = _react2['default'].createClass({
+		displayName: 'NewGroup',
+
+		contextTypes: {
+			currentUser: _react2['default'].PropTypes.object
+		},
+		getInitialState: function getInitialState() {
+			var selectedGroup = this.props.selectedGroup;
+			var users = [];
+
+			if (selectedGroup.users) {
+				users = selectedGroup.users.map(function (user) {
+					return user.id;
+				});
+			}
+
+			return {
+				name: selectedGroup.name || '',
+				users: users || '',
+				id: selectedGroup.id || ''
+			};
+		},
+		onSave: function onSave(event) {
+			var _this = this;
+
+			var selectedGroup = this.props.selectedGroup;
+
+			var editMode = !!selectedGroup.id;
+
+			if (this.$form.valid()) {
+
+				event && event.preventDefault();
+
+				if (editMode) {
+
+					// Save group
+
+					this.props.flux.actions.AdminActions.editGroup({
+						name: this.state.name,
+						users: this.state.users,
+						id: this.state.id,
+						userId: this.context.currentUser.id
+					}, function () {
+
+						_this.props.closeModal && _this.props.closeModal.call(_this);
+					});
+				} else {
+
+					// New group
+
+					this.props.flux.actions.AdminActions.createNewGroup({
+						name: this.state.name,
+						users: this.state.users,
+						userId: this.context.currentUser.id
+					}, function () {
+
+						_this.props.closeModal && _this.props.closeModal.call(_this);
+					});
+				}
+			}
+		},
+		componentDidMount: function componentDidMount() {
+
+			this.$form = $(this.refs.form.getDOMNode());
+
+			this.$form.validate(_constants.validationOptions);
+		},
+		render: function render() {
+			var _this2 = this;
+
+			var selectedGroup = this.props.selectedGroup;
+
+			var editMode = selectedGroup.id ? true : false;
+
+			return _react2['default'].createElement(
+				'div',
+				{ className: 'modal-dialog' },
+				_react2['default'].createElement(
+					'div',
+					{ className: 'modal-dialog-title' },
+					editMode ? 'Edit group' : 'Add group'
+				),
+				_react2['default'].createElement(
+					'form',
+					{ className: 'modal-dialog-body', ref: 'form' },
+					_react2['default'].createElement(_InputMaterial2['default'], {
+						label: 'Name',
+						required: true,
+
+						defaultValue: selectedGroup.name,
+						onChange: function (event) {
+							_this2.setState({
+								name: event.target.value
+							});
+						}
+					}),
+					_react2['default'].createElement(_Select22['default'], {
+						url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_USERS,
+						placeholder: 'Enter name or email address...',
+						defaultValue: selectedGroup.users,
+						required: true,
+						name: 'users',
+						multiple: true,
+						onChange: function (val, data, event) {
+
+							_this2.setState({
+								users: val
+							});
+
+							(0, _utilities.checkSelect2Valid)(event);
+						},
+						formatResult: function (result) {
+							return '<div>' + result.name + '<br /><small>' + result.email + '</small></div>';
+						}
+					}),
+					_react2['default'].createElement(
+						'div',
+						{ className: 'form-control submit-control' },
+						_react2['default'].createElement(
+							'button',
+							{ className: 'btn btn-primary', onClick: this.onSave },
+							'Submit'
+						),
+						_react2['default'].createElement(
+							'a',
+							{ onClick: this.props.closeModal, className: 'btn btn--unstyled' },
+							'Cancel'
+						)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = NewGroup;
+
+/***/ },
+/* 400 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _BudgetStore = __webpack_require__(401);
 
 	var _BudgetStore2 = _interopRequireDefault(_BudgetStore);
 
-	var _AdminStore = __webpack_require__(400);
+	var _AdminStore = __webpack_require__(402);
 
 	var _AdminStore2 = _interopRequireDefault(_AdminStore);
 
-	var _AuthStore = __webpack_require__(401);
+	var _AuthStore = __webpack_require__(403);
 
 	var _AuthStore2 = _interopRequireDefault(_AuthStore);
 
-	var _BudgetDetailStore = __webpack_require__(402);
+	var _BudgetDetailStore = __webpack_require__(404);
 
 	var _BudgetDetailStore2 = _interopRequireDefault(_BudgetDetailStore);
 
-	var _NotificationStore = __webpack_require__(403);
+	var _NotificationStore = __webpack_require__(405);
 
 	var _NotificationStore2 = _interopRequireDefault(_NotificationStore);
 
@@ -52723,7 +53135,7 @@
 	};
 
 /***/ },
-/* 399 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52855,7 +53267,7 @@
 
 				if (needle != -1) {
 
-					budgets[needle].status = response[i].status;
+					budgets[needle] = response[i];
 				}
 			}
 
@@ -52893,7 +53305,7 @@
 	module.exports = BudgetStore;
 
 /***/ },
-/* 400 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52922,7 +53334,9 @@
 
 			this.topicYears = [];
 
-			this.bindActions(_constants.actions.GET_MAIN_TOPICS, this.getMainTopics, _constants.actions.CREATE_MAIN_TOPIC, this.createMainTopic, _constants.actions.EDIT_MAIN_TOPIC, this.editMainTopic, _constants.actions.DELETE_MAIN_TOPIC, this.deleteMainTopic, _constants.actions.CREATE_BUDGET_CUT_TOPIC, this.createBudgetCutTopic, _constants.actions.EDIT_BUDGET_CUT_TOPIC, this.editBudgetCutTopic, _constants.actions.DELETE_BUDGET_CUT_TOPIC, this.deleteBudgetCutTopic, _constants.actions.GET_ALL_USERS, this.getAllUsers, _constants.actions.GET_ALL_USERS_ADMIN, this.getAllUsers, _constants.actions.CREATE_NEW_USER, this.addUser, _constants.actions.DELETE_USER, this.deleteUser, _constants.actions.UPDATE_MAIN_TOPICS, this.updateMainTopics, _constants.actions.UPDATE_SUB_TOPICS, this.updateSubTopics, _constants.actions.UPDATE_USER, this.updateUser, _constants.actions.GET_MAPPING_MP_TO_HODS, this.getMappingMpToHods, _constants.actions.GET_MAPPING_HOD_TO_LIASONS, this.getMappingHodLiasons, _constants.actions.DELETE_MAPPING_MP_TO_HODS, this.deleteMappingMpToHods, _constants.actions.DELETE_MAPPING_HOD_TO_LIASONS, this.deleteMappingHodLiasons, _constants.actions.CREATE_MAPPING_MP_TO_HODS, this.createMappingMpToHods, _constants.actions.CREATE_MAPPING_HOD_TO_LIASONS, this.createMappingHodLiasons, _constants.actions.UPDATE_MAPPING_MP_TO_HODS, this.updateMappingMpToHods, _constants.actions.UPDATE_MAPPING_HOD_TO_LIASONS, this.updateMappingHodLiasons, _constants.actions.GET_TOPIC_YEARS, this.getTopicYears);
+			this.groups = [];
+
+			this.bindActions(_constants.actions.GET_MAIN_TOPICS, this.getMainTopics, _constants.actions.CREATE_MAIN_TOPIC, this.createMainTopic, _constants.actions.EDIT_MAIN_TOPIC, this.editMainTopic, _constants.actions.DELETE_MAIN_TOPIC, this.deleteMainTopic, _constants.actions.CREATE_BUDGET_CUT_TOPIC, this.createBudgetCutTopic, _constants.actions.EDIT_BUDGET_CUT_TOPIC, this.editBudgetCutTopic, _constants.actions.DELETE_BUDGET_CUT_TOPIC, this.deleteBudgetCutTopic, _constants.actions.GET_ALL_USERS, this.getAllUsers, _constants.actions.GET_ALL_USERS_ADMIN, this.getAllUsers, _constants.actions.CREATE_NEW_USER, this.addUser, _constants.actions.DELETE_USER, this.deleteUser, _constants.actions.UPDATE_MAIN_TOPICS, this.updateMainTopics, _constants.actions.UPDATE_SUB_TOPICS, this.updateSubTopics, _constants.actions.UPDATE_USER, this.updateUser, _constants.actions.GET_MAPPING_MP_TO_HODS, this.getMappingMpToHods, _constants.actions.GET_MAPPING_HOD_TO_LIASONS, this.getMappingHodLiasons, _constants.actions.DELETE_MAPPING_MP_TO_HODS, this.deleteMappingMpToHods, _constants.actions.DELETE_MAPPING_HOD_TO_LIASONS, this.deleteMappingHodLiasons, _constants.actions.CREATE_MAPPING_MP_TO_HODS, this.createMappingMpToHods, _constants.actions.CREATE_MAPPING_HOD_TO_LIASONS, this.createMappingHodLiasons, _constants.actions.UPDATE_MAPPING_MP_TO_HODS, this.updateMappingMpToHods, _constants.actions.UPDATE_MAPPING_HOD_TO_LIASONS, this.updateMappingHodLiasons, _constants.actions.GET_TOPIC_YEARS, this.getTopicYears, _constants.actions.GET_ALL_GROUPS, this.getAllGroups, _constants.actions.DELETE_GROUP, this.deleteGroup, _constants.actions.CREATE_NEW_GROUP, this.createNewGroup, _constants.actions.EDIT_GROUP, this.editGroup);
 		},
 		getState: function getState() {
 			return {
@@ -52930,7 +53344,8 @@
 				users: this.users,
 				mappingMPHods: this.mappingMPHods,
 				mappingHodLiasons: this.mappingHodLiasons,
-				topicYears: this.topicYears
+				topicYears: this.topicYears,
+				groups: this.groups
 			};
 		},
 		getTopicYears: function getTopicYears(payload) {
@@ -53177,13 +53592,63 @@
 
 				this.emit('change');
 			}
+		},
+		getAllGroups: function getAllGroups(payload) {
+
+			this.groups = payload.data;
+
+			this.emit('change');
+		},
+		deleteGroup: function deleteGroup(payload) {
+
+			var data = payload.data.success,
+			    groupId = payload.id;
+
+			if (data) {
+				for (var i = this.groups.length - 1; i >= 0; i--) {
+					if (this.groups[i].id == groupId) {
+						this.groups.splice(i, 1);
+					}
+				}
+
+				this.emit('change');
+			}
+		},
+		createNewGroup: function createNewGroup(payload) {
+
+			var group = payload.data[0];
+
+			this.groups.unshift(group);
+
+			this.emit('change');
+		},
+		editGroup: function editGroup(payload) {
+
+			var _group = payload.data[0];
+
+			if (!_group) return;
+
+			var _id = _group.id;
+
+			var _groups = _lodash2['default'].clone(this.groups);
+
+			for (var i = 0; i < _groups.length; i++) {
+
+				if (_groups[i].id == _id) {
+					_groups[i] = _group;
+				}
+			}
+
+			this.groups = _groups;
+
+			this.emit('change');
 		}
 	});
 
 	module.exports = AdminStore;
 
 /***/ },
-/* 401 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53221,7 +53686,7 @@
 	module.exports = AuthStore;
 
 /***/ },
-/* 402 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53298,7 +53763,7 @@
 	module.exports = BudgetDetailStore;
 
 /***/ },
-/* 403 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53342,30 +53807,30 @@
 	module.exports = NotificationStore;
 
 /***/ },
-/* 404 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _BudgetActions = __webpack_require__(405);
+	var _BudgetActions = __webpack_require__(407);
 
 	var _BudgetActions2 = _interopRequireDefault(_BudgetActions);
 
-	var _AdminActions = __webpack_require__(410);
+	var _AdminActions = __webpack_require__(412);
 
 	var _AdminActions2 = _interopRequireDefault(_AdminActions);
 
-	var _AuthActions = __webpack_require__(411);
+	var _AuthActions = __webpack_require__(413);
 
 	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
-	var _BudgetDetailActions = __webpack_require__(412);
+	var _BudgetDetailActions = __webpack_require__(414);
 
 	var _BudgetDetailActions2 = _interopRequireDefault(_BudgetDetailActions);
 
-	var _NotificationActions = __webpack_require__(413);
+	var _NotificationActions = __webpack_require__(415);
 
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 
@@ -53378,7 +53843,7 @@
 	};
 
 /***/ },
-/* 405 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53387,11 +53852,11 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(406);
+	var _superagent = __webpack_require__(408);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _reactNprogress = __webpack_require__(409);
+	var _reactNprogress = __webpack_require__(411);
 
 	var _reactNprogress2 = _interopRequireDefault(_reactNprogress);
 
@@ -53567,15 +54032,15 @@
 	};
 
 /***/ },
-/* 406 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(407);
-	var reduce = __webpack_require__(408);
+	var Emitter = __webpack_require__(409);
+	var reduce = __webpack_require__(410);
 
 	/**
 	 * Root reference for iframes.
@@ -54730,7 +55195,7 @@
 
 
 /***/ },
-/* 407 */
+/* 409 */
 /***/ function(module, exports) {
 
 	
@@ -54900,7 +55365,7 @@
 
 
 /***/ },
-/* 408 */
+/* 410 */
 /***/ function(module, exports) {
 
 	
@@ -54929,7 +55394,7 @@
 	};
 
 /***/ },
-/* 409 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogress
@@ -55411,7 +55876,7 @@
 
 
 /***/ },
-/* 410 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55420,13 +55885,13 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(406);
+	var _superagent = __webpack_require__(408);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
 	var _constants2 = __webpack_require__(309);
 
-	var _reactNprogress = __webpack_require__(409);
+	var _reactNprogress = __webpack_require__(411);
 
 	var _reactNprogress2 = _interopRequireDefault(_reactNprogress);
 
@@ -55865,13 +56330,75 @@
 
 				_this24.dispatch(_constants.actions.GET_TOPIC_YEARS, JSON.parse(res.text));
 			});
+		},
+		getAllGroups: function getAllGroups() {
+			var _this25 = this;
+
+			_superagent2['default'].get(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.GET_ALL_GROUPS).set(_constants2.headers).end(function (err, res) {
+
+				_this25.dispatch(_constants.actions.GET_ALL_GROUPS, JSON.parse(res.text));
+			});
+		},
+		deleteGroup: function deleteGroup(payload, callback) {
+			var _this26 = this;
+
+			_reactNprogress2['default'].start();
+
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.DELETE_GROUP).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+
+				(0, _utilities.handleResponse)(res, _this26.flux, function (jsonResponse) {
+
+					_this26.dispatch(_constants.actions.DELETE_GROUP, {
+						data: jsonResponse,
+						id: payload.id
+					});
+
+					callback && callback();
+				}, 'Group deleted successfully.');
+
+				_reactNprogress2['default'].done();
+			});
+		},
+		createNewGroup: function createNewGroup(payload, callback) {
+			var _this27 = this;
+
+			_reactNprogress2['default'].start();
+
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.CREATE_NEW_GROUP).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+
+				(0, _utilities.handleResponse)(res, _this27.flux, function (jsonResponse) {
+
+					_this27.dispatch(_constants.actions.CREATE_NEW_GROUP, jsonResponse);
+
+					callback && callback();
+				}, 'New group added successfully.');
+
+				_reactNprogress2['default'].done();
+			});
+		},
+		editGroup: function editGroup(payload, callback) {
+			var _this28 = this;
+
+			_reactNprogress2['default'].start();
+
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.EDIT_GROUP).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+
+				(0, _utilities.handleResponse)(res, _this28.flux, function (jsonResponse) {
+
+					_this28.dispatch(_constants.actions.EDIT_GROUP, jsonResponse);
+
+					callback && callback();
+				}, 'Group updated successfully.');
+
+				_reactNprogress2['default'].done();
+			});
 		}
 	};
 
 	module.exports = AdminActions;
 
 /***/ },
-/* 411 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55886,7 +56413,7 @@
 	};
 
 /***/ },
-/* 412 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55895,7 +56422,7 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(406);
+	var _superagent = __webpack_require__(408);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -55983,7 +56510,7 @@
 	};
 
 /***/ },
-/* 413 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55992,11 +56519,11 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(406);
+	var _superagent = __webpack_require__(408);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _reactNprogress = __webpack_require__(409);
+	var _reactNprogress = __webpack_require__(411);
 
 	var _reactNprogress2 = _interopRequireDefault(_reactNprogress);
 
@@ -56024,7 +56551,7 @@
 	};
 
 /***/ },
-/* 414 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

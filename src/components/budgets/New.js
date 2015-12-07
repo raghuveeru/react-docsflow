@@ -344,6 +344,7 @@ var BudgetNew = React.createClass({
 									name="time" 
 									required = {true}
 									label = "Time for MP to speak (min)" 
+									type = 'number'
 									defaultValue = {currentBudget.time}
 									onChange = {
 										(event) => {
@@ -385,6 +386,24 @@ var BudgetNew = React.createClass({
 			<div className="form-control">
 				<h4>Assign to officer</h4>
 
+				<Select2 
+					placeholder="Select status"
+					label = 'Select action'
+					value = {this.state.status}
+					required = {true}
+					onChange = { (val, data, event) => {
+
+						checkSelect2Valid(event);
+						
+						this.setState({
+							status: val
+						}, this.updateSubject)
+					}} >
+					<option></option>
+					{AppConfig.STATUS_MAPPING.map((status, idx) => {
+						return <option key = {idx}>{status.name}</option>
+					})}
+				</Select2>
 
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 

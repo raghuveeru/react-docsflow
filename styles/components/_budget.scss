@@ -431,6 +431,13 @@
     position: relative;
     padding-right: 40px;
 
+    @include media(tablet){
+        padding-right: 0;
+    }
+    @include media(desktop){
+        padding-right: 40px;
+    }
+
     .link-toggle-filter{
         position: absolute;
         right: 0;

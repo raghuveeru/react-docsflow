@@ -83,6 +83,12 @@ var API = {
 
 		UPDATE_MAPPING_MP_TO_HODS: 'api/new-mapping-mp-hods.json',
 		UPDATE_MAPPING_HOD_TO_LIASONS: 'api/new-mapping-hod-liasonofficers.json',
+	},
+	GROUPS: {
+		GET_ALL_GROUPS: 'api/get-all-groups.json',
+		CREATE_NEW_GROUP: 'api/create-new-group.json',
+		EDIT_GROUP: 'api/edit-group.json',
+		DELETE_GROUP: 'api/delete-group.json',
 	}
 };
 
@@ -125,14 +131,14 @@ var ROLES = [
 		permissions: ['Admin']
 	},
 	{
-		name: 'COS Administrator',
+		name: 'COS coordinator',
 		id: 2,		
-		permissions: ['canViewSpeech', 'canCreateBudgetCut', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer']
+		permissions: ['canViewSpeech', 'canCreateBudgetCut', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer', 'canViewExport']
 	},
 	{
 		name: 'Liaison Officers',
 		id: 3,		
-		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer']
+		permissions: ['canEditQuestionDetails', 'canEditWorkingDraft', 'canAssignToOfficer', 'canViewExport']
 	},
 	{
 		name: 'Registry Officers',

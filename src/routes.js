@@ -8,6 +8,7 @@ import Users from './components/admin/Users';
 import Topics from './components/admin/Topics';
 import Mapping from './components/admin/Mapping';
 import AdminLayout from './components/admin/Layout';
+import Groups from './components/admin/Groups';
 
 module.exports = (
 	<Route handler = {Main} path = '/' name="home">
@@ -26,6 +27,7 @@ module.exports = (
 			<Route handler = {Users} name="users" />			
 			<Route handler = {Topics} name="topics" />
 			<Route handler = {Mapping} name="mapping" />						
+			<Route handler = {Groups} name="groups" />						
 		</Route>
 		
 		

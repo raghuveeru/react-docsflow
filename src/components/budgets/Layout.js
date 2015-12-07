@@ -125,18 +125,22 @@ var BudgetContainer = React.createClass({
 	},
 	handleSpeech: function(){
 
-		var ids = this.state.BudgetStore.budgets
-			.filter((budget) => budget.checked)
-			.map((budget) => budget.id);
+		var budgets = this.state.BudgetStore.budgets
+			.filter((budget) => budget.checked);
+
+		var ids = budgets.map((budget) => budget.id);
 
 		if(!ids.length){
 			return alert('Please select atleast one budget cut to add to speech');
 		}
+
+		if(confirm('The following budget cuts will be incorporated to speech. \n\n' + ids + '\n\nAre you sure you want to continue?')){
 		
-		this.getFlux().actions.BudgetActions.addToSpeech({
-			ids: ids,
-			userId: this.context.currentUser.id
-		});
+			this.getFlux().actions.BudgetActions.addToSpeech({
+				ids: ids,
+				userId: this.context.currentUser.id
+			});
+		}
 	},
 	render: function(){
 		var currentRoutes = this.context.router.getCurrentRoutes();
@@ -191,7 +195,9 @@ var BudgetContainer = React.createClass({
 								>Incorporate into speech</a>
 								</PermissionJail>
 
-								<a className="link-export-excel" onClick = {this.handleExportToExcel}>Export to excel</a>
+								<PermissionJail permission='canViewExport'>
+									<a className="link-export-excel" onClick = {this.handleExportToExcel}>Export to excel</a>
+								</PermissionJail>
 							</div>
 							<BudgetList budgets = {budgets} openStatus = {openStatus} {...this.props} />
 							

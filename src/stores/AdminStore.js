@@ -14,6 +14,8 @@ var AdminStore = Fluxxor.createStore({
 
 		this.topicYears = [];
 
+		this.groups = []
+
 		this.bindActions(
 			actions.GET_MAIN_TOPICS, this.getMainTopics,
 			actions.CREATE_MAIN_TOPIC, this.createMainTopic,
@@ -38,6 +40,10 @@ var AdminStore = Fluxxor.createStore({
 			actions.UPDATE_MAPPING_MP_TO_HODS, this.updateMappingMpToHods,
 			actions.UPDATE_MAPPING_HOD_TO_LIASONS, this.updateMappingHodLiasons,
 			actions.GET_TOPIC_YEARS, this.getTopicYears,
+			actions.GET_ALL_GROUPS, this.getAllGroups,
+			actions.DELETE_GROUP, this.deleteGroup,
+			actions.CREATE_NEW_GROUP, this.createNewGroup,
+			actions.EDIT_GROUP, this.editGroup
 		)
 	},
 	getState: function(){
@@ -46,7 +52,8 @@ var AdminStore = Fluxxor.createStore({
 			users: this.users,
 			mappingMPHods: this.mappingMPHods,
 			mappingHodLiasons: this.mappingHodLiasons,
-			topicYears: this.topicYears
+			topicYears: this.topicYears,
+			groups: this.groups
 		}
 	},
 	getTopicYears: function(payload){
@@ -298,6 +305,56 @@ var AdminStore = Fluxxor.createStore({
 
 			this.emit('change')
 		}
+	},
+	getAllGroups: function(payload){
+
+		this.groups = payload.data;
+
+		this.emit('change')
+	},
+	deleteGroup: function(payload){
+		
+		var data = payload.data.success,
+			groupId = payload.id;
+
+		if(data){
+			for(var i = this.groups.length - 1; i >= 0; i --){
+				if(this.groups[i].id == groupId){
+					this.groups.splice(i, 1)
+				}
+			}
+
+			this.emit('change')
+		}
+	},
+	createNewGroup: function(payload){
+
+		var group = payload.data[0]
+
+		this.groups.unshift(group)
+
+		this.emit('change')
+	},
+	editGroup: function(payload){
+
+		var _group = payload.data[0];
+		
+		if(!_group) return ;
+
+		var _id = _group.id;
+
+		var _groups = _.clone(this.groups);
+
+		for(var i = 0; i < _groups.length; i++){
+
+			if(_groups[i].id == _id){				
+				_groups[i] = _group
+			}
+		}
+
+		this.groups = _groups;
+
+		this.emit('change')
 	}
 });
 

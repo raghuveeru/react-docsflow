@@ -535,6 +535,83 @@ var AdminActions = {
 				this.dispatch(actions.GET_TOPIC_YEARS, JSON.parse(res.text))
 			})
 
+	},
+	getAllGroups: function(){
+
+		request
+			.get(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.GET_ALL_GROUPS)
+			.set(headers)
+			.end((err, res) => {
+
+				this.dispatch(actions.GET_ALL_GROUPS, JSON.parse(res.text))
+			})
+	},
+	deleteGroup: function(payload, callback){
+		
+		NProgress.start();
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.DELETE_GROUP)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.DELETE_GROUP, {
+						data: jsonResponse,
+						id: payload.id
+					});
+
+					callback && callback()
+				
+				}, 'Group deleted successfully.')				
+
+				NProgress.done()
+			})
+	},
+	createNewGroup: function(payload, callback){
+
+		NProgress.start();
+		
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.CREATE_NEW_GROUP)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.CREATE_NEW_GROUP, jsonResponse);
+
+					callback && callback()
+				
+				}, 'New group added successfully.')				
+
+				NProgress.done()
+			})
+
+	},
+	editGroup: function(payload, callback){
+
+		NProgress.start();
+		
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.GROUPS.EDIT_GROUP)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.EDIT_GROUP, jsonResponse);
+
+					callback && callback()
+				
+				}, 'Group updated successfully.')				
+
+				NProgress.done()
+			})
 	}
 };
 

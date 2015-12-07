@@ -229,12 +229,15 @@
  */
 
 .sp-card-search{
-    padding: 1em;
+    padding: 1em 0 1em 1em;
     border-bottom: 1px $base-ui-color solid;
     box-shadow: none;
 
     .text-wrap{
-        max-width: 400px;
+        
+        @include media(desktop){
+            max-width: 400px;
+        }
     }
 }
 

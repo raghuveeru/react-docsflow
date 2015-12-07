@@ -602,7 +602,7 @@ ul, ol, dd {
  * HTML
  */
 html {
-  font: 1em/1.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  font: 1em / 1.5 "Segoe UI", Helvetica, Arial, sans-serif;
   background: #f2f2f2;
   font-size: 16px;
   /* Sharepoint Fix */
@@ -1231,7 +1231,7 @@ a.ms-storefront-selectanchor, a.ms-storefront-selectanchor:link, a.ms-storefront
 
 .fa {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -3505,6 +3505,13 @@ label.label-error {
   .label-block + .label-block {
     margin-left: 0; }
 
+/**
+ * Hint text
+ */
+.text-hint {
+  display: block;
+  padding-bottom: 1em; }
+
 /*------------------------------------*    BUTTONS
 \*------------------------------------*/
 .btn {
@@ -5748,7 +5755,7 @@ li {
 .sp-tag-event {
   border-color: #ffa055; }
   .sp-tag-event, .sp-tag-event:hover, .sp-tag-event:visited {
-    color: #ff8321; }
+    color: #ff8322; }
 
 .sp-tag-gallery {
   border-color: #0092A5; }
@@ -6379,11 +6386,12 @@ li {
  * Sp Card search
  */
 .sp-card-search {
-  padding: 1em;
+  padding: 1em 0 1em 1em;
   border-bottom: 1px #e5e5e5 solid;
   box-shadow: none; }
-  .sp-card-search .text-wrap {
-    max-width: 400px; }
+  @media only screen and (min-width: 960px) {
+    .sp-card-search .text-wrap {
+      max-width: 400px; } }
 
 /**
  * Staff
@@ -7405,6 +7413,12 @@ li {
 .sp-card-search {
   position: relative;
   padding-right: 40px; }
+  @media only screen and (min-width: 768px) {
+    .sp-card-search {
+      padding-right: 0; } }
+  @media only screen and (min-width: 960px) {
+    .sp-card-search {
+      padding-right: 40px; } }
   .sp-card-search .link-toggle-filter {
     position: absolute;
     right: 0;

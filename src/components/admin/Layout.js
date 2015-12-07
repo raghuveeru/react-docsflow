@@ -23,6 +23,7 @@ var Layout = React.createClass({
 					<nav className="nav-tabs">
 						<Link className="tab__handle" to = {'/admin/users'}>Users</Link>
 						<Link to = {'/admin/topics'}>Topics</Link>
+						<Link to = {'/admin/groups'}>Groups</Link>
 						<Link to = {'/admin/mapping'}>Mapping</Link>
 					</nav>
 

@@ -218,6 +218,8 @@ var utilities = {
 	},
 	arrayJoin: function(array, key, separator){
 
+		if(!(array instanceof Array)) return null;
+		
 		var out = '',
 			size = array.length;
 

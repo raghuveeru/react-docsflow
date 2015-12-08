@@ -93,6 +93,27 @@ module.exports = {
 				
 			})
 	},
+	undoAddToSpeech: function(payload){
+				
+		NProgress.start()
+
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.UNDO_ADD_TO_SPEECH)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.UNDO_ADD_TO_SPEECH, jsonResponse);
+				
+				}, 'Selected budget cuts have been removed from speech.')
+				
+				NProgress.done()				
+				
+			})
+	},
 	assignToOfficer: function(payload, callback){
 
 		NProgress.start()

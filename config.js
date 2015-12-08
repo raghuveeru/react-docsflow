@@ -6,6 +6,7 @@ var API = {
 		SINGLE: 'api/budget-cuts-single.json',
 		EXPORT_TO_EXCEL: 'api/export',
 		ADD_TO_SPEECH: 'api/budget-add-to-speech.json',
+		UNDO_ADD_TO_SPEECH: 'api/budget-add-to-speech.json',
 		GET_QUESTION: 'api/budget-cuts-question-detail.json',				
 		EDIT_QUESTION: 'api/budget-cuts-question-detail.json',
 		CREATE_NEW_QUESTION: 'api/budget-cuts-new-question-response.json',
@@ -134,7 +135,7 @@ var ROLES = [
 	{
 		name: 'COS coordinator',
 		id: 2,		
-		permissions: ['canViewSpeech', 'canCreateBudgetCut', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer', 'canViewExport']
+		permissions: ['canViewSpeech','canUndoSpeech', 'canCreateBudgetCut', 'canEditDeleteBudgetCut', 'canSeeAdminMenu', 'canAssignToOfficer', 'canViewExport']
 	},
 	{
 		name: 'Liaison Officers',
@@ -159,7 +160,7 @@ var ROLES = [
 	{
 		name: 'Speech Writer',
 		id: 7,		
-		permissions: ['canViewSpeech']
+		permissions: ['canViewSpeech', 'canUndoSpeech']
 	},
 ];
 
@@ -194,7 +195,7 @@ window.AppConfig = {
 	STATUS_MAPPING         : STATUS_MAPPING,	
 	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
 	ROLES: ROLES,
-	SUBJECT_TEMPLATE: '[MOM COS] - {topic} - {mp}',
+	SUBJECT_TEMPLATE: '[MOM COS] - {status} - {topic} - {mp}',
 	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK,	
 	DEPARTMENTS: DEPARTMENTS
 }

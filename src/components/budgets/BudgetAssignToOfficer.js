@@ -51,7 +51,8 @@ var BudgetAssignToOfficer = React.createClass({
 
 		var sub = t(AppConfig.SUBJECT_TEMPLATE, {			
 			topic: this.props.budget.title,
-			mp: mp
+			mp: mp,
+			status: this.state.status
 		});
 
 		this.setState({
@@ -111,6 +112,7 @@ var BudgetAssignToOfficer = React.createClass({
 					placeholder= 'To'
 					multiple = {true}
 					name="responsibleOfficer"
+					query = {{groups: 'true'}}
 					onChange = { (val, data, event) => {
 
 						this.checkSelect2Valid(event)
@@ -126,6 +128,7 @@ var BudgetAssignToOfficer = React.createClass({
 					placeholder= 'CC'
 					multiple = {true}
 					required = {true}
+					query = {{groups: 'true'}}
 					name="officersToNotify"
 					onChange = { (val, data, event) => {
 						

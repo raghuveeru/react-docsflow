@@ -142,6 +142,25 @@ var BudgetContainer = React.createClass({
 			});
 		}
 	},
+	handleUndoSpeech: function(){
+
+		var budgets = this.state.BudgetStore.budgets
+			.filter((budget) => budget.checked);
+
+		var ids = budgets.map((budget) => budget.id);
+
+		if(!ids.length){
+			return alert('Please select atleast one budget cut to undo speech');
+		}
+
+		if(confirm('The following budget cuts will be removed from speech. \n\n' + ids + '\n\nAre you sure you want to continue?')){
+		
+			this.getFlux().actions.BudgetActions.undoAddToSpeech({
+				ids: ids,
+				userId: this.context.currentUser.id
+			});
+		}
+	},
 	render: function(){
 		var currentRoutes = this.context.router.getCurrentRoutes();
 		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;
@@ -193,6 +212,14 @@ var BudgetContainer = React.createClass({
 									className="link-speech"
 									onClick = {this.handleSpeech}
 								>Incorporate into speech</a>
+								
+								</PermissionJail>
+
+								<PermissionJail permission='canUndoSpeech'>
+									<a 
+										className="link-speech-undo"
+										onClick = {this.handleUndoSpeech}
+									>Undo speech</a>
 								</PermissionJail>
 
 								<PermissionJail permission='canViewExport'>

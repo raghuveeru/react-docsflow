@@ -20,6 +20,19 @@
 				"image": "images/profile-img.png",
 				"role": [5]
 			}],
+			"cc": [{
+				"name": "Samuel Seah",
+				"url": "http://profile_url",
+				"image": "images/profile-img.png",
+				"role": [5]
+			},{
+				"name": "Samuel Seah 2",
+				"url": "http://profile_url",
+				"image": "images/profile-img.png",
+				"role": [5]
+			}],
+			"status": "New Cut",
+			"subject": "Subject here",
 			"date": "August 28, 2015"
 		},
 		{
@@ -30,6 +43,19 @@
 				"image": "images/profile-img.png",
 				"role": [5]
 			}],
+			"cc": [{
+				"name": "Samuel Seah",
+				"url": "http://profile_url",
+				"image": "images/profile-img.png",
+				"role": [5]
+			},{
+				"name": "Samuel Seah 2",
+				"url": "http://profile_url",
+				"image": "images/profile-img.png",
+				"role": [5]
+			}],
+			"subject": "Subject here",
+			"status": "New Cut",
 			"message": "Message 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 			"date": "August 28, 2015"
 		}

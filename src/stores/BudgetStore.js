@@ -32,7 +32,8 @@ var BudgetStore = Fluxxor.createStore({
 			actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity,
 			actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity,			
 			actions.DELETE_BUDGET_CUT, this.deleteBudgetCut,
-			actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus
+			actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus,
+			actions.UNDO_ADD_TO_SPEECH, this.addToSpeech,
 		)
 	},
 	setBudgetOpenStatus: function(payload){

@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import {customStyles} from '../../constants';
 import Loader from './../Loader';
 import {StoreWatchMixin} from 'fluxxor';
-import {getUserRoleName} from './../../utilities';
+import {getUserRoleName, arrayJoin} from './../../utilities';
 
 var BudgetActivity = React.createClass({
 	mixins: [StoreWatchMixin('BudgetStore')],
@@ -92,12 +92,12 @@ var BudgetActivityItem = React.createClass({
 					{image?
 						<img src = {image} style = {{width: '40'}} />
 					: null}
+					<div className="activity-meta">{activity.date}</div>
 				</div>
 				<div className="media-content">
 					{this.renderUsers(fromUser)} {activity.action} {this.renderUsers(toUser)}<strong></strong>
 
-					<div className="activity-meta">
-						{activity.date}
+					<div className="activity-meta">						
 						<a className="link-view-message"  onClick = {this.viewMessage}>Message</a>
 					</div>
 				</div>
@@ -111,7 +111,25 @@ var BudgetActivityItem = React.createClass({
 							View Message
 						</div>
 						<div className="modal-dialog-body">
-							<p>{activity.message}</p>
+							<p>
+								<label><strong>To: </strong></label><br />
+								{arrayJoin(toUser, 'name')}</p>
+							<p>
+								<label><strong>CC: </strong></label><br />
+								{arrayJoin(activity.cc, 'name')}</p>
+							<p>
+								<label><strong>Status: </strong></label><br />
+								{activity.status}</p>
+							<p>
+								<label><strong>Subject: </strong></label><br />
+								{activity.subject}
+							</p>
+
+							
+							<p>
+								<label><strong>Message: </strong></label><br />
+								{activity.message}
+							</p>
 
 							<a onClick = {this.closeModal}>Close</a>
 						</div>

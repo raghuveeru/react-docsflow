@@ -24227,6 +24227,8 @@
 		},
 		arrayJoin: function arrayJoin(array, key, separator) {
 
+			if (!(array instanceof Array)) return null;
+
 			var out = '',
 			    size = array.length;
 
@@ -29771,6 +29773,7 @@
 			SELECT_BUDGET: 'SELECT_BUDGET',
 			GET_BUDGET_BY_ID: 'GET_BUDGET_BY_ID',
 			ADD_TO_SPEECH: 'ADD_TO_SPEECH',
+			UNDO_ADD_TO_SPEECH: 'UNDO_ADD_TO_SPEECH',
 			GET_QUESTION: 'GET_QUESTION',
 			CREATE_NEW_QUESTION: 'CREATE_NEW_QUESTION',
 			GET_FINAL_APPROVED_REPLY: 'GET_FINAL_APPROVED_REPLY',
@@ -30105,6 +30108,28 @@
 				});
 			}
 		},
+		handleUndoSpeech: function handleUndoSpeech() {
+
+			var budgets = this.state.BudgetStore.budgets.filter(function (budget) {
+				return budget.checked;
+			});
+
+			var ids = budgets.map(function (budget) {
+				return budget.id;
+			});
+
+			if (!ids.length) {
+				return alert('Please select atleast one budget cut to undo speech');
+			}
+
+			if (confirm('The following budget cuts will be removed from speech. \n\n' + ids + '\n\nAre you sure you want to continue?')) {
+
+				this.getFlux().actions.BudgetActions.undoAddToSpeech({
+					ids: ids,
+					userId: this.context.currentUser.id
+				});
+			}
+		},
 		render: function render() {
 			var currentRoutes = this.context.router.getCurrentRoutes();
 			var activeRouteName = currentRoutes[currentRoutes.length - 1].name;
@@ -30193,6 +30218,18 @@
 											onClick: this.handleSpeech
 										},
 										'Incorporate into speech'
+									)
+								),
+								_react2['default'].createElement(
+									_PermissionJail2['default'],
+									{ permission: 'canUndoSpeech' },
+									_react2['default'].createElement(
+										'a',
+										{
+											className: 'link-speech-undo',
+											onClick: this.handleUndoSpeech
+										},
+										'Undo speech'
 									)
 								),
 								_react2['default'].createElement(
@@ -43128,9 +43165,11 @@
 						return status.toLowerCase();
 					}) : [];
 
+					var innerKlass = 'budget-list-item-inner' + (item.checked ? ' item-active' : '');
+
 					return _react2['default'].createElement(
 						_reactRouter.Link,
-						{ to: 'budgetsView', params: { id: item.id }, className: 'budget-list-item-inner', key: index },
+						{ to: 'budgetsView', params: { id: item.id }, className: innerKlass, key: index },
 						statusText,
 						showCheckbox ? _react2['default'].createElement('input', {
 							type: 'checkbox',
@@ -43584,7 +43623,12 @@
 				_react2['default'].createElement(
 					'div',
 					{ className: 'media-item' },
-					image ? _react2['default'].createElement('img', { src: image, style: { width: '40' } }) : null
+					image ? _react2['default'].createElement('img', { src: image, style: { width: '40' } }) : null,
+					_react2['default'].createElement(
+						'div',
+						{ className: 'activity-meta' },
+						activity.date
+					)
 				),
 				_react2['default'].createElement(
 					'div',
@@ -43598,7 +43642,6 @@
 					_react2['default'].createElement(
 						'div',
 						{ className: 'activity-meta' },
-						activity.date,
 						_react2['default'].createElement(
 							'a',
 							{ className: 'link-view-message', onClick: this.viewMessage },
@@ -43627,6 +43670,76 @@
 							_react2['default'].createElement(
 								'p',
 								null,
+								_react2['default'].createElement(
+									'label',
+									null,
+									_react2['default'].createElement(
+										'strong',
+										null,
+										'To: '
+									)
+								),
+								_react2['default'].createElement('br', null),
+								(0, _utilities.arrayJoin)(toUser, 'name')
+							),
+							_react2['default'].createElement(
+								'p',
+								null,
+								_react2['default'].createElement(
+									'label',
+									null,
+									_react2['default'].createElement(
+										'strong',
+										null,
+										'CC: '
+									)
+								),
+								_react2['default'].createElement('br', null),
+								(0, _utilities.arrayJoin)(activity.cc, 'name')
+							),
+							_react2['default'].createElement(
+								'p',
+								null,
+								_react2['default'].createElement(
+									'label',
+									null,
+									_react2['default'].createElement(
+										'strong',
+										null,
+										'Status: '
+									)
+								),
+								_react2['default'].createElement('br', null),
+								activity.status
+							),
+							_react2['default'].createElement(
+								'p',
+								null,
+								_react2['default'].createElement(
+									'label',
+									null,
+									_react2['default'].createElement(
+										'strong',
+										null,
+										'Subject: '
+									)
+								),
+								_react2['default'].createElement('br', null),
+								activity.subject
+							),
+							_react2['default'].createElement(
+								'p',
+								null,
+								_react2['default'].createElement(
+									'label',
+									null,
+									_react2['default'].createElement(
+										'strong',
+										null,
+										'Message: '
+									)
+								),
+								_react2['default'].createElement('br', null),
 								activity.message
 							),
 							_react2['default'].createElement(
@@ -48574,7 +48687,8 @@
 
 			var sub = (0, _utilities.t)(AppConfig.SUBJECT_TEMPLATE, {
 				topic: this.props.budget.title,
-				mp: mp
+				mp: mp,
+				status: this.state.status
 			});
 
 			this.setState({
@@ -48642,6 +48756,7 @@
 					placeholder: 'To',
 					multiple: true,
 					name: 'responsibleOfficer',
+					query: { groups: 'true' },
 					onChange: function (val, data, event) {
 
 						_this2.checkSelect2Valid(event);
@@ -48656,6 +48771,7 @@
 					placeholder: 'CC',
 					multiple: true,
 					required: true,
+					query: { groups: 'true' },
 					name: 'officersToNotify',
 					onChange: function (val, data, event) {
 
@@ -49163,7 +49279,7 @@
 					required: true,
 					placeholder: 'To',
 					multiple: true,
-					query: { role: 'COSCoordinator' },
+					query: { role: 'COSCoordinator', groups: 'true' },
 					name: 'responsibleOfficer',
 					onChange: function (val, data, event) {
 
@@ -49179,6 +49295,7 @@
 					placeholder: 'CC',
 					multiple: true,
 					name: 'officersToNotify',
+					query: { groups: 'true' },
 					onChange: function (val) {
 
 						_this4.setState({
@@ -53172,7 +53289,7 @@
 
 			this.openStatus = item;
 
-			this.bindActions(_constants.actions.UPDATE_BUDGETS, this.updateBudgets, _constants.actions.SELECT_BUDGET, this.selectBudget, _constants.actions.SELECT_ALL_BUDGETS, this.selectAllBudgets, _constants.actions.GET_BUDGET_BY_ID, this.getBudgetById, _constants.actions.ADD_TO_SPEECH, this.addToSpeech, _constants.actions.ASSIGN_TO_OFFICER, this.assignToOfficer, _constants.actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity, _constants.actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity, _constants.actions.DELETE_BUDGET_CUT, this.deleteBudgetCut, _constants.actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus);
+			this.bindActions(_constants.actions.UPDATE_BUDGETS, this.updateBudgets, _constants.actions.SELECT_BUDGET, this.selectBudget, _constants.actions.SELECT_ALL_BUDGETS, this.selectAllBudgets, _constants.actions.GET_BUDGET_BY_ID, this.getBudgetById, _constants.actions.ADD_TO_SPEECH, this.addToSpeech, _constants.actions.ASSIGN_TO_OFFICER, this.assignToOfficer, _constants.actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity, _constants.actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity, _constants.actions.DELETE_BUDGET_CUT, this.deleteBudgetCut, _constants.actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus, _constants.actions.UNDO_ADD_TO_SPEECH, this.addToSpeech);
 		},
 		setBudgetOpenStatus: function setBudgetOpenStatus(payload) {
 
@@ -53936,8 +54053,23 @@
 				_reactNprogress2['default'].done();
 			});
 		},
-		assignToOfficer: function assignToOfficer(payload, callback) {
+		undoAddToSpeech: function undoAddToSpeech(payload) {
 			var _this4 = this;
+
+			_reactNprogress2['default'].start();
+
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.UNDO_ADD_TO_SPEECH).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+
+				(0, _utilities.handleResponse)(res, _this4.flux, function (jsonResponse) {
+
+					_this4.dispatch(_constants.actions.UNDO_ADD_TO_SPEECH, jsonResponse);
+				}, 'Selected budget cuts have been removed from speech.');
+
+				_reactNprogress2['default'].done();
+			});
+		},
+		assignToOfficer: function assignToOfficer(payload, callback) {
+			var _this5 = this;
 
 			_reactNprogress2['default'].start();
 
@@ -53945,16 +54077,16 @@
 
 				_reactNprogress2['default'].done();
 
-				(0, _utilities.handleResponse)(res, _this4.flux, function (jsonResponse) {
+				(0, _utilities.handleResponse)(res, _this5.flux, function (jsonResponse) {
 
-					_this4.dispatch(_constants.actions.ASSIGN_TO_OFFICER, jsonResponse);
+					_this5.dispatch(_constants.actions.ASSIGN_TO_OFFICER, jsonResponse);
 
 					callback && callback(jsonResponse);
 				}, 'Budget cut has been assigned to the selected officers');
 			});
 		},
 		getBudgetActivity: function getBudgetActivity(payload) {
-			var _this5 = this;
+			var _this6 = this;
 
 			this.dispatch(_constants.actions.FETCHING_BUDGET_ACTIVITY, true);
 
@@ -53966,30 +54098,15 @@
 
 				_reactNprogress2['default'].done();
 
-				_this5.dispatch(_constants.actions.GET_BUDGET_ACTIVITY, JSON.parse(res.text));
+				_this6.dispatch(_constants.actions.GET_BUDGET_ACTIVITY, JSON.parse(res.text));
 			});
 		},
 		createNew: function createNew(payload, callback) {
-			var _this6 = this;
-
-			_reactNprogress2['default'].start();
-
-			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_BUDGET_CUT).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
-
-				(0, _utilities.handleResponse)(res, _this6.flux, function (jsonResponse) {
-
-					callback && callback(jsonResponse);
-				}, 'Budget cut was saved successfully.');
-
-				_reactNprogress2['default'].done();
-			});
-		},
-		updateBudgetCut: function updateBudgetCut(payload, callback) {
 			var _this7 = this;
 
 			_reactNprogress2['default'].start();
 
-			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.UPDATE_BUDGET_CUT).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_NEW_BUDGET_CUT).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
 
 				(0, _utilities.handleResponse)(res, _this7.flux, function (jsonResponse) {
 
@@ -53999,14 +54116,29 @@
 				_reactNprogress2['default'].done();
 			});
 		},
-		deleteBudgetCut: function deleteBudgetCut(payload, callback) {
+		updateBudgetCut: function updateBudgetCut(payload, callback) {
 			var _this8 = this;
+
+			_reactNprogress2['default'].start();
+
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.UPDATE_BUDGET_CUT).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+
+				(0, _utilities.handleResponse)(res, _this8.flux, function (jsonResponse) {
+
+					callback && callback(jsonResponse);
+				}, 'Budget cut was saved successfully.');
+
+				_reactNprogress2['default'].done();
+			});
+		},
+		deleteBudgetCut: function deleteBudgetCut(payload, callback) {
+			var _this9 = this;
 
 			_reactNprogress2['default'].start();
 
 			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.DELETE_BUDGET_CUT).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
 
-				(0, _utilities.handleResponse)(res, _this8.flux, function (jsonResponse) {
+				(0, _utilities.handleResponse)(res, _this9.flux, function (jsonResponse) {
 
 					callback && callback(jsonResponse);
 				}, 'Budget cut has been deleted.');
@@ -54015,13 +54147,13 @@
 			});
 		},
 		deleteAttachment: function deleteAttachment(payload, callback) {
-			var _this9 = this;
+			var _this10 = this;
 
 			_reactNprogress2['default'].start();
 
 			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.DELETE_ATTACHMENT).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
 
-				(0, _utilities.handleResponse)(res, _this9.flux, function (jsonResponse) {
+				(0, _utilities.handleResponse)(res, _this10.flux, function (jsonResponse) {
 
 					callback && callback(jsonResponse);
 				}, 'Attachment deleted successfully.');

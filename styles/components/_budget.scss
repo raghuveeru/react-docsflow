@@ -118,6 +118,12 @@
         }
     }
 
+    .item-active{
+        &, &:hover{
+            background-color: #ffc;
+        }
+    }
+
     /**
      * CLosed group
      */
@@ -230,16 +236,22 @@
             @extend %icon;
             content: "\f019";
         }
-    }
-
-    .link-speech{
-        &:before{
-            @extend %icon;
-            content: "\f064";
-        }
-        margin-left: 1em;   
-    }
+    }    
 }
+
+.link-speech, .link-speech-undo{
+    &:before{
+        @extend %icon;
+        content: "\f064";
+    }
+    margin-left: 1em;   
+}
+
+    .link-speech-undo{
+        &:before{
+            content: "\f112";
+        }
+    }
 
 /**
  * Status trial

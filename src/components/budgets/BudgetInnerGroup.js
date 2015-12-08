@@ -50,8 +50,10 @@ var BudgetInnerGroup = React.createClass({
 				var {completedStatus} = item;
 				var completedStatus = completedStatus? completedStatus.map( (status) => status.toLowerCase()) : [];
 				
+				var innerKlass = 'budget-list-item-inner' + (item.checked? ' item-active': '');
+
 				return (
-					<Link to = 'budgetsView' params={{id: item.id}} className="budget-list-item-inner" key = {index}>					
+					<Link to = 'budgetsView' params={{id: item.id}} className={innerKlass} key = {index}>					
 						{statusText}
 						{showCheckbox? 
 						<input 

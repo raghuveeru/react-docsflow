@@ -129,12 +129,13 @@ var BudgetContainer = React.createClass({
 			.filter((budget) => budget.checked);
 
 		var ids = budgets.map((budget) => budget.id);
+		var gist = budgets.map( (budget)=> budget.summary);
 
 		if(!ids.length){
 			return alert('Please select atleast one budget cut to add to speech');
 		}
 
-		if(confirm('The following budget cuts will be incorporated to speech. \n\n' + ids + '\n\nAre you sure you want to continue?')){
+		if(confirm('The following budget cuts will be incorporated to speech. \n\n' + gist.join('\n') + '\n\nAre you sure you want to continue?')){
 		
 			this.getFlux().actions.BudgetActions.addToSpeech({
 				ids: ids,

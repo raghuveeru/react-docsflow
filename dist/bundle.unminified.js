@@ -30095,12 +30095,15 @@
 			var ids = budgets.map(function (budget) {
 				return budget.id;
 			});
+			var gist = budgets.map(function (budget) {
+				return budget.summary;
+			});
 
 			if (!ids.length) {
 				return alert('Please select atleast one budget cut to add to speech');
 			}
 
-			if (confirm('The following budget cuts will be incorporated to speech. \n\n' + ids + '\n\nAre you sure you want to continue?')) {
+			if (confirm('The following budget cuts will be incorporated to speech. \n\n' + gist.join('\n') + '\n\nAre you sure you want to continue?')) {
 
 				this.getFlux().actions.BudgetActions.addToSpeech({
 					ids: ids,
@@ -46598,7 +46601,7 @@
 			var hodDrafting = currentBudget.hodDrafting ? currentBudget.hodDrafting.name : '';
 			var liasonOfficer = currentBudget.liasonOfficer ? currentBudget.liasonOfficer.name : '';
 
-			var budgetEditActions = _react2['default'].createElement(
+			var budgetEditActions = !(0, _utilities.isSpeech)(currentBudget.status) ? _react2['default'].createElement(
 				'nav',
 				{ className: 'budget-cut-actions' },
 				_react2['default'].createElement(
@@ -46611,7 +46614,7 @@
 					{ className: 'link-delete', onClick: this.handleDelete },
 					'Delete'
 				)
-			);
+			) : null;
 
 			var budgetAssign = _react2['default'].createElement(_BudgetAssignToOfficer2['default'], {
 				id: this.props.id,

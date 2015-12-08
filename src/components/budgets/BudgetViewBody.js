@@ -55,12 +55,12 @@ var BudgetViewBody = React.createClass({
 		var hodDrafting = currentBudget.hodDrafting? currentBudget.hodDrafting.name : '';
 		var liasonOfficer = currentBudget.liasonOfficer? currentBudget.liasonOfficer.name : '';
 
-		var budgetEditActions = (
+		var budgetEditActions = !isSpeech(currentBudget.status)?(
 			<nav className="budget-cut-actions">
 				<Link to = 'budgetsEdit' params ={{id: currentBudget.id}} className="link-edit">Edit</Link>
 				<a className="link-delete" onClick = {this.handleDelete}>Delete</a>
 			</nav>
-		);
+		) : null;
 
 		var budgetAssign = (
 			<BudgetAssignToOfficer 

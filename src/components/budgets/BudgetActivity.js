@@ -84,7 +84,7 @@ var BudgetActivityItem = React.createClass({
 		var fromUser = activity.from;
 		var toUser = activity.to;
 		
-		var image = fromUser.length? fromUser[0].image: null;
+		var image = fromUser && fromUser.length? fromUser[0].image: null;
 
 		return (
 			<li>
@@ -111,25 +111,37 @@ var BudgetActivityItem = React.createClass({
 							View Message
 						</div>
 						<div className="modal-dialog-body">
+							{toUser? 
 							<p>
 								<label><strong>To: </strong></label><br />
 								{arrayJoin(toUser, 'name')}</p>
+							: null}
+
+							{activity.cc? 
 							<p>
 								<label><strong>CC: </strong></label><br />
 								{arrayJoin(activity.cc, 'name')}</p>
+							: null}
+
+							{activity.status? 
 							<p>
 								<label><strong>Status: </strong></label><br />
 								{activity.status}</p>
+							: null}
+							{activity.subject? 
 							<p>
 								<label><strong>Subject: </strong></label><br />
 								{activity.subject}
 							</p>
 
-							
+							: null}
+
+							{activity.message? 
 							<p>
 								<label><strong>Message: </strong></label><br />
 								{activity.message}
 							</p>
+							: null}
 
 							<a onClick = {this.closeModal}>Close</a>
 						</div>

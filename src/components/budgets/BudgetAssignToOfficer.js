@@ -49,10 +49,12 @@ var BudgetAssignToOfficer = React.createClass({
 		var {memberOfParliament} = this.props.budget;
 		var mp = memberOfParliament?  memberOfParliament.name : '';
 
+		var {status} = this.state; 
+
 		var sub = t(AppConfig.SUBJECT_TEMPLATE, {			
 			topic: this.props.budget.title,
 			mp: mp,
-			status: this.state.status
+			status: status? status + ' - ': ''
 		});
 
 		this.setState({
@@ -91,10 +93,8 @@ var BudgetAssignToOfficer = React.createClass({
 					placeholder="Select status"
 					label = 'Select action'
 					value = {this.state.status}
-					required = {true}
+					allowClear = {true}			
 					onChange = { (val, data, event) => {					
-
-						this.checkSelect2Valid(event);
 
 						this.setState({
 							status: val

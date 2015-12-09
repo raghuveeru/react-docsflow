@@ -43618,7 +43618,7 @@
 			var fromUser = activity.from;
 			var toUser = activity.to;
 
-			var image = fromUser.length ? fromUser[0].image : null;
+			var image = fromUser && fromUser.length ? fromUser[0].image : null;
 
 			return _react2['default'].createElement(
 				'li',
@@ -43670,7 +43670,7 @@
 						_react2['default'].createElement(
 							'div',
 							{ className: 'modal-dialog-body' },
-							_react2['default'].createElement(
+							toUser ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43684,8 +43684,8 @@
 								),
 								_react2['default'].createElement('br', null),
 								(0, _utilities.arrayJoin)(toUser, 'name')
-							),
-							_react2['default'].createElement(
+							) : null,
+							activity.cc ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43699,8 +43699,8 @@
 								),
 								_react2['default'].createElement('br', null),
 								(0, _utilities.arrayJoin)(activity.cc, 'name')
-							),
-							_react2['default'].createElement(
+							) : null,
+							activity.status ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43714,8 +43714,8 @@
 								),
 								_react2['default'].createElement('br', null),
 								activity.status
-							),
-							_react2['default'].createElement(
+							) : null,
+							activity.subject ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43729,8 +43729,8 @@
 								),
 								_react2['default'].createElement('br', null),
 								activity.subject
-							),
-							_react2['default'].createElement(
+							) : null,
+							activity.message ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43744,7 +43744,7 @@
 								),
 								_react2['default'].createElement('br', null),
 								activity.message
-							),
+							) : null,
 							_react2['default'].createElement(
 								'a',
 								{ onClick: this.closeModal },
@@ -48688,10 +48688,12 @@
 
 			var mp = memberOfParliament ? memberOfParliament.name : '';
 
+			var status = this.state.status;
+
 			var sub = (0, _utilities.t)(AppConfig.SUBJECT_TEMPLATE, {
 				topic: this.props.budget.title,
 				mp: mp,
-				status: this.state.status
+				status: status ? status + ' - ' : ''
 			});
 
 			this.setState({
@@ -48735,10 +48737,8 @@
 						placeholder: 'Select status',
 						label: 'Select action',
 						value: this.state.status,
-						required: true,
+						allowClear: true,
 						onChange: function (val, data, event) {
-
-							_this2.checkSelect2Valid(event);
 
 							_this2.setState({
 								status: val
@@ -48975,9 +48975,10 @@
 			}
 		},
 		updateSubject: function updateSubject() {
+			var status = this.state.status;
 
 			var sub = (0, _utilities.t)(AppConfig.SUBJECT_TEMPLATE, {
-				status: this.state.status,
+				status: status ? status + ' - ' : '',
 				topic: this.state.budgetCutTopicName,
 				mp: this.state.memberOfParliamentName
 			});

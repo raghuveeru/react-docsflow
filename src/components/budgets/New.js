@@ -122,10 +122,12 @@ var BudgetNew = React.createClass({
 
 		}
 	},
-	updateSubject: function(){		
+	updateSubject: function(){	
+
+		var {status} = this.state;
 
 		var sub = t(AppConfig.SUBJECT_TEMPLATE, {
-			status: this.state.status,
+			status: status? status + ' - ': '',
 			topic: this.state.budgetCutTopicName,
 			mp: this.state.memberOfParliamentName
 		});

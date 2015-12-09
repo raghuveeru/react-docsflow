@@ -47,6 +47,7 @@ var BudgetViewBody = React.createClass({
 	render: function(){
 
 		var {currentBudget} = this.state.BudgetStore;
+		console.log(currentBudget)
 
 		if(!Object.keys(currentBudget).length) return <Loader />;
 

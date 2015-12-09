@@ -27,10 +27,22 @@
 			"relationships": {
 				"category": "Workplace Safety & Health"
 			},
-			"liasonOfficer": {
-				"id": 121,
-				"name": "liasonOfficer"
-			},
+			"liasonOfficer": [
+				{
+					"id": "1212",
+					"name": "Lisa Lawrence",
+					"designation": "HOD",
+					"role": ["Liason Officers"],
+					"image": "images/profile-img.png"
+				},
+				{
+					"id": "1213",
+					"name": "Christopher Brown",
+					"designation": "Executive",
+					"role": ["Liason Officers"],
+					"image": "images/profile-img.png"
+				}
+			],
 			"userId": "blahblahblah",
 			"fileReferenceNo": "-",
 			"time": "50",

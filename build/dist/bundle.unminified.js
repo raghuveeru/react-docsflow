@@ -30120,12 +30120,15 @@
 			var ids = budgets.map(function (budget) {
 				return budget.id;
 			});
+			var gist = budgets.map(function (budget) {
+				return budget.summary;
+			});
 
 			if (!ids.length) {
 				return alert('Please select atleast one budget cut to undo speech');
 			}
 
-			if (confirm('The following budget cuts will be removed from speech. \n\n' + ids + '\n\nAre you sure you want to continue?')) {
+			if (confirm('The following budget cuts will be removed from speech. \n\n' + gist.join('\n') + '\n\nAre you sure you want to continue?')) {
 
 				this.getFlux().actions.BudgetActions.undoAddToSpeech({
 					ids: ids,
@@ -43612,6 +43615,9 @@
 				})
 			);
 		},
+		isExists: function isExists(item) {
+			return item && item.length;
+		},
 		render: function render() {
 			var activity = this.props.activity;
 
@@ -43670,7 +43676,7 @@
 						_react2['default'].createElement(
 							'div',
 							{ className: 'modal-dialog-body' },
-							toUser ? _react2['default'].createElement(
+							this.isExists(toUser) ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43685,7 +43691,7 @@
 								_react2['default'].createElement('br', null),
 								(0, _utilities.arrayJoin)(toUser, 'name')
 							) : null,
-							activity.cc ? _react2['default'].createElement(
+							this.isExists(activity.cc) ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -43700,7 +43706,7 @@
 								_react2['default'].createElement('br', null),
 								(0, _utilities.arrayJoin)(activity.cc, 'name')
 							) : null,
-							activity.status ? _react2['default'].createElement(
+							this.isExists(activity.status) ? _react2['default'].createElement(
 								'p',
 								null,
 								_react2['default'].createElement(
@@ -46594,6 +46600,8 @@
 		render: function render() {
 			var currentBudget = this.state.BudgetStore.currentBudget;
 
+			console.log(currentBudget);
+
 			if (!Object.keys(currentBudget).length) return _react2['default'].createElement(_Loader2['default'], null);
 
 			var memberOfParliament = currentBudget.memberOfParliament ? currentBudget.memberOfParliament.name : '';
@@ -48776,6 +48784,7 @@
 					required: true,
 					query: { groups: 'true' },
 					name: 'officersToNotify',
+					defaultValue: budget.liasonOfficer,
 					onChange: function (val, data, event) {
 
 						_this2.checkSelect2Valid(event);

@@ -130,6 +130,7 @@ var BudgetAssignToOfficer = React.createClass({
 					required = {true}
 					query = {{groups: 'true'}}
 					name="officersToNotify"
+					defaultValue = {budget.liasonOfficer}
 					onChange = { (val, data, event) => {
 						
 						this.checkSelect2Valid(event)

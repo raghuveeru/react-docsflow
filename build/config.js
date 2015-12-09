@@ -119,7 +119,8 @@ var STATUS_MAPPING = [
 	},
 	{
 		name: 'Speech',
-		color: '#D687C6'
+		color: '#D687C6',
+		showCheckbox: true
 	}
 ];
 

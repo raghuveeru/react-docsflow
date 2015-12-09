@@ -49215,7 +49215,7 @@
 									name: 'time',
 									required: true,
 									label: 'Time for MP to speak (min)',
-									type: 'number',
+									className: 'number',
 									defaultValue: currentBudget.time,
 									onChange: function (event) {
 

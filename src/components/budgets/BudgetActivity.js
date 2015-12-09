@@ -78,6 +78,9 @@ var BudgetActivityItem = React.createClass({
 			</span>
 		)
 	},
+	isExists: function(item){
+		return item && item.length
+	},
 	render: function(){
 
 		var {activity} = this.props;
@@ -111,19 +114,19 @@ var BudgetActivityItem = React.createClass({
 							View Message
 						</div>
 						<div className="modal-dialog-body">
-							{toUser? 
+							{this.isExists(toUser) ?
 							<p>
 								<label><strong>To: </strong></label><br />
 								{arrayJoin(toUser, 'name')}</p>
 							: null}
 
-							{activity.cc? 
+							{this.isExists(activity.cc)?
 							<p>
 								<label><strong>CC: </strong></label><br />
 								{arrayJoin(activity.cc, 'name')}</p>
 							: null}
 
-							{activity.status? 
+							{this.isExists(activity.status)? 
 							<p>
 								<label><strong>Status: </strong></label><br />
 								{activity.status}</p>

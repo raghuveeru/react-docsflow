@@ -47,7 +47,6 @@ var BudgetViewBody = React.createClass({
 	render: function(){
 
 		var {currentBudget} = this.state.BudgetStore;
-		console.log(currentBudget)
 
 		if(!Object.keys(currentBudget).length) return <Loader />;
 
@@ -63,12 +62,15 @@ var BudgetViewBody = React.createClass({
 			</nav>
 		) : null;
 
-		var budgetAssign = (
+		var budgetAssign = !isSpeech(currentBudget.status)?(
+			<div>
+				<hr className="rule rule--thick" />
 			<BudgetAssignToOfficer 
 						id = {this.props.id} 
 						budget = {currentBudget}
 					/>	
-		);
+			</div>
+		) : null;
 
 		var statusText = (currentBudget.status.toLowerCase() == 'speech')? <span className="budget-item-status budget-item-status-view" style = {{backgroundColor: getStatusName(currentBudget.status).color}}>{getStatusName(currentBudget.status).name}</span> : null;
 

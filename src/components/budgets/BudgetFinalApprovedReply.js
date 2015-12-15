@@ -125,8 +125,7 @@ var BudgetFinalApprovedReply = React.createClass({
 							)
 						})}
 						
-					</table>
-					<hr className="rule rule--thick" />									
+					</table>					
 				</div>
 			)
 		}

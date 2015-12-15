@@ -213,7 +213,7 @@ var BudgetContainer = React.createClass({
 								<a 
 									className="link-speech"
 									onClick = {this.handleSpeech}
-								>Incorporate into speech</a>
+								>Add to speech</a>
 								
 								</PermissionJail>
 
@@ -221,7 +221,7 @@ var BudgetContainer = React.createClass({
 									<a 
 										className="link-speech-undo"
 										onClick = {this.handleUndoSpeech}
-									>Undo speech</a>
+									>Remove from speech</a>
 								</PermissionJail>
 
 								<PermissionJail permission='canViewExport'>

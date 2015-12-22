@@ -25,9 +25,17 @@ var BudgetViewBody = React.createClass({
 	},
 	componentDidMount: function(){
 
+		this.getData();
+	},	
+	getData: function(){
+
 		this.getFlux().actions.BudgetActions.getBudgetById({
 			id: this.props.id
 		})
+	},
+	componentDidUpdate: function(prevProps){
+
+		if(prevProps.id != this.props.id) this.getData()
 	},
 	handleDelete: function(){
 

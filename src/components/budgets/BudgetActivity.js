@@ -13,9 +13,17 @@ var BudgetActivity = React.createClass({
 			BudgetStore: this.props.flux.store('BudgetStore').getState()
 		}
 	},
-	componentDidMount: function(){
+	getData: function(){
 		
 		this.props.flux.actions.BudgetActions.getBudgetActivity(this.props.id)		
+	},
+	componentDidMount: function(){
+		
+		this.getData();
+	},
+	componentDidUpdate: function(prevProps){
+
+		if(prevProps.id != this.props.id) this.getData();
 	},
 	render: function(){
 

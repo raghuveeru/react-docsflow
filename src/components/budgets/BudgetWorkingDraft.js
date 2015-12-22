@@ -24,12 +24,20 @@ var BudgetWorkingDraft = React.createClass({
 			editMode: false
 		}
 	},
-	componentDidMount: function(){
+	getData: function(){
 
 		this.getFlux().actions.BudgetDetailActions.getWorkingDraft({
 			budgetCutId: this.props.id
 		})
+	},
+	componentDidMount: function(){
+
+		this.getData();
 		
+	},
+	componentDidUpdate: function(prevProps){
+
+		if(prevProps.id != this.props.id) this.getData()
 	},
 	onEdit: function(){
 

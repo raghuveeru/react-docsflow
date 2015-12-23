@@ -30223,7 +30223,7 @@
 											className: 'link-speech',
 											onClick: this.handleSpeech
 										},
-										'Incorporate into speech'
+										'Add to speech'
 									)
 								),
 								_react2['default'].createElement(
@@ -30235,7 +30235,7 @@
 											className: 'link-speech-undo',
 											onClick: this.handleUndoSpeech
 										},
-										'Undo speech'
+										'Remove from speech'
 									)
 								),
 								_react2['default'].createElement(
@@ -43530,9 +43530,17 @@
 				BudgetStore: this.props.flux.store('BudgetStore').getState()
 			};
 		},
-		componentDidMount: function componentDidMount() {
+		getData: function getData() {
 
 			this.props.flux.actions.BudgetActions.getBudgetActivity(this.props.id);
+		},
+		componentDidMount: function componentDidMount() {
+
+			this.getData();
+		},
+		componentDidUpdate: function componentDidUpdate(prevProps) {
+
+			if (prevProps.id != this.props.id) this.getData();
 		},
 		render: function render() {
 			var _state$BudgetStore = this.state.BudgetStore;
@@ -46578,9 +46586,17 @@
 		},
 		componentDidMount: function componentDidMount() {
 
+			this.getData();
+		},
+		getData: function getData() {
+
 			this.getFlux().actions.BudgetActions.getBudgetById({
 				id: this.props.id
 			});
+		},
+		componentDidUpdate: function componentDidUpdate(prevProps) {
+
+			if (prevProps.id != this.props.id) this.getData();
 		},
 		handleDelete: function handleDelete() {
 			var _this = this;
@@ -46599,8 +46615,6 @@
 		},
 		render: function render() {
 			var currentBudget = this.state.BudgetStore.currentBudget;
-
-			console.log(currentBudget);
 
 			if (!Object.keys(currentBudget).length) return _react2['default'].createElement(_Loader2['default'], null);
 
@@ -46624,10 +46638,15 @@
 				)
 			) : null;
 
-			var budgetAssign = _react2['default'].createElement(_BudgetAssignToOfficer2['default'], {
-				id: this.props.id,
-				budget: currentBudget
-			});
+			var budgetAssign = !(0, _utilities.isSpeech)(currentBudget.status) ? _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement('hr', { className: 'rule rule--thick' }),
+				_react2['default'].createElement(_BudgetAssignToOfficer2['default'], {
+					id: this.props.id,
+					budget: currentBudget
+				})
+			) : null;
 
 			var statusText = currentBudget.status.toLowerCase() == 'speech' ? _react2['default'].createElement(
 				'span',
@@ -46820,11 +46839,19 @@
 				editMode: false
 			};
 		},
-		componentDidMount: function componentDidMount() {
+		getData: function getData() {
 
 			this.getFlux().actions.BudgetDetailActions.getQuestion({
 				budgetCutId: this.props.id
 			});
+		},
+		componentDidMount: function componentDidMount() {
+
+			this.getData();
+		},
+		componentDidUpdate: function componentDidUpdate(prevProps) {
+
+			if (prevProps.id != this.props.id) this.getData();
 		},
 		onEdit: function onEdit() {
 			var _this = this;
@@ -47849,11 +47876,19 @@
 				editMode: false
 			};
 		},
-		componentDidMount: function componentDidMount() {
+		getData: function getData() {
 
 			this.getFlux().actions.BudgetDetailActions.getWorkingDraft({
 				budgetCutId: this.props.id
 			});
+		},
+		componentDidMount: function componentDidMount() {
+
+			this.getData();
+		},
+		componentDidUpdate: function componentDidUpdate(prevProps) {
+
+			if (prevProps.id != this.props.id) this.getData();
 		},
 		onEdit: function onEdit() {
 			var _this = this;
@@ -48248,11 +48283,19 @@
 				editMode: false
 			};
 		},
-		componentDidMount: function componentDidMount() {
+		getData: function getData() {
 
 			this.getFlux().actions.BudgetDetailActions.getFinalApprovedReply({
 				budgetCutId: this.props.id
 			});
+		},
+		componentDidMount: function componentDidMount() {
+
+			this.getData();
+		},
+		componentDidUpdate: function componentDidUpdate(prevProps) {
+
+			if (prevProps.id != this.props.id) this.getData();
 		},
 		onEdit: function onEdit() {
 			var _this = this;
@@ -48399,8 +48442,7 @@
 								)
 							);
 						})
-					),
-					_react2['default'].createElement('hr', { className: 'rule rule--thick' })
+					)
 				);
 			}
 

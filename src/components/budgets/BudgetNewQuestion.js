@@ -136,13 +136,13 @@ var BudgetNewQuestion = React.createClass({
 								if(data.liasonOfficer.length){
 
 									setTimeout(() => {
-										$(select).select2('data', data.liasonOfficer[0], true)
+										$(select).select2('data', data.liasonOfficer, true)
 									}, 100)
 								}
 								
 								this.setState({
 									hodDrafting: val,
-									liasonOfficer: data.liasonOfficer.length? data.liasonOfficer[0].id : []
+									liasonOfficer: data.liasonOfficer.length? data.liasonOfficer : []
 								})
 							}}
 						/>

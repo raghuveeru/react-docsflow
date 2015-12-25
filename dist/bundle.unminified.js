@@ -24233,7 +24233,7 @@
 			    size = array.length;
 
 			for (var i = 0; i < size; i++) {
-				out += array[i][key] + (i + 1 != size ? ', ' : '');
+				out += key ? array[i][key] : array[i] + (i + 1 != size ? ', ' : '');
 			}
 
 			return out;
@@ -47225,13 +47225,13 @@
 							if (data.liasonOfficer.length) {
 
 								setTimeout(function () {
-									$(select).select2('data', data.liasonOfficer[0], true);
+									$(select).select2('data', data.liasonOfficer, true);
 								}, 100);
 							}
 
 							_this3.setState({
 								hodDrafting: val,
-								liasonOfficer: data.liasonOfficer.length ? data.liasonOfficer[0].id : []
+								liasonOfficer: data.liasonOfficer.length ? data.liasonOfficer : []
 							});
 						}
 					}),
@@ -48418,13 +48418,7 @@
 									_react2['default'].createElement(
 										'td',
 										null,
-										q.types.map(function (type, index) {
-											return _react2['default'].createElement(
-												'span',
-												{ key: index },
-												type
-											);
-										})
+										(0, _utilities.arrayJoin)(q.types)
 									)
 								),
 								_react2['default'].createElement(
@@ -48823,7 +48817,7 @@
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY,
 					placeholder: 'CC',
 					multiple: true,
-					required: true,
+					required: false,
 					query: { groups: 'true' },
 					name: 'officersToNotify',
 					defaultValue: budget.liasonOfficer,

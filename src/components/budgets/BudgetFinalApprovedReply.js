@@ -120,7 +120,7 @@ var BudgetFinalApprovedReply = React.createClass({
 								</tr>
 								<tr>
 									<th>Type of reply uploaded</th>
-									<td>{q.types.map((type, index) => <span key = {index}>{type}</span> )}</td>
+									<td>{ arrayJoin(q.types) }</td>
 								</tr>
 								<tr>
 									<td colSpan="2">

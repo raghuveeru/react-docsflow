@@ -47269,7 +47269,7 @@
 						_react2['default'].createElement(
 							'button',
 							{ className: 'btn btn-primary' },
-							'Submit'
+							'Save'
 						),
 						_react2['default'].createElement(
 							'a',
@@ -48217,7 +48217,7 @@
 						_react2['default'].createElement(
 							'button',
 							{ className: 'btn btn-primary' },
-							'Submit'
+							'Save'
 						),
 						_react2['default'].createElement(
 							'a',
@@ -48635,7 +48635,7 @@
 						_react2['default'].createElement(
 							'button',
 							{ className: 'btn btn-primary' },
-							'Submit'
+							'Save'
 						),
 						_react2['default'].createElement(
 							'a',

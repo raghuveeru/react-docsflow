@@ -43,38 +43,44 @@ var BudgetNewFinalApprovedReply = React.createClass({
 
 		var $form = $(this.refs.ajaxForm.getDOMNode());
 
-		$form.ajaxForm({
-			dataType: 'json',
-			success: (data) => {
+		$form.on('submit', (e) => {
+		    
+		    e.preventDefault(); 
+		    
+		    $form.ajaxSubmit({
+				dataType: 'json',
+				success: (data) => {
 
-				if(data.errors){
+					if(data.errors){
 
-					var errs = data.errors.map((data) => data.error);
+						var errs = data.errors.map((data) => data.error);
+
+						/* Emit error notification */
+
+						emitNotification('error', this.getFlux(), errs.join('<br />'))
+
+					}else{
+
+						/* Emit success notification */
+
+						emitNotification('success', this.getFlux(), this.props.editMode? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
+
+						this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data);
+
+						this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.budgetCutId);
+
+						this.props.onFinishEdit && this.props.onFinishEdit.call(this)
+
+					}
+				},
+				error: (data) => {				
 
 					/* Emit error notification */
 
-					emitNotification('error', this.getFlux(), errs.join('<br />'))
-
-				}else{
-
-					/* Emit success notification */
-
-					emitNotification('success', this.getFlux(), this.props.editMode? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
-
-					this.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data);
-
-					this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.budgetCutId);
-
-					this.props.onFinishEdit && this.props.onFinishEdit.call(this)
-
+					emitNotification('error', this.getFlux(), data.responseText)
 				}
-			},
-			error: (data) => {				
 
-				/* Emit error notification */
-
-				emitNotification('error', this.getFlux(), data.responseText)
-			}
+			})
 		})
 	},
 	render: function(){
@@ -99,7 +105,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 		}
 
 		return (
-			<form ref="ajaxForm" method = 'post' action = {url}>
+			<form className="formBudgetDetails" data-message = "Final approved reply" ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {this.context.currentUser.id} />
@@ -130,7 +136,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 					
 					<div className="form-control submit-control">
 						<button className="btn btn-primary">Save</button>
-						<a className="btn btn--unstyled" onClick = {this.cancelForm}>Cancel</a>
+						<a className="btn btn--unstyled btn-cancel" onClick = {this.cancelForm}>Cancel</a>
 					</div>
 				</div>
 			</form>

@@ -24232,7 +24232,7 @@
 			    size = array.length;
 
 			for (var i = 0; i < size; i++) {
-				out += key ? array[i][key] : array[i] + (i + 1 != size ? ', ' : '');
+				out += (key ? array[i][key] : array[i]) + (i + 1 != size ? ', ' : '');
 			}
 
 			return out;
@@ -47124,38 +47124,44 @@
 
 			var $form = $(this.refs.ajaxForm.getDOMNode());
 
-			$form.ajaxForm({
-				dataType: 'json',
-				success: function success(data) {
+			$form.on('submit', function (e) {
 
-					if (data.errors) {
+				e.preventDefault();
 
-						var errs = data.errors.map(function (data) {
-							return data.error;
-						});
+				$form.ajaxSubmit({
+					dataType: 'json',
+					success: function success(data) {
+
+						if (data.errors) {
+
+							var errs = data.errors.map(function (data) {
+								return data.error;
+							});
+
+							/* Emit error notification */
+
+							(0, _utilities.emitNotification)('error', _this2.getFlux(), errs.join('<br />'));
+						} else {
+
+							/* Emit success notification */
+
+							(0, _utilities.emitNotification)('success', _this2.getFlux(), _this2.props.editMode ? 'Question details successfully updated.' : 'Question details successfull added.');
+
+							_this2.getFlux().actions.BudgetDetailActions.addQuestion(data);
+
+							_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
+
+							_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
+						}
+					},
+					error: function error(data) {
 
 						/* Emit error notification */
 
-						(0, _utilities.emitNotification)('error', _this2.getFlux(), errs.join('<br />'));
-					} else {
-
-						/* Emit success notification */
-
-						(0, _utilities.emitNotification)('success', _this2.getFlux(), _this2.props.editMode ? 'Question details successfully updated.' : 'Question details successfull added.');
-
-						_this2.getFlux().actions.BudgetDetailActions.addQuestion(data);
-
-						_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
-
-						_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
+						(0, _utilities.emitNotification)('error', _this2.getFlux(), data.responseText);
 					}
-				},
-				error: function error(data) {
 
-					/* Emit error notification */
-
-					(0, _utilities.emitNotification)('error', _this2.getFlux(), data.responseText);
-				}
+				});
 			});
 		},
 		render: function render() {
@@ -47189,7 +47195,7 @@
 
 			return _react2['default'].createElement(
 				'form',
-				{ ref: 'ajaxForm', method: 'post', action: url },
+				{ className: 'formBudgetDetails', 'data-message': 'Question details', ref: 'ajaxForm', method: 'get', action: url },
 				link,
 				_react2['default'].createElement('input', { type: 'hidden', name: 'userId', value: this.context.currentUser.id }),
 				_react2['default'].createElement('input', { type: 'hidden', name: 'budgetCutId', value: this.props.budgetCutId }),
@@ -47220,17 +47226,15 @@
 						onChange: function (val, data, event) {
 
 							var select = _this3.refs.liasonOfficerSelect.refs.select.getDOMNode();
+							var hasLiason = data.liasonOfficer.length;
 
-							if (data.liasonOfficer.length) {
-
-								setTimeout(function () {
-									$(select).select2('data', data.liasonOfficer, true);
-								}, 100);
-							}
+							setTimeout(function () {
+								$(select).select2('data', hasLiason ? data.liasonOfficer : null, true);
+							}, 100);
 
 							_this3.setState({
 								hodDrafting: val,
-								liasonOfficer: data.liasonOfficer.length ? data.liasonOfficer : []
+								liasonOfficer: hasLiason ? data.liasonOfficer : []
 							});
 						}
 					}),
@@ -47272,7 +47276,7 @@
 						),
 						_react2['default'].createElement(
 							'a',
-							{ className: 'btn btn--unstyled', onClick: this.cancelForm },
+							{ className: 'btn btn--unstyled btn-cancel', onClick: this.cancelForm },
 							'Cancel'
 						)
 					)
@@ -48129,38 +48133,44 @@
 
 			var $form = $(this.refs.ajaxForm.getDOMNode());
 
-			$form.ajaxForm({
-				dataType: 'json',
-				success: function success(data) {
+			$form.on('submit', function (e) {
 
-					if (data.errors) {
+				e.preventDefault();
 
-						var errs = data.errors.map(function (data) {
-							return data.error;
-						});
+				$form.ajaxSubmit({
+					dataType: 'json',
+					success: function success(data) {
+
+						if (data.errors) {
+
+							var errs = data.errors.map(function (data) {
+								return data.error;
+							});
+
+							/* Emit error notification */
+
+							(0, _utilities.emitNotification)('error', _this2.getFlux(), errs.join('<br />'));
+						} else {
+
+							/* Emit success notification */
+
+							(0, _utilities.emitNotification)('success', _this2.getFlux(), _this2.props.editMode ? 'Working draft details successfully updated.' : 'Working draft details successfull added.');
+
+							_this2.getFlux().actions.BudgetDetailActions.addWorkingDraft(data);
+
+							_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
+
+							_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
+						}
+					},
+					error: function error(data) {
 
 						/* Emit error notification */
 
-						(0, _utilities.emitNotification)('error', _this2.getFlux(), errs.join('<br />'));
-					} else {
-
-						/* Emit success notification */
-
-						(0, _utilities.emitNotification)('success', _this2.getFlux(), _this2.props.editMode ? 'Working draft details successfully updated.' : 'Working draft details successfull added.');
-
-						_this2.getFlux().actions.BudgetDetailActions.addWorkingDraft(data);
-
-						_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
-
-						_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
+						(0, _utilities.emitNotification)('error', _this2.getFlux(), data.responseText);
 					}
-				},
-				error: function error(data) {
 
-					/* Emit error notification */
-
-					(0, _utilities.emitNotification)('error', _this2.getFlux(), data.responseText);
-				}
+				});
 			});
 		},
 		render: function render() {
@@ -48188,7 +48198,7 @@
 
 			return _react2['default'].createElement(
 				'form',
-				{ ref: 'ajaxForm', method: 'post', action: url },
+				{ className: 'formBudgetDetails', 'data-message': 'Working draft details', ref: 'ajaxForm', method: 'post', action: url },
 				link,
 				_react2['default'].createElement('input', { type: 'hidden', name: 'userId', value: this.context.currentUser.id }),
 				_react2['default'].createElement('input', { type: 'hidden', name: 'budgetCutId', value: this.props.budgetCutId }),
@@ -48220,7 +48230,7 @@
 						),
 						_react2['default'].createElement(
 							'a',
-							{ className: 'btn btn--unstyled', onClick: this.cancelForm },
+							{ className: 'btn btn--unstyled btn-cancel', onClick: this.cancelForm },
 							'Cancel'
 						)
 					)
@@ -48531,38 +48541,44 @@
 
 			var $form = $(this.refs.ajaxForm.getDOMNode());
 
-			$form.ajaxForm({
-				dataType: 'json',
-				success: function success(data) {
+			$form.on('submit', function (e) {
 
-					if (data.errors) {
+				e.preventDefault();
 
-						var errs = data.errors.map(function (data) {
-							return data.error;
-						});
+				$form.ajaxSubmit({
+					dataType: 'json',
+					success: function success(data) {
+
+						if (data.errors) {
+
+							var errs = data.errors.map(function (data) {
+								return data.error;
+							});
+
+							/* Emit error notification */
+
+							(0, _utilities.emitNotification)('error', _this2.getFlux(), errs.join('<br />'));
+						} else {
+
+							/* Emit success notification */
+
+							(0, _utilities.emitNotification)('success', _this2.getFlux(), _this2.props.editMode ? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
+
+							_this2.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data);
+
+							_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
+
+							_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
+						}
+					},
+					error: function error(data) {
 
 						/* Emit error notification */
 
-						(0, _utilities.emitNotification)('error', _this2.getFlux(), errs.join('<br />'));
-					} else {
-
-						/* Emit success notification */
-
-						(0, _utilities.emitNotification)('success', _this2.getFlux(), _this2.props.editMode ? 'Final approved reply successfully updated.' : 'Final approved reply successfull added.');
-
-						_this2.getFlux().actions.BudgetDetailActions.addFinalApprovedReply(data);
-
-						_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
-
-						_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
+						(0, _utilities.emitNotification)('error', _this2.getFlux(), data.responseText);
 					}
-				},
-				error: function error(data) {
 
-					/* Emit error notification */
-
-					(0, _utilities.emitNotification)('error', _this2.getFlux(), data.responseText);
-				}
+				});
 			});
 		},
 		render: function render() {
@@ -48594,7 +48610,7 @@
 
 			return _react2['default'].createElement(
 				'form',
-				{ ref: 'ajaxForm', method: 'post', action: url },
+				{ className: 'formBudgetDetails', 'data-message': 'Final approved reply', ref: 'ajaxForm', method: 'post', action: url },
 				link,
 				_react2['default'].createElement('input', { type: 'hidden', name: 'userId', value: this.context.currentUser.id }),
 				_react2['default'].createElement('input', { type: 'hidden', name: 'budgetCutId', value: this.props.budgetCutId }),
@@ -48638,7 +48654,7 @@
 						),
 						_react2['default'].createElement(
 							'a',
-							{ className: 'btn btn--unstyled', onClick: this.cancelForm },
+							{ className: 'btn btn--unstyled btn-cancel', onClick: this.cancelForm },
 							'Cancel'
 						)
 					)
@@ -49311,7 +49327,6 @@
 						label: 'Select action',
 						allowClear: true,
 						value: this.state.status,
-						required: true,
 						onChange: function (val, data, event) {
 
 							(0, _utilities.checkSelect2Valid)(event);
@@ -52505,7 +52520,6 @@
 						'tbody',
 						null,
 						mappingHodLiasons.map(function (item, idx) {
-
 							var deleteFn = _this.deleteMapping.bind(_this, item, idx, 2);
 							var editFn = _this.editMapping.bind(_this, item, idx, 2);
 

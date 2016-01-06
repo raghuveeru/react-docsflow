@@ -224,7 +224,7 @@ var utilities = {
 			size = array.length;
 
 		for(var i = 0; i < size; i ++){
-			out+= key? array[i][key]: array[i] + (i + 1 != size? ', ' : '')			
+			out+= ( key? array[i][key]: array[i] ) + (i + 1 != size? ', ' : '')			
 		}
 
 		return out;

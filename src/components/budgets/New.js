@@ -392,8 +392,7 @@ var BudgetNew = React.createClass({
 					placeholder="Select status"
 					label = 'Select action'
 					allowClear = {true}
-					value = {this.state.status}
-					required = {true}
+					value = {this.state.status}					
 					onChange = { (val, data, event) => {
 
 						checkSelect2Valid(event);

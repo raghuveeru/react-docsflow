@@ -154,7 +154,6 @@ var Mapping = React.createClass({
 					</thead>
 					<tbody>
 						{mappingHodLiasons.map( (item, idx) => {
-
 							var deleteFn = this.deleteMapping.bind(this, item, idx, 2)
 							var editFn = this.editMapping.bind(this, item, idx, 2);
 

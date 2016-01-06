@@ -48729,7 +48729,7 @@
 		},
 		onSave: function onSave(event) {
 
-			var $formBudgetDetails = $('.formBudgetDetails'),
+			var $formBudgetDetails = $('.formBudgetDetails').find('.section-form').not('.js-hide'),
 			    budgetMessages = [],
 			    budgetMessagesObj = [];
 
@@ -48740,8 +48740,9 @@
 				if ($formBudgetDetails.length) {
 
 					$formBudgetDetails.each(function (idx, el) {
-						budgetMessages.push(el.getAttribute('data-message'));
-						budgetMessagesObj.push(el);
+						var _el = $(el).closest('.formBudgetDetails')[0];
+						budgetMessages.push(_el.getAttribute('data-message'));
+						budgetMessagesObj.push(_el);
 					});
 
 					if (confirm('You are editing ' + budgetMessages.join(', ') + '. \n\nClick OK to continue editing. \nClick Cancel to discard.')) {

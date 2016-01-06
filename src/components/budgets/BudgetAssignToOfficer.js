@@ -31,7 +31,7 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	onSave: function(event){
 
-		var $formBudgetDetails = $('.formBudgetDetails'),
+		var $formBudgetDetails = $('.formBudgetDetails').find('.section-form').not('.js-hide'),
 			budgetMessages = [],
 			budgetMessagesObj = []
 
@@ -42,8 +42,9 @@ var BudgetAssignToOfficer = React.createClass({
 			if($formBudgetDetails.length){
 
 				$formBudgetDetails.each( (idx, el) => {
-					budgetMessages.push( el.getAttribute('data-message'))
-					budgetMessagesObj.push(el)
+					var _el = $(el).closest('.formBudgetDetails')[0];
+					budgetMessages.push( _el.getAttribute('data-message'))
+					budgetMessagesObj.push(_el)
 				});
 
 				if(

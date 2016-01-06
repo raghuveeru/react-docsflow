@@ -48730,9 +48730,30 @@
 		onSave: function onSave(event) {
 			var _this = this;
 
+			var $formBudgetDetails = $('.formBudgetDetails'),
+			    budgetMessages = [],
+			    budgetMessagesObj = [];
+
 			if (this.$form.valid()) {
 
 				event && event.preventDefault();
+
+				if ($formBudgetDetails.length) {
+
+					$formBudgetDetails.each(function (idx, el) {
+						budgetMessages.push(el.getAttribute('data-message'));
+						budgetMessagesObj.push(el);
+					});
+
+					if (confirm('You are editing ' + budgetMessages.join(', ') + '. \n\nClick OK to continue editing. \nClick Cancel to discard.')) {
+
+						$('html, body').animate({
+							scrollTop: $(budgetMessagesObj[0]).offset().top
+						}, 400);
+
+						return;
+					}
+				}
 
 				this.getFlux().actions.BudgetActions.assignToOfficer(this.state, function () {
 

@@ -48728,7 +48728,6 @@
 			};
 		},
 		onSave: function onSave(event) {
-			var _this = this;
 
 			var $formBudgetDetails = $('.formBudgetDetails'),
 			    budgetMessages = [],
@@ -48757,14 +48756,14 @@
 
 				this.getFlux().actions.BudgetActions.assignToOfficer(this.state, function () {
 
-					_this.getFlux().actions.BudgetActions.getBudgetActivity(_this.props.id);
+					window.location.reload();
 
-					_this.setState({
-						responsibleOfficer: [],
-						officersToNotify: [],
-						message: '',
-						subject: ''
-					});
+					// this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)
+
+					// this.setState({					
+					// 	responsibleOfficer: [],
+					// 	message: '',
+					// })
 				});
 			}
 		},
@@ -48804,7 +48803,7 @@
 			return $ele.valid();
 		},
 		render: function render() {
-			var _this2 = this;
+			var _this = this;
 
 			var budget = this.props.budget;
 
@@ -48825,9 +48824,9 @@
 						allowClear: true,
 						onChange: function (val, data, event) {
 
-							_this2.setState({
+							_this.setState({
 								status: val
-							}, _this2.updateSubject);
+							}, _this.updateSubject);
 						} },
 					_react2['default'].createElement('option', null),
 					AppConfig.STATUS_MAPPING.map(function (status, idx) {
@@ -48847,9 +48846,9 @@
 					query: { groups: 'true' },
 					onChange: function (val, data, event) {
 
-						_this2.checkSelect2Valid(event);
+						_this.checkSelect2Valid(event);
 
-						_this2.setState({
+						_this.setState({
 							responsibleOfficer: val
 						});
 					}
@@ -48861,13 +48860,12 @@
 					required: false,
 					query: { groups: 'true' },
 					name: 'officersToNotify',
-					defaultValue: budget.liasonOfficer,
+					defaultValue: budget.liasonOfficer || budget.liaisonOfficer,
 					onChange: function (val, data, event) {
 
-						_this2.checkSelect2Valid(event);
-						console.log(val);
+						_this.checkSelect2Valid(event);
 
-						_this2.setState({
+						_this.setState({
 							officersToNotify: val
 						});
 					}
@@ -48885,7 +48883,7 @@
 					required: true,
 					name: 'message',
 					rows: 1, onChange: function (event) {
-						_this2.setState({
+						_this.setState({
 							message: event.target.value
 						});
 					} }),

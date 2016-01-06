@@ -60,14 +60,14 @@ var BudgetAssignToOfficer = React.createClass({
 
 			this.getFlux().actions.BudgetActions.assignToOfficer(this.state, () => {
 
-				this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)
+				window.location.reload()
 
-				this.setState({					
-					responsibleOfficer: [],
-					officersToNotify: [],
-					message: '',					
-					subject: ''
-				})
+				// this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.id)
+
+				// this.setState({					
+				// 	responsibleOfficer: [],
+				// 	message: '',
+				// })
 			});			
 		}
 	},
@@ -157,11 +157,10 @@ var BudgetAssignToOfficer = React.createClass({
 					required = {false}
 					query = {{groups: 'true'}}
 					name="officersToNotify"
-					defaultValue = {budget.liasonOfficer}
+					defaultValue = {budget.liasonOfficer || budget.liaisonOfficer}
 					onChange = { (val, data, event) => {
 						
-						this.checkSelect2Valid(event)
-						console.log(val)
+						this.checkSelect2Valid(event)						
 
 						this.setState({
 							officersToNotify: val

@@ -166,7 +166,7 @@ var BudgetNew = React.createClass({
 			 * Check if the user has permission
 			 */
 			
-			if(!checkForPermission('canEditDeleteBudgetCut')){
+			if(!checkForPermission(this.context.currentUser, 'canEditDeleteBudgetCut')){
 
 				this.context.router.transitionTo('budgets')
 			}
@@ -391,6 +391,7 @@ var BudgetNew = React.createClass({
 				<Select2 
 					placeholder="Select status"
 					label = 'Select action'
+					allowClear = {true}
 					value = {this.state.status}
 					required = {true}
 					onChange = { (val, data, event) => {

@@ -15,9 +15,13 @@ var BudgetAssignToOfficer = React.createClass({
 	},
 	getInitialState: function(){
 
+		var { budget } = this.props;
+
+		var officersToNotify = budget.liasonOfficer.map( (item) => item.id)		
+
 		return {			
 			responsibleOfficer: [],
-			officersToNotify: [],
+			officersToNotify: officersToNotify || [],
 			message: '',
 			subject: '',
 			budgetCutId: this.props.id,			
@@ -134,6 +138,7 @@ var BudgetAssignToOfficer = React.createClass({
 					onChange = { (val, data, event) => {
 						
 						this.checkSelect2Valid(event)
+						console.log(val)
 
 						this.setState({
 							officersToNotify: val

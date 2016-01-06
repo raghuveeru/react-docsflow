@@ -24208,7 +24208,6 @@
 			}
 		},
 		checkForPermission: function checkForPermission(currentUser, permission) {
-
 			var roleId = currentUser.roleId;
 
 			/* For Admin and COS Admin */
@@ -48696,10 +48695,15 @@
 			currentUser: _react2['default'].PropTypes.object
 		},
 		getInitialState: function getInitialState() {
+			var budget = this.props.budget;
+
+			var officersToNotify = budget.liasonOfficer.map(function (item) {
+				return item.id;
+			});
 
 			return {
 				responsibleOfficer: [],
-				officersToNotify: [],
+				officersToNotify: officersToNotify || [],
 				message: '',
 				subject: '',
 				budgetCutId: this.props.id,
@@ -48824,6 +48828,7 @@
 					onChange: function (val, data, event) {
 
 						_this2.checkSelect2Valid(event);
+						console.log(val);
 
 						_this2.setState({
 							officersToNotify: val
@@ -49060,7 +49065,7 @@
 	    * Check if the user has permission
 	    */
 
-				if (!(0, _utilities.checkForPermission)('canEditDeleteBudgetCut')) {
+				if (!(0, _utilities.checkForPermission)(this.context.currentUser, 'canEditDeleteBudgetCut')) {
 
 					this.context.router.transitionTo('budgets');
 				}
@@ -49304,6 +49309,7 @@
 					{
 						placeholder: 'Select status',
 						label: 'Select action',
+						allowClear: true,
 						value: this.state.status,
 						required: true,
 						onChange: function (val, data, event) {

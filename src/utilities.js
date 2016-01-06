@@ -200,7 +200,7 @@ var utilities = {
 	},
 	checkForPermission: function(currentUser, permission){
 		
-		var roleId = currentUser.roleId;
+		var { roleId } = currentUser;
 
 		/* For Admin and COS Admin */
 

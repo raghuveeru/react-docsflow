@@ -46982,7 +46982,7 @@
 									_react2['default'].createElement(
 										'th',
 										null,
-										'Liason officer'
+										'Liaison officer'
 									),
 									_react2['default'].createElement(
 										'td',
@@ -47240,7 +47240,7 @@
 					}),
 					_react2['default'].createElement(_Select22['default'], {
 						url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_LIASON_OFFICERS,
-						placeholder: 'Liason officer',
+						placeholder: 'Liaison officer',
 						ref: 'liasonOfficerSelect',
 						multiple: true,
 						name: 'liasonOfficer',
@@ -52531,7 +52531,7 @@
 							_react2['default'].createElement(
 								'th',
 								null,
-								'Liason officers'
+								'Liaison officers'
 							),
 							_react2['default'].createElement('th', { className: 'cell-actions' })
 						)
@@ -52791,7 +52791,7 @@
 				}),
 				_react2['default'].createElement(_Select22['default'], {
 					url: AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_LIASON_OFFICERS,
-					placeholder: 'Liason officers',
+					placeholder: 'Liaison officers',
 					multiple: true,
 					ref: 'liasonOfficers',
 					name: 'liasonOfficers',

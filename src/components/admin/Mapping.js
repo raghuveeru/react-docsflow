@@ -148,7 +148,7 @@ var Mapping = React.createClass({
 					<thead>
 						<tr>
 							<th width="250">HOD</th>
-							<th>Liason officers</th>
+							<th>Liaison officers</th>
 							<th className="cell-actions"></th>
 						</tr>
 					</thead>

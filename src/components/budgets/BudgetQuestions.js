@@ -124,7 +124,7 @@ var BudgetQuestions = React.createClass({
 									<td>{q.hodDrafting.name}</td>
 								</tr>
 								<tr>
-									<th>Liason officer</th>
+									<th>Liaison officer</th>
 									<td>{arrayJoin(q.liasonOfficer, 'name')}</td>
 								</tr>
 								<tr>

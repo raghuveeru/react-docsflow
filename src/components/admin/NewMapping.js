@@ -197,7 +197,7 @@ var NewMapping = React.createClass({
 
 				<Select2  
 					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_LIASON_OFFICERS} 
-					placeholder= 'Liason officers'
+					placeholder= 'Liaison officers'
 					multiple = {true}
 					ref = 'liasonOfficers'
 					name="liasonOfficers"

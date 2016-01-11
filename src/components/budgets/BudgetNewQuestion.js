@@ -156,7 +156,7 @@ var BudgetNewQuestion = React.createClass({
 
 					<Select2  
 							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_ALL_LIASON_OFFICERS} 
-							placeholder= 'Liason officer'
+							placeholder= 'Liaison officer'
 							ref = 'liasonOfficerSelect'
 							multiple = {true}
 							name = 'liasonOfficer'

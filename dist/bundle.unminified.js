@@ -47195,7 +47195,7 @@
 
 			return _react2['default'].createElement(
 				'form',
-				{ className: 'formBudgetDetails', 'data-message': 'Question details', ref: 'ajaxForm', method: 'get', action: url },
+				{ className: 'formBudgetDetails', 'data-message': 'Question details', ref: 'ajaxForm', method: 'post', action: url },
 				link,
 				_react2['default'].createElement('input', { type: 'hidden', name: 'userId', value: this.context.currentUser.id }),
 				_react2['default'].createElement('input', { type: 'hidden', name: 'budgetCutId', value: this.props.budgetCutId }),

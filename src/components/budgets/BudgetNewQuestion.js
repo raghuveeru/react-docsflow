@@ -109,7 +109,7 @@ var BudgetNewQuestion = React.createClass({
 		}
 
 		return (
-			<form className="formBudgetDetails" data-message = "Question details" ref="ajaxForm" method = 'get' action = {url}>
+			<form className="formBudgetDetails" data-message = "Question details" ref="ajaxForm" method = 'post' action = {url}>
 				{link}
 
 				<input type = "hidden" name="userId" value = {this.context.currentUser.id} />

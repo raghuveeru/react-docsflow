@@ -87,7 +87,7 @@ var BudgetInnerGroup = React.createClass({
 									<td>{hodDrafting}</td>
 								</tr>
 								<tr>
-									<th>Liason officer</th>
+									<th>Liaison officer</th>
 									<td>{arrayJoin(item.liasonOfficer, 'name')}</td>
 								</tr>
 							</tbody>

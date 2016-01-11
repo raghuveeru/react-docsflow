@@ -43247,7 +43247,7 @@
 									_react2['default'].createElement(
 										'th',
 										null,
-										'Liason officer'
+										'Liaison officer'
 									),
 									_react2['default'].createElement(
 										'td',

@@ -86,7 +86,7 @@ module.exports = {
 	createEditFlag: function(payload, callback){
 
 		request
-			.post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_EDIT_FLAG)
+			.get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_EDIT_FLAG)
 			.set(headers)
 			.send(JSON.stringify(payload))
 			.end((err, res) => {

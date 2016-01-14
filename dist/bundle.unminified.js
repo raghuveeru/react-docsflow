@@ -56904,7 +56904,7 @@
 		createEditFlag: function createEditFlag(payload, callback) {
 			var _this5 = this;
 
-			_superagent2['default'].get(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_EDIT_FLAG).set(_constants.headers).send(JSON.stringify(payload)).end(function (err, res) {
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.BUDGET.CREATE_EDIT_FLAG).set(_constants.headers).send(JSON.stringify(payload)).end(function (err, res) {
 
 				(0, _utilities.handleResponse)(res, _this5.flux, function (jsonResponse) {
 

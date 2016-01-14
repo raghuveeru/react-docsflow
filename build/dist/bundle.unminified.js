@@ -47547,7 +47547,7 @@
 				_react2['default'].createElement(
 					'span',
 					{ className: 'text-hint', style: { fontSize: '14px', fontStyle: 'italic' } },
-					'Max per file size limit is 4 MB.  To select multiple files, press Ctrl (PC) or Command (Mac) and click all the files to upload.'
+					'Max per file size limit is 4 MB. Press the Control key to select multiple files.'
 				)
 			);
 		}

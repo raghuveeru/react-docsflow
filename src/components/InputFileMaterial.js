@@ -8,7 +8,7 @@ var InputFileMaterial = React.createClass({
 				<label className="material-file">
 					<input type="file" name={this.props.name} multiple={true} />
 				</label>
-				<span className="text-hint" style = {{ fontSize: '14px', fontStyle: 'italic'}}>Max per file size limit is 4 MB.  To select multiple files, press Ctrl (PC) or Command (Mac) and click all the files to upload.</span>
+				<span className="text-hint" style = {{ fontSize: '14px', fontStyle: 'italic'}}>Max per file size limit is 4 MB. Press the Control key to select multiple files.</span>
 			</div>
 		)
 	}

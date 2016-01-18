@@ -34,7 +34,20 @@ var BudgetStore = Fluxxor.createStore({
 			actions.DELETE_BUDGET_CUT, this.deleteBudgetCut,
 			actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus,
 			actions.UNDO_ADD_TO_SPEECH, this.addToSpeech,
+			actions.UPDATE_BUDGET_LIASION_OFFICER, this.updateBudgetLiasion
 		)
+	},
+	updateBudgetLiasion: function(payload){
+
+		var liasonOfficer = payload.data[0].liasonOfficer;
+
+		if(!liasonOfficer || !payload) {
+			throw new Error('No liason officers in the response');
+			return ;
+		}
+		this.currentBudget['liasonOfficer'] = liasonOfficer;
+
+		this.emit('change')
 	},
 	setBudgetOpenStatus: function(payload){
 		

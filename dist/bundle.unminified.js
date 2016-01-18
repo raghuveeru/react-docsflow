@@ -29821,7 +29821,8 @@
 			GET_ALL_GROUPS: 'GET_ALL_GROUPS',
 			CREATE_NEW_GROUP: 'CREATE_NEW_GROUP',
 			DELETE_GROUP: 'DELETE_GROUP',
-			EDIT_GROUP: 'EDIT_GROUP'
+			EDIT_GROUP: 'EDIT_GROUP',
+			UPDATE_BUDGET_LIASION_OFFICER: 'UPDATE_BUDGET_LIASION_OFFICER'
 		},
 		customStyles: {
 			overlay: {
@@ -47291,6 +47292,8 @@
 
 							_this2.getFlux().actions.BudgetDetailActions.addQuestion(data);
 
+							_this2.getFlux().actions.BudgetActions.updateLiasionOfficer(data);
+
 							_this2.getFlux().actions.BudgetActions.getBudgetActivity(_this2.props.budgetCutId);
 
 							_this2.props.onFinishEdit && _this2.props.onFinishEdit.call(_this2);
@@ -53520,7 +53523,19 @@
 
 			this.openStatus = item;
 
-			this.bindActions(_constants.actions.UPDATE_BUDGETS, this.updateBudgets, _constants.actions.SELECT_BUDGET, this.selectBudget, _constants.actions.SELECT_ALL_BUDGETS, this.selectAllBudgets, _constants.actions.GET_BUDGET_BY_ID, this.getBudgetById, _constants.actions.ADD_TO_SPEECH, this.addToSpeech, _constants.actions.ASSIGN_TO_OFFICER, this.assignToOfficer, _constants.actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity, _constants.actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity, _constants.actions.DELETE_BUDGET_CUT, this.deleteBudgetCut, _constants.actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus, _constants.actions.UNDO_ADD_TO_SPEECH, this.addToSpeech);
+			this.bindActions(_constants.actions.UPDATE_BUDGETS, this.updateBudgets, _constants.actions.SELECT_BUDGET, this.selectBudget, _constants.actions.SELECT_ALL_BUDGETS, this.selectAllBudgets, _constants.actions.GET_BUDGET_BY_ID, this.getBudgetById, _constants.actions.ADD_TO_SPEECH, this.addToSpeech, _constants.actions.ASSIGN_TO_OFFICER, this.assignToOfficer, _constants.actions.GET_BUDGET_ACTIVITY, this.getBudgetActivity, _constants.actions.FETCHING_BUDGET_ACTIVITY, this.fetchingBudgetActivity, _constants.actions.DELETE_BUDGET_CUT, this.deleteBudgetCut, _constants.actions.SET_BUDGET_OPEN_STATUS, this.setBudgetOpenStatus, _constants.actions.UNDO_ADD_TO_SPEECH, this.addToSpeech, _constants.actions.UPDATE_BUDGET_LIASION_OFFICER, this.updateBudgetLiasion);
+		},
+		updateBudgetLiasion: function updateBudgetLiasion(payload) {
+
+			var liasonOfficer = payload.data[0].liasonOfficer;
+
+			if (!liasonOfficer || !payload) {
+				throw new Error('No liason officers in the response');
+				return;
+			}
+			this.currentBudget['liasonOfficer'] = liasonOfficer;
+
+			this.emit('change');
 		},
 		setBudgetOpenStatus: function setBudgetOpenStatus(payload) {
 
@@ -54391,6 +54406,10 @@
 
 				_reactNprogress2['default'].done();
 			});
+		},
+		updateLiasionOfficer: function updateLiasionOfficer(payload) {
+
+			this.dispatch(_constants.actions.UPDATE_BUDGET_LIASION_OFFICER, payload);
 		}
 	};
 

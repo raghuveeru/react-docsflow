@@ -70,6 +70,8 @@ var BudgetNewQuestion = React.createClass({
 
 						this.getFlux().actions.BudgetDetailActions.addQuestion(data);
 
+						this.getFlux().actions.BudgetActions.updateLiasionOfficer(data)
+
 						this.getFlux().actions.BudgetActions.getBudgetActivity(this.props.budgetCutId);
 
 						this.props.onFinishEdit && this.props.onFinishEdit.call(this)

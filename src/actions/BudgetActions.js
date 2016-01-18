@@ -237,5 +237,9 @@ module.exports = {
 				NProgress.done()
 				
 			})
+	},
+	updateLiasionOfficer: function(payload){
+	
+		this.dispatch(actions.UPDATE_BUDGET_LIASION_OFFICER, payload);						
 	}
 }

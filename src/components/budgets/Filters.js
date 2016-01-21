@@ -17,7 +17,7 @@ var Filters = React.createClass({
 	render: function(){
 
 		const {facets} = this.props;		
-
+		
 		return (
 			<div>				
 				{mapObject(facets, (key, values, index) => {

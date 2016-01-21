@@ -612,6 +612,27 @@ var AdminActions = {
 
 				NProgress.done()
 			})
+	},
+	uploadToEReg: function(payload, callback){
+
+		NProgress.start();
+		
+		request
+			.post(AppConfig.API.BASE_URL + AppConfig.API.UPLOAD_TO_EREG)
+			.set(headers)
+			.send(JSON.stringify(payload))
+			.end((err, res) => {
+				
+				handleResponse(res, this.flux, (jsonResponse) => {
+
+					this.dispatch(actions.UPLOAD_TO_EREG_SUCCESS, jsonResponse);
+
+					callback && callback( jsonResponse )
+				
+				})				
+
+				NProgress.done()
+			})
 	}
 };
 

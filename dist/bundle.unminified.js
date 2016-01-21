@@ -71,21 +71,21 @@
 
 	var _fluxxor2 = _interopRequireDefault(_fluxxor);
 
-	var _stores = __webpack_require__(400);
+	var _stores = __webpack_require__(401);
 
 	var _stores2 = _interopRequireDefault(_stores);
 
-	var _actions = __webpack_require__(406);
+	var _actions = __webpack_require__(407);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
-	var _superagent = __webpack_require__(408);
+	var _superagent = __webpack_require__(409);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
 	var _constants = __webpack_require__(309);
 
-	var _componentsNotifications = __webpack_require__(416);
+	var _componentsNotifications = __webpack_require__(417);
 
 	var _componentsNotifications2 = _interopRequireDefault(_componentsNotifications);
 
@@ -23798,6 +23798,10 @@
 
 	var _componentsAdminGroups2 = _interopRequireDefault(_componentsAdminGroups);
 
+	var _componentsAdminEReg = __webpack_require__(400);
+
+	var _componentsAdminEReg2 = _interopRequireDefault(_componentsAdminEReg);
+
 	module.exports = _react2['default'].createElement(
 		_reactRouter.Route,
 		{ handler: _componentsMain2['default'], path: '/', name: 'home' },
@@ -23814,7 +23818,8 @@
 			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminUsers2['default'], name: 'users' }),
 			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminTopics2['default'], name: 'topics' }),
 			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminMapping2['default'], name: 'mapping' }),
-			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminGroups2['default'], name: 'groups' })
+			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminGroups2['default'], name: 'groups' }),
+			_react2['default'].createElement(_reactRouter.Route, { handler: _componentsAdminEReg2['default'], name: 'eReg' })
 		),
 		_react2['default'].createElement(_reactRouter.Redirect, { from: '/', to: 'budgetsInbox', params: { type: 'inbox' } })
 	);
@@ -29822,7 +29827,9 @@
 			CREATE_NEW_GROUP: 'CREATE_NEW_GROUP',
 			DELETE_GROUP: 'DELETE_GROUP',
 			EDIT_GROUP: 'EDIT_GROUP',
-			UPDATE_BUDGET_LIASION_OFFICER: 'UPDATE_BUDGET_LIASION_OFFICER'
+			UPDATE_BUDGET_LIASION_OFFICER: 'UPDATE_BUDGET_LIASION_OFFICER',
+
+			UPLOAD_TO_EREG_SUCCESS: 'UPLOAD_TO_EREG_SUCCESS'
 		},
 		customStyles: {
 			overlay: {
@@ -53102,6 +53109,11 @@
 							_reactRouter.Link,
 							{ to: '/admin/mapping' },
 							'Mapping'
+						),
+						_react2['default'].createElement(
+							_reactRouter.Link,
+							{ to: '/admin/eReg' },
+							'eReg'
 						)
 					),
 					_react2['default'].createElement(
@@ -53457,23 +53469,71 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _BudgetStore = __webpack_require__(401);
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _utilities = __webpack_require__(204);
+
+	var EReg = _react2['default'].createClass({
+		displayName: 'EReg',
+
+		contextTypes: {
+			currentUser: _react2['default'].PropTypes.object,
+			router: _react2['default'].PropTypes.func
+		},
+		render: function render() {
+			var _this = this;
+
+			return _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement('br', null),
+				_react2['default'].createElement(
+					'a',
+					{
+						className: 'btn btn-primary',
+						onClick: function (event) {
+
+							_this.props.flux.actions.AdminActions.uploadToEReg({ 'userId': _this.context.currentUser.id }, function (response) {
+
+								(0, _utilities.emitNotification)('success', _this.props.flux, response.message ? response.message : 'No message found in response JSON');
+							});
+						}
+					},
+					'Upload to eReg'
+				)
+			);
+		}
+	});
+
+	module.exports = EReg;
+
+/***/ },
+/* 401 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _BudgetStore = __webpack_require__(402);
 
 	var _BudgetStore2 = _interopRequireDefault(_BudgetStore);
 
-	var _AdminStore = __webpack_require__(402);
+	var _AdminStore = __webpack_require__(403);
 
 	var _AdminStore2 = _interopRequireDefault(_AdminStore);
 
-	var _AuthStore = __webpack_require__(403);
+	var _AuthStore = __webpack_require__(404);
 
 	var _AuthStore2 = _interopRequireDefault(_AuthStore);
 
-	var _BudgetDetailStore = __webpack_require__(404);
+	var _BudgetDetailStore = __webpack_require__(405);
 
 	var _BudgetDetailStore2 = _interopRequireDefault(_BudgetDetailStore);
 
-	var _NotificationStore = __webpack_require__(405);
+	var _NotificationStore = __webpack_require__(406);
 
 	var _NotificationStore2 = _interopRequireDefault(_NotificationStore);
 
@@ -53486,7 +53546,7 @@
 	};
 
 /***/ },
-/* 401 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53668,7 +53728,7 @@
 	module.exports = BudgetStore;
 
 /***/ },
-/* 402 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54011,7 +54071,7 @@
 	module.exports = AdminStore;
 
 /***/ },
-/* 403 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54049,7 +54109,7 @@
 	module.exports = AuthStore;
 
 /***/ },
-/* 404 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54126,7 +54186,7 @@
 	module.exports = BudgetDetailStore;
 
 /***/ },
-/* 405 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54170,30 +54230,30 @@
 	module.exports = NotificationStore;
 
 /***/ },
-/* 406 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _BudgetActions = __webpack_require__(407);
+	var _BudgetActions = __webpack_require__(408);
 
 	var _BudgetActions2 = _interopRequireDefault(_BudgetActions);
 
-	var _AdminActions = __webpack_require__(412);
+	var _AdminActions = __webpack_require__(413);
 
 	var _AdminActions2 = _interopRequireDefault(_AdminActions);
 
-	var _AuthActions = __webpack_require__(413);
+	var _AuthActions = __webpack_require__(414);
 
 	var _AuthActions2 = _interopRequireDefault(_AuthActions);
 
-	var _BudgetDetailActions = __webpack_require__(414);
+	var _BudgetDetailActions = __webpack_require__(415);
 
 	var _BudgetDetailActions2 = _interopRequireDefault(_BudgetDetailActions);
 
-	var _NotificationActions = __webpack_require__(415);
+	var _NotificationActions = __webpack_require__(416);
 
 	var _NotificationActions2 = _interopRequireDefault(_NotificationActions);
 
@@ -54206,7 +54266,7 @@
 	};
 
 /***/ },
-/* 407 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54215,11 +54275,11 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(408);
+	var _superagent = __webpack_require__(409);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _reactNprogress = __webpack_require__(411);
+	var _reactNprogress = __webpack_require__(412);
 
 	var _reactNprogress2 = _interopRequireDefault(_reactNprogress);
 
@@ -54414,15 +54474,15 @@
 	};
 
 /***/ },
-/* 408 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(409);
-	var reduce = __webpack_require__(410);
+	var Emitter = __webpack_require__(410);
+	var reduce = __webpack_require__(411);
 
 	/**
 	 * Root reference for iframes.
@@ -55621,7 +55681,7 @@
 
 
 /***/ },
-/* 409 */
+/* 410 */
 /***/ function(module, exports) {
 
 	
@@ -55791,7 +55851,7 @@
 
 
 /***/ },
-/* 410 */
+/* 411 */
 /***/ function(module, exports) {
 
 	
@@ -55820,7 +55880,7 @@
 	};
 
 /***/ },
-/* 411 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogress
@@ -56302,7 +56362,7 @@
 
 
 /***/ },
-/* 412 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56311,13 +56371,13 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(408);
+	var _superagent = __webpack_require__(409);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
 	var _constants2 = __webpack_require__(309);
 
-	var _reactNprogress = __webpack_require__(411);
+	var _reactNprogress = __webpack_require__(412);
 
 	var _reactNprogress2 = _interopRequireDefault(_reactNprogress);
 
@@ -56818,13 +56878,30 @@
 
 				_reactNprogress2['default'].done();
 			});
+		},
+		uploadToEReg: function uploadToEReg(payload, callback) {
+			var _this29 = this;
+
+			_reactNprogress2['default'].start();
+
+			_superagent2['default'].post(AppConfig.API.BASE_URL + AppConfig.API.UPLOAD_TO_EREG).set(_constants2.headers).send(JSON.stringify(payload)).end(function (err, res) {
+
+				(0, _utilities.handleResponse)(res, _this29.flux, function (jsonResponse) {
+
+					_this29.dispatch(_constants.actions.UPLOAD_TO_EREG_SUCCESS, jsonResponse);
+
+					callback && callback(jsonResponse);
+				});
+
+				_reactNprogress2['default'].done();
+			});
 		}
 	};
 
 	module.exports = AdminActions;
 
 /***/ },
-/* 413 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56839,7 +56916,7 @@
 	};
 
 /***/ },
-/* 414 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56848,7 +56925,7 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(408);
+	var _superagent = __webpack_require__(409);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -56936,7 +57013,7 @@
 	};
 
 /***/ },
-/* 415 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56945,11 +57022,11 @@
 
 	var _constants = __webpack_require__(309);
 
-	var _superagent = __webpack_require__(408);
+	var _superagent = __webpack_require__(409);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _reactNprogress = __webpack_require__(411);
+	var _reactNprogress = __webpack_require__(412);
 
 	var _reactNprogress2 = _interopRequireDefault(_reactNprogress);
 
@@ -56977,7 +57054,7 @@
 	};
 
 /***/ },
-/* 416 */
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

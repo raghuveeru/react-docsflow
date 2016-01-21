@@ -25,6 +25,7 @@ var Layout = React.createClass({
 						<Link to = {'/admin/topics'}>Topics</Link>
 						<Link to = {'/admin/groups'}>Groups</Link>
 						<Link to = {'/admin/mapping'}>Mapping</Link>
+						<Link to = {'/admin/eReg'}>eReg</Link>
 					</nav>
 
 					<div className="card-body">

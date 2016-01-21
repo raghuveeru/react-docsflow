@@ -9,6 +9,7 @@ import Topics from './components/admin/Topics';
 import Mapping from './components/admin/Mapping';
 import AdminLayout from './components/admin/Layout';
 import Groups from './components/admin/Groups';
+import EReg from './components/admin/EReg';
 
 module.exports = (
 	<Route handler = {Main} path = '/' name="home">
@@ -27,7 +28,8 @@ module.exports = (
 			<Route handler = {Users} name="users" />			
 			<Route handler = {Topics} name="topics" />
 			<Route handler = {Mapping} name="mapping" />						
-			<Route handler = {Groups} name="groups" />						
+			<Route handler = {Groups} name="groups" />
+			<Route handler = {EReg} name="eReg" />
 		</Route>
 		
 		

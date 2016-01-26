@@ -23951,7 +23951,7 @@
 								_react2['default'].createElement(
 									_reactRouter.Link,
 									{ to: 'budgetsNew' },
-									'Create new budget cut'
+									'New budget cut'
 								)
 							)
 						),
@@ -49278,7 +49278,7 @@
 
 			var AssignTo = !isEditMode ? this.renderAssignToOfficer() : null;
 			var buttonTitle = !isEditMode ? 'Create and assign' : 'Submit';
-			var title = !isEditMode ? 'Create new budget cut' : 'Edit budget cut';
+			var title = !isEditMode ? 'New budget cut' : 'Edit budget cut';
 
 			/* Handle for edit and no Id */
 
@@ -53103,7 +53103,7 @@
 						_react2['default'].createElement(
 							_reactRouter.Link,
 							{ to: '/admin/groups' },
-							'Groups'
+							'Email Groups'
 						),
 						_react2['default'].createElement(
 							_reactRouter.Link,

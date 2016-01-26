@@ -21,7 +21,7 @@ var Navigation = React.createClass({
 						</li>
 						<PermissionJail permission = 'canCreateBudgetCut'>
 							<li>
-								<Link to="budgetsNew">Create new budget cut</Link>
+								<Link to="budgetsNew">New budget cut</Link>
 							</li>
 						</PermissionJail>
 						<PermissionJail permission='canSeeAdminMenu'>

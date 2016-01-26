@@ -190,7 +190,7 @@ var BudgetNew = React.createClass({
 
 		var AssignTo = !isEditMode? this.renderAssignToOfficer() : null;
 		var buttonTitle = !isEditMode? 'Create and assign': 'Submit';		
-		var title = !isEditMode? 'Create new budget cut' : 'Edit budget cut';
+		var title = !isEditMode? 'New budget cut' : 'Edit budget cut';
 		
 		/* Handle for edit and no Id */
 

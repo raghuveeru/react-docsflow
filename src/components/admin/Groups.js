@@ -67,7 +67,7 @@ var Groups = React.createClass({
 
 		return (
 			<div>
-				<a className="card-link" onClick = {this.openGroupModal}><em className='fa fa-plus' />Add group</a>
+				<a className="card-link" onClick = {this.openGroupModal}><em className='fa fa-plus' />Add email group</a>
 				<Modal 
 					isOpen = {isModalOpen}
 					style={customStyles}

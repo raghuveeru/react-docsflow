@@ -80,7 +80,7 @@ var NewGroup = React.createClass({
 		return (
 			<div className="modal-dialog">
 				<div className="modal-dialog-title">
-					{editMode? 'Edit group': 'Add group'}
+					{editMode? 'Edit email group': 'Add email group'}
 				</div>
 				<form className="modal-dialog-body" ref="form">
 					

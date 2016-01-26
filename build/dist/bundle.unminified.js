@@ -53223,7 +53223,7 @@
 					'a',
 					{ className: 'card-link', onClick: this.openGroupModal },
 					_react2['default'].createElement('em', { className: 'fa fa-plus' }),
-					'Add group'
+					'Add email group'
 				),
 				_react2['default'].createElement(
 					_reactModal2['default'],
@@ -53405,7 +53405,7 @@
 				_react2['default'].createElement(
 					'div',
 					{ className: 'modal-dialog-title' },
-					editMode ? 'Edit group' : 'Add group'
+					editMode ? 'Edit email group' : 'Add email group'
 				),
 				_react2['default'].createElement(
 					'form',

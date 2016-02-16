@@ -266,7 +266,7 @@ var NewMapping = React.createClass({
 					>
 						<option></option>
 						<option value="1">MP to HODs</option>
-						<option value ="2">HOD to Liason officers</option>
+						<option value ="2">HOD to Liaison officers</option>
 					</Select2>
 
 					{formContent}

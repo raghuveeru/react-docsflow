@@ -142,7 +142,7 @@ var Mapping = React.createClass({
 
 				<br />
 
-				<h4>HOD to Liason officers</h4>
+				<h4>HOD to Liaison officers</h4>
 
 				<table className="table table-admin">
 					<thead>

@@ -27,8 +27,11 @@ var Navigation = React.createClass({
 						<PermissionJail permission='canSeeAdminMenu'>
 						<li>
 							<Link to='admin'>Admin</Link>
-						</li>
+						</li>						
 						</PermissionJail>
+						<li>
+							<Link to='help'>Help</Link>
+						</li>
 					</ul>
 				</div>
 			</div>

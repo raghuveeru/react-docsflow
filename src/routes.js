@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, DefaultRoute, Redirect} from 'react-router';
 import Main from './components/Main';
+import Help from './components/help';
 import BudgetLayout from './components/budgets/Layout';
 import BudgetView from './components/budgets/BudgetView';
 import NewBudget from './components/budgets/New';
@@ -18,6 +19,7 @@ module.exports = (
 		
 		<Route handler={NewBudget} path = "budgets/new" name="budgetsNew" />
 		<Route handler={BudgetLayout} path = "budgets" name="budgets" />		
+		<Route handler={Help} path = "help" name="help" />		
 		<Route handler={BudgetLayout} path = "budgets/:type" name="budgetsInbox" />				
 		<Route handler={BudgetView} path = "budgets/view/:id" name="budgetsView" />		
 		<Route handler={NewBudget} path = "budgets/edit/:id" name="budgetsEdit" />		

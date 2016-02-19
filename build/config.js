@@ -92,7 +92,8 @@ var API = {
 		EDIT_GROUP: 'api/edit-group.json',
 		DELETE_GROUP: 'api/delete-group.json',
 	},
-	UPLOAD_TO_EREG: 'api/upload-to-ereg.json'
+	UPLOAD_TO_EREG: 'api/upload-to-ereg.json',
+	GET_HELP_DOCUMENTS: 'api/help-documents.json'
 };
 
 /**

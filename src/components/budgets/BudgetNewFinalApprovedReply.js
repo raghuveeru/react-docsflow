@@ -121,7 +121,7 @@ var BudgetNewFinalApprovedReply = React.createClass({
 
 					<div className="form-control">
 						<label>
-							Types of reply uploaded
+							Types of reply uploaded (upto confidential only)
 						</label>
 						{AppConfig.APPROVED_REPLY_TYPES.map((reply, idx) => {
 

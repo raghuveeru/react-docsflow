@@ -72,9 +72,10 @@ var BudgetAssignToOfficer = React.createClass({
 			});			
 		}
 	},
-	updateSubject: function(){		
+	updateSubject: function( props ){		
 
-		var {memberOfParliament} = this.props.budget;
+		var currentProps = props? props : this.props;
+		var {memberOfParliament} = currentProps.budget;
 		var mp = memberOfParliament?  memberOfParliament.name : '';
 
 		var {status} = this.state; 
@@ -97,6 +98,13 @@ var BudgetAssignToOfficer = React.createClass({
 
 		this.updateSubject();
 
+	},
+	componentWillReceiveProps(nextProps){
+		var { memberOfParliament } = nextProps.budget;
+
+		if(!memberOfParliament) return;
+		
+		if(this.props.budget.memberOfParliament != memberOfParliament) this.updateSubject( nextProps )
 	},
 	checkSelect2Valid: function(e){
 		

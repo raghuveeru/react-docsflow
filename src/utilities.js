@@ -205,16 +205,14 @@ var utilities = {
 		/* For Admin and COS Admin */
 
 		if(roleId.indexOf(1) != -1 || roleId.indexOf(2) != -1) return true;
+		
+		/* Gather all permissions of the current role */
+		var allPermissions = [].concat.apply([], AppConfig.ROLES.map((role) => {
+			if (roleId.indexOf(role.id) != -1) return role.permissions
+			return []
+		}))
 
-		for(var i = 0; i < AppConfig.ROLES.length; i++){
-
-			if(roleId.indexOf(AppConfig.ROLES[i].id) != -1){
-
-				return AppConfig.ROLES[i].permissions.indexOf(permission) != -1
-			}
-		}
-
-		return false
+		return allPermissions.indexOf(permission) != -1
 	},
 	arrayJoin: function(array, key, separator){
 

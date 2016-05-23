@@ -97,7 +97,7 @@ var BudgetViewBody = React.createClass({
 									<td>{currentBudget.title}</td>
 								</tr>
 								<tr>
-									<th>Budget cut topic</th>
+									<th>{TRANSLATIONS.label_topic}</th>
 									<td>{currentBudget.relationships.category}</td>
 								</tr>
 								<tr>

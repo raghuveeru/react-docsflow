@@ -193,13 +193,25 @@ var DEPARTMENTS = [
 
 var APPROVED_REPLY_TYPES = ["Approved draft", "Anticipated Q&A", "Supplementary Info (upto confidential only)"];
 
+var TRANSLATIONS = {
+	all: 'All workflows',
+	new: 'New workflow',
+	edit: 'Edit workflow',
+	add: 'Add workflow topic',
+	details: 'Workflow details',
+	label_topic: 'Workflow topic',
+	label_name: 'Workflow topic name',
+	placeholder_search: 'Search workflows'
+}
+
 window.AppConfig = {
 	API                    : API,
 	STATUS_MAPPING         : STATUS_MAPPING,	
 	APPROVED_REPLY_TYPES: APPROVED_REPLY_TYPES,
 	ROLES: ROLES,
-	SUBJECT_TEMPLATE: '[MOM COS] - {status}{topic} - {mp}',
+	SUBJECT_TEMPLATE: '[MOM Workflows] - {status}{topic} - {mp}',
 	ALL_NOTIFICATIONS_LINK: ALL_NOTIFICATIONS_LINK,	
-	DEPARTMENTS: DEPARTMENTS
+	DEPARTMENTS: DEPARTMENTS,
+	TRANSLATIONS: TRANSLATIONS
 }
 

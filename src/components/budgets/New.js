@@ -11,7 +11,7 @@ var FluxMixin = Fluxxor.FluxMixin(React);
 
 var defaultStatus = AppConfig.STATUS_MAPPING.filter( (status) => status.defaultStatus).map( (item) => item.name)
 
-var BudgetNew = React.createClass({	
+var BudgetNew = React.createClass({
 	mixins: [FluxMixin, StoreWatchMixin('BudgetStore')],
 	getStateFromFlux: function(){
 
@@ -24,11 +24,11 @@ var BudgetNew = React.createClass({
 		currentUser: React.PropTypes.object
 	},
 	goBack: function(){
-		this.context.router.transitionTo('budgetsInbox', {type: 'inbox'})	
+		this.context.router.transitionTo('budgetsInbox', {type: 'inbox'})
 	},
 	getInitialState: function(){
-		
-		return {			
+
+		return {
 			topicId: '',
 			budgetCutId: '',
 			budgetCutTopic: [],
@@ -52,14 +52,14 @@ var BudgetNew = React.createClass({
 
 		if(this.props.params.id) return this.update(event)
 
-		if(this.$form.valid()){			
+		if(this.$form.valid()){
 
 			event && event.preventDefault();
 
 			var data = this.getData();
 
 			this.props.flux.actions.BudgetActions.createNew(data, (response) => {
-				
+
 				var res = response.data[0];
 
 				if(!res || !res.id){
@@ -71,7 +71,7 @@ var BudgetNew = React.createClass({
 	},
 	getData: function(){
 
-		return {			
+		return {
 			topicId: this.state.topicId,
 			budgetCutId: this.state.budgetCutId,
 			memberOfParliament: this.state.memberOfParliament,
@@ -92,9 +92,9 @@ var BudgetNew = React.createClass({
 		event && event.preventDefault();
 
 		if(this.$form.valid()){
-			
+
 			var {currentBudget} = this.state.BudgetStore;
-			
+
 			var data = {
 				id: currentBudget.id,
 				topicId: this.state.topicId || currentBudget.topic.id,
@@ -107,9 +107,9 @@ var BudgetNew = React.createClass({
 				userId: this.context.currentUser.id
 			}
 
-			
+
 			this.props.flux.actions.BudgetActions.updateBudgetCut(data, (response) => {
-				
+
 				var res = response.data[0];
 
 				if(!res || !res.id){
@@ -118,11 +118,11 @@ var BudgetNew = React.createClass({
 				this.context.router.transitionTo('budgetsView', {'id': res.id})
 			})
 
-			
+
 
 		}
 	},
-	updateSubject: function(){	
+	updateSubject: function(){
 
 		var {status} = this.state;
 
@@ -139,7 +139,7 @@ var BudgetNew = React.createClass({
 	componentDidUpdate: function(nextProps, nextState){
 
 		var {currentBudget} = this.state.BudgetStore;
-		
+
 		if(this.props.params.id && currentBudget.id){
 			this.$form = $(this.refs.form.getDOMNode());
 
@@ -148,7 +148,7 @@ var BudgetNew = React.createClass({
 	},
 	componentDidMount: function(){
 
-		
+
 		if(!this.props.params.id){
 
 			this.$form = $(this.refs.form.getDOMNode());
@@ -159,13 +159,13 @@ var BudgetNew = React.createClass({
 		/**
 		 * Check if its in editMode
 		 */
-		
+
 		if(this.props.params.id){
 
 			/**
 			 * Check if the user has permission
 			 */
-			
+
 			if(!checkForPermission(this.context.currentUser, 'canEditDeleteBudgetCut')){
 
 				this.context.router.transitionTo('budgets')
@@ -175,23 +175,23 @@ var BudgetNew = React.createClass({
 			/**
 			 * Get Budget cut
 			 */
-			
+
 			this.getFlux().actions.BudgetActions.getBudgetById({
 				id: this.props.params.id
 			})
 		}
 
-	},	
+	},
 	render: function(){
 		var {currentBudget} = this.state.BudgetStore;
-		var isEditMode = !!this.props.params.id;		
+		var isEditMode = !!this.props.params.id;
 
 		if(!isEditMode) currentBudget = {};
 
 		var AssignTo = !isEditMode? this.renderAssignToOfficer() : null;
-		var buttonTitle = !isEditMode? 'Create and assign': 'Submit';		
-		var title = !isEditMode? 'New budget cut' : 'Edit budget cut';
-		
+		var buttonTitle = !isEditMode? 'Create and assign': 'Submit';
+		var title = !isEditMode? TRANSLATIONS.new : TRANSLATIONS.edit;
+
 		/* Handle for edit and no Id */
 
 		if(isEditMode && !currentBudget.id) return null;
@@ -207,7 +207,7 @@ var BudgetNew = React.createClass({
 				<div className="sp-card">
 					<div className="card-body">
 
-						<Select2  
+						<Select2
 							url = {AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_MAIN_TOPICS}
 							required = {true}
 							placeholder= 'Select topics'
@@ -218,39 +218,39 @@ var BudgetNew = React.createClass({
 
 								var bcTopic = data.budgetCutTopic;
 
-								
+
 								checkSelect2Valid(event);
-								
+
 								this.setState({
 									topicId: val,
-									budgetCutTopic: bcTopic									
+									budgetCutTopic: bcTopic
 								})
 							}}
 						/>
-						
+
 						<Select2
 							url = {AppConfig.API.BASE_URL + AppConfig.API.TOPICS.GET_BUDGET_CUT_TOPICS}
-							placeholder = 'Budget cut topic' 							
-							ref = "budgetCutTopicSelect"							
+							placeholder = {TRANSLATIONS.label_topic}
+							ref = "budgetCutTopicSelect"
 							readOnly = {true}
 							required = {true}
 							name="budgetCutTopicSelect"
 							query = {{ topicId: this.state.topicId}}
 							defaultValue = {currentBudget.budgetCutTopic}
 							onChange = { (val, data, event) => {
-								
+
 								checkSelect2Valid(event);
-								
+
 								this.setState({
 									budgetCutId: val,
 									budgetCutTopicName: data.name
 								}, this.updateSubject)
 							}}
 						 />
-						
 
-						<Select2  
-							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS} 
+
+						<Select2
+							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_MPS}
 							placeholder= 'Member of Parliament'
 							multiple = {false}
 							required = {true}
@@ -258,18 +258,18 @@ var BudgetNew = React.createClass({
 							defaultValue = {currentBudget.memberOfParliament}
 							onChange = { (val, data, event) => {
 
-								checkSelect2Valid(event);								
-								
+								checkSelect2Valid(event);
+
 								var select = this.refs.hodSourcingSelect.refs.select.getDOMNode();
 
 								if(data.hodOfficer.length){
-									
+
 									setTimeout(() => {
 										$(select).select2('data', data.hodOfficer[0], true)
 									}, 100)
-								
+
 								}else{
-									
+
 									setTimeout(() => {
 										$(select).select2('data', null)
 									}, 100)
@@ -283,8 +283,8 @@ var BudgetNew = React.createClass({
 							}}
 						/>
 
-						<Select2  
-							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_SOURCING_USER} 
+						<Select2
+							url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_HOD_SOURCING_USER}
 							placeholder= 'HOD Sourcing'
 							multiple = {false}
 							ref = 'hodSourcingSelect'
@@ -295,23 +295,23 @@ var BudgetNew = React.createClass({
 							onChange = { (val, data, event) => {
 
 								checkSelect2Valid(event);
-								
+
 								this.setState({
 									hodSourcing: val
 								})
 							}}
 						/>
 
-						
+
 						<div className="row">
 							<div className="columns six">
-								<InputMaterial 
-									label = "File reference no. (optional)" 
-									name = "fileReferenceNo"									
+								<InputMaterial
+									label = "File reference no. (optional)"
+									name = "fileReferenceNo"
 									defaultValue = {currentBudget.fileReferenceNo}
 									onChange = {
 										(event) => {
-											
+
 											this.setState({
 												fileReferenceNo: event.target.value
 											})
@@ -323,14 +323,14 @@ var BudgetNew = React.createClass({
 						<div className="row">
 							<div className="columns six">
 								<TextareaMaterial
-									rows = {1} 
+									rows = {1}
 									required = {true}
 									name="summary"
-									label = "Gist of cuts" 
+									label = "Gist of cuts"
 									defaultValue = {currentBudget.summary}
 									onChange = {
 										(event) => {
-											
+
 											this.setState({
 												summary: event.target.value
 											})
@@ -343,14 +343,14 @@ var BudgetNew = React.createClass({
 						<div className="row">
 							<div className="columns six">
 								<InputMaterial
-									name="time" 
+									name="time"
 									required = {true}
-									label = "Time for MP to speak (min)" 
-									className="number"									
+									label = "Time for MP to speak (min)"
+									className="number"
 									defaultValue = {currentBudget.time}
 									onChange = {
 										(event) => {
-											
+
 											this.setState({
 												time: event.target.value
 											})
@@ -362,14 +362,14 @@ var BudgetNew = React.createClass({
 
 
 						{AssignTo}
-						
+
 
 						<div className="form-control">
 							<button className="btn btn-primary" onClick = {this.create}>{buttonTitle}</button>
 							<a className="btn btn--unstyled" onClick = {() =>{
 
 								if(isEditMode){
-									return this.context.router.transitionTo('budgetsView', {id: currentBudget.id})	
+									return this.context.router.transitionTo('budgetsView', {id: currentBudget.id})
 								}
 
 								this.context.router.transitionTo('budgets')
@@ -388,15 +388,15 @@ var BudgetNew = React.createClass({
 			<div className="form-control">
 				<h4>Assign to officer</h4>
 
-				<Select2 
+				<Select2
 					placeholder="Select status"
 					label = 'Select action'
 					allowClear = {true}
-					value = {this.state.status}					
+					value = {this.state.status}
 					onChange = { (val, data, event) => {
 
 						checkSelect2Valid(event);
-						
+
 						this.setState({
 							status: val
 						}, this.updateSubject)
@@ -407,8 +407,8 @@ var BudgetNew = React.createClass({
 					})}
 				</Select2>
 
-				<Select2  
-					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS} 
+				<Select2
+					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_RESPONSIBLE_OFFICERS}
 					required = {true}
 					placeholder= 'To'
 					multiple = {true}
@@ -417,21 +417,21 @@ var BudgetNew = React.createClass({
 					onChange = { (val, data, event) => {
 
 						checkSelect2Valid(event);
-						
+
 						this.setState({
 							responsibleOfficer: val
 						})
 					}}
 				/>
 
-				<Select2  
-					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY} 
+				<Select2
+					url = {AppConfig.API.BASE_URL + AppConfig.API.USERS.GET_OFFICERS_TO_NOTIFY}
 					placeholder= 'CC'
 					multiple = {true}
 					name="officersToNotify"
 					query = {{groups: 'true'}}
 					onChange = { (val) => {
-						
+
 						this.setState({
 							officersToNotify: val
 						})
@@ -452,12 +452,12 @@ var BudgetNew = React.createClass({
 
 				<div className="row">
 					<div className="columns six">
-						
-						<TextareaMaterial 
+
+						<TextareaMaterial
 							name="message"
 							required = {true}
-							label="Message" 
-							rows = {1} 
+							label="Message"
+							rows = {1}
 							onChange = { (event) => {
 								this.setState({
 									message: event.target.value
@@ -465,7 +465,7 @@ var BudgetNew = React.createClass({
 						}} />
 					</div>
 				</div>
-				
+
 			</div>
 		)
 	}

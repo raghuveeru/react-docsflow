@@ -6,10 +6,10 @@ var Navigation = React.createClass({
 	contextTypes: {
 		router: React.PropTypes.func
 	},
-	render: function(){		
-		
+	render: function(){
+
 		var currentRoutes = this.context.router.getCurrentRoutes();
-		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;		
+		var activeRouteName = currentRoutes[currentRoutes.length - 1].name;
 
 		var homeActive = (!activeRouteName || activeRouteName == 'budgetsInbox' || activeRouteName == 'budgets'? 'active' : '');
 		return (
@@ -21,13 +21,13 @@ var Navigation = React.createClass({
 						</li>
 						<PermissionJail permission = 'canCreateBudgetCut'>
 							<li>
-								<Link to="budgetsNew">New budget cut</Link>
+								<Link to="budgetsNew">{TRANSLATIONS.new}</Link>
 							</li>
 						</PermissionJail>
 						<PermissionJail permission='canSeeAdminMenu'>
 						<li>
 							<Link to='admin'>Admin</Link>
-						</li>						
+						</li>
 						</PermissionJail>
 						<li>
 							<Link to='help'>Help</Link>

@@ -36,7 +36,7 @@ var TopicList = React.createClass({
 						{...this.props} 
 						toggleAdd = {this.toggleAdd} 
 						topic = {topic} 
-						/>: <a onClick = {this.toggleAdd}>Add budget cut topic</a>;
+						/>: <a onClick = {this.toggleAdd}>{TRANSLATIONS.add}</a>;
 		
 		return (
 			<li className={klassName}>				

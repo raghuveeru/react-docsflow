@@ -18,7 +18,7 @@ var BudgetCutTopicForm = React.createClass({
 
 		return {
 			budgetCutTopic: null,
-			buttonTitle: 'Add budget cut topic'
+			buttonTitle: TRANSLATIONS.add
 		}
 	},
 	onSave: function(event){
@@ -73,7 +73,7 @@ var BudgetCutTopicForm = React.createClass({
 		return (
 			<form className="section-form" ref = "form" onSub>
 				<InputMaterial
-					label="Budget Cut Topic name"
+					label={TRANSLATIONS.label_name}
 					name="topicName"
 					ref = "firstInput"
 					value = {this.state.budgetCutTopicName}

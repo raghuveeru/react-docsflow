@@ -18,7 +18,7 @@ var BudgetView = React.createClass({
 						<em className="fa fa-home" />
 					</a>
 				</nav>
-				<h1>Budget cut details</h1>
+				<h1>{TRANSLATIONS.details}</h1>
 				<div className="row">
 					<div className="sp-content">
 						<BudgetViewBody id = {this.props.params.id} />
